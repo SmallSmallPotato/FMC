@@ -105,32 +105,23 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="FMC setting3" startnode="1" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body.DressingRoom {
-  background-image: url("images/bg0.jpeg") !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-  background-repeat: no-repeat !important;
-  height: 100vh;
-  width: 100vw;
+    background-image: url("images/bg0.jpeg") !important;
+    background-size: cover;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
-Config.history.maxStates = 1;
-
-$(document).on(':passagerender', function () {
-    setTimeout(function () {
-        var audio = SimpleAudio.tracks.get("tetris");
-        if (audio && audio.playing) {
-            audio.playbackRate = 1.5;
-            // 嘗試控制底層物件
-            if (audio._source && audio._source.playbackRate) {
-                audio._source.playbackRate = 1.5;
-            }
-        }
-    }, 200);
-});</script><tw-tag name="DressingRoom" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="400,0" size="100,100">你正在FMC當值。
+Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="400,0" size="100,100">你正在FMC當值。
 選擇一個情境：
 &lt;&lt;if $scenarios[0].completed&gt;&gt;
 &lt;span style=&quot;color: grey;&quot;&gt;忙碌洗傷口中(DONE)&lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-* [[忙碌洗傷口中-&gt;PhysicalAbuse][audio &quot;tetris&quot; play loop]]
+* &lt;&lt;link &quot;忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;
+    &lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;
+    &lt;&lt;run 
+        setTimeout(function() {
+            var a = document.querySelector(&#39;audio&#39;);
+            if (a) { a.playbackRate = 1.5; }
+        }, 150);
+    &gt;&gt;
+&lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $scenarios[1].completed&gt;&gt;
 &lt;span style=&quot;color: grey;&quot;&gt;路過大堂(DONE)&lt;/span&gt;
