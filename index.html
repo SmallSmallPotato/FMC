@@ -156,72 +156,76 @@ html[data-tags~="Dx"] body {
   color: #0077ff;
   text-decoration: underline;
 }
-
-/* 面板主體 */
-.stats-panel {
-  background: rgba(44, 62, 80, 0.8); /* 深藍半透明 */
-  padding: 15px;
-  border-radius: 8px;
+  
+/* 極致壓縮面板 */
+.stats-panel.compact {
+  background: rgba(44, 62, 80, 0.8);
+  padding: 8px 12px; /* 大幅減少內距 */
+  border-radius: 6px;
   border: 1px solid #34495e;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-  margin-bottom: 10px;
-}
-
-/* 標籤文字 (小標題) */
-.stats-label {
-  font-size: 0.7em;
-  color: #bdc3c7;
-  letter-spacing: 1px;
   margin-bottom: 5px;
 }
 
-/* 進度條容器 */
-.progress-container {
-  background: #34495e;
-  height: 8px;
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 5px 0;
-  border: 1px solid #1a252f;
-}
-
-/* 進度條本體 (帶發光效果) */
-.progress-bar {
-  background: #3498db;
-  height: 100%;
-  box-shadow: 0 0 8px #3498db;
-  transition: width 0.5s ease; /* 增加數值變動時的動畫感 */
-}
-
-/* 分數網格佈局 */
-.stats-grid {
+/* 讓 Progress 標題與 2/7 水平分佈 */
+.stats-header {
   display: flex;
-  justify-content: space-around;
-  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
 }
 
-.stats-score {
-  font-size: 1.4em;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-}
-
-/* 分數顏色判斷 */
-.positive { color: #2ecc71; text-shadow: 0 0 5px rgba(46, 204, 113, 0.5); }
-.negative { color: #e74c3c; text-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
-
-/* 分隔線 */
-.stats-divider {
-  border: 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  margin: 15px 0;
+.stats-label {
+  font-size: 0.65em; /* 字體縮小 */
+  color: #bdc3c7;
+  letter-spacing: 0.5px;
 }
 
 .stats-value {
-  font-size: 0.8em;
-  text-align: right;
+  font-size: 0.75em;
   color: #ecf0f1;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
+}
+
+/* 縮短進度條高度 */
+.progress-container {
+  background: #34495e;
+  height: 5px; /* 高度從 8px 降到 5px */
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-bar {
+  background: #3498db;
+  height: 100%;
+  box-shadow: 0 0 5px #3498db;
+}
+
+/* 縮短分隔線間距 */
+.stats-divider {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin: 6px 0; /* 間距從 15px 大幅降到 6px */
+}
+
+/* 分數區域壓縮 */
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.stats-item {
+  flex: 1;
+}
+
+.stats-score {
+  font-size: 1.1em; /* 分數大小微調 */
+  font-weight: bold;
+  line-height: 1; /* 縮減行高 */
+}
+
+.positive { color: #2ecc71; }
+.negative { color: #e74c3c; }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="325,50" size="100,100">你正在FMC當值。選擇以下情境：
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;\
@@ -633,14 +637,16 @@ Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag>
 &lt;&lt;set $scenarios[0].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="StoryCaption" tags="" position="25,150" size="100,100">&lt;div class=&quot;stats-panel&quot;&gt;
-  &lt;!-- 進度部分 --&gt;
+&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="StoryCaption" tags="" position="25,150" size="100,100">&lt;div class=&quot;stats-panel compact&quot;&gt;
+  &lt;!-- 進度部分：標題與數值並排 --&gt;
   &lt;div class=&quot;stats-row&quot;&gt;
-    &lt;div class=&quot;stats-label&quot;&gt;PROGRESS&lt;/div&gt;
+    &lt;div class=&quot;stats-header&quot;&gt;
+      &lt;span class=&quot;stats-label&quot;&gt;PROGRESS&lt;/span&gt;
+      &lt;span class=&quot;stats-value&quot;&gt;$progress / 7&lt;/span&gt;
+    &lt;/div&gt;
     &lt;div class=&quot;progress-container&quot;&gt;
       &lt;div class=&quot;progress-bar&quot; @style=&quot;&#39;width: &#39; + Math.min(($progress/7*100), 100) + &#39;%&#39;&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;stats-value&quot;&gt;$progress / 7&lt;/div&gt;
   &lt;/div&gt;
 
   &lt;hr class=&quot;stats-divider&quot;&gt;
