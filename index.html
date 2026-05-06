@@ -112,7 +112,20 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
   height: 100vh;
   width: 100vw;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
-Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="400,0" size="100,100">你正在FMC當值。
+Config.history.maxStates = 1;
+
+$(document).on(':passagerender', function () {
+    setTimeout(function () {
+        var audio = SimpleAudio.tracks.get("tetris");
+        if (audio && audio.playing) {
+            audio.playbackRate = 1.5;
+            // 嘗試控制底層物件
+            if (audio._source && audio._source.playbackRate) {
+                audio._source.playbackRate = 1.5;
+            }
+        }
+    }, 200);
+});</script><tw-tag name="DressingRoom" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="400,0" size="100,100">你正在FMC當值。
 選擇一個情境：
 &lt;&lt;if $scenarios[0].completed&gt;&gt;
 &lt;span style=&quot;color: grey;&quot;&gt;忙碌洗傷口中(DONE)&lt;/span&gt;
@@ -169,18 +182,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
   
 &lt;&lt;set $currentIdx = 0&gt;&gt;
 
-&lt;&lt;run
-    $(document).on(&#39;:passagerender&#39;, function () {
-        setTimeout(function () {
-            var audio = SimpleAudio.tracks.get(&quot;tetris&quot;);
-            if (audio &amp;&amp; audio.playing) {
-                audio.playbackRate = 1.5;
-                // 強制刷新底層 HTML5 物件
-                if (audio._source) { audio._source.playbackRate = 1.5; }
-            }
-        }, 200);
-    });
-&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="DressingRoom" position="200,575" size="100,100">你是一名家庭醫學門診護士，今天早上負責洗傷口。一開波輪候人數就有雙位數。
+</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="DressingRoom" position="200,575" size="100,100">你是一名家庭醫學門診護士，今天早上負責洗傷口。一開波輪候人數就有雙位數。
 
 👶 一名6歲男童因皮膚問題覆診。  
 👩 母親表示：「佢沖熱水時自己整親。」
@@ -502,7 +504,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[立即查看表現-&gt;Ending]]
 
-[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="22" name="PsychologicalAbuse" tags="" position="525,100" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="SexualAbuse" tags="" position="375,325" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="NeglectEnvironment" tags="" position="275,125" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="ResetS3" tags="" position="725,275" size="100,100">&lt;&lt;silent&gt;&gt;
+[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="22" name="PsychologicalAbuse" tags="" position="550,150" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="SexualAbuse" tags="" position="375,325" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="NeglectEnvironment" tags="" position="275,125" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="ResetS3" tags="" position="725,275" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[3].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[3].legal&gt;&gt;
 &lt;&lt;set $scenarios[3].safety = 0&gt;&gt;
