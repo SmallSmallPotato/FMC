@@ -106,9 +106,19 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 	</div>
 	<tw-storydata name="FMC setting3" startnode="1" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body.DressingRoom {
     background-image: url("images/bg0.jpeg") !important;
-    background-size: cover;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    background-repeat: no-repeat !important;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 確保遊戲內容不會遮住背景 */
+#passages {
+    background-color: transparent !important;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
-Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="400,0" size="100,100">你正在FMC當值。
+Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="orange"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="450,150" size="100,100">你正在FMC當值。
 選擇一個情境：
 &lt;&lt;if $scenarios[0].completed&gt;&gt;
 &lt;span style=&quot;color: grey;&quot;&gt;忙碌洗傷口中(DONE)&lt;/span&gt;
@@ -154,7 +164,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 * [[放飯前5分鐘-&gt;NecglectDiet]] 
 &lt;&lt;/if&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="0,0" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;music/tetris_bgm.mp3&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="225,150" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;music/tetris_bgm.mp3&quot;&gt;&gt;
 
 &lt;&lt;set $totalSafety = 0&gt;&gt;
 &lt;&lt;set $totalLegal = 0&gt;&gt;
@@ -173,7 +183,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
   
 &lt;&lt;set $currentIdx = 0&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="DressingRoom" position="200,575" size="100,100">你是一名家庭醫學門診護士，今天早上負責洗傷口。一開波輪候人數就有雙位數。
+</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="DressingRoom" position="250,500" size="100,100">你是一名家庭醫學門診護士，今天早上負責洗傷口。一開波輪候人數就有雙位數。
 
 👶 一名6歲男童因皮膚問題覆診。  
 👩 母親表示：「佢沖熱水時自己整親。」
@@ -190,7 +200,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[C. 進行全面身體檢查-&gt;Exam]]
 
-</tw-passagedata><tw-passagedata pid="4" name="NecglectDiet" tags="" position="100,200" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="NeglectCare" tags="" position="625,275" size="100,100">第二日。
+</tw-passagedata><tw-passagedata pid="4" name="NecglectDiet" tags="" position="225,150" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="NeglectCare" tags="" position="675,200" size="100,100">第二日。
 今日你負責在護士站幫手清飛。
 
 👧 一名8歲女童因「食慾不振」由祖母陪同就診。
@@ -210,7 +220,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 [[A. 當作一般營養問題處理-&gt;Neglect_Normal]]
 [[B. 詳細詢問生活情況-&gt;Neglect_History]]
 [[C. 進行進一步評估（包括家庭照顧）-&gt;Neglect_Assess]]
-</tw-passagedata><tw-passagedata pid="6" name="Accept" tags="" position="0,700" size="100,100">你選擇接受家長解釋，未有進一步跟進。
+</tw-passagedata><tw-passagedata pid="6" name="Accept" tags="" position="225,625" size="100,100">你選擇接受家長解釋，未有進一步跟進。
 
 ❌ 你可能忽略了重要的red flag（對稱性燒傷）。
 
@@ -231,7 +241,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 [[重來吧-&gt;ResetS0]] 
 
 [[立即查看表現-&gt;Ending]]
-</tw-passagedata><tw-passagedata pid="7" name="History" tags="" position="125,700" size="100,100">你進一步詢問病史。
+</tw-passagedata><tw-passagedata pid="7" name="History" tags="" position="100,600" size="100,100">你進一步詢問病史。
 
 母親的說法前後出現矛盾。
 
@@ -247,7 +257,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[0].legal = 0&gt;&gt;
 &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt; 
 &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="Exam" tags="" position="275,700" size="100,100">你進行詳細檢查，發現：
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="Exam" tags="" position="325,625" size="100,100">你進行詳細檢查，發現：
 
 - 燒傷邊界清晰  
 - 分佈對稱  
@@ -266,7 +276,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[0].legal = 0&gt;&gt;
 &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt; 
 &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Ending" tags="" position="900,0" size="100,100">&lt;div class=&quot;header&quot;&gt;Training Result&lt;/div&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Ending" tags="" position="950,150" size="100,100">&lt;div class=&quot;header&quot;&gt;Training Result&lt;/div&gt;
 
 &lt;&lt;if $safety &gt;= 70 and $legal &gt;= 70&gt;&gt;
 🏆 Expert Mandatory Reporter
@@ -282,7 +292,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;br&gt;&lt;br&gt;
 
 [[主頁-&gt;Start]]
-</tw-passagedata><tw-passagedata pid="10" name="Observe" tags="" position="0,825" size="100,100">你選擇暫時觀察。
+</tw-passagedata><tw-passagedata pid="10" name="Observe" tags="" position="225,750" size="100,100">你選擇暫時觀察。
 
 ⚠️ 在存在明顯red flags時，延遲行動可能增加風險。
 
@@ -306,7 +316,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 [[重來吧-&gt;ResetS0]] 
 
 
-[[立即查看表現-&gt;Ending]]</tw-passagedata><tw-passagedata pid="11" name="Consult" tags="" position="125,825" size="100,100">你向護士長諮詢。
+[[立即查看表現-&gt;Ending]]</tw-passagedata><tw-passagedata pid="11" name="Consult" tags="" position="225,750" size="100,100">你向護士長諮詢。
 
 經討論後，你們一致認為需要進一步評估。
 
@@ -321,7 +331,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[0].legal += 5&gt;&gt;
 &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt; 
 &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="ReportDecision" tags="" position="250,825" size="100,100">你正在考慮是否需要進行強制報告。
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="ReportDecision" tags="" position="300,750" size="100,100">你正在考慮是否需要進行強制報告。
 
 根據現有資料，這可能符合「Serious Harm」門檻。
 
@@ -329,7 +339,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[A. 再觀察一下-&gt;Observe]]
 
-[[B. 立即報告-&gt;Report]]</tw-passagedata><tw-passagedata pid="13" name="Report" tags="" position="125,950" size="100,100">你啟動報告程序：
+[[B. 立即報告-&gt;Report]]</tw-passagedata><tw-passagedata pid="13" name="Report" tags="" position="225,875" size="100,100">你啟動報告程序：
 
 📞 聯絡相關部門  
 📝 完成電子報告  
@@ -355,7 +365,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[立即查看表現-&gt;Ending]]
 
-[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="14" name="Neglect_Normal" tags="" position="475,400" size="100,100">你將個案視為單純飲食問題，建議改善飲食。
+[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="14" name="Neglect_Normal" tags="" position="525,325" size="100,100">你將個案視為單純飲食問題，建議改善飲食。
 
 ⚠️ 可能忽略了潛在的長期忽視問題。
 
@@ -379,7 +389,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[回主頁-&gt;Start]] 
 
-[[在這個情景重來-&gt;ResetS3]] </tw-passagedata><tw-passagedata pid="15" name="Neglect_History" tags="" position="625,400" size="100,100">你進一步了解情況：
+[[在這個情景重來-&gt;ResetS3]] </tw-passagedata><tw-passagedata pid="15" name="Neglect_History" tags="" position="675,325" size="100,100">你進一步了解情況：
 
 祖母透露：
 - 小朋友經常自己在家  
@@ -402,7 +412,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[3].legal = 0&gt;&gt;
 &lt;&lt;set $totalSafety += $scenarios[3].safety&gt;&gt; 
 &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Neglect_Assess" tags="" position="750,400" size="100,100">你進行全面評估：
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Neglect_Assess" tags="" position="800,325" size="100,100">你進行全面評估：
 
 發現：
 - 明顯營養不足  
@@ -424,7 +434,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[3].legal = 0&gt;&gt;
 &lt;&lt;set $totalSafety += $scenarios[3].safety&gt;&gt; 
 &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="NeglectHygiene" tags="" position="400,125" size="100,100"></tw-passagedata><tw-passagedata pid="18" name="Neglect_Observe" tags="" position="525,525" size="100,100">你選擇暫時觀察。
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="NeglectHygiene" tags="" position="425,350" size="100,100"></tw-passagedata><tw-passagedata pid="18" name="Neglect_Observe" tags="" position="575,450" size="100,100">你選擇暫時觀察。
 
 ⚠️ 長期忽視可能不會自行改善，延遲介入可能加重風險。
 
@@ -447,7 +457,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[立即查看表現-&gt;Ending]]
 
-[[回主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="19" name="Neglect_Consult" tags="" position="650,525" size="100,100">你與護士長討論個案。
+[[回主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="19" name="Neglect_Consult" tags="" position="700,450" size="100,100">你與護士長討論個案。
 
 團隊認為：
 
@@ -462,7 +472,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;silent&gt;&gt;
 &lt;&lt;set $scenarios[3].legal += 5&gt;&gt;
 &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Neglect_Decision" tags="" position="775,525" size="100,100">你正在考慮：
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Neglect_Decision" tags="" position="825,450" size="100,100">你正在考慮：
 
 這是否已達到需要強制報告的門檻？
 
@@ -470,7 +480,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[A. 再觀察一下-&gt;Neglect_Observe]]
 
-[[B. 提交報告-&gt;Neglect_Report]]</tw-passagedata><tw-passagedata pid="21" name="Neglect_Report" tags="" position="900,525" size="100,100">你決定進行報告：
+[[B. 提交報告-&gt;Neglect_Report]]</tw-passagedata><tw-passagedata pid="21" name="Neglect_Report" tags="" position="950,450" size="100,100">你決定進行報告：
 
 📞 聯絡相關機構  
 📝 提交詳細評估  
@@ -495,7 +505,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 
 [[立即查看表現-&gt;Ending]]
 
-[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="22" name="PsychologicalAbuse" tags="" position="550,150" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="SexualAbuse" tags="" position="375,325" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="NeglectEnvironment" tags="" position="275,125" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="ResetS3" tags="" position="725,275" size="100,100">&lt;&lt;silent&gt;&gt;
+[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="22" name="PsychologicalAbuse" tags="" position="600,150" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="SexualAbuse" tags="" position="325,300" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="NeglectEnvironment" tags="" position="325,150" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="ResetS3" tags="" position="775,200" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[3].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[3].legal&gt;&gt;
 &lt;&lt;set $scenarios[3].safety = 0&gt;&gt;
@@ -503,7 +513,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[3].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;NeglectCare&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="ResetS0" tags="" position="300,575" size="100,100">&lt;&lt;silent&gt;&gt;
+&lt;&lt;goto &quot;NeglectCare&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="ResetS0" tags="" position="350,500" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[0].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[0].legal&gt;&gt;
 &lt;&lt;set $scenarios[0].safety = 0&gt;&gt;
@@ -511,7 +521,7 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;set $scenarios[0].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="PassageHeader" tags="" position="0,100" size="100,100">&lt;div style=&quot;background: #2c3e50; padding: 10px; border-radius: 5px; color: white; border-bottom: 2px solid #34495e;&quot;&gt;
+&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="PassageHeader" tags="" position="225,150" size="100,100">&lt;div style=&quot;background: #2c3e50; padding: 10px; border-radius: 5px; color: white; border-bottom: 2px solid #34495e;&quot;&gt;
     &lt;div style=&quot;display: flex; justify-content: space-around; align-items: center;&quot;&gt;
         &lt;!-- 進度顯示 --&gt;
         &lt;div&gt;
