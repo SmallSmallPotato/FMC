@@ -119,7 +119,9 @@ Config.history.maxStates = 1;</script><tw-tag name="DressingRoom" color="green">
 &lt;&lt;else&gt;&gt;
 * &lt;&lt;link &quot;忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;
     &lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;
-    &lt;&lt;run SimpleAudio.tracks.get(&quot;tetris&quot;).playbackRate = 1.5&gt;&gt;
+    &lt;&lt;run setTimeout(function() {
+        SimpleAudio.tracks.get(&quot;tetris&quot;).playbackRate = 1.5;
+    }, 100)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $scenarios[1].completed&gt;&gt;
