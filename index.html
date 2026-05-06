@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html data-init="no-js">
 <head>
 <meta charset="UTF-8" />
@@ -110,7 +110,7 @@ Config.history.maxStates = 1;</script><tw-passagedata pid="1" name="Start" tags=
 &lt;&lt;if $scenarios[0].completed&gt;&gt;
 &lt;span style=&quot;color: grey;&quot;&gt;忙碌洗傷口中(DONE)&lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-* [[忙碌洗傷口中-&gt;PhysicalAbuse][audio &quot;tetris&quot; play loop]]
+* &lt;&lt;link &quot;忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $scenarios[1].completed&gt;&gt;
 &lt;span style=&quot;color: grey;&quot;&gt;路過大堂(DONE)&lt;/span&gt;
@@ -483,7 +483,7 @@ Config.history.maxStates = 1;</script><tw-passagedata pid="1" name="Start" tags=
 
 [[立即查看表現-&gt;Ending]]
 
-[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="22" name="PsychologicalAbuse" tags="" position="525,125" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="SexualAbuse" tags="" position="400,250" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="NeglectEnvironment" tags="" position="275,125" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="ResetS3" tags="" position="725,275" size="100,100">&lt;&lt;silent&gt;&gt;
+[[主頁-&gt;Start]] </tw-passagedata><tw-passagedata pid="22" name="PsychologicalAbuse" tags="" position="525,125" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="SexualAbuse" tags="" position="375,325" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="NeglectEnvironment" tags="" position="275,125" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="ResetS3" tags="" position="725,275" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[3].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[3].legal&gt;&gt;
 &lt;&lt;set $scenarios[3].safety = 0&gt;&gt;
