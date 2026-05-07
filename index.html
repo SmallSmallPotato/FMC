@@ -155,8 +155,8 @@ html[data-tags~="Dx"] body {
     background: rgba(255, 255, 255, 0.7) !important; 
     border: 3px solid #3498db; 
   	bottom: 30px;
-  	left: 5%;
-  	width: 85%;
+  	left: 15%;
+  	width: 70%;
     box-shadow: 0 0 15px #3498db, inset 0 0 10px rgba(52, 152, 219, 0.3);
     border-radius: 4px;
     padding: 20px;
@@ -166,6 +166,11 @@ html[data-tags~="Dx"] body {
     z-index: 10; /* 層級低於點擊層 */
     line-height: 1.6;
     margin-top: 40px;
+}
+
+#story-test, #text-display {
+  font-size: 14px !important;
+  line-height: 1.4;
 }
 
 /* 2. 全螢幕透明點擊層 */
@@ -194,21 +199,26 @@ html[data-tags~="Dx"] body {
 
 /* 4. 選項樣式 (確保在最上層) */
 #final-options {
-    position: relative;
-    z-index: 1000; 
+    position: fixed;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
 }
 
 /* 精緻像素風格選項框 */
 #final-options a {
     display: block;
-    background: rgba(255, 255, 255, 0.9); /* 半透明白色 */
+    background: rgba(255, 255, 255, 0.85); /* 半透明白色 */
     color: #2c3e50 !important;
-    padding: 16px;
-    margin: 15px auto;
-    width: 80%;
+    padding: 10px 12px;
+    margin: 12px auto;
+    width: 65%;
+    font-size: 14px
+    font-weight: bold;
     text-align: center;
     text-decoration: none;
-    font-weight: bold;
     
     /* 核心：像素厚邊框效果 (多層 box-shadow 模擬) */
     border: 3px solid #000; 
