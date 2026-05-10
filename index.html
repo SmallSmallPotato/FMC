@@ -745,7 +745,7 @@ Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag>
   
 &lt;&lt;set $currentIdx = 0&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="Dx no-handbk" position="150,225" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="Dx no-handbk" position="150,275" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -825,7 +825,10 @@ Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag>
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[重新評估|PhAExam]] 
-[[繼續忽略|PhA4B]]
+&lt;&lt;link &quot;繼續忽略&quot;&gt;&gt;
+    &lt;&lt;set $decisionHistory[0] to $totalTime&gt;&gt;
+    &lt;&lt;goto &quot;PhA4B&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -926,6 +929,8 @@ Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag>
     &lt;div class=&quot;pixel-popup anim-item-get&quot;&gt;ITEM GET:&lt;br&gt;Red Flags Guideline!&lt;/div&gt;
     &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
     &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+    &lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="8" name="Ending" tags="Start no-timer" position="325,150" size="100,100">&lt;div class=&quot;header&quot;&gt;Training Result&lt;/div&gt;
 
@@ -1610,7 +1615,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[「左上臂及背部有多處瘀傷，&lt;br&gt;顏色深淺不同」|PhA4A]]
+    [[「左上臂及背部有多處瘀傷，顏色深淺不同」|PhA4A]]
     [[「懷疑母親虐待兒童」|PhA4D]]
     [[「一定係被打」|PhA4D]]
 &lt;/div&gt;
@@ -1645,6 +1650,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
     [[再觀察|PhAWait]]
 &lt;/div&gt;
 
+
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;nobr&gt;&gt;
@@ -1663,28 +1669,34 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 避免：&lt;br&gt;❌ 主觀判斷&lt;br&gt;❌ 定罪式語言
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
-                /* 隱藏點擊層，顯示選項 */
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;PhADoc&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;click-overlay&quot; style=&quot;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    cursor: pointer;
-&quot;&gt;&lt;/div&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
 
-&lt;&lt;script&gt;&gt;
-$(document).one(&#39;click&#39;, function () {
-    Engine.play(&quot;PhADoc&quot;);
-});
-&lt;&lt;/script&gt;&gt;
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
@@ -1703,28 +1715,34 @@ $(document).one(&#39;click&#39;, function () {
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 第二天，他們沒有出現&lt;br&gt;電腦紀錄顯示：阿樂因頭部受傷入院。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
-                /* 隱藏點擊層，顯示選項 */
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;PhAENDING_DELAY&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;click-overlay&quot; style=&quot;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    cursor: pointer;
-&quot;&gt;&lt;/div&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
 
-&lt;&lt;script&gt;&gt;
-$(document).one(&#39;click&#39;, function () {
-    Engine.play(&quot;PhAENDING_DELAY&quot;);
-});
-&lt;&lt;/script&gt;&gt;
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
@@ -1743,28 +1761,34 @@ $(document).one(&#39;click&#39;, function () {
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 阿樂離開前，回頭望了你一眼。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
-                /* 隱藏點擊層，顯示選項 */
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;PhAENDING_BAD&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;click-overlay&quot; style=&quot;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    cursor: pointer;
-&quot;&gt;&lt;/div&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
 
-&lt;&lt;script&gt;&gt;
-$(document).one(&#39;click&#39;, function () {
-    Engine.play(&quot;PhAENDING_BAD&quot;);
-});
-&lt;&lt;/script&gt;&gt;
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
@@ -1834,6 +1858,10 @@ $(document).one(&#39;click&#39;, function () {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="PhAENDING_BAD" tags="Dx no-timer" position="25,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         兩個月後，&lt;br&gt;你再次見到阿樂。
@@ -1849,44 +1877,54 @@ $(document).one(&#39;click&#39;, function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 這次，&lt;br&gt;他右眼瘀黑。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;* 你用了&lt;&lt;print $decisionHistory[0]&gt;&gt; 秒時間由猶豫，但最後沒有行動。&lt;br&gt;&lt;&lt;type 100ms&gt;&gt;如果再有一次機會，你會怎樣做？&lt;&lt;/type&gt;&gt;&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 3&gt;&gt;
-                /* 隱藏點擊層，顯示選項 */
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間猶豫，但最後沒有行動。&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;set $page = 3&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;type 80ms&gt;&gt;如果再有一次機會，你會怎樣做？&lt;&lt;/type&gt;&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 4&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 4&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;click-overlay&quot; style=&quot;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    cursor: pointer;
-&quot;&gt;&lt;/div&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
 
-&lt;&lt;script&gt;&gt;
-$(document).one(&#39;click&#39;, function () {
-    Engine.play(&quot;Start&quot;);
-});
-&lt;&lt;/script&gt;&gt;
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
+
+&lt;&lt;silent&gt;&gt;
+&lt;&lt;if $scenarios[0].completed is false&gt;&gt;
+    &lt;&lt;set $scenarios[0].safety -= 10&gt;&gt;
+    &lt;&lt;set $scenarios[0].legal -= 10&gt;&gt;
+    &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt;
+    &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
+    &lt;&lt;set $progress += 1&gt;&gt;
+    &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/silent&gt;&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-&lt;&lt;if $scenarios[0].completed is false&gt;&gt;
-&lt;&lt;set $scenarios[0].safety -= 10&gt;&gt;
-&lt;&lt;set $scenarios[0].legal -= 10&gt;&gt;
-&lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt;
-&lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
-&lt;&lt;set $progress += 1&gt;&gt;
-&lt;&lt;set $scenarios[0].completed = true&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="PhAENDING_DELAY" tags="Dx no-timer" position="125,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="56" name="PhAENDING_DELAY" tags="Dx no-timer" position="125,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你沒有做錯。&lt;br&gt;但你太遲行動。
@@ -1901,28 +1939,28 @@ $(document).one(&#39;click&#39;, function () {
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 「等待更多證據」&lt;br&gt;是否有時本身就是風險？&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
-                /* 隱藏點擊層，顯示選項 */
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;click-overlay&quot; style=&quot;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    cursor: pointer;
-&quot;&gt;&lt;/div&gt;
-
-&lt;&lt;script&gt;&gt;
-$(document).one(&#39;click&#39;, function () {
-    Engine.play(&quot;Start&quot;);
-});
-&lt;&lt;/script&gt;&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
 
 &lt;&lt;silent&gt;&gt;\
 &lt;&lt;if $scenarios[0].completed is false&gt;&gt;\
@@ -1938,6 +1976,10 @@ $(document).one(&#39;click&#39;, function () {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         數星期後，阿樂開始接受社工跟進。
@@ -1953,11 +1995,7 @@ $(document).one(&#39;click&#39;, function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;學校表示：&lt;br&gt;他最近比較願意說話。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-    &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;剛才你用了 &lt;&lt;print $decisionHistory[0]&gt;&gt; 秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;剛才你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;✔ 你已採取適當行動保護兒童&lt;br&gt;🏆 結局：Timely Protection&lt;&lt;/replace&gt;&gt;
