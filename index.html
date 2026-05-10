@@ -298,62 +298,68 @@ html[data-tags~="nc"] body {
     align-items: center; /* 強制所有 Passage 內容在手機中線對齊 */
 }
 
-/* 頂部菜單容器：調整位置避開進度條 */
+
+/* 1. 容器定位 */
 .top-menu-container {
-    position: fixed;
-    top: 10px;
-    left: 10px; /* 放在左上角 */
-    z-index: 9999;
-    display: flex;
-    gap: 4px;
-    flex-direction: row;
+    position: fixed !important;
+    top: 10px !important;
+    left: 10px !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    gap: 3.5px !important;
 }
 
-/* 針對容器內的超連結（按鈕樣式） */
-.top-menu-container a {
-    display: inline-block !important;
-    background-color: #e74c3c !important;
-    color: white !important;
-    text-decoration: none !important; /* 移除超連結下劃線 */
-    font-family: 'Press Start 2P', 'Zpix', monospace; 
+/* 2. 針對 <<link>> 標籤的終極壓扁設定 */
+.top-menu-container a.macro-link {
+    /* 必須強制使用 flex 佈局才能徹底控制內部高度 */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 80px !important;           /* 長方形寬度 */
+    
+    /* --- 高度徹底鎖死區 --- */
+    height: 22px !important;          /* 1. 直接指定一個很小的高度，不要用 auto */
+    min-height: 0 !important;        /* 2. 強制取消 SugarCube 可能的最小高度限制 */
+    line-height: 1 !important;        /* 3. 行高設為 1 */
+    padding: 0 !important;            /* 4. 既然指定了 height，就先將 padding 設為 0 */
+    /* -------------------- */
+
     font-size: 10px !important;
-    font-weight: bold;
-    line-height: 8 !important;    /* 2. 重點：強制行高為 1，移除文字上下多餘空間 */
-    padding: 1px 4px !important;  /* 3. 上下只留 1px */
-    height: auto !important;      /* 確保沒有被設定固定的 min-height */
-    cursor: pointer;
-    text-transform: uppercase;
-    text-align: center;
-    width: 70px;
-    position: relative;
-    
-    /* restart紅 */
-    box-shadow: 
-        inset -4px -4px 0px 0px #c0392b, 
-        inset 4px 4px 0px 0px #f1948a,   
-        2px 4px 0px 0px #000;            
-    
-    transition: transform 0.1s steps(2);
+    font-family: 'Press Start 2P', 'Zpix', monospace !important;
+    text-decoration: none !important;
+    border: none !important;
+    color: white !important;
+    cursor: pointer !important;
 }
 
-/* restart紅 */
-.top-menu-container a:active {
-    transform: translateY(2px);
+/* 3. 分別上色與陰影 */
+
+/* SAVES 藍色 */
+.top-menu-container a.macro-link:nth-of-type(1) {
+    background-color: #3498db !important;
+    box-shadow: 
+        inset -2px -2px 0px 0px #2980b9,
+        inset 2px 2px 0px 0px #5dade2,
+        0px 3px 0px 0px #000 !important;
+}
+
+/* RESTART 紅色 */
+.top-menu-container a.macro-link:nth-of-type(2) {
+    background-color: #e74c3c !important;
     box-shadow: 
         inset -2px -2px 0px 0px #c0392b,
         inset 2px 2px 0px 0px #f1948a,
-        2px 2px 0px 0px #000;
+        0px 3px 0px 0px #000 !important;
 }
 
-/* save藍 */
-.top-menu-container a:nth-child(2) {
-    background-color: #3498db !important; 
-    box-shadow: 
-        inset -4px -4px 0px 0px #2980b9,
-        inset 4px 4px 0px 0px #5dade2,
-        2px 4px 0px 0px #000;
+/* 4. 點擊效果 */
+.top-menu-container a.macro-link:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0px 1px 0px 0px #000 !important;
 }
 
+   
 .pixel-glow-blue {
 font-size: 28px; /* 放大字體 */
 font-weight: bold; /* 粗體 */
@@ -631,7 +637,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="nc" color="blue"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer no-handbk" position="325,50" size="100,100">&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;\
-&lt;&lt;type 100ms&gt;&gt;&lt;div style=&quot;font-size: 23px;&quot;&gt;你是一名家庭醫學門診護士。&lt;br&gt;請選擇以下情節：
+&lt;&lt;type 80ms&gt;&gt;&lt;div style=&quot;font-size: 23px;&quot;&gt;你是一名家庭醫學門診護士。&lt;br&gt;請選擇以下情節：
 &lt;/div&gt;\
 &lt;&lt;/type&gt;&gt;\
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
@@ -1345,7 +1351,7 @@ $(document).one(&#39;click&#39;, function () {
     &lt;&lt;/link&gt;&gt;
     
     &lt;&lt;link &quot;🔄RESTART&quot;&gt;&gt;
-        &lt;&lt;run Engine.restart()&gt;&gt;
+        &lt;&lt;run UI.restart()&gt;&gt;
     &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
@@ -1355,7 +1361,7 @@ $(document).one(&#39;click&#39;, function () {
 &lt;&lt;if !tags().includes(&quot;no-timer&quot;)&gt;&gt;
 &lt;div style=&quot;
 position: fixed;
-top: 15px;
+top: 10px;
 right: 10px;
 z-index: 10000;
 width: 170px;
@@ -1827,7 +1833,7 @@ $(document).one(&#39;click&#39;, function () {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="PhAENDING_BAD" tags="Dx" position="25,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="PhAENDING_BAD" tags="Dx no-timer" position="25,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         兩個月後，&lt;br&gt;你再次見到阿樂。
@@ -1880,7 +1886,7 @@ $(document).one(&#39;click&#39;, function () {
 &lt;&lt;set $progress += 1&gt;&gt;
 &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="PhAENDING_DELAY" tags="Dx" position="125,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="PhAENDING_DELAY" tags="Dx no-timer" position="125,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你沒有做錯。&lt;br&gt;但你太遲行動。
@@ -1931,7 +1937,7 @@ $(document).one(&#39;click&#39;, function () {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="PhAENDING_GOOD" tags="Dx" position="225,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         數星期後，阿樂開始接受社工跟進。
@@ -1947,7 +1953,11 @@ $(document).one(&#39;click&#39;, function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;學校表示：&lt;br&gt;他最近比較願意說話。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了 &lt;&lt;print $decisionHistory[0]&gt;&gt; 秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;剛才你用了 &lt;&lt;print $decisionHistory[0]&gt;&gt; 秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;✔ 你已採取適當行動保護兒童&lt;br&gt;🏆 結局：Timely Protection&lt;&lt;/replace&gt;&gt;
