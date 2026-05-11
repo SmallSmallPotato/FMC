@@ -666,70 +666,87 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     to { opacity: 0; visibility: hidden; }
 }
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
-Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;dialogue-box-container&quot;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;\
-&lt;&lt;type 80ms&gt;&gt;&lt;div style=&quot;font-size: 23px;&quot;&gt;你是一名家庭醫學門診護士。&lt;br&gt;請選擇以下情節：
-&lt;/div&gt;\
-&lt;&lt;/type&gt;&gt;\
-&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;\
-&lt;&lt;if $scenarios[0].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;你不需要100%肯定，才開始行動。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $scenarios[1].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;沒有瘀傷，不代表沒有傷害。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;路過大堂&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $scenarios[2].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;當孩子終於開口，成人的反應會改變一切。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $scenarios[3].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;協助量度Vital Signs&quot; &quot;NeglectCare&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $scenarios[4].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;孩子適應了危險，不代表危險不存在。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;放飯前5分鐘&quot; &quot;NeglectEnvironment&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $scenarios[5].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;孩子需要被保護，即使他身上的氣味令人退縮。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;護士站內&quot; &quot;NeglectHygiene&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
-&lt;&lt;if $scenarios[6].completed&gt;&gt;\
-&lt;span style=&quot;color: grey;&quot;&gt;不是所有 neglect 都來自惡意。&lt;/span&gt;
-&lt;&lt;else&gt;&gt;\
-* &lt;&lt;link &quot;準備收工&quot; &quot;NeglectDiet&quot;&gt;&gt;
-    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-    &lt;&lt;audio &quot;star&quot; play loop&gt;&gt;\
-&lt;&lt;/link&gt;&gt;\
-&lt;&lt;/if&gt;&gt;
- &lt;/span&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;\
+    &lt;span id=&quot;story-text&quot;&gt;\
+        &lt;&lt;type 80ms&gt;&gt;&lt;div style=&quot;font-size: 23px; font-weight: bold; border-bottom: 2px solid white; padding-bottom: 10px;&quot;&gt;🏥 家庭醫學門診工作日&lt;/div&gt;&lt;&lt;/type&gt;&gt;\
+        &lt;div style=&quot;font-size: 18px; margin-top: 10px; margin-bottom: 15px;&quot;&gt;請選擇你要處理的情況：&lt;/div&gt;\
+        /* 情節 0 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[0].completed&gt;&gt;\
+                &lt;span style=&quot;color: #ff6b6b; font-size: 15px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動&lt;/span&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;&lt;link &quot;❑ 忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+
+        /* 情節 1 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[1].completed&gt;&gt;\
+                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害&lt;/span&gt;\
+            &lt;&lt;elseif $scenarios[0].completed&gt;&gt;\
+                &lt;&lt;link &quot;❑ 路過大堂&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;span style=&quot;color: #555;&quot;&gt;❑ 路過大堂🔒&lt;/span&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+
+        /* 情節 2 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[2].completed&gt;&gt;\
+                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;/span&gt;\
+            &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
+                &lt;&lt;link &quot;❑ 護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;server&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;span style=&quot;color: #555;&quot;&gt;❑ 護士站諮詢🔒&lt;/span&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+
+        /* 情節 3 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[3].completed&gt;&gt;\
+                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;/span&gt;\
+            &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
+                &lt;&lt;link &quot;❑ 協助量度Vital Signs&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;span style=&quot;color: #555;&quot;&gt;❑ 協助量度Vital Signs🔒&lt;/span&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+
+        /* 情節 4 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[4].completed&gt;&gt;\
+                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。&lt;/span&gt;\
+            &lt;&lt;elseif $scenarios[3].completed&gt;&gt;\
+                &lt;&lt;link &quot;❑ 放飯前5分鐘&quot; &quot;NeglectEnvironment&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;span style=&quot;color: #555;&quot;&gt;❑ 放飯前5分鐘🔒&lt;/span&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+
+        /* 情節 5 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[5].completed&gt;&gt;\
+                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。&lt;/span&gt;\
+            &lt;&lt;elseif $scenarios[4].completed&gt;&gt;\
+                &lt;&lt;link &quot;❑ 護士站內&quot; &quot;NeglectHygiene&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;span style=&quot;color: #555;&quot;&gt;❑ 護士站內🔒&lt;/span&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+
+        /* 情節 6 */\
+        &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
+            &lt;&lt;if $scenarios[6].completed&gt;&gt;\
+                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。&lt;/span&gt;\
+            &lt;&lt;elseif $scenarios[5].completed&gt;&gt;\
+                &lt;&lt;link &quot;❑ 準備收工&quot; &quot;NeglectDiet&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+            &lt;&lt;else&gt;&gt;\
+                &lt;span style=&quot;color: #555;&quot;&gt;❑ 準備收工🔒&lt;/span&gt;\
+            &lt;&lt;/if&gt;&gt;\
+        &lt;/div&gt;\
+    &lt;/span&gt;\
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,50" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;music/tetris_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;news&quot; &quot;music/news_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;crybaby&quot; &quot;music/crybaby_bgm.mp3&quot;&gt;&gt;
@@ -776,7 +793,7 @@ Config.history.maxStates = 1;</script><tw-tag name="Dx" color="purple"></tw-tag>
   
 &lt;&lt;set $currentIdx = 0&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="Dx" position="125,300" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="Dx" position="275,400" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1920,7 +1937,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
         &lt;&lt;set $progress += 1&gt;&gt;
         &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,950" size="100,100">&lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2378,6 +2395,10 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc" position="550,600" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         【結局：破碎的沈默】&lt;br&gt;
@@ -2437,13 +2458,13 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/style&gt;
 
 &lt;&lt;silent&gt;&gt;
-&lt;&lt;if $scenarios[0].completed is false&gt;&gt;
-    &lt;&lt;set $scenarios[0].safety -= 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 10&gt;&gt;
-    &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt;
-    &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
+&lt;&lt;if $scenarios[3].completed is false&gt;&gt;
+    &lt;&lt;set $scenarios[3].safety += 10&gt;&gt;
+    &lt;&lt;set $scenarios[3].legal += 10&gt;&gt;
+    &lt;&lt;set $totalSafety += $scenarios[3].safety&gt;&gt;
+    &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
-    &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+    &lt;&lt;set $scenarios[3].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -2604,6 +2625,10 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc" position="450,600" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         【結局：不再孤獨的夜晚】&lt;br&gt;
@@ -2662,13 +2687,13 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/style&gt;
 
 &lt;&lt;silent&gt;&gt;
-&lt;&lt;if $scenarios[0].completed is false&gt;&gt;
-    &lt;&lt;set $scenarios[0].safety -= 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 10&gt;&gt;
-    &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt;
-    &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
+&lt;&lt;if $scenarios[3].completed is false&gt;&gt;
+    &lt;&lt;set $scenarios[3].safety += 10&gt;&gt;
+    &lt;&lt;set $scenarios[3].legal += 10&gt;&gt;
+    &lt;&lt;set $totalSafety += $scenarios[3].safety&gt;&gt;
+    &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
-    &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+    &lt;&lt;set $scenarios[3].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
