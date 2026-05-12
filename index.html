@@ -485,7 +485,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 
 #fixed-handbook-anchor {
     position: fixed;
-    bottom: 630px;
+    Top: 1px;
     left: 15px;
     z-index: 9999;
     text-align: center;
@@ -634,7 +634,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 .anim-item-get {
     position: fixed;
     width: 250px;
-    top: -230%;
+    top: -250%;
     left: 50%;
     transform: translateX(-50%);
     font-size: 15px;
@@ -674,7 +674,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 }
 .score-table th, .score-table td {
     border: 1px solid #444;
-    padding: 5px;
+    padding: 1px;
     text-align: center;
 }
 .score-table th { background: #333; }
@@ -684,7 +684,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 .rank-bronze { color: #cd7f32; font-weight: bold; }
 
 .current-rank {
-    padding: 15px;
+    padding: 1px;
     background: #222;
     border-radius: 5px;
     border: 1px solid #444;
@@ -695,7 +695,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 /* 分數固定按鈕容器 */
 #fixed-hud-container {
     position: fixed;
-    bottom: 653px;
+    Top: 108px;
     right: 12px;
     z-index: 9999;
 }
@@ -1983,7 +1983,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,700" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="100,550" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你與資深護士討論。
@@ -2533,8 +2533,20 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    但在臨床工作中，我們必須明白：&lt;br&gt;
-                    **「沒有即時受傷」不代表「安全」。**
+                    但在臨床工作中，你明白：&lt;br&gt;
+                    即使「沒有即時受傷」不代表「安全」。
+                    &lt;&lt;if $unlocked.redFlags is false&gt;&gt;
+            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
+                [Red Flags Guideline]
+            &lt;/div&gt;
+            
+            /* 音效與自動清理邏輯 */
+            &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+            &lt;&lt;timed 3.5s&gt;&gt;
+                &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
@@ -3087,6 +3099,18 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
                     阿晴立即停止說話，甚至屏住呼吸。&lt;br&gt;你開始強烈感受到：這絕對不是單純的管教，而是長期的羞辱。
+                    &lt;&lt;if $unlocked.redFlags is false&gt;&gt;
+            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
+                [Red Flags Guideline]
+            &lt;/div&gt;
+            
+            /* 音效與自動清理邏輯 */
+            &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+            &lt;&lt;timed 3.5s&gt;&gt;
+                &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
