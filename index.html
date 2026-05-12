@@ -1112,7 +1112,6 @@ $(document).on(':passageend', function () {
 [[觀察母親反應|PhAObs]]
 [[請醫生接手|PhAConsult]]
 [[詢問受傷經過|PhAIncon]]
-[[記錄CMS Nursing Note|PhADoc]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1720,6 +1719,8 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     &lt;&lt;set $totalLegal += 10&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="PhA4A" tags="Dx" position="25,600" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        你開始意識到：&lt;br&gt;✔️ 傷勢不一致&lt;br&gt;✔️ 多階段瘀傷&lt;br&gt;✔️ 孩子表現恐懼
         &lt;&lt;if $unlocked.doc is false&gt;&gt;
             &lt;&lt;set $unlocked.doc to true&gt;&gt;
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
@@ -1732,10 +1733,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
                 &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
             &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;
-        你開始意識到：&lt;br&gt;✔️ 傷勢不一致&lt;br&gt;✔️ 多階段瘀傷&lt;br&gt;✔️ 孩子表現恐懼
     &lt;/span&gt;
-    
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
 
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
