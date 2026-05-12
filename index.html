@@ -341,7 +341,7 @@ html[data-tags~="Nd"] body {
 /* 1. 容器定位 */
 .top-menu-container {
     position: fixed !important;
-    top: 10px !important;
+    top: 20px !important;
     left: 10px !important;
     z-index: 99999 !important;
     display: flex !important;
@@ -358,13 +358,13 @@ html[data-tags~="Nd"] body {
     width: 80px !important;           /* 長方形寬度 */
     
     /* --- 高度徹底鎖死區 --- */
-    height: 22px !important;          /* 1. 直接指定一個很小的高度，不要用 auto */
+    height: 24px !important;          /* 1. 直接指定一個很小的高度，不要用 auto */
     min-height: 0 !important;        /* 2. 強制取消 SugarCube 可能的最小高度限制 */
     line-height: 1 !important;        /* 3. 行高設為 1 */
     padding: 0 !important;            /* 4. 既然指定了 height，就先將 padding 設為 0 */
     /* -------------------- */
 
-    font-size: 10px !important;
+    font-size: 11px !important;
     font-family: 'Press Start 2P', 'Zpix', monospace !important;
     text-decoration: none !important;
     border: none !important;
@@ -405,7 +405,7 @@ font-weight: bold; /* 粗體 */
 color: white !important; /* 白色內裡 */
 text-align: center;
 display: block;
-margin: 20px 0;
+margin: 15px 0;
 
 /* 核心：多層疊加陰影製造光暈效果 */
 text-shadow:
@@ -485,9 +485,9 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 
 #fixed-handbook-anchor {
     position: fixed;
-    top: 40px;
-    right: 15px;
-    z-index: 999;
+    bottom: 630px;
+    left: 15px;
+    z-index: 9999;
     text-align: center;
 }
 
@@ -670,11 +670,11 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 .score-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .score-table th, .score-table td {
     border: 1px solid #444;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
 .score-table th { background: #333; }
@@ -695,20 +695,20 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 /* 分數固定按鈕容器 */
 #fixed-hud-container {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 999;
+    bottom: 653px;
+    right: 12px;
+    z-index: 9999;
 }
 /* 復古可愛圓形按鈕 */
 .retro-circle-btn {
-    width: 60px;   /* 寬度 */
-    height: 60px;  /* 高度相等以保持正圓 */
+    width: 50px;   /* 寬度 */
+    height: 50px;  /* 高度相等以保持正圓 */
     border-radius: 50%;
-    border: 4px solid #000; /* 像素黑邊 */
+    border: 2.5px solid #000; /* 像素黑邊 */
     background-color: #ff4757; /* 復古紅 (像紅白機按鈕) */
     color: white;
     font-family: 'Courier New', monospace;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -767,7 +767,7 @@ $(document).on(':passageend', function () {
         /* 情節 0 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[0].completed&gt;&gt;\
-                &lt;span style=&quot;color: #ff6b6b; font-size: 15px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動&lt;/span&gt;\
+                &lt;span style=&quot;color: #870F00; font-size: 15px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動&lt;/span&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;&lt;link &quot;❑ 忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -776,9 +776,9 @@ $(document).on(':passageend', function () {
         /* 情節 1 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[1].completed&gt;&gt;\
-                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害&lt;/span&gt;\
+                &lt;span style=&quot;color: #C36200; font-size: 15px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[0].completed&gt;&gt;\
-                &lt;&lt;link &quot;❑ 路過大堂&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+                &lt;&lt;link &quot;❑ 路過大堂&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;span style=&quot;color: #555;&quot;&gt;❑ 路過大堂🔒&lt;/span&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -787,9 +787,9 @@ $(document).on(':passageend', function () {
         /* 情節 2 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[2].completed&gt;&gt;\
-                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;/span&gt;\
+                &lt;span style=&quot;color: #C7A000; font-size: 15px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
-                &lt;&lt;link &quot;❑ 護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;server&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+                &lt;&lt;link &quot;❑ 護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;span style=&quot;color: #555;&quot;&gt;❑ 護士站諮詢🔒&lt;/span&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -798,7 +798,7 @@ $(document).on(':passageend', function () {
         /* 情節 3 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
-                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;/span&gt;\
+                &lt;span style=&quot;color: #597F00; font-size: 15px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 協助量度Vital Signs&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -809,7 +809,7 @@ $(document).on(':passageend', function () {
         /* 情節 4 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[4].completed&gt;&gt;\
-                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。&lt;/span&gt;\
+                &lt;span style=&quot;color: #007D7C; font-size: 15px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[3].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 放飯前5分鐘&quot; &quot;NeglectEnvironment&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -820,7 +820,7 @@ $(document).on(':passageend', function () {
         /* 情節 5 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[5].completed&gt;&gt;\
-                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。&lt;/span&gt;\
+                &lt;span style=&quot;color: #00438F; font-size: 15px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[4].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 護士站內&quot; &quot;NeglectHygiene&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -831,7 +831,7 @@ $(document).on(':passageend', function () {
         /* 情節 6 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[6].completed&gt;&gt;\
-                &lt;span style=&quot;color: #999; font-size: 15px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。&lt;/span&gt;\
+                &lt;span style=&quot;color: #2A0075; font-size: 15px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[5].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 準備收工&quot; &quot;NeglectDiet&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -854,6 +854,8 @@ $(document).on(':passageend', function () {
 &lt;&lt;cacheaudio &quot;lofi&quot; &quot;music/lofi_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;get&quot; &quot;music/get_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;bingo&quot; &quot;music/bingo_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;plane&quot;music/plane_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;moon&quot; &quot;music/moon_bgm.mp3&quot;&gt;&gt;
 
 &lt;&lt;run $(&#39;#ui-bar-body&#39;).append(&#39;&lt;div id=&quot;game-hud&quot;&gt;&lt;/div&gt;&#39;)&gt;&gt;
 &lt;&lt;set $totalSafety = 0&gt;&gt;
@@ -935,7 +937,7 @@ $(document).on(':passageend', function () {
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         星期三夜診，診所非常忙碌。&lt;br&gt;
-        一名 8 歲男童阿俊獨自向你走來想要量體溫。
+        一名 7 歲男童阿俊獨自向你走來想要量體溫。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -1247,6 +1249,9 @@ $(document).on(':passageend', function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你仍然感到不安。&lt;br&gt;但你知道：&lt;br&gt;孩子安全比舒服更重要。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
+              /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
              /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;PhAENDING_GOOD&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -1302,8 +1307,8 @@ $(document).on(':passageend', function () {
 &lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PsychologicalAbuse" tags="Psy" position="1150,0" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        星期四下午，診所接近收工時間。&lt;br&gt;
-        一位母親帶著 10 歲女童阿晴走進診室。
+        這天下午，你走入候診大堂。&lt;br&gt;
+        一位母親帶著 10 歲女童阿晴坐在候診座椅上。
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
@@ -1311,7 +1316,7 @@ $(document).on(':passageend', function () {
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
                     阿晴很安靜，一直低頭，雙手抓緊校裙。&lt;br&gt;
-                    母親一坐下就抱怨：「佢成日都係咁，肚痛，好麻煩。」
+                    母親望着她抱怨：「成日都係咁，又話頭痛，好麻煩。」
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
@@ -1341,7 +1346,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[2].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;PsychologicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="325,1050" size="100,100">Sexual abuse content (S2)
+&lt;&lt;goto &quot;PsychologicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="200,1100" size="100,100">Sexual abuse content (S2)
 ???</tw-passagedata><tw-passagedata pid="17" name="NeglectDiet" tags="Nd" position="850,650" size="100,100">Neglect diet content (S6) 
 
 ???</tw-passagedata><tw-passagedata pid="18" name="NeglectEnvironment" tags="Ne" position="1675,575" size="100,100">Neglect environment content (S4)
@@ -1461,13 +1466,9 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="Start no-timer no-handbk" position="225,50" size="100,100">
-
-
-
-&lt;div class=&quot;pixel-glow-blue&quot;&gt;Interactive Clinical Judgment Simulator&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="Start no-timer no-handbk" position="225,50" size="100,100">&lt;div class=&quot;pixel-glow-blue&quot;&gt;Interactive Clinical Judgment Simulator&lt;/div&gt;
      
- &lt;div style=&quot;font-size: 38px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;[[Start|Start]]
+ &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;[[► Start|Start]]
 &lt;/div&gt;
 
 </tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
@@ -1555,7 +1556,29 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 * 詳細記錄照顧者的原話，並加上引號。
 * 拍攝臨床照片時需確保光線充足並放置比例尺。</tw-passagedata><tw-passagedata pid="28" name="HB_Quotes" tags="" position="100,2025" size="100,100">&lt;h3&gt;💬 相關的法律條文 (Legal &amp; Professional Quotes)&lt;/h3&gt;\
 * 「兒童的安全是我們的首要考慮（The safety of the child is the paramount consideration）」。
-* 記錄強制舉報的法律責任與保護條款。</tw-passagedata><tw-passagedata pid="29" name="HB_Contacts" tags="" position="100,1925" size="100,100">&lt;h3&gt;📞 相關部門的聯絡資訊 (Emergency Contacts)&lt;/h3&gt;\
+* 記錄強制舉報的法律責任與保護條款。
+
+&lt;h3&gt;根據香港法例第 650 章《強制舉報虐待兒童條例》（Mandatory Reporting of Child Abuse Ordinance），該法例已於 2026 年 1 月 20 日正式生效。&lt;/h3&gt;\
+作為醫療衞生界的指明專業人員，護士若在工作期間未能履行舉報義務，將面臨法律責任及專業後果：
+&lt;h3&gt;1. 刑事法律後果&lt;/h3&gt;\
+如果護士在工作過程中，有合理理由懷疑兒童「已遭受嚴重傷害」或「面臨遭受嚴重傷害的實質風險」，但未能在合理可行範圍內盡快舉報，即屬違法：
+* 最高罰則： 監禁 3 個月及罰款港幣 $50,000（第五級罰款）。
+* 兩級制刑罰：
+- 簡易程序定罪： 最高罰款 $50,000。
+- 公訴程序定罪： 最高罰款 $50,000 及監禁 3 個月。
+
+&lt;h3&gt;2. 專業操守與執業影響&lt;/h3&gt;\
+* 除了刑事責任，未履行法定舉報義務亦會引發一系列職業生涯的後果：
+紀律處分： 相關個案可能會被轉介至 香港護士管理局（Nursing Council of Hong Kong）。若被裁定為專業失德或因刑事定罪影響專業聲譽，可能面臨警告、停牌甚至除牌。
+* 僱傭合約風險： 醫療機構（如醫管局或私家醫院）通常要求員工遵守所有法規。違法行為可能導致內部紀律處分，包括終止聘用。
+
+&lt;h3&gt;3. 免責辯護與保護條款&lt;/h3&gt;\
+法例亦同時考慮了實際臨床環境，提供了一些保障：
+* 合理的辯護理由：
+- 誠實且合理地相信另一名指明專業人員已經舉報（例如醫生已報警/報社署）。
+_ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分理據）。
+* 法律保障： 只要是出於誠實信用（good faith）作出的舉報，護士可獲免除民事或刑事法律責任，亦不會因舉報而被視為違反專業操守（如洩露病人隱私）。
+* 阻止舉報亦屬犯罪： 任何上司或同事若企圖阻撓護士進行強制舉報，同樣屬於犯罪，最高可判監禁 3 個月及罰款 $50,000。</tw-passagedata><tw-passagedata pid="29" name="HB_Contacts" tags="" position="100,1925" size="100,100">&lt;h3&gt;📞 相關部門的聯絡資訊 (Emergency Contacts)&lt;/h3&gt;\
 * 社會福利署（SWD）保護家庭及兒童服務課
 * 醫務社工（MSW）各分科直通電話
 * 警察電訊處（RCCC）及各區警署值日室電話</tw-passagedata><tw-passagedata pid="30" name="HB_DoDont" tags="" position="0,1925" size="100,100">&lt;h3&gt;👨🏻‍🏫 處理疑似虐兒個案時的行為準則 ⭕️ DO / DON&#39;T ❌&lt;/h3&gt;\
@@ -1697,6 +1720,18 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
     &lt;&lt;set $totalLegal += 10&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="PhA4A" tags="Dx" position="25,600" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
+        &lt;&lt;if $unlocked.doc is false&gt;&gt;
+            &lt;&lt;set $unlocked.doc to true&gt;&gt;
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
+                Unlock hand book item!!&lt;br&gt;[Documentation Tips]
+            &lt;/div&gt;
+            
+            /* 音效與自動清理邏輯 */
+            &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+            &lt;&lt;timed 3.5s&gt;&gt;
+                &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你開始意識到：&lt;br&gt;✔️ 傷勢不一致&lt;br&gt;✔️ 多階段瘀傷&lt;br&gt;✔️ 孩子表現恐懼
     &lt;/span&gt;
@@ -1790,7 +1825,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你決定先完成手頭上的工作。&lt;br&gt;在處理完傷口便讓他們回家，並讓他們明天再來。
@@ -1806,7 +1841,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 第二天，他們沒有出現&lt;br&gt;電腦紀錄顯示：阿樂因頭部受傷入院。&lt;&lt;/replace&gt;&gt;
                   &lt;&lt;set $page = 2&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
-                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;PhAENDING_DELAY&quot;&gt;&gt;
@@ -1948,7 +1983,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你與資深護士討論。
@@ -2255,7 +2290,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你疑惑，一個 8 歲的孩子，「沒有時間」看醫生？&lt;br&gt;
+                    你疑惑，一個 7 歲的孩子，「沒有時間」看醫生？&lt;br&gt;
                     這句話背後隱含著監護權的缺位。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
@@ -2429,6 +2464,18 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="49" name="NC4A" tags="Nc" position="450,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
+        &lt;&lt;if $unlocked.doc is false&gt;&gt;
+            &lt;&lt;set $unlocked.doc to true&gt;&gt;
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
+                [Documentation Tips]
+            &lt;/div&gt;
+            
+            /* 音效與自動清理邏輯 */
+            &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+            &lt;&lt;timed 3.5s&gt;&gt;
+                &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你意識到不能只看表面。&lt;br&gt;
         為了確認阿俊受監管的程度，你決定問得更深入。
@@ -2455,7 +2502,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
                     這句話讓你感到不安。&lt;br&gt;
-                    一個8歲孩子與一名幼兒，在沒有任何求助途徑下被獨留在家。
+                    一個 7 歲孩子與一名幼兒，在沒有任何求助途徑下被獨留在家。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -2528,15 +2575,34 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
                     在那之後，你忙於其他病人，漸漸忘記了那個瘦小的背影。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;NCBad&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[查看最終後果|NCBad]]
-&lt;/div&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
+
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2578,7 +2644,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc" position="550,600" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer" position="550,600" size="100,100">&lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2643,10 +2709,6 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 
 &lt;&lt;silent&gt;&gt;
 &lt;&lt;if $scenarios[3].completed is false&gt;&gt;
-    &lt;&lt;set $scenarios[3].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[3].legal += 10&gt;&gt;
-    &lt;&lt;set $totalSafety += $scenarios[3].safety&gt;&gt;
-    &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[3].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -2686,7 +2748,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[🔄 重新撰寫紀錄|NC3C]]
+    [[重新撰寫紀錄|NC3C]]
 &lt;/div&gt;
 
 &lt;&lt;set $page = 1&gt;&gt;
@@ -2712,7 +2774,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
                     你在報告中寫道：&lt;br&gt;
-                    「8歲兒童與幼兒長期在無成人監管下留家，存在顯著安全風險。」
+                    「7 歲兒童與幼兒長期在無成人監管下留家，存在顯著安全風險。」
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
@@ -2721,15 +2783,34 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
                     **醫護人員的職責是 Safeguarding（守護），而非評判。**
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 4&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;NCGood&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[數星期後|NCGood]]
-&lt;/div&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
+
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2808,7 +2889,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc" position="450,600" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer" position="450,600" size="100,100">&lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2872,10 +2953,6 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 
 &lt;&lt;silent&gt;&gt;
 &lt;&lt;if $scenarios[3].completed is false&gt;&gt;
-    &lt;&lt;set $scenarios[3].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[3].legal += 10&gt;&gt;
-    &lt;&lt;set $totalSafety += $scenarios[3].safety&gt;&gt;
-    &lt;&lt;set $totalLegal += $scenarios[3].legal&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[3].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -2887,7 +2964,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你留意到：當母親說話時，阿晴明顯縮起肩膀。&lt;br&gt;
-        她低著頭，完全沒有主動說過一句話。
+        沒有抬頭，亦完全沒有主動說過一句話。
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
@@ -2936,11 +3013,46 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="61" name="PsA2C" tags="Psy" position="1325,100" size="100,100"></tw-passagedata><tw-passagedata pid="62" name="PsA3A" tags="Psy" position="1125,225" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="61" name="PsA2C" tags="Psy" position="1325,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你輕聲問：「晴晴，點解咁講？」&lt;br&gt;
-        阿晴小聲說：「媽咪成日話我無用，死咗仲好。」
+        你幫她量血壓時，阿晴突然小聲問：「姐姐，我係咪好差？」
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    你突然不知道如何回應。&lt;br&gt;但她 10 歲就如此自我否定，&lt;br&gt;往往是長期受壓的信號。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 隱藏點擊層，顯示選項 */
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+[[提出疑問|PsA3A]]
+[[簡單安慰後繼續做事|PsA3E]]
+&lt;/div&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;silent&gt;&gt;
+    &lt;&lt;if $scenarios is undefined&gt;&gt;&lt;&lt;set $scenarios = []&gt;&gt;&lt;&lt;endif&gt;&gt;
+    /* 邏輯可按需求擴充 */
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="PsA3A" tags="Psy" position="1125,200" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        你問：「你幾時開始頭痛？？」&lt;br&gt;
+        阿晴答非所問，小聲說：「媽咪成日話我無用，死咗仲好。」
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
@@ -2961,7 +3073,42 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
     [[感到尷尬，不知如何應對孩子的情緒|PsA4B]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="PsA3B" tags="" position="1225,200" size="100,100"></tw-passagedata><tw-passagedata pid="64" name="PsA3C" tags="Psy" position="1325,200" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="PsA3B" tags="Psy" position="1225,200" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        母親突然對孩子說：&lt;br&gt;「你又喊？你知唔知你好丟架？」
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    阿晴立即停止說話，甚至屏住呼吸。&lt;br&gt;你開始強烈感受到：這絕對不是單純的管教，而是長期的羞辱。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 隱藏點擊層，顯示選項 */
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+[[高度關注|PsA4A]]
+[[仍視為普通管教|PsA4B]]
+&lt;/div&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;silent&gt;&gt;
+    &lt;&lt;if $scenarios is undefined&gt;&gt;&lt;&lt;set $scenarios = []&gt;&gt;&lt;&lt;endif&gt;&gt;
+    /* 邏輯可按需求擴充 */
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="PsA3C" tags="Psy" position="1325,200" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         作為專業護理，你決定將觀察寫入文件。&lt;br&gt;
@@ -2979,18 +3126,88 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
     [[直接診斷為母親精神虐待孩子|PsADOC]]
 &lt;/div&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="65" name="PsA3E" tags="" position="1525,200" size="100,100"></tw-passagedata><tw-passagedata pid="66" name="PsA3D" tags="" position="1425,200" size="100,100"></tw-passagedata><tw-passagedata pid="67" name="PsA4A" tags="Psy" position="1125,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="65" name="PsA3E" tags="Psy" position="1525,200" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        空氣突然安靜。你意識到這已經超出了管教的範疇。&lt;br&gt;
-        阿晴表現出的不僅是肚痛，而是長期的創傷。
+        你告訴自己：&lt;br&gt;
+        「香港好多家長都係咁講嘢。」
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
         &lt;&lt;link &quot; &quot;&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    「沒有瘀傷，不代表沒有傷害。」&lt;br&gt;
+                    阿晴再沒有說話。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;endif&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+    [[重新思考|PsA4A]]
+    [[準備離開|PsABAD]]
+&lt;/div&gt;
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="PsA3D" tags="Psy" position="1425,200" size="100,100">    &lt;span id=&quot;story-text&quot;&gt;
+        眼前阿晴表現出的極度恐懼與退縮，&lt;br&gt;正是心理傷害的關鍵線索。[cite: 98, 100, 201]
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    這種隱蔽的傷害，往往比瘀傷更難癒合。&lt;br&gt;你需要更深入的評估。[cite: 14, 186]
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 隱藏點擊層，顯示選項 */
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+[[進一步評估|PsA4A]]
+[[覺得未算嚴重|PsA4B]]
+&lt;/div&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;silent&gt;&gt;
+    &lt;&lt;if $scenarios is undefined&gt;&gt;&lt;&lt;set $scenarios = []&gt;&gt;&lt;&lt;endif&gt;&gt;
+    /* 邏輯可按需求擴充 */
+&lt;&lt;/silent&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="67" name="PsA4A" tags="Psy" position="1125,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        最怕空氣突然安靜。&lt;br&gt;你將此記錄下來，亦意識到這已經超出了管教的範疇。
+    &lt;/span&gt;
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊換頁&lt;/div&gt;
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                    &lt;&lt;if $unlocked.doc is false&gt;&gt;
+            &lt;&lt;set $unlocked.doc to true&gt;&gt;
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
+                [Documentation Tips]
+            &lt;/div&gt;
+            
+            /* 音效與自動清理邏輯 */
+            &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+            &lt;&lt;timed 3.5s&gt;&gt;
+                &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    阿晴表現出的不僅是頭痛，而是長期的創傷。&lt;br&gt;
                     這種情緒上的摧毀，對孩子的影響可能更深遠。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
@@ -3007,12 +3224,83 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[決定啟動通報程序|PsAREPORT]]
-    [[與資深護理人員討論|PsASUPPORT]]
+    [[與資深護士討論|PsASUPPORT]]
     [[仍然懷疑是否「太小題大做」|PsAGRAY]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="68" name="PsA4B" tags="" position="1225,300" size="100,100"></tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="" position="1325,300" size="100,100"></tw-passagedata><tw-passagedata pid="70" name="PsAREPORT" tags="Psy" position="1125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="68" name="PsA4B" tags="Psy" position="1225,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        你開始懷疑：「係咪我太敏感？會唔會只係家長壓力大？」
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    這種遲疑在心理虐待個案中很常見，因為傷害是隱形的。&lt;br&gt;但孩子的恐懼是真實的。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                /* 隱藏點擊層，顯示選項 */
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+[[重新評估|PsA4A]]
+[[再等等吧|PsAWAIT]]
+&lt;/div&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;silent&gt;&gt;
+    &lt;&lt;if $scenarios is undefined&gt;&gt;&lt;&lt;set $scenarios = []&gt;&gt;&lt;&lt;endif&gt;&gt;
+    /* 邏輯可按需求擴充 */
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        ⚠️ **專業回饋：文件紀錄原則**&lt;br&gt;
+        你的紀錄包含過多「主觀評判」與「情緒性字眼」。
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面查看修正&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 
+                    ✔️ **應做**：描述觀察、記錄直接引述。&lt;br&gt;
+                    ❌ **避開**：主觀診斷、情緒化字眼或臆測未見之事。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    紀錄是為了給其他醫護與社工提供事實根據，&lt;br&gt;
+                    情緒化的文字反而會降低報告的信服力。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;endif&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+    [[重新撰寫紀錄|PsA3C]]
+&lt;/div&gt;
+
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="PsAREPORT" tags="Psy" position="1125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你決定啟動通報程序。&lt;br&gt;
@@ -3033,27 +3321,125 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
                     你的介入，可能阻止了下一場悲劇。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
+              /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
+             /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;PsAGood&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
+
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
+
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="71" name="PsASUPPORT" tags="Psy" position="1525,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        你將情況告訴了資深護士。
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    資深護士說：&lt;br&gt;「心理虐待最難。」&lt;br&gt;「但孩子長期恐懼，本身已經係signal。」
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+            &lt;&lt;endif&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
+    [[聽從意見，進行通報|PsAREPORT]]
+    [[仍然猶豫不決|PsAWAIT]]
+&lt;/div&gt;
+
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="PsAGRAY" tags="Psy" position="1425,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        你心想：&lt;br&gt;「佢冇受傷。」&lt;br&gt;「會唔會未去到report程度？」
+      &lt;/span&gt;
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊換頁&lt;/div&gt;
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    但你同時知道： 長期羞辱與恐嚇，&lt;br&gt;也可能造成 serious emotional harm。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    面對這個灰色地帶，&lt;br&gt;你的選擇將決定孩子的未來。[cite: 7, 176]
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[查看最終結果|PsAGood]]
+    [[決定啟動通報程序|PsAREPORT]]
+    [[需要思考一段日子|PsAWAIT]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="71" name="PsASUPPORT" tags="" position="1225,400" size="100,100"></tw-passagedata><tw-passagedata pid="72" name="PsAGRAY" tags="" position="1425,300" size="100,100"></tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy" position="1125,500" size="100,100">&lt;div class=&quot;handbook-entrance-anim&quot;&gt;
-    📖 已更新 Child Protection 手冊：識別心理虐待
-&lt;/div&gt;
+&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        數星期後，&lt;br&gt;阿晴開始接受兒童心理支援。
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
 
-數星期後，阿晴開始接受兒童心理支援。
-她回診時主動對你微笑，小聲說：「多謝姐姐。」
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
-**【Reflection】**
-心理虐待（Psychological Abuse）往往被「鬧下啫」、「為佢好」所掩蓋。
-你的敏感度，保護了一個正在枯萎的小生命。
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;有天她主動到診所找你，對你表示感謝。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;set $page = 3&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
 
 &lt;style&gt;
 .full-screen-clicker a {
@@ -3074,13 +3460,9 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;/style&gt;
 
 &lt;&lt;silent&gt;&gt;
-&lt;&lt;if $scenarios[0].completed is false&gt;&gt;
-    &lt;&lt;set $scenarios[0].safety -= 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 10&gt;&gt;
-    &lt;&lt;set $totalSafety += $scenarios[0].safety&gt;&gt;
-    &lt;&lt;set $totalLegal += $scenarios[0].legal&gt;&gt;
+&lt;&lt;if $scenarios[1].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
-    &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+    &lt;&lt;set $scenarios[1].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -3090,31 +3472,31 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
     &lt;h3&gt;各場景評核結果&lt;/h3&gt;
     &lt;table class=&quot;score-table&quot;&gt;
         &lt;tr&gt;
-            &lt;th&gt;場景名稱&lt;/th&gt;
-            &lt;th&gt;狀態&lt;/th&gt;
+            &lt;th&gt;Situation&lt;/th&gt;
+            &lt;th&gt;Progress&lt;/th&gt;
             &lt;th&gt;Safety&lt;/th&gt;
             &lt;th&gt;Legal&lt;/th&gt;
-            &lt;th&gt;表現評級&lt;/th&gt;
+            &lt;th&gt;Rank&lt;/th&gt;
         &lt;/tr&gt;
         &lt;&lt;for _i = 0; _i &lt; $scenarios.length; _i++&gt;&gt;
             &lt;&lt;set _s = $scenarios[_i]&gt;&gt;
             &lt;tr&gt;
                 &lt;td&gt;&lt;&lt;print _s.name&gt;&gt;&lt;/td&gt;
                 &lt;td&gt;
-                    &lt;&lt;if _s.completed&gt;&gt;
-                        &lt;span style=&quot;color: #2ecc71;&quot;&gt;已完成&lt;/span&gt;
-                    &lt;&lt;else&gt;&gt;
-                        &lt;span style=&quot;color: #95a5a6;&quot;&gt;未解鎖&lt;/span&gt;
+                    &lt;&lt;if _s.completed&gt;&gt;\
+                        &lt;span style=&quot;color: #2ecc71;&quot;&gt;ℂ𝕠𝕞𝕡𝕝𝕖𝕥𝕖𝕕&lt;/span&gt;
+                    &lt;&lt;else&gt;&gt;\
+                        &lt;span style=&quot;color: #95a5a6;&quot;&gt;⏳&lt;/span&gt;
                     &lt;&lt;/if&gt;&gt;
                 &lt;/td&gt;
                 &lt;td&gt;&lt;&lt;print _s.safety&gt;&gt;&lt;/td&gt;
                 &lt;td&gt;&lt;&lt;print _s.legal&gt;&gt;&lt;/td&gt;
                 &lt;td&gt;
                     &lt;&lt;if _s.completed&gt;&gt;
-                        /* 個別場景等級判定 */
-                        &lt;&lt;if _s.safety &gt;= 15&gt;&gt;
+                        /* 個別場景等級判定 */\
+                        &lt;&lt;if _s.safety &gt;= 15&gt;&gt;\
                             &lt;b style=&quot;color: #f1c40f;&quot;&gt;Expert&lt;/b&gt;
-                        &lt;&lt;elseif _s.safety &gt;= 10&gt;&gt;
+                        &lt;&lt;elseif _s.safety &gt;= 10&gt;&gt;\
                             &lt;b style=&quot;color: #3498db;&quot;&gt;Competent&lt;/b&gt;
                         &lt;&lt;else&gt;&gt;
                             &lt;b style=&quot;color: #e67e22;&quot;&gt;Novice&lt;/b&gt;
@@ -3129,7 +3511,7 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 
     &lt;hr&gt;
     &lt;h4&gt;當前總分統計&lt;/h4&gt;
-    &lt;p&gt;總 Safety: &lt;b&gt;$totalSafety&lt;/b&gt; | 總 Legal: &lt;b&gt;$totalLegal&lt;/b&gt;&lt;/p&gt;
+    &lt;p&gt;Total Safety: &lt;b&gt;$totalSafety&lt;/b&gt; | Total Legal: &lt;b&gt;$totalLegal&lt;/b&gt;&lt;/p&gt;
     
     &lt;div class=&quot;current-rank&quot;&gt;
         當前總評級：
@@ -3142,27 +3524,120 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="75" name="PassageDone" tags="" position="0,1400" size="100,100">&lt;div id=&quot;fixed-hud-container&quot;&gt;
-    /* 必須在引號內指定按鈕文字，哪怕是空格 */
-    &lt;&lt;button &quot;STATS DATA&quot;&gt;&gt;
-        &lt;&lt;script&gt;&gt;
-            Dialog.setup(&quot;TRAINING PROGRESS&quot;, &quot;score-board&quot;);
-            Dialog.wiki(Story.get(&quot;ScenarioResultsPanel&quot;).processText());
-            Dialog.open();
-        &lt;&lt;/script&gt;&gt;
-    &lt;&lt;/button&gt;&gt;
+</tw-passagedata><tw-passagedata pid="75" name="PsAWAIT" tags="Psy" position="1225,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        你決定先觀察一段時間。&lt;br&gt;三星期後，阿晴獨自來門診求診，被診斷自殘行為。&lt;br&gt;需要被escort去急症室。
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    因為未能及時介入，孩子的心理創傷迅速惡化。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+              /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+             /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;PsABAD&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;&lt;script&gt;&gt;
-    $(document).ready(function() {
-        /* 套用圓形按鈕樣式 */
-        $(&quot;#fixed-hud-container button&quot;).addClass(&quot;retro-circle-btn&quot;);
-        
-        /* 💡 額外技巧：如果你想讓按鈕文字換行，可以用 JS 強制修改 */
-        $(&quot;#fixed-hud-container button&quot;).html(&quot;STATS&lt;br&gt;DATA&quot;);
-    });
-&lt;&lt;/script&gt;&gt;
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
 
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;silent&gt;&gt;
+    &lt;&lt;if $scenarios is undefined&gt;&gt;&lt;&lt;set $scenarios = []&gt;&gt;&lt;&lt;endif&gt;&gt;
+    /* 邏輯可按需求擴充 */
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer" position="1225,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+        半年後，&lt;br&gt;你在新聞中看到一名 10 歲女孩失蹤的消息，名字非常熟悉。
+    &lt;/span&gt;
+    
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間猶豫，但最後沒有行動。&lt;br&gt;心理虐待（Psychological Abuse）往往被「鬧下啫」、「為佢好」所掩蓋。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「沒有傷痕」往往讓我們低估了心理虐待的毀滅性。&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;set $page = 3&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;type 80ms&gt;&gt;如果再有一次機會，你會怎樣做？&lt;&lt;/type&gt;&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 4&gt;&gt;
+                /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 4&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
+
+&lt;&lt;silent&gt;&gt;
+&lt;&lt;if $scenarios[1].completed is false&gt;&gt;
+    &lt;&lt;set $progress += 1&gt;&gt;
+    &lt;&lt;set $scenarios[1].completed = true&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/silent&gt;&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 </tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
