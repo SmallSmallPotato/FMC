@@ -3256,12 +3256,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     [[準備離開|PsABAD]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="PsA3D" tags="Psy" position="1425,200" size="100,100">                    &lt;&lt;if $unlocked.redFlags is false&gt;&gt;
-            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                [Red Flags Guideline]
-            &lt;/div&gt;
-            
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="PsA3D" tags="Psy" position="1425,200" size="100,100">&lt;&lt;if $unlocked.redFlags is false&gt;&gt;\
+&lt;&lt;set $unlocked.redFlags to true&gt;&gt;\
+&lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Red Flags Guideline]&lt;/div&gt;
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
             &lt;&lt;timed 3.5s&gt;&gt;
@@ -3271,7 +3268,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
         &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
         &lt;span id=&quot;story-text&quot;&gt;
-        眼前阿晴表現出的極度恐懼與退縮，&lt;br&gt;正是心理傷害的關鍵線索。[cite: 98, 100, 201]
+        眼前阿晴表現出的極度恐懼與退縮，&lt;br&gt;正是心理傷害的關鍵線索。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -3281,7 +3278,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    這種隱蔽的傷害，往往比瘀傷更難癒合。&lt;br&gt;你需要更深入的評估。[cite: 14, 186]
+                    這種隱蔽的傷害，往往比瘀傷更難癒合。&lt;br&gt;你需要更深入的評估。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
@@ -3302,12 +3299,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;/nobr&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="67" name="PsA4A" tags="Psy" position="1125,300" size="100,100">                    &lt;&lt;if $unlocked.doc is false&gt;&gt;
-            &lt;&lt;set $unlocked.doc to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                [Documentation Tips]
-            &lt;/div&gt;
-            
+</tw-passagedata><tw-passagedata pid="67" name="PsA4A" tags="Psy" position="1125,300" size="100,100">&lt;&lt;if $unlocked.doc is false&gt;&gt;\
+&lt;&lt;set $unlocked.doc to true&gt;&gt;\
+&lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Documentation Tips]&lt;/div&gt;            
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
             &lt;&lt;timed 3.5s&gt;&gt;
@@ -3545,7 +3539,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    面對這個灰色地帶，&lt;br&gt;你的選擇將決定孩子的未來。[cite: 7, 176]
+                    面對這個灰色地帶，&lt;br&gt;你的選擇將決定孩子的未來。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -3558,12 +3552,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     [[需要思考一段日子|PsAWAIT]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">                    &lt;&lt;if $unlocked.flow is false&gt;&gt;
-            &lt;&lt;set $unlocked.flow to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                [Reporting workflow]
-            &lt;/div&gt;
-            
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;if $unlocked.flow is false&gt;&gt;
+&lt;&lt;set $unlocked.flow to true&gt;&gt;
+&lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Reporting workflow]&lt;/div&gt;          
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
             &lt;&lt;timed 3.5s&gt;&gt;
