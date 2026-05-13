@@ -1061,11 +1061,9 @@ $(document).on(':passageend', function () {
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-</tw-passagedata><tw-passagedata pid="7" name="PhAExam" tags="Dx" position="225,400" size="100,100">        &lt;&lt;if $unlocked.redFlags is false&gt;&gt;
-            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                Unlock hand book item!!&lt;br&gt;[Red Flags Guideline]
-            &lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="7" name="PhAExam" tags="Dx" position="225,400" size="100,100">        &lt;&lt;if $unlocked.redFlags is false&gt;&gt;\
+            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Red Flags Guideline]&lt;/div&gt;
             
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
@@ -1181,7 +1179,12 @@ $(document).on(':passageend', function () {
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[蒐集更多線索|PhA4A]]
-    [[堅持等醫生決定|PhAWait]]
+        &lt;&lt;/link&gt;&gt;
+    &lt;&lt;link &quot;堅持等醫生決定&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PhAWait&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1302,7 +1305,8 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[0].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PsychologicalAbuse" tags="Psy" position="1150,0" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PsychologicalAbuse" tags="Psy" position="1150,0" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         這天下午，你走入候診大堂。&lt;br&gt;
@@ -1336,7 +1340,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="15" name="ResetS1" tags="" position="1250,0" size="100,100">&lt;&lt;silent&gt;&gt;
+</tw-passagedata><tw-passagedata pid="15" name="ResetS2" tags="" position="700,775" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[2].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[2].legal&gt;&gt;
 &lt;&lt;set $scenarios[2].safety = 0&gt;&gt;
@@ -1344,7 +1348,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[2].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;PsychologicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,775" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;goto &quot;SexualAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,775" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1801,11 +1805,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal += 10&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="PhA4A" tags="Dx" position="25,600" size="100,100">        &lt;&lt;if $unlocked.doc is false&gt;&gt;
-            &lt;&lt;set $unlocked.doc to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                Unlock hand book item!!&lt;br&gt;[Documentation Tips]
-            &lt;/div&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="PhA4A" tags="Dx" position="25,600" size="100,100">        &lt;&lt;if $unlocked.doc is false&gt;&gt;\
+            &lt;&lt;set $unlocked.doc to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Documentation Tips]&lt;/div&gt;
             
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
@@ -2238,7 +2240,10 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">           &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
+            &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
+&lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2540,11 +2545,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="49" name="NC4A" tags="Nc" position="450,400" size="100,100">        &lt;&lt;if $unlocked.doc is false&gt;&gt;
-            &lt;&lt;set $unlocked.doc to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                [Documentation Tips]
-            &lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="49" name="NC4A" tags="Nc" position="450,400" size="100,100">        &lt;&lt;if $unlocked.doc is false&gt;&gt;\
+            &lt;&lt;set $unlocked.doc to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Documentation Tips]&lt;/div&gt;
             
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
@@ -2892,11 +2895,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="56" name="NCSUPPORT" tags="Nc" position="550,500" size="100,100">                    &lt;&lt;if $unlocked.redFlags is false&gt;&gt;
-            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                [Red Flags Guideline]
-            &lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="56" name="NCSUPPORT" tags="Nc" position="550,500" size="100,100">          &lt;&lt;if $unlocked.redFlags is false&gt;&gt;\
+            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Red Flags Guideline]&lt;/div&gt;
             
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
@@ -3449,6 +3450,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
              /* 最後一次點擊才執行跳轉 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
                 &lt;&lt;goto &quot;PsAGood&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
@@ -3552,8 +3554,8 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     [[需要思考一段日子|PsAWAIT]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;if $unlocked.flow is false&gt;&gt;
-&lt;&lt;set $unlocked.flow to true&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;if $unlocked.flow is false&gt;&gt;\
+&lt;&lt;set $unlocked.flow to true&gt;&gt;\
 &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Reporting workflow]&lt;/div&gt;          
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
@@ -3696,6 +3698,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
              /* 最後一次點擊才執行跳轉 */
+          &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
                 &lt;&lt;goto &quot;PsABAD&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
@@ -4485,11 +4488,9 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="" position="700,1400" size="100,100">                    &lt;&lt;if $unlocked.quotes is false&gt;&gt;
-            &lt;&lt;set $unlocked.quotes to true&gt;&gt;
-            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;
-                Unlock hand book item!!&lt;br&gt;[Legal &amp; Professional Quotes]
-            &lt;/div&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="" position="700,1400" size="100,100">            &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
+            &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
             
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
