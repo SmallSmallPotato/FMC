@@ -767,7 +767,7 @@ $(document).on(':passageend', function () {
         /* 情節 0 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[0].completed&gt;&gt;\
-                &lt;span style=&quot;color: #870F00; font-size: 14px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動。&lt;br&gt;[[►▻►回到過去|ResetS0]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #870F00; font-size: 14px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動。&lt;br&gt;[[◄◅◄🔙|ResetS0]]&lt;/span&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;&lt;link &quot;❑ 忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -776,7 +776,7 @@ $(document).on(':passageend', function () {
         /* 情節 1 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[1].completed&gt;&gt;\
-                &lt;span style=&quot;color: #C36200; font-size: 14px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害。&lt;br&gt;[[►▻►回到過去|ResetS1]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #C36200; font-size: 14px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害。&lt;br&gt;[[◄◅◄🔙|ResetS1]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[0].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 路過大堂&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -787,7 +787,7 @@ $(document).on(':passageend', function () {
         /* 情節 2 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[2].completed&gt;&gt;\
-                &lt;span style=&quot;color: #C7A000; font-size: 14px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;br&gt;[[►▻►回到過去|ResetS2]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #C7A000; font-size: 14px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;br&gt;[[◄◅◄🔙|ResetS2]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -798,7 +798,7 @@ $(document).on(':passageend', function () {
         /* 情節 3 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
-                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;br&gt;[[►▻►回到過去|ResetS3]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;br&gt;[[◄◅◄🔙去|ResetS3]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 協助量度Vital Signs&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -809,7 +809,7 @@ $(document).on(':passageend', function () {
         /* 情節 4 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[4].completed&gt;&gt;\
-                &lt;span style=&quot;color: #007D7C; font-size: 14px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。&lt;br&gt;[[►▻►回到過去|ResetS4]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #007D7C; font-size: 14px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。&lt;br&gt;[[◄◅◄🔙|ResetS4]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[3].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 放飯前5分鐘&quot; &quot;NeglectEnvironment&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -820,7 +820,7 @@ $(document).on(':passageend', function () {
         /* 情節 5 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[5].completed&gt;&gt;\
-                &lt;span style=&quot;color: #00438F; font-size: 14px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。&lt;br&gt;[[►▻►回到過去|ResetS5]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #00438F; font-size: 14px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。&lt;br&gt;[[◄◅◄🔙|ResetS5]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[4].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 護士站內&quot; &quot;NeglectHygiene&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -831,7 +831,7 @@ $(document).on(':passageend', function () {
         /* 情節 6 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[6].completed&gt;&gt;\
-                &lt;span style=&quot;color: #2A0075; font-size: 14px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。&lt;br&gt;[[►▻►回到過去|ResetS6]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #2A0075; font-size: 14px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。&lt;br&gt;[[◄◅◄🔙|ResetS6]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[5].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 準備收工&quot; &quot;NeglectDiet&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -3554,7 +3554,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     &lt;&lt;set $totalSafety += 20&gt;&gt;
     &lt;&lt;set $totalLegal += 20&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-</tw-passagedata><tw-passagedata pid="71" name="PsASUPPORT" tags="Psy" position="1525,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="71" name="PsASUPPORT" tags="Psy" position="1550,350" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你將情況告訴了資深護士。
@@ -3721,15 +3721,15 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
                             &lt;b style=&quot;color: #3498db;&quot;&gt;Competent&lt;/b&gt;
                         &lt;&lt;else&gt;&gt;\
                             &lt;b style=&quot;color: #e67e22;&quot;&gt;Novice&lt;/b&gt;
-                        &lt;&lt;/if&gt;&gt;\
-                    &lt;&lt;else&gt;&gt;\
+                        &lt;&lt;/if&gt;&gt;
+                    &lt;&lt;else&gt;&gt;
                         --
                     &lt;&lt;/if&gt;&gt;\
-                &lt;/td&gt;\
-            &lt;/tr&gt;\
-        &lt;&lt;/for&gt;&gt;\
-    &lt;/table&gt;\
-    &lt;hr&gt;\
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;&lt;/for&gt;&gt;
+    &lt;/table&gt;
+    &lt;hr&gt;
     &lt;h4&gt;當前總分統計&lt;/h4&gt;
     &lt;p&gt;Total Safety: &lt;b&gt;$totalSafety&lt;/b&gt; | Total Legal: &lt;b&gt;$totalLegal&lt;/b&gt;&lt;/p&gt;
     &lt;div class=&quot;current-rank&quot;&gt;
@@ -3740,7 +3740,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
             &lt;span class=&quot;rank-silver&quot;&gt;👍 Competent&lt;/span&gt;
         &lt;&lt;else&gt;&gt;\
             &lt;span class=&quot;rank-bronze&quot;&gt;⚠️ Needs Improvement&lt;/span&gt;
-        &lt;&lt;/if&gt;&gt;\
+        &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="75" name="PsAWAIT" tags="Psy" position="1225,400" size="100,100">&lt;&lt;nobr&gt;&gt;
