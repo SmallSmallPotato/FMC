@@ -2262,9 +2262,15 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;news&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;audio &quot;news&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;news&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
