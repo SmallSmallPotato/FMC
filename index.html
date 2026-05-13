@@ -767,7 +767,7 @@ $(document).on(':passageend', function () {
         /* 情節 0 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[0].completed&gt;&gt;\
-                &lt;span style=&quot;color: #870F00; font-size: 14px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動。[[►▻►回到過去|ResetS0]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #870F00; font-size: 14px;&quot;&gt;✓ 任務完成：你不需要100%肯定才行動。&lt;br&gt;[[►▻►回到過去|ResetS0]]&lt;/span&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;&lt;link &quot;❑ 忙碌洗傷口中&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -776,7 +776,7 @@ $(document).on(':passageend', function () {
         /* 情節 1 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[1].completed&gt;&gt;\
-                &lt;span style=&quot;color: #C36200; font-size: 14px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害。[[►▻►回到過去|ResetS1]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #C36200; font-size: 14px;&quot;&gt;✓ 任務完成：沒有瘀傷不代表沒有傷害。&lt;br&gt;[[►▻►回到過去|ResetS1]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[0].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 路過大堂&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -787,7 +787,7 @@ $(document).on(':passageend', function () {
         /* 情節 2 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[2].completed&gt;&gt;\
-                &lt;span style=&quot;color: #C7A000; font-size: 14px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。[[►▻►回到過去|ResetS2]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #C7A000; font-size: 14px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;br&gt;[[►▻►回到過去|ResetS2]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -798,7 +798,7 @@ $(document).on(':passageend', function () {
         /* 情節 3 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
-                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。[[►▻►回到過去|ResetS3]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;br&gt;[[►▻►回到過去|ResetS3]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 協助量度Vital Signs&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -809,7 +809,7 @@ $(document).on(':passageend', function () {
         /* 情節 4 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[4].completed&gt;&gt;\
-                &lt;span style=&quot;color: #007D7C; font-size: 14px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。[[►▻►回到過去|ResetS4]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #007D7C; font-size: 14px;&quot;&gt;✓ 任務完成：孩子適應了危險，不代表危險存在。&lt;br&gt;[[►▻►回到過去|ResetS4]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[3].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 放飯前5分鐘&quot; &quot;NeglectEnvironment&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -820,7 +820,7 @@ $(document).on(':passageend', function () {
         /* 情節 5 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[5].completed&gt;&gt;\
-                &lt;span style=&quot;color: #00438F; font-size: 14px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。[[►▻►回到過去|ResetS5]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #00438F; font-size: 14px;&quot;&gt;✓ 任務完成：孩子需要被保護，即使他身上的氣味令人退縮。&lt;br&gt;[[►▻►回到過去|ResetS5]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[4].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 護士站內&quot; &quot;NeglectHygiene&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -831,7 +831,7 @@ $(document).on(':passageend', function () {
         /* 情節 6 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[6].completed&gt;&gt;\
-                &lt;span style=&quot;color: #2A0075; font-size: 14px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。[[►▻►回到過去|ResetS6]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #2A0075; font-size: 14px;&quot;&gt;✓ 任務完成：不是所有 neglect 都來自惡意。&lt;br&gt;[[►▻►回到過去|ResetS6]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[5].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 準備收工&quot; &quot;NeglectDiet&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2129,9 +2129,15 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_BAD" tags="Dx no-timer" position="25,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;tear&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -2196,9 +2202,15 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="41" name="PhAENDING_DELAY" tags="Dx no-timer" position="125,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;tear&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -2754,9 +2766,14 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer" position="550,600" size="100,100">&lt;&lt;audio &quot;wizard&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;tear&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -3013,9 +3030,14 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer" position="450,600" size="100,100">&lt;&lt;audio &quot;wizard&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;news&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;news&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;news&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; wizard&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -3600,9 +3622,14 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;news&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;moon&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;news&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;news&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
         &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -3773,9 +3800,14 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer" position="1225,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;moon&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;tear&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
     &lt;&lt;set $totalTime to 0&gt;&gt;
