@@ -798,7 +798,7 @@ $(document).on(':passageend', function () {
         /* 情節 3 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
-                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;br&gt;[[◄◅◄🔙去|ResetS3]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：過度懂事的孩子，很多時並不是真的被照顧得很好。&lt;br&gt;[[◄◅◄🔙|ResetS3]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 協助量度Vital Signs&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1306,7 +1306,8 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[3].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;goto &quot;NeglectCare&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="ResetS0" tags="" position="200,300" size="100,100">&lt;&lt;silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
+&lt;&lt;goto &quot;NeglectCare&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="ResetS0" tags="" position="225,300" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[0].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[0].legal&gt;&gt;
 &lt;&lt;set $scenarios[0].safety = 0&gt;&gt;
@@ -1314,6 +1315,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[0].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PsychologicalAbuse" tags="Psy" position="1150,0" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -1357,6 +1359,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[2].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;SexualAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,775" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -1638,31 +1641,77 @@ Thinking: $totalTime s
     &lt;&lt;/if&gt;&gt;
 &lt;/div&gt;
 
- </tw-passagedata><tw-passagedata pid="25" name="HB_RedFlags" tags="" position="200,1925" size="100,100">&lt;h3&gt;🚩 臨床紅旗指標 (Clinical Red Flags)&lt;/h3&gt;\
-* 受傷解釋與臨床觀察不符（Inconsistency）
-* 延遲就醫 (Delay in seeking medical attention)
+ </tw-passagedata><tw-passagedata pid="25" name="HB_RedFlags" tags="" position="200,1925" size="100,100">&lt;h3&gt;🚩 臨床紅旗指標 (Clinical Red Flags)&lt;/h3&gt;\ 
+
+&lt;h3&gt;身體徵象&lt;/h3&gt;
+* 受傷解釋與臨床觀察不符 (Inconsistency)
 * 多處不同癒合階段的瘀傷
-* 具特徵性的傷痕（如煙頭燙傷、齒痕、器械印記）
+* 特殊位置（背部、耳後、大腿內側）
+* 具特徵性的傷痕 (如煙頭燙傷、齒痕、器械印記)
+&lt;h3&gt;行為徵象&lt;/h3&gt;
+* 過度恐懼某人
+* 突然退縮／沉默
+* 性化行為（不符合年齡）
+* 延遲就醫 (Delay in seeking medical attention)
+&lt;h3&gt;家庭風險&lt;/h3&gt;
+* 家暴、濫藥、精神病
+* 長期壓力（失業、貧困）
+* 家長情緒失控
+
+&lt;h3&gt;強制舉報的核心法律要素(Training Core Content)&lt;/h3&gt;
+*  舉報條件：
+o 「合理理由懷疑」
+o 「嚴重傷害」或「實際風險」
+* 對象：18歲以下兒童
+* 涉及四大類：
+o 身體虐待 (physical abuse)
+o 心理虐待 (psychological abuse)
+o 性侵犯 (sexual abuse)
+o 疏忽照顧 (neglect)
 </tw-passagedata><tw-passagedata pid="26" name="HB_Flow" tags="" position="200,2025" size="100,100">&lt;h3&gt;📑 處理疑似虐兒個案流程 (Reporting Workflow)&lt;/h3&gt;\
-Step 1: 臨床評估及初步穩定傷情。
-Step 2: 通知高級護士長（DOM/NS）及值班醫生。
-Step 3: 聯絡醫務社工（MSW）進行評估。
-Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><tw-passagedata pid="27" name="HB_Doc" tags="" position="0,2025" size="100,100">&lt;h3&gt;📝 臨床紀錄建議 (Documentation Tips)&lt;/h3&gt;\
-* 使用客觀語言描述傷口，避免主觀臆斷（例如：使用「受傷位置」而非「被虐位置」）。
-* 詳細記錄照顧者的原話，並加上引號。
-* 拍攝臨床照片時需確保光線充足並放置比例尺。</tw-passagedata><tw-passagedata pid="28" name="HB_Quotes" tags="" position="100,2025" size="100,100">&lt;h3&gt;💬 相關的法律條文 (Legal &amp; Professional Quotes)&lt;/h3&gt;\
+只要有「合理懷疑」＋「嚴重傷害或風險」＝ 要報
+❗ 不需要確定
+❗ 不需要證據齊全
+❗ 寧願報，不要錯過
+
+當你在工作期間產生合理懷疑時，應遵循以下步驟：
+Step 1 即時評估: 判斷兒童是否處於即時危險（如需要急救、施虐者在現場）及初步穩定傷情。
+Step 2 初步紀錄: 簡要記錄觀察到的傷痕、兒童的情緒反應或陪同者的可疑言論。
+Step 3 內部通報（非必要但建議）: 通知高級護士長（DOM/NS）及值班醫生，登入CMS Child Abuse Case Record作為HA internal documentation。但需注意：內部通報不能代替法律規定的舉報責任（除非確認已有同事完成舉報）。
+Step 4遞交舉報：根據指引決定是否報警及填寫專項報告。
+* 緊急個案Mandatory Reporting： 立即致電 999 或聯繫最近的警署。
+* 非緊急個案Normal Reporting： 透過社會福利署開發的「強制舉報虐待兒童電子平台」提交報告，或填寫指定表格傳真至社署保護家庭及兒童服務課。
+* 時限： 法例要求在「合理可行範圍內盡快」完成，通常指識別後的 24 小時內。
+
+① 先打電話：警方 / 社署
+② 再書面報告：https://www.mrr.gov.hk
+&lt;h3&gt;📌記住：電話先，文件後&lt;/h3&gt;</tw-passagedata><tw-passagedata pid="27" name="HB_Doc" tags="" position="0,2025" size="100,100">&lt;h3&gt;📝 臨床紀錄建議 (Documentation Tips)&lt;/h3&gt;\
+* 使用客觀語言描述傷口及事實，避免主觀臆斷、猜測和下結論（例如：使用「受傷位置」而非「被虐位置」）。
+* 用直接引述，詳細記錄照顧者的原話，並加上引號。（例如：「爸爸打我」）
+* 描述傷勢位置和大小。拍攝臨床照片時需確保光線充足並放置比例尺。
+</tw-passagedata><tw-passagedata pid="28" name="HB_Quotes" tags="" position="100,2025" size="100,100">&lt;h3&gt;💬 相關的法律條文 (Legal &amp; Professional Quotes)&lt;/h3&gt;\
 * 「兒童的安全是我們的首要考慮（The safety of the child is the paramount consideration）」。
-* 記錄強制舉報的法律責任與保護條款。
+✔️ 善意舉報 → 無法律責任
+✔️ 身份受保護
+✔️ 不可被阻止舉報
+「合理懷疑，就要行動」
 
 &lt;h3&gt;根據香港法例第 650 章《強制舉報虐待兒童條例》（Mandatory Reporting of Child Abuse Ordinance），該法例已於 2026 年 1 月 20 日正式生效。&lt;/h3&gt;\
-作為醫療衞生界的指明專業人員，護士若在工作期間未能履行舉報義務，將面臨法律責任及專業後果：
+作為醫療衞生界的指明專業人員（specified professionals），護士若在工作期間未能履行舉報義務：
+* 已知悉（knows）
+* 或有合理理由懷疑（has reasonable grounds to suspect）
+兒童正遭受：
+* 嚴重傷害（serious harm）
+* 或有遭受嚴重傷害的實際風險（real risk of serious harm）
+但沒有在合理時間內作出舉報，可能會涉及刑事責任。
+
 &lt;h3&gt;1. 刑事法律後果&lt;/h3&gt;\
 如果護士在工作過程中，有合理理由懷疑兒童「已遭受嚴重傷害」或「面臨遭受嚴重傷害的實質風險」，但未能在合理可行範圍內盡快舉報，即屬違法：
 * 最高罰則： 監禁 3 個月及罰款港幣 $50,000（第五級罰款）。
 * 兩級制刑罰：
-- 簡易程序定罪： 最高罰款 $50,000。
-- 公訴程序定罪： 最高罰款 $50,000 及監禁 3 個月。
-
+        - 簡易程序定罪： 最高罰款 $50,000。
+        - 公訴程序定罪： 最高罰款 $50,000 及監禁 3 個月。
+        
 &lt;h3&gt;2. 專業操守與執業影響&lt;/h3&gt;\
 * 除了刑事責任，未履行法定舉報義務亦會引發一系列職業生涯的後果：
 紀律處分： 相關個案可能會被轉介至 香港護士管理局（Nursing Council of Hong Kong）。若被裁定為專業失德或因刑事定罪影響專業聲譽，可能面臨警告、停牌甚至除牌。
@@ -1671,10 +1720,16 @@ Step 4: 根據指引決定是否報警及填寫專項報告。</tw-passagedata><
 &lt;h3&gt;3. 免責辯護與保護條款&lt;/h3&gt;\
 法例亦同時考慮了實際臨床環境，提供了一些保障：
 * 合理的辯護理由：
-- 誠實且合理地相信另一名指明專業人員已經舉報（例如醫生已報警/報社署）。
-_ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分理據）。
+        - 誠實且合理地相信另一名指明專業人員已經舉報（例如醫生已報警/報社署）。
+        - 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分理據）。
 * 法律保障： 只要是出於誠實信用（good faith）作出的舉報，護士可獲免除民事或刑事法律責任，亦不會因舉報而被視為違反專業操守（如洩露病人隱私）。
-* 阻止舉報亦屬犯罪： 任何上司或同事若企圖阻撓護士進行強制舉報，同樣屬於犯罪，最高可判監禁 3 個月及罰款 $50,000。</tw-passagedata><tw-passagedata pid="29" name="HB_Contacts" tags="" position="100,1925" size="100,100">&lt;h3&gt;📞 相關部門的聯絡資訊 (Emergency Contacts)&lt;/h3&gt;\
+* 阻止舉報亦屬犯罪： 任何上司或同事若企圖阻撓護士進行強制舉報，同樣屬於犯罪，最高可判監禁 3 個月及罰款 $50,000。
+
+&lt;h3&gt;💡 專業提示：&lt;/h3&gt;\
+由於法例強調「及早識別」，建議護士在遇到疑似個案時，除按照院方內部指引通報外，應記錄觀察所得（如傷痕位置、家長解釋是否合理等），以證明履行了專業專業判斷的責任。有關詳細的識別標準，可參考社會福利署推出的《強制舉報虐待兒童條例指南》。
+
+&lt;h3&gt;The law does not expect certainty.&lt;br&gt;It expects professional action when serious concern exists.&lt;/h3&gt;
+</tw-passagedata><tw-passagedata pid="29" name="HB_Contacts" tags="" position="100,1925" size="100,100">&lt;h3&gt;📞 相關部門的聯絡資訊 (Emergency Contacts)&lt;/h3&gt;\
 * 社會福利署（SWD）保護家庭及兒童服務課
 * 醫務社工（MSW）各分科直通電話
 * 警察電訊處（RCCC）及各區警署值日室電話</tw-passagedata><tw-passagedata pid="30" name="HB_DoDont" tags="" position="0,1925" size="100,100">&lt;h3&gt;👨🏻‍🏫 處理疑似虐兒個案時的行為準則 ⭕️ DO / DON&#39;T ❌&lt;/h3&gt;\
@@ -1922,7 +1977,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="200,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你決定先完成手頭上的工作。&lt;br&gt;在處理完傷口便讓他們回家，並讓他們明天再來。
@@ -4635,6 +4690,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $scenarios[1].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;PsychologicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="98" name="ResetS4" tags="" position="1175,700" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[4].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[4].legal&gt;&gt;
@@ -4643,6 +4699,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $scenarios[4].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectEnvironment&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="99" name="ResetS5" tags="" position="1625,975" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[5].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[5].legal&gt;&gt;
@@ -4651,6 +4708,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $scenarios[5].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectHygiene&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="ResetS6" tags="" position="2200,800" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[6].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[6].legal&gt;&gt;
@@ -4659,6 +4717,7 @@ _ 誠實且合理地相信延誤舉報符合兒童的最佳利益（需有充分
 &lt;&lt;set $scenarios[6].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectDiet&quot;&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
