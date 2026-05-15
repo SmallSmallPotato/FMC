@@ -123,7 +123,7 @@ body {
 
 /* 修改所有連結的預設顏色 */
 a {
-    color: #008584 !important; /* 改為深藍色或其他你喜歡的顏色 */
+    color: #0073a7 !important; /* 改為深藍色或其他你喜歡的顏色 */
     text-decoration: none;      /* 移除下劃線 */
     font-weight: bold;
     transition: 0.2s;           /* 讓顏色變換變平滑 */
@@ -436,7 +436,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     transition: transform 0.1s;
     text-align: center;
     line-height: 40px; /* 修正居中高度 */
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     image-rendering: pixelated;
     position: relative; /* 為了確保發光效果層級正確 */
@@ -500,8 +500,8 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     /* 或者你也可以使用 transform 來精確移動 (更推薦) */
     /* transform: translateY(-5px); */
     
-    font-size: 25px; 
-    line-height: 0.5;
+    font-size: 14.5px; 
+    line-height: 0.88;
 }
 
 /* 修改 SugarCube 默認 Dialog 樣式 */
@@ -787,7 +787,7 @@ $(document).on(':passageend', function () {
         /* 情節 2 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[2].completed&gt;&gt;\
-                &lt;span style=&quot;color: #C7A000; font-size: 14px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;br&gt;[[◄◅◄🔙|ResetS2]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #816300; font-size: 14px;&quot;&gt;✓ 任務完成：當孩子終於開口，成人的反應會改變一切。&lt;br&gt;[[◄◅◄🔙|ResetS2]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 護士站諮詢&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1630,7 +1630,7 @@ Thinking: $totalTime s
     &lt;&lt;if !tags().includes(&quot;no-handbk&quot;)&gt;&gt;
         &lt;!-- 這裡加入了 handbook-entrance-anim 類別 --&gt;
         &lt;div class=&quot;pixel-icon-btn handbook-entrance-anim&quot;&gt;
-            &lt;&lt;link &quot;📖&quot;&gt;&gt;
+            &lt;&lt;link &quot;天書&quot;&gt;&gt;
                 &lt;&lt;script&gt;&gt;
                     Dialog.setup(&quot;📖 Pocket Nurse Handbook&quot;, &quot;pixel-handbook&quot;);
                     Dialog.wiki(Story.get(&quot;Handbook_Content&quot;).processText());
