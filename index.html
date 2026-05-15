@@ -1714,7 +1714,7 @@ Thinking: $totalTime s
 ** 簡易程序定罪： 最高罰款 $50,000。
 ** 公訴程序定罪： 最高罰款 $50,000 及監禁 3 個月。
 &lt;h3&gt;2. 專業操守與執業影響&lt;/h3&gt;\
-* 除了刑事責任，未履行法定舉報義務亦會引發一系列職業生涯的後果：
+除了刑事責任，未履行法定舉報義務亦會引發一系列職業生涯的後果：
 * 紀律處分： 相關個案可能會被轉介至 香港護士管理局（Nursing Council of Hong Kong）。若被裁定為專業失德或因刑事定罪影響專業聲譽，可能面臨警告、停牌甚至除牌。
 * 僱傭合約風險： 醫療機構（如醫管局或私家醫院）通常要求員工遵守所有法規。違法行為可能導致內部紀律處分，包括終止聘用。
 &lt;h3&gt;3. 免責辯護與保護條款&lt;/h3&gt;\
@@ -3510,9 +3510,14 @@ Thinking: $totalTime s
     &lt;&lt;set $totalSafety -= 10&gt;&gt;
     &lt;&lt;set $totalLegal -= 10&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;sadsong&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;moon&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;sadsong&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;sadsong&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -3534,8 +3539,7 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    紀錄是為了給其他醫護與社工提供事實根據，&lt;br&gt;
-                    情緒化的文字反而會降低報告的信服力。
+                    紀錄是為了給其他醫護與社工提供事實根據，&lt;br&gt;情緒化的文字反而會降低報告的信服力。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -3620,7 +3624,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalSafety += 20&gt;&gt;
     &lt;&lt;set $totalLegal += 20&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-</tw-passagedata><tw-passagedata pid="71" name="PsASUPPORT" tags="Psy" position="1550,350" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="71" name="PsASUPPORT" tags="Psy" position="1525,300" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你將情況告訴了資深護士。
