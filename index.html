@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="103" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="22" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 body {
   font-family: 'DotGothic16', sans-serif !important;
@@ -131,6 +131,22 @@ a {
 
 a:active { 
     color: #3498db !important; text-shadow: 0 0 5px rgba(52, 152, 219, 0.5) !important; 
+}
+
+html[data-tags~="Quiz"] body {
+  background-image: url("https://smallsmallpotato.github.io/FMC/images/bgq.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+html[data-tags~="Ready"] body {
+  background-image: url("https://smallsmallpotato.github.io/FMC/images/bgq1.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 html[data-tags~="Start"] body {
@@ -202,7 +218,7 @@ html[data-tags~="Nd"] body {
 #quiz-box {
     border: 4px solid #ffffff;
     box-shadow: 6px 6px 0px #333333;
-    background: #000000;
+    background: rgba(0, 0, 0, 0.5) !important;
     padding: 18px;
     font-family: "Courier New", Courier, monospace;
     color: #ffffff;
@@ -926,7 +942,7 @@ $(document).on(':passageend', function () {
         });
     }
 });
-</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;dialogue-box-container&quot;&gt;\
+</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;dialogue-box-container&quot;&gt;\
     &lt;span id=&quot;story-text&quot;&gt;\
         &lt;&lt;type 80ms&gt;&gt;&lt;div style=&quot;font-size: 23px; font-weight: bold; border-bottom: 2px solid white; padding-bottom: 10px;&quot;&gt;🏥 家庭醫學門診工作日&lt;/div&gt;&lt;&lt;/type&gt;&gt;\
         &lt;div style=&quot;font-size: 18px; margin-top: 10px; margin-bottom: 15px;&quot;&gt;►▻►▻►▻請選擇你要處理的情況：&lt;/div&gt;\
@@ -1721,13 +1737,14 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="Start no-timer no-handbk" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="no-timer no-handbk Quiz" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;\
 &lt;&lt;set $decisionHistory to []&gt;&gt;\
 &lt;&lt;set $totalSafety = 0&gt;&gt;\
 &lt;&lt;set $totalLegal = 0&gt;&gt;\
 &lt;&lt;set $progress = 0&gt;&gt;\
-&lt;div class=&quot;pixel-glow-blue&quot;&gt;Interactive Clinical Judgment Simulator&lt;/div&gt;
- &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;[[► Start|Start]]
+&lt;div class=&quot;pixel-glow-blue&quot;&gt;Interactive Clinical Judgment Simulator&lt;/div&gt;\
+ &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
+[[► Start|Start]]
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
     &lt;tr&gt;\
@@ -2101,7 +2118,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;wah&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -2365,7 +2382,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -2438,7 +2455,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -2509,7 +2526,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3000,7 +3017,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3077,7 +3094,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;wah&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3270,7 +3287,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3684,7 +3701,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;sadsong&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3866,7 +3883,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -4044,7 +4061,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -4521,7 +4538,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -4816,7 +4833,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -5159,7 +5176,7 @@ Thinking: $totalTime s
         &lt;&lt;/script&gt;&gt;
     &lt;&lt;/done&gt;&gt;
     &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="Quiz_1" tags="no-handbk no-timer" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
     &quot;1. 下列哪一項最準確描述「強制舉報」的法律時限？&quot; 
     &quot;Quiz_2&quot; 
     &quot;A. 發現後 24 小時內提交書面報告&quot; 
@@ -5167,7 +5184,7 @@ Thinking: $totalTime s
     &quot;C. 發現後 48 小時內致電警方&quot; 
     &quot;D. 視乎傷勢，若不嚴重可於下一個工作天處理&quot; 
     &quot;B. 隨即並在不遲於 24 小時內作出舉報&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="Quiz_Intro" tags="no-handbk no-timer" position="600,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="Quiz_Intro" tags="no-handbk no-timer Quiz" position="600,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;\
 &lt;&lt;if typeof $score !== &quot;number&quot; || isNaN($score)&gt;&gt;&lt;&lt;set $score to 0&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;nobr&gt;&gt;\
@@ -5191,7 +5208,7 @@ Thinking: $totalTime s
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 20px;&quot;&gt;
         &lt;&lt;link &quot;開始測試&quot; &quot;Quiz_1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;\
     &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="104" name="Quiz_2" tags="no-handbk no-timer" position="500,2125" size="100,100">&lt;&lt;PixelQuiz 
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="104" name="Quiz_2" tags="no-handbk no-timer Quiz" position="500,2125" size="100,100">&lt;&lt;PixelQuiz 
     &quot;2. 在診所環境中，若醫護人員懷疑虐兒，法定的「指明方式」舉報程序為何？&quot; 
     &quot;Quiz_3&quot; 
     &quot;A. 直接在電子平台填寫報告，無需致電&quot; 
@@ -5199,7 +5216,7 @@ Thinking: $totalTime s
     &quot;C. 寄送掛號信至社會福利署保護家庭及兒童服務課&quot; 
     &quot;D. 填寫醫院管理局內部意外報告（AIRS）即視作完成法律責任&quot; 
     &quot;B. 先致電主管當局（警方或社署）口頭舉報，再以書面形式提供資料&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="105" name="Quiz_3" tags="no-handbk no-timer" position="500,2225" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="105" name="Quiz_3" tags="no-handbk no-timer Quiz" position="500,2225" size="100,100">&lt;&lt;PixelQuiz 
     &quot;3. 根據《應用手冊》，在電子舉報平台進行身份驗證的登入碼（OTP）會透過什麼途徑發送？&quot; 
     &quot;Quiz_4&quot; 
     &quot;A. 電郵 (Email)&quot; 
@@ -5207,7 +5224,7 @@ Thinking: $totalTime s
     &quot;C. 舉報者提供的個人手機短訊 (SMS)&quot; 
     &quot;D. 郵寄紙本驗證碼&quot; 
     &quot;C. 舉報者提供的個人手機短訊 (SMS)&quot; 
-&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="Quiz_4" tags="no-handbk no-timer" position="500,2325" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="Quiz_4" tags="no-handbk no-timer Quiz" position="500,2325" size="100,100">&lt;&lt;PixelQuiz 
     &quot;4. 關於在舉報平台輸入「受影響兒童」的數目，下列何者正確？&quot; 
     &quot;Quiz_5&quot; 
     &quot;A. 舉報者可隨時在平台上自行增加兒童數目&quot; 
@@ -5215,7 +5232,7 @@ Thinking: $totalTime s
     &quot;C. 平台不設人數限制，亦不需預先核實&quot; 
     &quot;D. 若有多名受影響兒童，只需填寫其中一人的資料&quot; 
     &quot;B. 兒童數目是根據早前口頭舉報時提供的資料預設的，不能在平台上直接增加&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="Quiz_5" tags="no-handbk no-timer" position="500,2425" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="Quiz_5" tags="no-handbk no-timer Quiz" position="500,2425" size="100,100">&lt;&lt;PixelQuiz 
     &quot;5. 若一名註冊護士未能在法定期限內舉報懷疑嚴重虐兒個案，最高刑事處罰為：&quot; 
     &quot;Quiz_6&quot; 
     &quot;A. 罰款港幣 $5,000&quot; 
@@ -5223,7 +5240,7 @@ Thinking: $totalTime s
     &quot;C. 監禁 3 個月及罰款港幣 $50,000&quot; 
     &quot;D. 僅受所屬專業委員會紀律處分&quot; 
     &quot;C. 監禁 3 個月及罰款港幣 $50,000&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="Quiz_6" tags="no-timer no-handbk" position="500,2525" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="Quiz_6" tags="no-timer no-handbk Quiz" position="500,2525" size="100,100">&lt;&lt;PixelQuiz 
     &quot;6. 下列哪一項不屬於《條例》中定義的「嚴重傷害」範疇？&quot; 
     &quot;Quiz_7&quot; 
     &quot;A. 嚴重的身體傷害（如骨折、內傷）&quot; 
@@ -5231,7 +5248,7 @@ Thinking: $totalTime s
     &quot;C. 嚴重的疏忽（如持續拒絕提供致命疾病的藥物）&quot; 
     &quot;D. 偶爾因管教問題導致的輕微皮膚紅印&quot; 
     &quot;D. 偶爾因管教問題導致的輕微皮膚紅印&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="Quiz_7" tags="no-handbk no-timer" position="500,2625" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="Quiz_7" tags="no-handbk no-timer Quiz" position="500,2625" size="100,100">&lt;&lt;PixelQuiz 
     &quot;7. 誰有責任保存舉報後的參考編號（Reference Number）？&quot; 
     &quot;Quiz_8&quot; 
     &quot;A. 診所護士站IC&quot; 
@@ -5239,7 +5256,7 @@ Thinking: $totalTime s
     &quot;C. 進行舉報的指明專業人士（如護士或醫生個人）&quot; 
     &quot;D. 社署派出的社工&quot; 
     &quot;C. 進行舉報的指明專業人士（如護士或醫生個人）&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="Quiz_8" tags="no-handbk no-timer" position="500,2725" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="Quiz_8" tags="no-handbk no-timer Quiz" position="500,2725" size="100,100">&lt;&lt;PixelQuiz 
     &quot;8. 根據《程序指引》，如果受害兒童超過一名，在診所等待調查或治療時應：&quot; 
     &quot;Quiz_9&quot; 
     &quot;A. 安排他們一起玩耍以緩解情緒&quot; 
@@ -5247,7 +5264,7 @@ Thinking: $totalTime s
     &quot;C. 立即交由行政職員帶到診所外觀察&quot; 
     &quot;D. 讓家長同時照顧所有受影響兒童&quot; 
     &quot;B. 安排他們分開，避免互相影響陳述&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="Quiz_9" tags="no-handbk no-timer" position="500,2825" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="Quiz_9" tags="no-handbk no-timer Quiz" position="500,2825" size="100,100">&lt;&lt;PixelQuiz 
     &quot;9. 若舉報者「真誠地」作出了舉報，但最後調查證實不構成虐待，《條例》提供：&quot; 
     &quot;Quiz_10&quot; 
     &quot;A. 法律豁免及民事責任保障&quot; 
@@ -5255,7 +5272,7 @@ Thinking: $totalTime s
     &quot;C. 僅提供口頭表揚，不設法律保障&quot; 
     &quot;D. 舉報者仍需自費聘請律師應對可能的民事訴訟&quot; 
     &quot;A. 法律豁免及民事責任保障&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="Quiz_10" tags="no-handbk no-timer" position="500,2925" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="Quiz_10" tags="no-handbk no-timer Quiz" position="500,2925" size="100,100">&lt;&lt;PixelQuiz 
     &quot;10. 根據醫管局指引，在診所進行初步評估時，首要考慮的是：&quot; 
     &quot;Quiz_11&quot; 
     &quot;A. 收集證據以備法庭判案&quot; 
@@ -5263,7 +5280,7 @@ Thinking: $totalTime s
     &quot;C. 維持與家長的良好醫患關係&quot; 
     &quot;D. 診所的行政工作效率&quot; 
     &quot;B. 兒童的安全和最佳利益&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="Quiz_11" tags="no-handbk no-timer" position="600,2025" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="Quiz_11" tags="no-handbk no-timer Quiz" position="600,2025" size="100,100">&lt;&lt;PixelQuiz 
     &quot;Case 1: 一名 5 歲兒童因流感就診，護士發現其腹部有明顯的煙頭灼傷痕跡。家長聲稱是孩子自己玩火受傷，但灼傷位置在背部及腹部多處。&lt;br&gt;問：你應如何處理？&quot; 
     &quot;Quiz_12&quot; 
     &quot;A. 相信家長解釋，記錄病歷後讓其回家&quot; 
@@ -5271,7 +5288,7 @@ Thinking: $totalTime s
     &quot;C. 要求家長簽署承諾書不再玩火&quot; 
     &quot;D. 告知家長下次若再發生才舉報&quot; 
     &quot;B. 認為有合理理由懷疑兒童正遭受嚴重傷害，必須啟動強制舉報程序&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="Quiz_12" tags="no-handbk no-timer" position="600,2125" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="Quiz_12" tags="no-handbk no-timer Quiz" position="600,2125" size="100,100">&lt;&lt;PixelQuiz 
     &quot;Case 2: 一名患有慢性心臟病的 8 歲兒童，其照顧者連續三次無故缺席專科覆診，且拒絕領取維持生命的藥物。診所護士家訪發現兒童呼吸困難且神志淡漠。&lt;br&gt;問：這是否屬於強制舉報範疇？&quot; 
     &quot;Quiz_13&quot; 
     &quot;A. 否，這屬於家長的自主選擇&quot; 
@@ -5279,7 +5296,7 @@ Thinking: $totalTime s
     &quot;C. 否，因為家長沒有直接動武&quot; 
     &quot;D. 是，這屬於「嚴重疏忽」且已對兒童生命構成實際風險&quot; 
     &quot;D. 是，這屬於「嚴重疏忽」且已對兒童生命構成實際風險&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="Quiz_13" tags="no-handbk no-timer" position="600,2225" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="Quiz_13" tags="no-handbk no-timer Quiz" position="600,2225" size="100,100">&lt;&lt;PixelQuiz 
     &quot;Case 3: 一名 10 歲女童向診所職員透露，家中繼父經常要求她觸摸其私密部位，並威脅不准告訴母親。&lt;br&gt;問：根據指引，你的判斷是？&quot; 
     &quot;Quiz_14&quot; 
     &quot;A. 屬於性侵犯，必須立即舉報，不論有無身體受傷跡象&quot; 
@@ -5287,7 +5304,7 @@ Thinking: $totalTime s
     &quot;C. 否，因為家長沒有直接動武&quot; 
     &quot;D. 先與繼父對質，核實後再舉報&quot; 
     &quot;A. 屬於性侵犯，必須立即舉報，不論有無身體受傷跡象&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="116" name="Quiz_14" tags="no-handbk no-timer" position="600,2325" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="116" name="Quiz_14" tags="no-handbk no-timer Quiz" position="600,2325" size="100,100">&lt;&lt;PixelQuiz 
     &quot;Case 4: 診所醫生認為個案不需要舉報，但作為護士的你根據專業判斷認為兒童面對極大危險。&lt;br&gt;問：根據法律，你應該？&quot; 
     &quot;Quiz_15&quot; 
     &quot;A. 遵從醫生指令，因為他是診所負責人&quot; 
@@ -5295,7 +5312,7 @@ Thinking: $totalTime s
     &quot;C. 要求醫生簽署免責聲明&quot; 
     &quot;D. 向同事求助，由同事代為舉報&quot; 
     &quot;B. 履行個人法律責任，自行向主管當局舉報&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="Quiz_15" tags="no-handbk no-timer" position="600,2425" size="100,100">&lt;&lt;PixelQuiz 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="Quiz_15" tags="no-handbk no-timer Quiz" position="600,2425" size="100,100">&lt;&lt;PixelQuiz 
     &quot;Case 5: 一名 3 歲幼童頭部有不尋常腫塊，家長解釋是從床上掉下。但檢查發現傷勢與高度不吻合（例如傷勢非常嚴重）。&lt;br&gt;問：哪一個分析因素最支持你舉報？&quot; 
     &quot;Quiz_16&quot; 
     &quot;A. 兒童的年齡（年幼者風險較高）&quot; 
@@ -5305,22 +5322,22 @@ Thinking: $totalTime s
     &quot;D. 以上皆是&quot;
 &gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="118" name="Quiz_16" tags="no-handbk no-timer" position="700,2025" size="100,100">&lt;&lt;PixelLikertBar 
+</tw-passagedata><tw-passagedata pid="118" name="Quiz_16" tags="no-handbk no-timer Quiz" position="700,2025" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;我清楚了解自己在《強制舉報虐待兒童條例》下的個人法律責任。&quot; 
     &quot;Quiz_17&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="119" name="Quiz_17" tags="no-handbk no-timer" position="700,2125" size="100,100">&lt;&lt;PixelLikertBar 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="119" name="Quiz_17" tags="no-handbk no-timer Quiz" position="700,2125" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;我有信心能準確辨識哪些傷勢或行為屬於「嚴重傷害」。&quot; 
     &quot;Quiz_18&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="Quiz_18" tags="no-handbk no-timer" position="700,2225" size="100,100">&lt;&lt;PixelLikertBar 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="Quiz_18" tags="no-handbk no-timer Quiz" position="700,2225" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;我熟悉使用電子舉報平台提交書面資料的流程。&quot; 
     &quot;Quiz_19&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="Quiz_19" tags="no-handbk no-timer" position="700,2325" size="100,100">&lt;&lt;PixelLikertBar 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="Quiz_19" tags="no-handbk no-timer Quiz" position="700,2325" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;我認為強制舉報制度能有效保護診所接觸到的高風險兒童。&quot; 
     &quot;Quiz_20&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="Quiz_20" tags="no-handbk no-timer" position="700,2425" size="100,100">&lt;&lt;PixelLikertBar 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="Quiz_20" tags="no-handbk no-timer Quiz" position="700,2425" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;如果我要與上司就舉報決定產生分歧，我有信心能堅持履行法律義務。&quot; 
     &quot;Quiz_Result&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 20px; overflow-y: auto; max-height: 100vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;
