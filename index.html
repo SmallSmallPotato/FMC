@@ -2097,9 +2097,15 @@ Thinking: $totalTime s
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;wah&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;wah&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;wah&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -2147,7 +2153,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="200,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你決定先完成手頭上的工作。&lt;br&gt;在處理完傷口便讓他們回家，並讓他們明天再來。
@@ -2359,7 +2365,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -2432,7 +2438,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -2503,7 +2509,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -2994,7 +3000,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3067,9 +3073,15 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="NC4DOC" tags="Nc" position="650,400" size="100,100">&lt;&lt;audio &quot;wizard&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;wah&quot; play on end&gt;&gt;
-&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;
-&lt;&lt;/audio&gt;&gt;
+&lt;&lt;audio &quot;wah&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;wah&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -3258,7 +3270,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; wizard&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3672,7 +3684,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;sadsong&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3854,7 +3866,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -4032,7 +4044,7 @@ Thinking: $totalTime s
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -4503,7 +4515,18 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="" position="350,1150" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="" position="350,1150" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;tear&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
+
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
@@ -4787,7 +4810,17 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="" position="700,1400" size="100,100">            &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="" position="700,1400" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;audio &quot;news&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;trackended&#39;, function (ev) {
+        if (ev.track.id === &quot;news&quot;) {
+            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&#39;);
+        }
+    });
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;if $unlocked.quotes is false&gt;&gt;\
             &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
             /* 音效與自動清理邏輯 */
@@ -5288,8 +5321,8 @@ Thinking: $totalTime s
     &quot;如果我要與上司就舉報決定產生分歧，我有信心能堅持履行法律義務。&quot; 
     &quot;Quiz_Result&quot;
 &gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;\
-&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 20px; overflow-y: auto; max-height: 100vh;&quot;&gt;\
+&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
+&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 20px; overflow-y: auto; max-height: 100vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;
         SYSTEM: EVALUATION COMPLETED
     &lt;/div&gt;
