@@ -1166,10 +1166,7 @@ $(document).on(':passageend', function () {
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[有古怪，再認真檢查一下|PhAExam]]
-&lt;&lt;link &quot;跌倒有瘀傷很正常吧&quot;&gt;&gt;
-    &lt;&lt;set $decisionHistory[0] to $totalTime&gt;&gt;
-    &lt;&lt;goto &quot;PhA4B&quot;&gt;&gt;
-&lt;&lt;/link&gt;&gt;
+[[跌倒有瘀傷很正常吧|PhA4B]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1225,56 +1222,55 @@ $(document).on(':passageend', function () {
 </tw-passagedata><tw-passagedata pid="7" name="PhAExam" tags="Dx" position="225,400" size="100,100">        &lt;&lt;if $unlocked.redFlags is false&gt;&gt;\
             &lt;&lt;set $unlocked.redFlags to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Red Flags Guideline]&lt;/div&gt;
-            
             /* 音效與自動清理邏輯 */
             &lt;&lt;audio &quot;get&quot; play&gt;&gt;
             &lt;&lt;timed 3.5s&gt;&gt;
                 &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
             &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
+        
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+&lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;
-        你思考了 &lt;&lt;print $lastDecisionTime&gt;&gt; 秒。&lt;br&gt;現在仔細觀察。你發現......
-    &lt;/span&gt;
-    
-    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+&lt;span id=&quot;story-text&quot;&gt;
+你思考了 &lt;&lt;print $lastDecisionTime&gt;&gt; 秒。&lt;br&gt;現在仔細觀察。你發現......
+&lt;/span&gt;
 
-    &lt;span class=&quot;full-screen-clicker&quot;&gt;
-        &lt;&lt;link &quot; &quot;&gt;&gt;
-            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+&lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
 
-            &lt;&lt;if $page == 1&gt;&gt;
-    &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-        除了磨損，還有瘀傷分布在上臂及背部。&lt;br&gt;部分像手掌印。
-    &lt;&lt;/replace&gt;&gt;
-    &lt;&lt;set $page = 2&gt;&gt;
-            &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂避開你的眼神。&lt;br&gt;你開始覺得不對路。&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 3&gt;&gt;
-            &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;（門口位置有嘈雜聲，多名病人在催促）&lt;br&gt;你打算......&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 4&gt;&gt;
-                /* 隱藏點擊層，顯示選項 */
-                &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
-            &lt;&lt;endif&gt;&gt;
-        &lt;&lt;/link&gt;&gt;
-    &lt;/span&gt;
+&lt;span class=&quot;full-screen-clicker&quot;&gt;
+&lt;&lt;link &quot; &quot;&gt;&gt;
+&lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+
+&lt;&lt;if $page == 1&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+除了磨損，還有瘀傷分布在上臂及背部。&lt;br&gt;部分像手掌印。
+&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 2&gt;&gt;
+&lt;&lt;elseif $page == 2&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂避開你的眼神。&lt;br&gt;你開始覺得不對路。&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 3&gt;&gt;
+&lt;&lt;elseif $page == 3&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;（門口位置有嘈雜聲，多名病人在催促）&lt;br&gt;你打算......&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 4&gt;&gt;
+/* 隱藏點擊層，顯示選項 */
+&lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
+&lt;&lt;endif&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/span&gt;
 &lt;/div&gt;
-
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[觀察母親反應|PhAObs]]
 [[請醫生接手|PhAConsult]]
 [[詢問受傷經過|PhAIncon]]
 &lt;/div&gt;
-
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
+
 &lt;&lt;silent&gt;&gt;
     /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
     &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
@@ -1725,8 +1721,12 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="Start no-timer no-handbk" position="225,50" size="100,100">&lt;div class=&quot;pixel-glow-blue&quot;&gt;Interactive Clinical Judgment Simulator&lt;/div&gt;
-     
+</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="Start no-timer no-handbk" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;\
+&lt;&lt;set $decisionHistory to []&gt;&gt;\
+&lt;&lt;set $totalSafety = 0&gt;&gt;\
+&lt;&lt;set $totalLegal = 0&gt;&gt;\
+&lt;&lt;set $progress = 0&gt;&gt;\
+&lt;div class=&quot;pixel-glow-blue&quot;&gt;Interactive Clinical Judgment Simulator&lt;/div&gt;
  &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;[[► Start|Start]]
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
@@ -2438,7 +2438,6 @@ Thinking: $totalTime s
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
@@ -5288,8 +5287,9 @@ Thinking: $totalTime s
 &gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="Quiz_20" tags="no-handbk no-timer" position="700,2425" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;如果我要與上司就舉報決定產生分歧，我有信心能堅持履行法律義務。&quot; 
     &quot;Quiz_Result&quot;
-&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer" position="700,1925" size="100,100">&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 20px; overflow-y: auto; max-height: 100vh;&quot;&gt;
-    
+&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;\
+&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 20px; overflow-y: auto; max-height: 100vh;&quot;&gt;\
     &lt;div class=&quot;quiz-status&quot;&gt;
         SYSTEM: EVALUATION COMPLETED
     &lt;/div&gt;
