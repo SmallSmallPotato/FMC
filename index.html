@@ -334,7 +334,27 @@ html[data-tags~="Nd"] body {
     box-shadow: 0px 0px 10px #00ffff, inset 0px 0px 4px #ffffff !important;
 }
 
-.likert-labels { display: flex; justify-content: space-between; font-size: 12px; color: #888; }
+/* 你的原本排版（保留不動） */
+.likert-labels { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 12px; 
+    color: #888; 
+}
+
+/* 🎯 追加：設定「非常不同意」為像素復古紅＋微發光 */
+.likert-labels .label-left {
+    color: #d08888 !important;
+    text-shadow: 0 0 5px rgba(255, 115, 113, 0.6) !important;
+    font-weight: bold;
+}
+
+/* 🎯 追加：設定「非常同意」為像素復古綠＋微發光 */
+.likert-labels .label-right {
+    color: #88b888 !important;
+    text-shadow: 0 0 5px rgba(117, 238, 121, 0.6) !important;
+    font-weight: bold;
+}
 
 
 /* 結算報告專用表格 - 手機極致精簡版 */
@@ -342,7 +362,7 @@ html[data-tags~="Nd"] body {
     width: 100%;
     max-width: 100%;
     border-collapse: collapse;
-    margin: 10px auto;
+    margin: 20px auto;
     font-size: 0.7em; /* 稍微放大字體，因為欄位變少、空間變充裕了 */
     border: 2px solid #333333;
     background: #090909; /* 加上微黑底色，讓階梯感更重 */
@@ -5345,10 +5365,8 @@ Thinking: $totalTime s
     &lt;/div&gt;
     
     &lt;div class=&quot;story-text&quot;&gt;
-        &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;
-            ✦ 最終評估報告 ✦
-        &lt;/h2&gt;
-        &lt;p style=&quot;font-size: 1.2em; text-align: center; margin-bottom: 20px;&quot;&gt;
+        &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 最終評估報告 ✦&lt;/h2&gt;\
+        &lt;p style=&quot;font-size: 1.2em; text-align: center; margin-bottom: 20px;&quot;&gt;\
             TOTAL SCORE / 總得分：
             &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1em;&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt; 分
         &lt;/p&gt;
