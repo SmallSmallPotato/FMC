@@ -5108,7 +5108,7 @@ Thinking: $totalTime s
                     &lt;&lt;link &quot;1&quot;&gt;&gt;
                         &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
                         &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;1/5 (Strongly Disagree)&quot;, time: _elapsed})&gt;&gt;
+                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
                         &lt;&lt;goto $likertNextPassage&gt;&gt;
                     &lt;&lt;/link&gt;&gt;
                 &lt;/div&gt;
@@ -5116,7 +5116,7 @@ Thinking: $totalTime s
                     &lt;&lt;link &quot;2&quot;&gt;&gt;
                         &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
                         &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;2/5 (Disagree)&quot;, time: _elapsed})&gt;&gt;
+                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
                         &lt;&lt;goto $likertNextPassage&gt;&gt;
                     &lt;&lt;/link&gt;&gt;
                 &lt;/div&gt;
@@ -5124,7 +5124,7 @@ Thinking: $totalTime s
                     &lt;&lt;link &quot;3&quot;&gt;&gt;
                         &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
                         &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;3/5 (Neutral)&quot;, time: _elapsed})&gt;&gt;
+                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
                         &lt;&lt;goto $likertNextPassage&gt;&gt;
                     &lt;&lt;/link&gt;&gt;
                 &lt;/div&gt;
@@ -5132,7 +5132,7 @@ Thinking: $totalTime s
                     &lt;&lt;link &quot;4&quot;&gt;&gt;
                         &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
                         &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;4/5 (Agree)&quot;, time: _elapsed})&gt;&gt;
+                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
                         &lt;&lt;goto $likertNextPassage&gt;&gt;
                     &lt;&lt;/link&gt;&gt;
                 &lt;/div&gt;
@@ -5140,7 +5140,7 @@ Thinking: $totalTime s
                     &lt;&lt;link &quot;5&quot;&gt;&gt;
                         &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
                         &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;5/5 (Strongly Agree)&quot;, time: _elapsed})&gt;&gt;
+                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
                         &lt;&lt;goto $likertNextPassage&gt;&gt;
                     &lt;&lt;/link&gt;&gt;
                 &lt;/div&gt;
@@ -5370,8 +5370,8 @@ Thinking: $totalTime s
             &lt;thead&gt;
                 &lt;tr&gt;
                     &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
-                    &lt;th style=&quot;width: 35%; text-align: center;&quot;&gt;結果&lt;/th&gt;
-                    &lt;th style=&quot;width: 40%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
+                    &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
+                    &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
                 &lt;/tr&gt;
             &lt;/thead&gt;
             &lt;tbody&gt;
@@ -5384,8 +5384,8 @@ Thinking: $totalTime s
     &lt;&lt;if $decisionHistory[_i].choice == &quot;TIMEOUT&quot;&gt;&gt;\
         &lt;span class=&quot;glow-red&quot;&gt;[ 超時 ]&lt;/span&gt;\
     &lt;&lt;else&gt;&gt;\     
-        &lt;&lt;if $decisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-            &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold;&quot;&gt; - &lt;/span&gt;\
+&lt;&lt;if $decisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
+    &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold; font-size: 0.75em;&quot;&gt;&lt;&lt;print $decisionHistory[_i].choice&gt;&gt;&lt;/span&gt;\
         &lt;&lt;else&gt;&gt;\
             &lt;&lt;if $decisionHistory[_i].isCorrect == true&gt;&gt;\
                 &lt;span class=&quot;glow-green&quot;&gt; ✓ &lt;/span&gt;\
