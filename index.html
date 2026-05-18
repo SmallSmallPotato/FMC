@@ -1241,7 +1241,7 @@ $(document).on(':passageend', function () {
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[觀察母親反應|PhAObs]]
     [[再問多次男童|PhAAA]]
-    [[記錄CMS|PhADoc]]
+    [[記錄CMS Child Abuse Record|PhADoc]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1590,7 +1590,7 @@ $(document).on(':passageend', function () {
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[先與女孩說話|SA2A]]
-    [[詢問姨姨|SA2B]]
+    [[詢問姑姑|SA2B]]
     [[先做一般流程|SA2C]]
 &lt;/div&gt;
 
@@ -2694,7 +2694,7 @@ Thinking: $totalTime s
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[與阿俊談談|NC3A]]
     [[尋找紀錄聯絡家長|NC3B]]
-    [[先記錄生命表徵|NC3C]]
+    [[先記錄|NC3C]]
 &lt;/div&gt;
 
 &lt;&lt;set $page = 1&gt;&gt;
@@ -4357,10 +4357,10 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「但係我都對你誠實：&lt;br&gt;如果呢個秘密，係有人傷害你、令你好痛、或者你依家唔安全...&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...我一定要搵有能力嘅人(例如醫生、或者社工)&lt;br&gt;一齊嚟保護你，唔會令件事再發生...&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...我一定要搵有能力嘅人(例如醫生、或者社工) 一齊嚟保護你，唔會令件事再發生...&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...你肯唔肯信我，&lt;br&gt;俾我幫你分擔一下？」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...你肯唔肯信我，俾我幫你分擔一下？」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;欣欣沉默良久，顫抖的聲音對你說：「媽咪最近去外地出差，昨晚......我繼父入我間房瞓......」&lt;&lt;/replace&gt;&gt;
@@ -4457,7 +4457,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-       你輕聲說：「多謝你話俾我知。&lt;br&gt;呢件事唔係你嘅錯。」
+       你溫柔地說：「多謝你話俾我知。&lt;br&gt;呢件事唔係你嘅錯。」
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -4580,7 +4580,7 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[重新建立安全感|SA3A]]
+    [[重新建立安全感|SA4A]]
     [[讓她等媽媽出差回來再處理|SA5Wait]]
 &lt;/div&gt;
 
@@ -4610,7 +4610,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 【當晚悲劇】&lt;br&gt;涉嫌施虐者繼父晚上又入欣欣房間。&lt;br&gt;得知她去了看醫生，猜到可能東窗事發。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 【當晚悲劇】&lt;br&gt;涉嫌施虐者繼父晚上又入欣欣房間。得知她去了看醫生，猜到可能東窗事發。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;他在恐慌和憤怒下，對欣欣實施了殘暴的身體虐待以作「懲罰」和恐嚇，隨後潛逃。&lt;&lt;/replace&gt;&gt;
@@ -4742,7 +4742,7 @@ Thinking: $totalTime s
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="90" name="SA5Report" tags="Sa" position="600,1350" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-       你馬上撥打 999(或九龍中警區的 RCCC 指揮中心熱線)&lt;br&gt;，向警方清晰、冷靜地報告：
+       你馬上撥打 999(或九龍中警區的 RCCC 指揮中心熱線)，&lt;br&gt;向警方清晰、冷靜地報告：
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -4758,18 +4758,20 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...涉嫌施虐者今晚有機會再次接觸女童，有即時危險。兒童目前在診所由姑姑陪同，情緒高度恐慌...&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...要求警方及社署 FCPSU 專責小組&lt;br&gt;立刻派員到場提供法律保護。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...要求警方及社署 FCPSU 專責小組立刻派員到場提供法律保護。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;警方高度重視，立刻立案，&lt;br&gt;並與你確認了你的個人手機號碼以作稍後電子平台登入之用。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;警方高度重視，立刻立案，並與你確認了你的個人手機號碼以作稍後電子平台登入之用。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在等待警方和社工趕來的 30 分鐘內，&lt;br&gt;欣欣因為害怕而一直哭泣，且衣服上有些黏稠的污漬。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在等待警方和社工趕來的時間，欣欣因為害怕而一直哭泣，且衣服上有些黏稠的污漬。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;作為專業護士，&lt;br&gt;你記起多專業指引《附件十二》中有關保留法庭證據(Preservation of Evidence)&lt;br&gt;與心理保護的嚴格守則。&lt;br&gt;此時你應該：&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;作為專業護士，&lt;br&gt;你記起多專業指引《附件十二》中有關保留法庭證據(Preservation of Evidence) 與心理保護的嚴格守則。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
-
+                &lt;&lt;elseif $page == 7&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;此時你應該：&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 8&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
@@ -4778,7 +4780,7 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[帶她去浴室讓她徹底沖洗和更換衣服|SA5Bad2]]
+    [[讓她徹底沖洗和更換衣服|SA5Bad2]]
     [[絕對不清洗身體/換衣服|SA6Good]]
 &lt;/div&gt;
 
@@ -4887,7 +4889,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-       你溫柔地陪伴她，遞給她溫水，&lt;br&gt;停止重覆盤問細節，避免造成重複陳述的心理創傷，&lt;br&gt;並嚴格將她與大堂其他病人隔離。
+       你溫柔地陪伴她，遞給她溫水。&lt;br&gt;停止重覆盤問細節，避免造成重複陳述的心理創傷，並嚴格將她與大堂其他病人隔離。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -4897,10 +4899,10 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 確保了法醫證據的完整性。&lt;br&gt;同時嚴格叮囑姑姑和診所行政同事，對事件絕對保密，&lt;br&gt;絕不允許大堂任何群眾窺探。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 確保了法醫證據的完整性。&lt;br&gt;同時嚴格叮囑姑姑和診所行政同事，對事件絕對保密，絕不允許大堂任何群眾窺探。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;1小時內，&lt;br&gt;警方專責小組(CAU)與社署專責社工、法醫同步趕到。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;1小時內，警方專責小組(CAU)與社署專責社工、法醫同步趕到。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;警方用高度保密的方式將姑姑和欣欣接走，&lt;br&gt;直接送往專門的保護兒童法醫鑑定中心進行證據提取與心理輔導。&lt;&lt;/replace&gt;&gt;
@@ -4909,7 +4911,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;當晚，警方根據你提供的舉報資料，&lt;br&gt;在涉嫌施虐者企圖潛逃出境前，在機場將其正式拘捕。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【翌日上午：履行電子平台書面程序】&lt;br&gt;你坐在護士站電腦前，履行法定的後續書面義務。&lt;br&gt;你打開「社會福利署強制舉報電子平台」：&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【翌日上午：履行電子平台書面程序】&lt;br&gt;你坐在護士站電腦前，履行法定的後續書面義務。你打開「社會福利署強制舉報電子平台」：&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;1. 你的個人手機順利接收到 短訊驗證碼 (OTP)，完成身份驗證。&lt;br&gt;2. 填寫兒童資料時，平台鎖定人數為「1人」(系統與昨天的口頭舉報自動關聯)。&lt;br&gt;3. 你在事件摘要中填寫極其客觀、無主觀猜測的臨床記錄。&lt;br&gt;4. 你按下提交，成功獲取 【案件參考編號：Ref-2026-SEX-XXXX】，並親自妥善保存。&lt;&lt;/replace&gt;&gt;
@@ -4918,13 +4920,13 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;半年後，&lt;br&gt;法庭作出宣判。&lt;br&gt;由於你在第一時間進行了高度保密的口頭舉報，&lt;br&gt;成功阻止了施虐者滅證及潛逃；&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 8&gt;&gt;
                 &lt;&lt;elseif $page == 8&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;更因為你完美的證據保留程序，&lt;br&gt;法醫成功提取了關鍵的 DNA 證據。&lt;br&gt;涉嫌施虐者在鐵證如山下無從抵賴，&lt;br&gt;被判處重刑入獄 10 年。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;更因為你完美的證據保留程序，法醫成功提取了關鍵的 DNA 證據。&lt;br&gt;涉嫌施虐者在鐵證如山下無從抵賴，被判處重刑入獄 10 年。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 9&gt;&gt;
                 &lt;&lt;elseif $page == 9&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;欣欣的媽媽在趕回香港後，&lt;br&gt;在社署和醫務社工的長遠福利計劃下，&lt;br&gt;欣欣正接受兒童心理學家的創傷輔導，&lt;br&gt;逐步走出陰霾，重新綻放笑容。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;欣欣的媽媽在趕回香港後，在社署和醫務社工的長遠福利計劃下，欣欣正接受兒童心理學家的創傷輔導，逐步走出陰霾，重新綻放笑容。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 10&gt;&gt;
                 &lt;&lt;elseif $page == 10&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、&lt;br&gt;高度的保密操守和完美的臨床證據保留意識，&lt;br&gt;成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 11&gt;&gt;
                 &lt;&lt;elseif $page == 11&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;&lt;/replace&gt;&gt;
@@ -5541,10 +5543,10 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但護士卻以「無設備」為由&lt;br&gt;拒絕在法定的隨即及不遲於 24 小時內作出舉報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你與醫生因漏報嚴重虐兒個案，&lt;br&gt;正式被警方落案起訴，&lt;br&gt;面臨監禁 3 三個月及罰款港幣 $50,000。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你與醫生因漏報嚴重虐兒個案，正式被警方落案起訴，面臨監禁 3 三個月及罰款港幣 $50,000。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;護士管理局召開紀律聆訊，&lt;br&gt;以嚴重專業失德為由，&lt;br&gt;終身吊銷你的註冊護士執照。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;護士管理局召開紀律聆訊，以嚴重專業失德為由，終身吊銷你的註冊護士執照。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -5749,11 +5751,14 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「而且，為了保護欣欣的私隱和心理免受二次摧殘，&lt;br&gt;我們在診所內必須做到最高級別的保密。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;目前面臨「今晚可能再次受害」的即時危險，&lt;br&gt;且屬於嚴重的刑事罪行，&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;目前面臨「今晚可能再次受害」的即時危險，且屬於嚴重的刑事罪行，&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你需要採取法定的「指明方式」作出第一步舉報。&lt;br&gt;你決定：&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你需要採取法定的「指明方式」作出第一步舉報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
+             &lt;&lt;elseif $page == 6&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你決定:&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 7&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
@@ -5781,13 +5786,13 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費了寶貴的時間打給社工。&lt;br&gt;社工在電話裡大驚失色地喝止你：&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費了寶貴的時間打給社工。社工在電話裡大驚失色地喝止你：&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「What&#39;s wrong with you! &lt;br&gt;法律寫得很清楚！」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「...強迫兒童觸摸私密部位是嚴重的性侵犯刑事罪行，&lt;br&gt;屬於無容置疑的『嚴重傷害』...&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「...強迫兒童觸摸私密部位是嚴重的性侵犯刑事罪行，屬於無容置疑的『嚴重傷害』...&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...完全沒有灰色地帶！你打給我們諮詢不能免除你的個人刑責！」&lt;&lt;/replace&gt;&gt;
@@ -5796,7 +5801,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「你必須立刻撥打 999 聯絡警方總區指揮及控制中心(RCCC)&lt;br&gt;或社署 FCPSU 專責小組，&lt;br&gt;這才是法定的指明舉報方式！」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;(你驚出一身冷汗，&lt;br&gt;意識到性侵犯個案一分一秒都不能耽誤，&lt;br&gt;立刻掛斷電話撥打 999)&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;(你驚出一身冷汗) 意識到性侵犯個案一分一秒都不能耽誤，立刻掛斷電話......&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
