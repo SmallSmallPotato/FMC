@@ -1514,9 +1514,6 @@ $(document).on(':passageend', function () {
     &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
-/* 進入這頁時重置頁數 */
-&lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;silent&gt;&gt;
     /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
     &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
@@ -1524,7 +1521,11 @@ $(document).on(':passageend', function () {
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="PhADecision" tags="Dx" position="225,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="10" name="PhADecision" tags="Dx" position="225,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你正在考慮是否需要進行強制報告。
@@ -2390,10 +2391,12 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
             
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;當晚，母親帶著秘密被揭穿的恐慌回到家。為了「懲罰」阿樂在診所多嘴，父親在憤怒下實施了更殘暴的毒打。&lt;&lt;/replace&gt;&gt;
-                  &lt;&lt;set $page = 2&gt;&gt;
-                  &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;第二天，他們沒有出現。&lt;br&gt;電腦紀錄顯示：阿樂因嚴重硬腦膜下血腫(Subdural Hematoma)及顱骨骨折，陷入深度昏迷，被送入 ICU 搶救。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;當晚，母親帶著秘密被揭穿的恐慌回到家。為了「懲罰」阿樂在診所多嘴，父親在憤怒下實施了更殘暴的毒打。
+                &lt;&lt;/replace&gt;&gt;
+              &lt;&lt;set $page = 2&gt;&gt;
+               &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;第二天，他們沒有出現。&lt;br&gt;電腦紀錄顯示：阿樂因嚴重硬腦膜下血腫(Subdural Hematoma)及顱骨骨折，陷入深度昏迷，被送入 ICU 搶救。
+                &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -2423,10 +2426,6 @@ Thinking: $totalTime s
     outline: none !important;
 }
 &lt;/style&gt;
-
-/* 進入這頁時重置頁數 */
-&lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;silent&gt;&gt;
     /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
     &lt;&lt;set $scenarios[0].safety -= 30&gt;&gt;
@@ -2434,7 +2433,11 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 30&gt;&gt;
     &lt;&lt;set $totalLegal -= 30&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="PhA4B" tags="Dx" position="25,700" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="37" name="PhA4B" tags="Dx" position="25,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         【❌ 錯誤選擇：淡化危機】&lt;br&gt;你選擇不深入。&lt;br&gt;處理完傷口後，預約他明天再來洗傷口。
@@ -2678,6 +2681,7 @@ Thinking: $totalTime s
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
@@ -2705,7 +2709,7 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 4&gt;&gt;
+            &lt;&lt;elseif $page == 5&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;Start&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
