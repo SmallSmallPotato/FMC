@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="103" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="22" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 body {
   font-family: 'DotGothic16', sans-serif !important;
@@ -942,6 +942,117 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 .retro-circle-btn:hover {
     filter: brightness(1.05);
 }
+
+
+
+
+/* 1. 禁用平滑渲染，強制像素方塊鋭利 */
+:root {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* 2. 外層大幕容器：鎖定全螢幕 */
+.mario-opening-stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    pointer-events: none; /* 防止動畫時誤點 */
+}
+
+/* 3. 🎬 關鍵：拆分左大幕與右大幕 */
+.mario-curtain-left, .mario-curtain-right {
+    width: 50vw;
+    height: 100vh;
+    background: #0f141d; /* 復古純黑底色 */
+    position: relative;
+    transition: none; /* 禁用預設漸變，改用純 CSS 動畫 */
+}
+
+/* 4. 裝載問號方塊的容器（置中） */
+.mario-opening-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+
+/* 5. 🎯 經典黃色問號方塊 (純 CSS 像素風格) */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+.mario-block {
+    width: 64px;
+    height: 64px;
+    background: #f1c40f;
+    box-shadow: 
+        inset -4px -4px 0 #000, 
+        inset -8px -8px 0 #d35400, /* 磚塊邊緣硬線條 */
+        4px 4px 0 rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 磚塊上的問號 */
+.mario-block::after {
+    content: "?";
+    font-family: 'Press Start 2P', monospace;
+    font-size: 32px;
+    color: #fff;
+    animation: marioTextPulse 0.4s infinite alternate; /* 像素級快速閃爍 */
+}
+
+@keyframes marioTextPulse {
+    0% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* ========================================== */
+/* 🚀 觸發動畫：當加入 .start-opening 時的動作 */
+/* ========================================== */
+
+/* 磚塊：1秒時向上彈起，然後迅速墜落 */
+.start-opening .mario-block {
+    animation: marioBlockJump 1.2s ease-in-out forwards;
+}
+
+/* 左大幕：在磚塊彈起後（約1.5秒時），往左邊橫向拉開 */
+.start-opening .mario-curtain-left {
+    animation: openLeftM 1.5s 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* 右大幕：在同一時間，往右邊橫向拉開 */
+.start-opening .mario-curtain-right {
+    animation: openRightM 1.5s 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* ============================== */
+/* 📐 動畫軌跡 (Keyframes) */
+/* =============================== */
+
+/* 瑪利奧撞磚塊彈起與墜落 */
+@keyframes marioBlockJump {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(-40px); } /* 向上撞擊 */
+    40% { transform: translateY(-30px); }
+    100% { transform: translateY(120vh); } /* 往下掉出全螢幕 */
+}
+
+/* 左大幕向左拉開 */
+@keyframes openLeftM {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* 右大幕向右拉開 */
+@keyframes openRightM {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
@@ -962,7 +1073,22 @@ $(document).on(':passageend', function () {
         });
     }
 });
-</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;dialogue-box-container&quot;&gt;\
+</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
+    &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
+    &lt;div class=&quot;mario-opening-container&quot;&gt;        
+        &lt;div class=&quot;mario-block&quot;&gt;&lt;/div&gt;        
+    &lt;/div&gt;   
+    &lt;div class=&quot;mario-curtain-right&quot;&gt;&lt;/div&gt;   
+&lt;/div&gt;
+&lt;&lt;timed 0.5s&gt;&gt;
+    &lt;&lt;addclass &quot;#mario-curtain&quot; &quot;start-opening&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 2.5s&gt;&gt;
+    &lt;&lt;remove &quot;#mario-curtain&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+
+&lt;div id=&quot;dialogue-box-container&quot;&gt;\
     &lt;span id=&quot;story-text&quot;&gt;\
         &lt;&lt;type 80ms&gt;&gt;&lt;div style=&quot;font-size: 23px; font-weight: bold; border-bottom: 2px solid white; padding-bottom: 10px;&quot;&gt;🏥 家庭醫學門診工作日&lt;/div&gt;&lt;&lt;/type&gt;&gt;\
         &lt;div style=&quot;font-size: 18px; margin-top: 10px; margin-bottom: 15px;&quot;&gt;►▻►▻►▻請選擇你要處理的情況：&lt;/div&gt;\
@@ -1002,7 +1128,7 @@ $(document).on(':passageend', function () {
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
                 &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：急著回家背後的獨留危機&lt;br&gt;「過度懂事的，很多時並非被照顧得很好。」[[◄◅◄🔙|ResetS3]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
-                &lt;&lt;link &quot;❑ 《深夜診室的秘密》&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
+                &lt;&lt;link &quot;❑ 《深夜診室的秘密》&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;magicforest&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;span style=&quot;color: #555;&quot;&gt;❑ 《深夜診室的秘密》🔒&lt;/span&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -1059,6 +1185,9 @@ $(document).on(':passageend', function () {
 &lt;&lt;cacheaudio &quot;plane&quot; &quot;music/plane_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;moon&quot; &quot;music/moon_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;tear&quot; &quot;music/tear_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;magicforest&quot; &quot;music/magicforest_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;magictree&quot; &quot;music/magictree_bgm.mp3&quot;&gt;&gt;
+
 
 &lt;&lt;run $(&#39;#ui-bar-body&#39;).append(&#39;&lt;div id=&quot;game-hud&quot;&gt;&lt;/div&gt;&#39;)&gt;&gt;
 &lt;&lt;set $totalSafety = 0&gt;&gt;
@@ -1515,7 +1644,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[3].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;magicforest&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectCare&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="ResetS0" tags="" position="225,300" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[0].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[0].legal&gt;&gt;
@@ -1821,7 +1950,7 @@ Thinking: $totalTime s
 &lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;set $progress = 0&gt;&gt;
  &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
-[[► Start|Start]]
+&lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
     &lt;tr&gt;\
@@ -3106,12 +3235,12 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer" position="550,600" size="100,100">&lt;&lt;audio &quot;wizard&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer" position="550,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;magicforest&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -3376,12 +3505,12 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer" position="450,600" size="100,100">&lt;&lt;audio &quot;wizard&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer" position="450,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
         if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
+            $.wiki(&#39;&lt;&lt;audio &quot;magicforest&quot; play&gt;&gt;&#39;);
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -5484,7 +5613,7 @@ Thinking: $totalTime s
         &lt;/table&gt;\
     &lt;/div&gt;\
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-        &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot; &quot;Ready&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot; &quot;Ready&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
     &lt;/div&gt;</tw-passagedata><tw-passagedata pid="124" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
