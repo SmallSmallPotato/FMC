@@ -1114,7 +1114,7 @@ $(document).on(':passageend', function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 一位母親帶著8歲男童進來。&lt;br&gt;男童叫阿樂。你注意到他右腳有大片磨損。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂母親：「佢跌親啫，小朋友成日撞到。」&lt;br&gt;阿樂低著頭，很安靜。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂母親：「佢跌親啫，小朋友成日撞到。快啲洗完傷口，我哋趕住走。」&lt;br&gt;阿樂低著頭，很安靜，雙手死死抓著衣角。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你打算：&lt;&lt;/replace&gt;&gt;
@@ -1219,8 +1219,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="PhAHistory" tags="Dx" position="125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你蹲下問：「點整親㗎？」 &lt;br&gt;阿樂低頭小聲說：「我唔記得。」
-    &lt;/span&gt;
+        你蹲下問：「點整親㗎？」 &lt;br&gt;阿樂恐懼地望向母親，停了幾秒，全身僵硬。 &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
 
@@ -1229,8 +1228,11 @@ $(document).on(':passageend', function () {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;氣氛突然變得緊張。你會？&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;母親在旁邊狠狠地瞪了他一眼。&lt;br&gt;阿樂低頭小聲說：「我唔記得。」氣氛突然變得緊張。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;elseif $page == 2&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你會？&lt;&lt;/replace&gt;&gt;
+                 &lt;&lt;set $page = 3&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
@@ -1266,14 +1268,8 @@ $(document).on(':passageend', function () {
         &lt;&lt;/if&gt;&gt;
         
 &lt;&lt;nobr&gt;&gt;
-&lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-&lt;&lt;set $totalTime to 0&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
-&lt;span id=&quot;story-text&quot;&gt;
-你思考了 &lt;&lt;print $lastDecisionTime&gt;&gt; 秒。&lt;br&gt;現在仔細觀察。你發現......
-&lt;/span&gt;
+&lt;span id=&quot;story-text&quot;&gt;你藉口洗傷口需要，溫柔地拉開阿樂的長袖，並解開上衣。&lt;/span&gt;
 
 &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
 
@@ -1283,15 +1279,18 @@ $(document).on(':passageend', function () {
 
 &lt;&lt;if $page == 1&gt;&gt;
 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-除了磨損，還有瘀傷分布在上臂及背部。&lt;br&gt;部分像手掌印。
+你發現除了磨損，還有瘀傷分布在上臂及背部。&lt;br&gt;瘀傷顏色深淺不同(有新鮮的鮮紅色，也有舊的青紫色)，部分像手掌印。
 &lt;&lt;/replace&gt;&gt;
 &lt;&lt;set $page = 2&gt;&gt;
 &lt;&lt;elseif $page == 2&gt;&gt;
-&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂避開你的眼神。&lt;br&gt;你開始覺得不對路。&lt;&lt;/replace&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;這與「跌倒」會傷在骨骼突出處(如膝蓋、手肘)的機制完全不吻合！&lt;&lt;/replace&gt;&gt;
 &lt;&lt;set $page = 3&gt;&gt;
 &lt;&lt;elseif $page == 3&gt;&gt;
-&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;（門口位置有嘈雜聲，多名病人在催促）&lt;br&gt;你打算......&lt;&lt;/replace&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂避開你的眼神。你開始覺得不對路，這屬於典型的「非意外受傷（Non-accidental Trauma）」。&lt;&lt;/replace&gt;&gt;
 &lt;&lt;set $page = 4&gt;&gt;
+&lt;&lt;elseif $page == 4&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你打算......&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 5&gt;&gt;
 /* 隱藏點擊層，顯示選項 */
 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
 &lt;&lt;endif&gt;&gt;
@@ -1299,9 +1298,9 @@ $(document).on(':passageend', function () {
 &lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-[[觀察母親反應|PhAObs]]
-[[請醫生接手|PhAConsult]]
-[[詢問受傷經過|PhAIncon]]
+[[向母親指出傷勢矛盾，詢問受傷真正經過|PhAIncon]]
+[[默默回到電腦前先記錄臨床觀察|PhADoc]]
+[[請醫生接手處理|PhAConsult]]
 &lt;/div&gt;
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
@@ -1317,7 +1316,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="PhAObs" tags="Dx" position="325,600" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        母親立即回答：&lt;br&gt;「咪話咗跌親囉。」
+        你保持沉默，觀察母親。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -1327,8 +1326,14 @@ $(document).on(':passageend', function () {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂沉默。&lt;br&gt;雙手發抖。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;母親立即拍打阿樂的肩膀，大聲喝斥：「咪話咗跌親囉！成日害到阿媽畀人懷疑！快啲同護士講你係跌親！」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;elseif $page == 2&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂沉默。&lt;br&gt;雙手發抖。&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 3&gt;&gt;
+&lt;&lt;elseif $page == 3&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;這種家庭互動(Family Interaction)呈現高度的威脅與恐懼。&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 4&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
@@ -1338,12 +1343,7 @@ $(document).on(':passageend', function () {
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[高度懷疑|PhA4A]]
-&lt;&lt;link &quot;避免衝突&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhA4B&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+[[避免衝突|PhA4B]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1352,7 +1352,7 @@ $(document).on(':passageend', function () {
 </tw-passagedata><tw-passagedata pid="9" name="PhAConsult" tags="Dx" position="125,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你請醫生處理。&lt;br&gt;但醫生忙碌中，表示要一段時間才能過來。
+        你請醫生處理。&lt;br&gt;但醫生忙碌中，表示要一段時間才能過來，並說：「你先處理，等我半個鐘！」
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -1362,8 +1362,14 @@ $(document).on(':passageend', function () {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 你仍然需要決定：&lt;br&gt;是否啟動兒童保護程序。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 然而，母親在大堂已經大吵大鬧要拿回身份證離開。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;elseif $page == 2&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你必須記住：&lt;br&gt;強制舉報的法律責任是「個人（Personal Liability）」的，不能轉嫁給醫生。&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 3&gt;&gt;
+&lt;&lt;elseif $page == 3&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你仍然需要決定：&lt;br&gt;是否啟動兒童保護程序。&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
         &lt;&lt;/link&gt;&gt;
@@ -1413,7 +1419,7 @@ $(document).on(':passageend', function () {
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[再問母親受傷詳情|PhAObs]]
- &lt;&lt;link &quot;立即報告&quot;&gt;&gt;
+ &lt;&lt;link &quot;立即舉報&quot;&gt;&gt;
     /* 將這次的時間「推」進歷史清單裡 */
     &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -1435,7 +1441,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你決定啟動程序。
+        你勇敢地啟動法定舉報程序(口頭 + 後補書面雙軌制)。由於是「非緊急個案」(如阿樂的非致命新舊瘀傷)，首選通常是致電社署的專責小組。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -1445,15 +1451,26 @@ $(document).on(':passageend', function () {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; ✔️ 記錄傷勢 &lt;br&gt;✔️ 通知主管&lt;br&gt;✔️ 聯絡相關部門&lt;br&gt;✔️ 完成電子報告&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;口頭通報： &lt;br&gt;你致電阿樂居住地址所屬分區的社會福利署 — 保護家庭及兒童服務課(FCPSU)直通電話。當局人員記錄了資料，並登記了你的個人手機號碼以作立案。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你仍然感到不安。&lt;br&gt;但你知道：&lt;br&gt;孩子安全是最重要的。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊皮膚藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
+                &lt;&lt;elseif $page == 3&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;後續法定書面程序： &lt;br&gt;翌日上午，你登入「社會福利署強制舉報電子平台」，憑手機收到的 短訊驗證碼 (OTP) 順利登入，填寫客觀的臨床記錄。
+&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 4&gt;&gt;
+                &lt;&lt;elseif $page == 4&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;取得憑證：&lt;br&gt; 點擊提交後，系統彈出 【案件參考編號：Ref-2026-PHY-0892】。你將編號親自妥善自存，這筆紀錄將在系統中保存 20 年，是你完美履行個人法律責任的唯一防彈衣。
+&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 5&gt;&gt;
+                &lt;&lt;elseif $page == 5&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;雖然你此時感到心跳加速、有些不安，但你知道：&lt;br&gt;孩子的安全，永遠比醫護人員當下的舒服更重要。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 6&gt;&gt;
               /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 3&gt;&gt;
+            &lt;&lt;elseif $page == 6&gt;&gt;
              /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;PhAENDING_GOOD&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -1806,7 +1823,7 @@ Thinking: $totalTime s
  &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
 [[► Start|Start]]
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,300" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
+</tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
     &lt;tr&gt;\
         &lt;td&gt;\
             &lt;&lt;if $unlocked.redFlags&gt;&gt;\
@@ -1994,7 +2011,7 @@ Thinking: $totalTime s
 </tw-passagedata><tw-passagedata pid="31" name="PhAAA" tags="Dx" position="225,600" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你輕聲問：&lt;br&gt;「有冇人整傷你？」
+        【⚠️ 錯誤操作反思】&lt;br&gt;你在施虐嫌疑人(母親)面前輕聲逼問：「有冇人整傷你？係咪爸爸媽媽打你？」
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2004,10 +2021,10 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 阿樂低聲說：&lt;br&gt;「爸爸嬲嗰陣會打我。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 阿樂在極度恐懼和壓力下，突然情緒崩潰，大哭著說：「爸爸嬲嗰陣會用衣架打我……媽媽叫我唔好講……」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你感到心跳加速。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;母親聽到後瞬間暴怒，一把扯過阿樂，在大堂大吼大叫，診所現場面臨失控危險。你感到心跳加速。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -2023,7 +2040,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime to 0&gt;&gt;
     &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
     &lt;&lt;/link&gt;&gt;
-    [[不過是體罰|PhAGrey]]
+    [[不過是體罰，算了吧|PhAGrey]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -2039,7 +2056,7 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="PhAIncon" tags="Dx" position="325,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        母親最初說：「樓梯跌親。」&lt;br&gt;之後改口：「學校撞到。」
+        你指出跌倒不可能造成背部和手臂的條狀及手掌印瘀傷。母親最初說：「樓梯跌親。」&lt;br&gt;當你指出顏色深淺不同、明顯有舊傷時，她改口：「學校撞到。」
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2049,7 +2066,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 你注意到說法不一致。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 你注意到說法不一致且前後矛盾。&lt;br&gt;家長呈現極度防禦及試圖逃跑的態度。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -2060,12 +2077,7 @@ Thinking: $totalTime s
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[考慮虐待的可能|PhADecision]]
-&lt;&lt;link &quot;你認為她只是緊張&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhA4B&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[你認為她只是緊張|PhA4B]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -2081,7 +2093,7 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="PhADoc" tags="Dx" position="25,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你開始記錄。
+        根據《強制舉報者指南》，所有書面記錄將來都可能作為法庭證據。你會怎樣寫？
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2101,8 +2113,8 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[「左上臂及背部有多處瘀傷，顏色深淺不同」|PhA4A]]
-    [[「懷疑母親虐待兒童」|PhA4D]]
+    [[「左上臂及背部有多處瘀傷，顏色深淺不同。家長對傷勢機制未能給出一致解釋。」|PhA4A]]
+    [[「懷疑母親虐待兒童，並講大話隱瞞。」|PhA4D]]
     [[「一定係被打」|PhA4D]]
 &lt;/div&gt;
 
@@ -2129,7 +2141,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你開始意識到：&lt;br&gt;✔️ 傷勢不一致&lt;br&gt;✔️ 多階段瘀傷&lt;br&gt;✔️ 孩子表現恐懼
+        你在腦海中勾選了《輔助分析框架》的指標：&lt;br&gt;✔️ 臨床傷勢與跌倒機制不一致&lt;br&gt;✔️ 新舊交替的隱蔽瘀傷&lt;br&gt;✔️ 家長口供前後矛盾、情緒防禦&lt;br&gt;✔️ 孩子表現出極度恐懼與退縮
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
 
@@ -2138,8 +2150,11 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 這可能已達：「合理懷疑」&lt;br&gt; 你下一步會？&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 這可能已達：「合理懷疑」&lt;br&gt;但診所無即時致命危險(非緊急)，&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+                 &lt;&lt;elseif $page == 2&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你下一步會？&lt;&lt;/replace&gt;&gt;
+&lt;&lt;set $page = 3&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
@@ -2149,13 +2164,13 @@ Thinking: $totalTime s
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[先與上司討論|PhASupport]]
-    &lt;&lt;link &quot;進行強制舉報&quot;&gt;&gt;
+    &lt;&lt;link &quot;致電社署專責小組(FCPSU)進行口頭強制舉報&quot;&gt;&gt;
     /* 將這次的時間「推」進歷史清單裡 */
     &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
     &lt;&lt;set $totalTime to 0&gt;&gt;
     &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
     &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;決定觀察一段時間&quot;&gt;&gt;
+    &lt;&lt;link &quot;先放他們回家，下次再觀察&quot;&gt;&gt;
     /* 將這次的時間「推」進歷史清單裡 */
     &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
     &lt;&lt;set $totalTime to 0&gt;&gt;
@@ -2186,7 +2201,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-⚠️ Feedback：&lt;br&gt;Documentation應記錄：&lt;br&gt;✔️ 客觀觀察&lt;br&gt;✔️ 直接引述
+⚠️ 【法規 Feedback：病歷記錄大忌】&lt;br&gt;Documentation應記錄：&lt;br&gt;✔️ 客觀臨床觀察(如：瘀傷形狀、面積大小、深淺顏色、位置)&lt;br&gt;✔️ 直接引述字句(如：男童說「我唔記得」，母親說「樓梯跌親」)
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2196,12 +2211,15 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 避免：&lt;br&gt;❌ 主觀判斷&lt;br&gt;❌ 定罪式語言
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 避免：&lt;br&gt;❌ 主觀情緒判斷(如：「家長極度殘忍」)&lt;br&gt;❌ 未經法律定罪的字眼(如：「母親犯了虐兒罪」)
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+               &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;這樣才能保障你的專業操守，避免將來在法庭上被辯方律師質疑你的客觀性。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 2&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;PhADoc&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -2233,7 +2251,7 @@ Thinking: $totalTime s
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你決定先完成手頭上的工作。&lt;br&gt;在處理完傷口便讓他們回家，並讓他們明天再來。
+        【❌ 錯誤選擇：拖延等待】&lt;br&gt;你決定先完成手頭上的工作。&lt;br&gt;在處理完傷口便讓他們回家，並讓他們明天再來。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2243,11 +2261,14 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
             
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 第二天，他們沒有出現&lt;br&gt;電腦紀錄顯示：阿樂因頭部受傷入院。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;當晚，母親帶著秘密被揭穿的恐慌回到家。為了「懲罰」阿樂在診所多嘴，父親在憤怒下實施了更殘暴的毒打。&lt;&lt;/replace&gt;&gt;
                   &lt;&lt;set $page = 2&gt;&gt;
+                  &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;第二天，他們沒有出現。&lt;br&gt;電腦紀錄顯示：阿樂因嚴重硬腦膜下血腫(Subdural Hematoma)及顱骨骨折，陷入深度昏迷，被送入 ICU 搶救。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 2&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;PhAENDING_DELAY&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -2287,7 +2308,7 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="PhA4B" tags="Dx" position="25,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你選擇不深入。&lt;br&gt;處理完傷口後，預約他明天再來洗傷口。
+        【❌ 錯誤選擇：淡化危機】&lt;br&gt;你選擇不深入。&lt;br&gt;處理完傷口後，預約他明天再來洗傷口。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2297,11 +2318,14 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 阿樂離開前，回頭望了你一眼。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 母親扯著阿樂快步離開。阿樂在踏出傷口房門前，回頭望了你一眼。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;那眼神充滿了絕望與無助，因為他最後的求救窗戶，被你親手關上了。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 2&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;PhAENDING_BAD&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -2341,7 +2365,7 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="PhAGrey" tags="Dx" position="225,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你心想：&lt;br&gt;「香港好多家庭都會體罰…」
+        你心想：&lt;br&gt;「香港好多家庭都會體罰…如果每宗都報警，會不會破壞別人家庭？」
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2351,10 +2375,10 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 但你同時記得：&lt;br&gt;重點不是體罰本身，&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 但你同時記得：&lt;br&gt;重點不是定義「體罰還是虐待」，&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;而是：&lt;br&gt;- 傷害程度&lt;br&gt;- 風險&lt;br&gt;- 恐懼&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;而是：&lt;br&gt;評估「傷害程度與未來風險」。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -2400,10 +2424,10 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;  
-她說：&lt;br&gt;「你唔需要100%肯定。」&lt;br&gt;「合理懷疑已經足夠。」&lt;&lt;/replace&gt;&gt;
+資深護士說：&lt;br&gt;「你唔需要100%肯定。&lt;br&gt;合理懷疑已經足夠...&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你決定：&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...我們現在分工：我致電醫務社工(MSW)去系統查背景，並陪著家長在獨立房間內，你立刻提起電話致電社署 FCPSU 作法定口頭舉報！」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 /* 隱藏點擊層，顯示選項 */
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -2418,7 +2442,7 @@ Thinking: $totalTime s
     &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
     &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
     &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;再觀察幾天&quot;&gt;&gt;
+    &lt;&lt;link &quot;怕得罪家長，猶豫不決&quot;&gt;&gt;
     /* 將這次的時間「推」進歷史清單裡 */
     &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
     &lt;&lt;goto &quot;PhAWait&quot;&gt;&gt;
@@ -2453,7 +2477,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        兩個月後，&lt;br&gt;你再次見到阿樂。
+        兩個月後，&lt;br&gt;你再次見到阿樂。他右眼完全瘀黑，左手前臂呈現骨折的異常彎曲。父親在暴怒下，將他推落樓梯。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2466,14 +2490,18 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 這次，&lt;br&gt;他右眼瘀黑。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間猶豫，但最後沒有行動。&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間猶豫，但最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在法定 24 小時內 履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;type 80ms&gt;&gt;如果再有一次機會，你會怎樣做？&lt;&lt;/type&gt;&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;判決結果：&lt;br&gt;
+你因為「違反《強制舉報虐待兒童條例》罪」，被警方正式落案起訴。經法庭審訊，你被判處監禁 3 個月並留下刑事案底。&lt;br&gt;護士管理局召開緊急紀律聆訊，以嚴重專業失德、未能保障兒童最佳利益為由，永久撤銷你的註冊護士執業牌照。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
+                 &lt;&lt;elseif $page == 4&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;type 80ms&gt;&gt;如果再有一次機會，那天早上，你還會選擇轉過頭去、假裝看不見嗎？&lt;&lt;/type&gt;&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 4&gt;&gt;
+            &lt;&lt;elseif $page == 5&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;Start&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -2535,14 +2563,17 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 「等待更多證據」&lt;br&gt;是否有時就是風險？&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;雖然你最終在第二天舉報了。但你太遲行動，錯失了在診所將兒童與施虐者即時隔離的黃金機會。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在當晚那個漫長的黑夜裡，阿樂已經承受了本不該屬於他的顱骨骨折。雖然經 ICU 搶救後保住了性命，但腦部缺氧造成了不可逆轉的永久性神經受損，小宇下半生將需要坐輪椅。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費的&lt;&lt;print $decisionHistory[0]&gt;&gt;秒，仍沒有行動。&lt;br&gt;這是他們仍然處於地獄裏的時間。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費的&lt;&lt;print $decisionHistory[0]&gt;&gt;秒，仍沒有行動。&lt;br&gt;「等待更多證據」是否有時就是風險？而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
+                &lt;&lt;elseif $page == 4&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【遊戲結束：遺憾的結局】&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 4&gt;&gt;
@@ -2597,7 +2628,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        數星期後，阿樂開始接受社工跟進。
+        數星期後，個案通過了「保護兒童個案會議」。阿樂暫時交由在外地的外婆照顧，遠離了施虐的父親。社工與心理學家正式介入這個家庭。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2607,7 +2638,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;學校表示：&lt;br&gt;他最近比較願意說話。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;今天阿樂回診所覆診膝蓋。&lt;br&gt;學校老師傳來消息：阿樂最近在課堂上，終於比較願意抬起頭說話了，臉上也有了笑容。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;剛才你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
@@ -2615,9 +2646,12 @@ Thinking: $totalTime s
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;✔ 你已採取適當行動保護兒童&lt;br&gt;🏆 結局：Timely Protection&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
+                &lt;&lt;elseif $page == 4&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【恭喜通關！You Win!】&lt;br&gt;「意外受傷有故事，虐待痕跡不吻合；傷勢達標即時報，莫用『頑皮』蓋殘暴。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 4&gt;&gt;
+            &lt;&lt;elseif $page == 5&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;Start&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
