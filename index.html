@@ -1360,7 +1360,12 @@ $(document).on(':passageend', function () {
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[有古怪，再認真檢查一下|PhAExam]]
-[[跌倒有瘀傷很正常吧|PhA4B]]
+&lt;&lt;link &quot;跌倒有瘀傷很正常吧&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;goto &quot;PhA4B&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -2090,7 +2095,7 @@ Thinking: $totalTime s
 &lt;h3&gt;當你在工作期間產生合理懷疑時，應遵循以下步驟：&lt;/h3&gt;\
 * Step 1 即時評估: 判斷兒童是否處於即時危險（如需要急救、施虐者在現場）及初步穩定傷情。
 * Step 2 初步紀錄: 簡要記錄觀察到的傷痕、兒童的情緒反應或陪同者的可疑言論。
-* Step 3 內部通報（非必要但建議）: 通知高級護士長（DOM/NS）及值班醫生，但需注意：內部通報不能代替法律規定的舉報責任（除非確認已有同事完成舉報）。
+* Step 3 內部通報（非必要但建議）: 通知護士長及值班醫生，但需注意：內部通報不能代替法律規定的舉報責任（除非確認已有同事完成舉報）。
 * Step 4 遞交舉報：根據指引決定是否報警及填寫專項報告。登入CMS Child Abuse Case Record作為HA internal documentation。
 &lt;h3&gt;📌記住：電話先，文件後&lt;/h3&gt;\
 * 緊急個案Mandatory Reporting： 立即致電 999 或聯繫最近的警署。
