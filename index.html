@@ -2128,13 +2128,13 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;
+</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;\
 &lt;&lt;set $decisionHistory to []&gt;&gt;
+&lt;&lt;set $currentScenarioId = 0&gt;&gt;
 &lt;&lt;set $totalSafety = 0&gt;&gt;
 &lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;set $progress = 0&gt;&gt;
  &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
-&lt;br&gt;
 &lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="23" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
@@ -5747,13 +5747,13 @@ window.quizTimer = setInterval(function() {
     &quot;Quiz_Result&quot;
 &gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
-&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 92vh;&quot;&gt;
+&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;
         SYSTEM: EVALUATION COMPLETED&lt;/div&gt;
     &lt;div class=&quot;story-text&quot;&gt;\
         &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 最終評估報告 ✦&lt;/h2&gt;\
-        &lt;p style=&quot;font-size: 1.2em; text-align: center; margin-bottom: 20px;&quot;&gt;TOTAL SCORE / 總得分：
-            &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1em;&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt; 分 &lt;/p&gt;\
+        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;TOTAL SCORE / 總得分：
+            &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt; 分 &lt;/p&gt;\
         &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
         &lt;table class=&quot;pixel-report-table&quot;&gt;
             &lt;thead&gt;
