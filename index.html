@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="145" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="3" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 body {
   font-family: 'DotGothic16', sans-serif !important;
@@ -889,15 +889,15 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     /* 或者你也可以使用 transform 來精確移動 (更推薦) */
     /* transform: translateY(-5px); */
     
-    font-size: 14.5px; 
-    line-height: 0.88;
+    font-size: 14.5px !important; 
+    line-height: 0.88 !important;
 }
 
 /* 修改 SugarCube 默認 Dialog 樣式 */
 #ui-dialog-body.pixel-handbook {
     background-color: #2a2a2a !important; /* 深灰背景 */
     color: #ffffff;
-    padding: 3px;
+    padding: 3px !important;
     /* 雙層復古邊框：白框包黑框 */
     border: 3.5px solid #ffffff !important;
     outline: 4px solid #000000 !important;
@@ -941,7 +941,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     font-size: 14px !important;
     width: 100% !important; 
     min-height: 30px !important;
-    font-weight: bold;
+    font-weight: bold !important;
     color: #bdc3c7 !important; /* 灰色字體 */
     background-color: #7f8c8d !important; /* 灰色背景 */
     padding: 8px 4px !important;
@@ -1003,26 +1003,28 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     margin-top: -25px !important;
     background-color: #f0f0f0; /* 淺灰色復古紙張感 */
     color: #1a1a1a;
-    padding: 5px;
-    border: 3px solid #000;
+    padding: 6px !important;
+    border: 4px solid #000;
     min-height: 550px !important;
     font-family: sans-serif; /* 內容使用系統字體以保證長文易讀性 */
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: 12px !important;
+    text-align: left !important;
+    line-height: 1.6 !important;
     /* 內凹陰影效果 */
     box-shadow: inset 4px 4px 0px #ccc;
 }
 
 /* 當顯示區域是像素標題時 */
 #hb-display h3 {
-    font-size: 13px;
-    color: #e60012;
-    margin-bottom: 10px;
+    font-size: 13px !important;
+    color: #e60012 !important;
+    margin-bottom: 10px !important;
+    text-align: left !important;
 }
 
 .anim-item-get {
-    position: fixed;
-    width: 250px;
+    position: fixed !important;
+    width: 250px !important;
     top: 50%;
     left: 50%;
     transform: translateX(-50%);
@@ -2399,7 +2401,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="PhADoc" tags="Dx" position="25,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="PhADoc" tags="Dx" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         根據《強制舉報者指南》，所有書面記錄將來都可能作為法庭證據。你會怎樣寫？
@@ -2490,12 +2492,16 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;wah&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;wah&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+    $(document).one(&#39;:passagerender&#39;, function (ev) {
+        var track = SimpleAudio.tracks.get(&quot;wah&quot;);
+        if (track) {
+            $(track).one(&#39;ended&#39;, function () {
+                $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
+            });
         }
     });
 &lt;&lt;/script&gt;&gt;
+
 
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -2547,7 +2553,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PhAWait" tags="Dx no-timer" position="125,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         【❌ 錯誤選擇：拖延等待】&lt;br&gt;你決定先完成手頭上的工作。&lt;br&gt;在處理完傷口便讓他們回家，並讓他們明天再來。
@@ -3473,12 +3479,15 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="NC4DOC" tags="Nc" position="650,400" size="100,100">&lt;&lt;audio &quot;wizard&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="NC4DOC" tags="Nc" position="650,400" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;wah&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;wah&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;wizard&quot; play&gt;&gt;&#39;);
+    $(document).one(&#39;:passagerender&#39;, function (ev) {
+        var track = SimpleAudio.tracks.get(&quot;wah&quot;);
+        if (track) {
+            $(track).one(&#39;ended&#39;, function () {
+                $.wiki(&#39;&lt;&lt;audio &quot;magicforest&quot; play&gt;&gt;&#39;);
+            });
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -4094,9 +4103,12 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;sadsong&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;sadsong&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+    $(document).one(&#39;:passagerender&#39;, function (ev) {
+        var track = SimpleAudio.tracks.get(&quot;sadsong&quot;);
+        if (track) {
+            $(track).one(&#39;ended&#39;, function () {
+                $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
+            });
         }
     });
 &lt;&lt;/script&gt;&gt;
@@ -5146,7 +5158,19 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="SA5DocError" tags="Sa" position="600,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="SA5DocError" tags="Sa" position="600,1250" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+&lt;&lt;audio &quot;wah&quot; play&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    $(document).one(&#39;:passagerender&#39;, function (ev) {
+        var track = SimpleAudio.tracks.get(&quot;wah&quot;);
+        if (track) {
+            $(track).one(&#39;ended&#39;, function () {
+                $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
+            });
+        }
+    });
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
        Documentation應：&lt;br&gt;記錄原話、描述情緒與行為。
