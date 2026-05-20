@@ -1667,14 +1667,12 @@ $(document).on(':passageend', function () {
         &lt;&lt;link &quot; &quot;&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    阿晴很安靜，一直低頭，雙手抓緊校裙。&lt;br&gt;
-                    母親望着她抱怨：「成日都係咁，又話頭痛，好麻煩。」
+                    母親望着她抱怨：「成日都係咁，又話頭痛，集中唔到精神。麻鬼煩！」&lt;br&gt;阿晴很安靜，一直低頭，雙手抓緊校裙，指甲發白。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你感到氣氛有點奇怪。阿晴的神情不像普通的身體不適，&lt;br&gt;
-                    更像是在極度焦慮中。
+                    診室內的空氣瞬間凝固。阿晴的神情不像普通的身體不適，更像是在極度焦慮中。身為護士，你的第一步是？
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -2453,7 +2451,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 母親扯著阿樂快步離開。阿樂在踏出傷口房門前，回頭望了你一眼。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
                 &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;那眼神充滿了絕望與無助，因為他最後的求救窗戶，被你親手關上了。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;那眼神充滿了絕望與無助，因為他最後的求救窗戶，被你親手關上了。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -3588,8 +3586,7 @@ Thinking: $totalTime s
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="PsA2A" tags="Psy" position="1125,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你留意到：當母親說話時，阿晴明顯縮起肩膀。&lt;br&gt;
-        沒有抬頭，亦完全沒有主動說過一句話。
+        你留意到：當母親說話時，阿晴明顯縮起肩膀。像在躲避隨時會落下來的巴掌。沒有抬頭，亦完全沒有主動說過一句話。雖然沒有可疑的物理傷痕，但脸色蒼白得不正常。
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
@@ -3597,7 +3594,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
                     這種對照顧者的「過度畏縮」，&lt;br&gt;
-                    往往是長期的情緒壓力所致。
+                    往往是長期恐懼引發的防禦姿態。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -3622,18 +3619,21 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="PsA2B" tags="Psy" position="1225,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你問：「最近發生咩事？」&lt;br&gt;
-        母親嘆氣：「佢咁蠢，學校又差，成日搞到我好煩。」
-    &lt;/span&gt;
+        你轉向母親，用溫和的語氣問：「阿晴媽咪，阿晴最近喺學校或者屋企有冇發生咩特別事？」&lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
         &lt;&lt;link &quot; &quot;&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    阿晴依然低頭不語，雙手把校裙抓得更皺。&lt;br&gt;
-                    家長的貶低非常直接且帶有強烈情緒。
+                    母親冷笑一聲，瞪著阿晴：
+「有咩事？咪就係佢蠢囉！成日考包尾，教極都唔識，好似弱智咁。我出到去被親戚笑到面都黃。佢成個人生就係搞到我好煩、拖累我！」
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+                &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                    這些字眼如利刃般在大堂和診室內迴盪。&lt;br&gt;阿晴的頭埋得更深，兩滴眼淚無聲地滴在校裙上，但她連哭都不敢發出半點聲音。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
             &lt;&lt;endif&gt;&gt;
         &lt;&lt;/link&gt;&gt;
@@ -3677,19 +3677,22 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="62" name="PsA3A" tags="Psy" position="1125,200" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="62" name="PsA3A" tags="Psy" position="1125,200" size="100,100">阿晴的肩膀微微顫抖，眼眶通紅，極度驚恐地偷看了母親一眼，然後用氣音說：
+「媽咪每日都話我係廢物……話我做咩都錯。佢話全家最不幸嘅事就係生咗我……」
+
+這屬於《強制舉報者指南》中典型的長期言語貶低（Severe Verbal Assault）。
+
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你問：「你幾時開始頭痛？？」&lt;br&gt;
-        阿晴答非所問，小聲說：「媽咪成日話我無用，死咗仲好。」
+        母親此時正低頭不停按電話。你微微蹲下，讓視線與阿晴平齊，輕聲問：「你幾時開始頭痛？？」
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
         &lt;&lt;link &quot; &quot;&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    阿晴開始眼紅，淚水在眼眶打轉。&lt;br&gt;
-                    這是一句非常嚴重的言語攻擊。
+                    阿晴開始眼紅，淚水在眼眶打轉，答非所問：「媽咪成日話我無用，全家最不幸嘅事就係生咗我……死咗仲好。」&lt;br&gt;這是一句非常嚴重的言語攻擊。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
