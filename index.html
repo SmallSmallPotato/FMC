@@ -233,20 +233,49 @@ html[data-tags~="Nd"] body {
     image-rendering: pixelated;
 }
 
-/* 紅色發光時間線 */
+/* 計時條外殼 */
 #timer-bar-container {
     width: 100%;
-    height: 10px;
-    background: #220000;
-    border: 2px solid #550000;
-    margin-bottom: 20px;
+    height: 12px;
+    background-color: #111; /* 深色背景底框 */
+    border: 3px solid #fff;  /* 經典像素白框 */
+    padding: 1px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 20px;    /* 👈 把這行加回來，保持原本的精美間距 */
 }
-#timer-bar {
+
+/* 16bit 像素風格的無限循環動畫條 */
+#timer-bar.pixel-loop-animation {
+    width: 100% !important; /* 覆蓋原本用 JS 控制的寬度，保持全寬 */
     height: 100%;
-    background: #ff0033;
-    width: 100%;
-    box-shadow: 0px 0px 8px #ff0033;
-    transition: width 1s linear;
+    
+    /* 使用 CSS 漸層繪製 16-bit 雙色相間斜紋（像素顆粒感） */
+    background-image: linear-gradient(
+        45deg, 
+        #ff0055 25%, #aa0033 25%, 
+        #aa0033 50%, #ff0055 50%, 
+        #ff0055 75%, #aa0033 75%, 
+        #aa0033 100%
+    );
+    background-size: 16px 16px; /* 控制像素顆粒的大小 */
+    
+    /* 核心：關閉抗鋸齒，強制點陣像素化 */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    
+    /* 呼叫動畫：每 0.8 秒循環一次 */
+    animation: pixelShift 0.8s linear infinite;
+}
+
+/* 讓像素斜紋向右滾動的動畫 */
+@keyframes pixelShift {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 32px 0; /* 移動距離必須是 background-size 的倍數以實現無縫銜接 */
+    }
 }
 
 /* 狀態列 */
@@ -3866,7 +3895,11 @@ Thinking: $totalTime s
     &lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[決定啟動通報程序|PsAREPORT]]
+   &lt;&lt;link &quot;決定啟動通報程序&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PsAREPORT&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
     [[與資深護士討論|PsASUPPORT]]
     [[仍然懷疑是否「太小題大做」|PsAGRAY]]
 &lt;/div&gt;
@@ -3907,7 +3940,11 @@ Thinking: $totalTime s
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[重新評估|PsA4A]]
-[[再等等吧|PsAWAIT]]
+&lt;&lt;link &quot;再等等吧&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PsAWAIT&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -4059,8 +4096,16 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[聽從意見，進行通報|PsAREPORT]]
-    [[仍然猶豫不決|PsAWAIT]]
+    &lt;&lt;link &quot;聽從意見，進行通報&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PsAREPORT&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+    &lt;&lt;link &quot;仍然猶豫不決&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PsAWAIT&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 
@@ -4098,8 +4143,16 @@ Thinking: $totalTime s
     &lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    [[決定啟動通報程序|PsAREPORT]]
-    [[需要思考一段日子|PsAWAIT]]
+    &lt;&lt;link &quot;決定啟動通報程序&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PsAREPORT&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+    &lt;&lt;link &quot;需要思考一段日子&quot;&gt;&gt;
+    /* 將這次的時間「推」進歷史清單裡 */
+    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
+    &lt;&lt;goto &quot;PsAWAIT&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
@@ -4131,7 +4184,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;有天她主動到診所找你，對你表示感謝。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[1]&gt;&gt;秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
@@ -4306,7 +4359,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間猶豫，但最後沒有行動。&lt;br&gt;心理虐待（Psychological Abuse）往往被「鬧下啫」、「為佢好」所掩蓋。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[1]&gt;&gt;秒時間猶豫，但最後沒有行動。&lt;br&gt;心理虐待（Psychological Abuse）往往被「鬧下啫」、「為佢好」所掩蓋。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「沒有傷痕」往往讓我們低估了心理虐待的毀滅性。&lt;&lt;/replace&gt;&gt;
@@ -5171,87 +5224,86 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectDiet&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="Quiz_Widget" tags="widget" position="600,1825" size="100,100">&lt;&lt;widget &quot;PixelQuiz&quot;&gt;&gt;
-    &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $quizNextPassage to _args[1]&gt;&gt;
-    &lt;&lt;set $quizLimitTime to 40&gt;&gt; 
-    &lt;&lt;set _correctAnswer to _args[6]&gt;&gt;
-    
-    &lt;&lt;set $timeLeft to $quizLimitTime&gt;&gt;
-    &lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $quizNextPassage to _args[1]&gt;&gt;
+&lt;&lt;set _correctAnswer to _args[6]&gt;&gt;
 
-    &lt;div id=&quot;quiz-box&quot;&gt;
-        &lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-        
-        &lt;div class=&quot;quiz-status&quot;&gt;
-            SYSTEM: DECISION REQUIRED
-            &lt;span id=&quot;timer-text&quot; style=&quot;float: right;&quot;&gt;00:40&lt;/span&gt;
-        &lt;/div&gt;
+/* 初始化正向計時器 */
+&lt;&lt;set $quizElapsedTime to 0&gt;&gt;
+&lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
 
-        &lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
-            &lt;&lt;type 30ms&gt;&gt;_args[0]&lt;&lt;/type&gt;&gt;
-        &lt;/div&gt;
+&lt;div id=&quot;quiz-box&quot;&gt;
+&lt;!-- 這裡換成無限循環的 16bit 像素動畫 --&gt;
+&lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot; class=&quot;pixel-loop-animation&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 
-        &lt;div class=&quot;quiz-option&quot;&gt;    
-            &lt;&lt;link _args[2]&gt;&gt;
-    &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-    &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-    &lt;&lt;if _args[2] == _correctAnswer&gt;&gt;
-        &lt;&lt;set $score += 10&gt;&gt;
-        &lt;&lt;set _isRight to true&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set _isRight to false&gt;&gt;
-    &lt;&lt;endif&gt;&gt;
-    &lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-    &lt;&lt;goto $quizNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-            
-    &lt;&lt;link _args[3]&gt;&gt;
-    &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-    &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-    &lt;&lt;if _args[3] == _correctAnswer&gt;&gt;
-        &lt;&lt;set $score += 10&gt;&gt;
-        &lt;&lt;set _isRight to true&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set _isRight to false&gt;&gt;
-    &lt;&lt;endif&gt;&gt;
-    &lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-    &lt;&lt;goto $quizNextPassage&gt;&gt;
+&lt;div class=&quot;quiz-status&quot;&gt;
+SYSTEM: DECISION REQUIRED
+&lt;!-- 移除了右上角的倒數時間文字 --&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
+&lt;&lt;type 30ms&gt;&gt;_args[0]&lt;&lt;/type&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;quiz-option&quot;&gt; 
+&lt;&lt;link _args[2]&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;if _args[2] == _correctAnswer&gt;&gt;
+&lt;&lt;set $score += 10&gt;&gt;
+&lt;&lt;set _isRight to true&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;set _isRight to false&gt;&gt;
+&lt;&lt;endif&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-    &lt;&lt;link _args[4]&gt;&gt;
-    &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-    &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-    &lt;&lt;if _args[4] == _correctAnswer&gt;&gt;
-        &lt;&lt;set $score += 10&gt;&gt;
-        &lt;&lt;set _isRight to true&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set _isRight to false&gt;&gt;
-    &lt;&lt;endif&gt;&gt;
-    &lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-    &lt;&lt;goto $quizNextPassage&gt;&gt;
+&lt;&lt;link _args[3]&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;if _args[3] == _correctAnswer&gt;&gt;
+&lt;&lt;set $score += 10&gt;&gt;
+&lt;&lt;set _isRight to true&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;set _isRight to false&gt;&gt;
+&lt;&lt;endif&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;goto $quizNextPassage&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;link _args[4]&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;if _args[4] == _correctAnswer&gt;&gt;
+&lt;&lt;set $score += 10&gt;&gt;
+&lt;&lt;set _isRight to true&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;set _isRight to false&gt;&gt;
+&lt;&lt;endif&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link _args[5]&gt;&gt;
-    &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-    &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-    &lt;&lt;if _args[5] == _correctAnswer&gt;&gt;
-        &lt;&lt;set $score += 10&gt;&gt;
-        &lt;&lt;set _isRight to true&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set _isRight to false&gt;&gt;
-    &lt;&lt;endif&gt;&gt;
-    &lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-    &lt;&lt;goto $quizNextPassage&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;if _args[5] == _correctAnswer&gt;&gt;
+&lt;&lt;set $score += 10&gt;&gt;
+&lt;&lt;set _isRight to true&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;set _isRight to false&gt;&gt;
+&lt;&lt;endif&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;&lt;done&gt;&gt;
-        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-        &lt;&lt;script&gt;&gt;
-        
-    $(&#39;.quiz-option a&#39;).on(&#39;click&#39;, function(e) {
+&lt;&lt;done&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;script&gt;&gt;
+$(&#39;.quiz-option a&#39;).on(&#39;click&#39;, function(e) {
     var $btn = $(this);
     if ($btn.hasClass(&#39;is-tapped&#39;)) return;
     e.preventDefault();
@@ -5263,149 +5315,122 @@ Thinking: $totalTime s
         $.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetPage + &#39;&quot;&gt;&gt;&#39;);
     }, 50);
 });
-        
-            window.quizTimer = setInterval(function() {
-                State.variables.timeLeft -= 1;
-                var timeText = State.variables.timeLeft;
-                
-                if (timeText &lt; 10) { timeText = &quot;0&quot; + timeText; }
-                
-                if ($(&quot;#timer-text&quot;).length &gt; 0) {
-                    $(&quot;#timer-text&quot;).text(&quot;00:&quot; + timeText);
-                    var widthPercent = (State.variables.timeLeft / State.variables.quizLimitTime * 100) + &quot;%&quot;;
-                    $(&quot;#timer-bar&quot;).css(&quot;width&quot;, widthPercent);
-                }
 
-                if (State.variables.timeLeft &lt;= 0) {
-                    clearInterval(window.quizTimer);
-                    State.variables.decisionHistory.push({
-                        q: passage(), 
-                        choice: &quot;TIMEOUT&quot;, 
-                        time: State.variables.quizLimitTime
-                    });
-                    Engine.play(State.variables.quizNextPassage);
-                }
-            }, 1000);
-        &lt;&lt;/script&gt;&gt;
-    &lt;&lt;/done&gt;&gt;
-    &lt;&lt;/nobr&gt;&gt;
+// 後台靜默正向計時（不設置上限，僅記錄時間）
+window.quizTimer = setInterval(function() {
+    State.variables.quizElapsedTime += 1;
+}, 1000);
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/done&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 
 &lt;&lt;widget &quot;PixelLikertBar&quot;&gt;&gt;
-    &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $likertNextPassage to _args[1]&gt;&gt;
-    &lt;&lt;set $likertLimitTime to 40&gt;&gt;
-    
-    &lt;&lt;set $timeLeft to $likertLimitTime&gt;&gt;
-    &lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $likertNextPassage to _args[1]&gt;&gt;
 
-    &lt;div id=&quot;quiz-box&quot;&gt;
-        &lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-        
-        &lt;div class=&quot;quiz-status&quot;&gt;
-            SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
-            &lt;span id=&quot;timer-text&quot; style=&quot;float: right;&quot;&gt;00:40&lt;/span&gt;
-        &lt;/div&gt;
+/* 初始化正向計時器 */
+&lt;&lt;set $likertElapsedTime to 0&gt;&gt;
+&lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
 
-        &lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
-            &lt;&lt;type 30ms&gt;&gt;_args[0]&lt;&lt;/type&gt;&gt;
-        &lt;/div&gt;
+&lt;div id=&quot;quiz-box&quot;&gt;
+&lt;!-- 這裡換成無限循環的 16bit 像素動畫 --&gt;
+&lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot; class=&quot;pixel-loop-animation&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 
-        &lt;div class=&quot;likert-horizontal-container&quot;&gt;
-            &lt;div class=&quot;likert-scale-bar&quot;&gt;
-                &lt;div class=&quot;likert-circle-node&quot;&gt;
-                    &lt;&lt;link &quot;1&quot;&gt;&gt;
-                        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-                        &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
-                        &lt;&lt;goto $likertNextPassage&gt;&gt;
-                    &lt;&lt;/link&gt;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;likert-circle-node&quot;&gt;
-                    &lt;&lt;link &quot;2&quot;&gt;&gt;
-                        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-                        &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
-                        &lt;&lt;goto $likertNextPassage&gt;&gt;
-                    &lt;&lt;/link&gt;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;likert-circle-node&quot;&gt;
-                    &lt;&lt;link &quot;3&quot;&gt;&gt;
-                        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-                        &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
-                        &lt;&lt;goto $likertNextPassage&gt;&gt;
-                    &lt;&lt;/link&gt;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;likert-circle-node&quot;&gt;
-                    &lt;&lt;link &quot;4&quot;&gt;&gt;
-                        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-                        &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
-                        &lt;&lt;goto $likertNextPassage&gt;&gt;
-                    &lt;&lt;/link&gt;&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;likert-circle-node&quot;&gt;
-                    &lt;&lt;link &quot;5&quot;&gt;&gt;
-                        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-                        &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-                        &lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
-                        &lt;&lt;goto $likertNextPassage&gt;&gt;
-                    &lt;&lt;/link&gt;&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            
-            &lt;div class=&quot;likert-labels&quot;&gt;
-                &lt;span class=&quot;label-left&quot;&gt;◀ 非常不同意&lt;/span&gt;
-                &lt;span class=&quot;label-right&quot;&gt;非常同意 ▶&lt;/span&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+&lt;div class=&quot;quiz-status&quot;&gt;
+SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
+&lt;!-- 移除了右上角的倒數時間文字 --&gt;
+&lt;/div&gt;
 
-    &lt;&lt;done&gt;&gt;
-        &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-        &lt;&lt;script&gt;&gt;
-            
-            $(&#39;.likert-scale-bar a&#39;).on(&#39;click&#39;, function(e) {
+&lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
+&lt;&lt;type 30ms&gt;&gt;_args[0]&lt;&lt;/type&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;likert-horizontal-container&quot;&gt;
+&lt;div class=&quot;likert-scale-bar&quot;&gt;
+&lt;div class=&quot;likert-circle-node&quot;&gt;
+&lt;&lt;link &quot;1&quot;&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;goto $likertNextPassage&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;likert-circle-node&quot;&gt;
+&lt;&lt;link &quot;2&quot;&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;goto $likertNextPassage&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;likert-circle-node&quot;&gt;
+&lt;&lt;link &quot;3&quot;&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;goto $likertNextPassage&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;likert-circle-node&quot;&gt;
+&lt;&lt;link &quot;4&quot;&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;goto $likertNextPassage&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;likert-circle-node&quot;&gt;
+&lt;&lt;link &quot;5&quot;&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
+&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;goto $likertNextPassage&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;likert-labels&quot;&gt;
+&lt;span class=&quot;label-left&quot;&gt;◀ 非常不同意&lt;/span&gt;
+&lt;span class=&quot;label-right&quot;&gt;非常同意 ▶&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;&lt;done&gt;&gt;
+&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
+&lt;&lt;script&gt;&gt;
+$(&#39;.likert-scale-bar a&#39;).on(&#39;click&#39;, function(e) {
     var $btn = $(this);
     if ($btn.hasClass(&#39;is-tapped&#39;)) return;
+    
     e.preventDefault();
     e.stopPropagation();
-    $btn.addClass(&#39;is-tapped&#39;);
+    
+    $btn.addClass(&#39;is-tapped&#39;); 
+    
     clearInterval(window.quizTimer);
     var targetLikert = State.variables.likertNextPassage;
+    
     setTimeout(function() {
         $.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetLikert + &#39;&quot;&gt;&gt;&#39;);
     }, 50);
 });
-        
-            window.quizTimer = setInterval(function() {
-                State.variables.timeLeft -= 1;
-                var timeText = State.variables.timeLeft;
-                
-                if (timeText &lt; 10) { timeText = &quot;0&quot; + timeText; }
-                
-                if ($(&quot;#timer-text&quot;).length &gt; 0) {
-                    $(&quot;#timer-text&quot;).text(&quot;00:&quot; + timeText);
-                    var widthPercent = (State.variables.timeLeft / State.variables.likertLimitTime * 100) + &quot;%&quot;;
-                    $(&quot;#timer-bar&quot;).css(&quot;width&quot;, widthPercent);
-                }
 
-                if (State.variables.timeLeft &lt;= 0) {
-                    clearInterval(window.quizTimer);
-                    State.variables.decisionHistory.push({
-                        q: passage(), 
-                        choice: &quot;TIMEOUT&quot;, 
-                        time: State.variables.likertLimitTime
-                    });
-                    Engine.play(State.variables.likertNextPassage);
-                }
-            }, 1000);
-        &lt;&lt;/script&gt;&gt;
-    &lt;&lt;/done&gt;&gt;
-    &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
+window.quizTimer = setInterval(function() {
+    State.variables.likertElapsedTime += 1;
+}, 1000);
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/done&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+ </tw-passagedata><tw-passagedata pid="102" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
     &quot;1. 下列哪一項最準確描述「強制舉報」的法律時限？&quot; 
     &quot;Quiz_2&quot; 
     &quot;A. 發現後 24 小時內提交書面報告&quot; 
