@@ -1381,6 +1381,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $total = 7&gt;&gt;
 &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;set $decisionHistory to []&gt;&gt;
+&lt;&lt;set $currentScenarioId = 0&gt;&gt;
   
 &lt;&lt;set $scenarios = [
     { id: 0, name: &quot;PhysicalAbuse&quot;, completed: false, safety: 0, legal: 0 },
@@ -1411,7 +1412,7 @@ $(document).on(':passageend', function () {
   
 &lt;&lt;set $currentIdx = 0&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="Dx" position="125,300" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+</tw-passagedata><tw-passagedata pid="3" name="PhysicalAbuse" tags="Dx" position="125,300" size="100,100">&lt;&lt;set $currentScenarioId = 0&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1449,7 +1450,7 @@ $(document).on(':passageend', function () {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-  </tw-passagedata><tw-passagedata pid="4" name="NeglectCare" tags="Nc" position="500,100" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+  </tw-passagedata><tw-passagedata pid="4" name="NeglectCare" tags="Nc" position="500,100" size="100,100">&lt;&lt;set $currentScenarioId = 3&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1516,12 +1517,7 @@ $(document).on(':passageend', function () {
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[有古怪，再認真檢查一下|PhAExam]]
-&lt;&lt;link &quot;跌倒有瘀傷很正常吧&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhA4B&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+[[跌倒有瘀傷很正常吧|PhA4B]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1562,7 +1558,7 @@ $(document).on(':passageend', function () {
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[觀察母親反應|PhAObs]]
     [[再問多次男童|PhAAA]]
-    [[記錄CMS Child Abuse Record|PhADoc]]
+    [[CMS Documentation|PhADoc]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1697,11 +1693,7 @@ $(document).on(':passageend', function () {
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[蒐集更多線索|PhA4A]]
-    &lt;&lt;link &quot;堅持等醫生決定&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PhAWait&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[堅持等醫生決定|PhAWait]]
 &lt;/div&gt;
 
 &lt;&lt;silent&gt;&gt;
@@ -1739,12 +1731,7 @@ $(document).on(':passageend', function () {
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[再問母親受傷詳情|PhAObs]]
- &lt;&lt;link &quot;立即舉報&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
-&lt;&lt;/link&gt;&gt;
+    [[立即舉報|PhAReport]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -1835,6 +1822,8 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[3].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 3&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;magicforest&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectCare&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="ResetS0" tags="" position="225,300" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[0].safety&gt;&gt;
@@ -1844,8 +1833,10 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[0].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 0&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;
-&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PsychologicalAbuse" tags="Psy" position="1150,0" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;goto &quot;PhysicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PsychologicalAbuse" tags="Psy" position="1150,0" size="100,100">&lt;&lt;set $currentScenarioId = 1&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1886,8 +1877,10 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $scenarios[2].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 2&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;
-&lt;&lt;goto &quot;SexualAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,775" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;goto &quot;SexualAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,775" size="100,100">&lt;&lt;set $currentScenarioId = 2&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1931,9 +1924,11 @@ $(document).on(':passageend', function () {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="NeglectDiet" tags="Nd" position="2100,800" size="100,100">Neglect diet content (S6) 
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="NeglectDiet" tags="Nd" position="2100,800" size="100,100">&lt;&lt;set $currentScenarioId = 6&gt;&gt;
 
-???</tw-passagedata><tw-passagedata pid="18" name="NeglectEnvironment" tags="Ne" position="1075,700" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+Neglect diet content (S6) 
+
+???</tw-passagedata><tw-passagedata pid="18" name="NeglectEnvironment" tags="Ne" position="1075,700" size="100,100">&lt;&lt;set $currentScenarioId = 4&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -1977,7 +1972,7 @@ $(document).on(':passageend', function () {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="19" name="NeglectHygiene" tags="Nh" position="1525,975" size="100,100">&lt;&lt;set $totalTime to 0&gt;&gt;
+</tw-passagedata><tw-passagedata pid="19" name="NeglectHygiene" tags="Nh" position="1525,975" size="100,100">&lt;&lt;set $currentScenarioId = 5&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -2353,12 +2348,7 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-     &lt;&lt;link &quot;進行強制舉報&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[進行強制舉報|PhAReport]]
     [[不過是體罰，算了吧|PhAGrey]]
 &lt;/div&gt;
 
@@ -2483,18 +2473,8 @@ Thinking: $totalTime s
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
     [[先與上司討論|PhASupport]]
-    &lt;&lt;link &quot;致電社署專責小組(FCPSU)進行口頭強制舉報&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;先放他們回家，下次再觀察&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;set $totalTime to 0&gt;&gt;
-    &lt;&lt;goto &quot;PhAWait&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[致電社署專責小組(FCPSU)進行口頭強制舉報|PhAReport]]
+    [[先放他們回家，下次再觀察|PhAWait]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -2709,16 +2689,8 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    &lt;&lt;link &quot;進行強制舉報&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;再等等，讓我思考一下&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PhAWait&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[進行強制舉報|PhAReport]]
+    [[再等等，讓我思考一下|PhAWait]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -2758,17 +2730,8 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    &lt;&lt;link &quot;進行強制舉報&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PhAReport&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;怕得罪家長，猶豫不決&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PhAWait&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-    
+    [[進行強制舉報|PhAReport]]
+    [[怕得罪家長，猶豫不決|PhAWait]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -2792,9 +2755,11 @@ Thinking: $totalTime s
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
+&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用過往經驗迅速應變，此案例共花費了 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒。&lt;&lt;/replace&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -2811,7 +2776,8 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 這次，&lt;br&gt;他右眼瘀黑。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間猶豫，但最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在法定 24 小時內 履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+        你用了 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在法定 24 小時內 履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;判決結果：&lt;br&gt;
@@ -2869,8 +2835,9 @@ Thinking: $totalTime s
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
@@ -2891,7 +2858,7 @@ Thinking: $totalTime s
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在當晚那個漫長的黑夜裡，阿樂已經承受了本不該屬於他的顱骨骨折。雖然經 ICU 搶救後保住了性命，但腦部缺氧造成了不可逆轉的永久性神經受損，小宇下半生將需要坐輪椅。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費的&lt;&lt;print $decisionHistory[0]&gt;&gt;秒，仍沒有行動。&lt;br&gt;「等待更多證據」是否有時就是風險？而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費的&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒，仍沒有行動。&lt;br&gt;「等待更多證據」是否有時就是風險？而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【遊戲結束：遺憾的結局】&lt;&lt;/replace&gt;&gt;
@@ -2944,8 +2911,9 @@ Thinking: $totalTime s
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
@@ -2963,7 +2931,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;今天阿樂回診所覆診膝蓋。&lt;br&gt;學校老師傳來消息：阿樂最近在課堂上，終於比較願意抬起頭說話了，臉上也有了笑容。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;剛才你用了&lt;&lt;print $decisionHistory[0]&gt;&gt;秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;剛才你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間由懷疑到行動。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;✔ 你已採取適當行動保護兒童&lt;br&gt;🏆 結局：Timely Protection&lt;&lt;/replace&gt;&gt;
@@ -3437,13 +3405,14 @@ Thinking: $totalTime s
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        那次診症後兩個月，你在新聞中看到了熟悉的名字。
+        你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。但在那次診症的兩個月後，你在新聞中看到了熟悉的名字。
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
@@ -3707,8 +3676,9 @@ Thinking: $totalTime s
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
@@ -3733,12 +3703,14 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你明白到：及時的介入，是給予這個家庭重生的機會。
-                &lt;&lt;/replace&gt;&gt;
+                    你僅用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒就過關行動。因你明白到：及時的介入，是給予這個家庭重生的機會。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
+                &lt;&lt;elseif $page == 4&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「 有病不醫非大意，持續拒絕屬不顧；健康受損風險在，履行責任莫等待。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 4&gt;&gt;
+            &lt;&lt;elseif $page == 5&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;Start&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -4326,9 +4298,10 @@ Thinking: $totalTime s
         }
     });
 &lt;&lt;/script&gt;&gt;
-        &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
@@ -4346,11 +4319,14 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;有天她主動到診所找你，對你表示感謝。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[1]&gt;&gt;秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「 言語威嚇無血跡，精神摧殘損智力；持續恐嚇成嚴重，臨床退縮是警鐘。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 4&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 3&gt;&gt;
+            &lt;&lt;elseif $page == 4&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
                 &lt;&lt;goto &quot;Start&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
@@ -4505,8 +4481,9 @@ Thinking: $totalTime s
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $lastDecisionTime to $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime to 0&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
@@ -4521,7 +4498,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $decisionHistory[1]&gt;&gt;秒時間猶豫，但最後沒有行動。&lt;br&gt;心理虐待（Psychological Abuse）往往被「鬧下啫」、「為佢好」所掩蓋。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。&lt;br&gt;心理虐待（Psychological Abuse）往往被「鬧下啫」、「為佢好」所掩蓋。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「沒有傷痕」往往讓我們低估了心理虐待的毀滅性。&lt;&lt;/replace&gt;&gt;
@@ -4975,7 +4952,11 @@ Thinking: $totalTime s
         }
     });
 &lt;&lt;/script&gt;&gt;
-
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -5256,6 +5237,11 @@ Thinking: $totalTime s
         }
     });
 &lt;&lt;/script&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
             &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
@@ -5308,7 +5294,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 11&gt;&gt;
                 &lt;&lt;elseif $page == 11&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 12&gt;&gt;
 
                /* 更改提示文字，引導玩家去點擊跳轉 */
@@ -5357,6 +5343,8 @@ Thinking: $totalTime s
 &lt;&lt;set $scenarios[1].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 1&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;PsychologicalAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="98" name="ResetS4" tags="" position="1175,700" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[4].safety&gt;&gt;
@@ -5366,6 +5354,8 @@ Thinking: $totalTime s
 &lt;&lt;set $scenarios[4].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 4&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectEnvironment&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="99" name="ResetS5" tags="" position="1625,975" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[5].safety&gt;&gt;
@@ -5375,6 +5365,8 @@ Thinking: $totalTime s
 &lt;&lt;set $scenarios[5].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 5&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectHygiene&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="ResetS6" tags="" position="2200,800" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[6].safety&gt;&gt;
@@ -5384,6 +5376,8 @@ Thinking: $totalTime s
 &lt;&lt;set $scenarios[6].completed = false&gt;&gt;
 &lt;&lt;set $progress -= 1&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
+&lt;&lt;set $currentScenarioId = 6&gt;&gt;
+&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;
 &lt;&lt;goto &quot;NeglectDiet&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="Quiz_Widget" tags="widget" position="600,1825" size="100,100">&lt;&lt;widget &quot;PixelQuiz&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
@@ -5865,6 +5859,11 @@ window.quizTimer = setInterval(function() {
         }
     });
 &lt;&lt;/script&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
             &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
@@ -6041,6 +6040,11 @@ window.quizTimer = setInterval(function() {
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
@@ -6108,7 +6112,11 @@ window.quizTimer = setInterval(function() {
         }
     });
 &lt;&lt;/script&gt;&gt;
-
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -6288,7 +6296,11 @@ window.quizTimer = setInterval(function() {
         }
     });
 &lt;&lt;/script&gt;&gt;
-
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -6364,7 +6376,11 @@ window.quizTimer = setInterval(function() {
         }
     });
 &lt;&lt;/script&gt;&gt;
-
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -6441,6 +6457,11 @@ window.quizTimer = setInterval(function() {
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
@@ -6509,6 +6530,11 @@ window.quizTimer = setInterval(function() {
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
@@ -6576,7 +6602,11 @@ window.quizTimer = setInterval(function() {
         }
     });
 &lt;&lt;/script&gt;&gt;
-
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
