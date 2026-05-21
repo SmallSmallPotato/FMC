@@ -686,25 +686,34 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
     clear: both;
 }
 
-/* 1. 對話框：白色半透明 + 藍色發光邊 */
+  /* 1. 核心：改為經典的深綠色黑板面 (使用粉筆字適合的深綠) */
 #dialogue-box-container {
-    background: rgba(255, 255, 255, 0.7) !important; 
-    border: 3px solid #3498db; 
-  	bottom: 30px;
-  	left: 50%;
-    transform: translateX(-50%);
-  	width: 80%;
-    box-shadow: 0 0 15px #3498db, inset 0 0 10px rgba(52, 152, 219, 0.3);
-    border-radius: 4px;
-    padding: 15px;
-    color: #2c3e50 !important;
-    min-height: 80px;
-    position: fixed;
-    z-index: 10; /* 層級低於點擊層 */
-    line-height: 1.6;
-    margin-top: 40px;
-}
+  background: #1e3525 !important;
+  /* 2. 木頭質感邊框：用 8px 粗棕色，並透過陰影做出木頭立體層次 */
+  border: 8px solid #5c4033 !important; 
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.6),            /* 外部大陰影，讓黑板立體浮起來 */
+    inset -4px -4px 0px #3d2b22,               /* 內陰影：木框右下暗部 */
+    inset 4px 4px 0px #85614d,                 /* 內陰影：木框左上亮部 */
+    inset 0 0 15px rgba(0, 0, 0, 0.4);         /* 板面四周向內變暗的深邃感 */
+    
+  /* 3. 文字顏色：改為粉筆白（稍微帶點米白，比純白更像粉筆） */
+  color: #f7f5f0 !important; 
 
+  /* 4. 保持你原本設定好的定位與大小設定 */
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  border-radius: 0px; /* 像素風黑板必須是完美的直角 */
+  padding: 15px;
+  min-height: 80px;
+  position: fixed;
+  z-index: 10;
+  line-height: 1.6;
+  margin-top: 40px;
+}
+  
 #story-test, #text-display {
   font-size: 15px !important;
   line-height: 1.4;
@@ -1346,15 +1355,14 @@ $(document).on(':passageend', function () {
     &lt;&lt;remove &quot;#mario-curtain&quot;&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
-
 &lt;div id=&quot;dialogue-box-container&quot;&gt;\
     &lt;span id=&quot;story-text&quot;&gt;\
-        &lt;&lt;type 80ms&gt;&gt;&lt;div style=&quot;font-size: 23px; font-weight: bold; border-bottom: 2px solid white; padding-bottom: 10px;&quot;&gt;🏥 家庭醫學門診工作日&lt;/div&gt;&lt;&lt;/type&gt;&gt;\
-        &lt;div style=&quot;font-size: 18px; margin-top: 10px; margin-bottom: 15px;&quot;&gt;►▻►▻►▻請選擇你要處理的情況：&lt;/div&gt;\
+        &lt;&lt;type 100ms&gt;&gt;&lt;div style=&quot;font-size: 23px; font-weight: bold; border-bottom: 2px solid white; padding-bottom: 10px; text-align: center;&quot;&gt;🏥 家庭醫學門診工作日&lt;/div&gt;
+        &lt;div style=&quot;font-size: 18px; margin-top: 10px; margin-bottom: 15px; text-align: center;&quot;&gt;▻►▻又是充滿挑戰的一天◄◅◄&lt;/div&gt;&lt;&lt;/type&gt;&gt;\
         /* 情節 0 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[0].completed&gt;&gt;\
-                &lt;span style=&quot;color: #870F00; font-size: 14px;&quot;&gt;✓ 任務完成：洗傷口撕出的非意外瘀傷&lt;br&gt;「你不需要100%肯定才行動。」[[◄◅◄🔙|ResetS0]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #FFCCC9; font-size: 14px;&quot;&gt;✓ 任務完成：洗傷口撕出的非意外瘀傷&lt;br&gt;「你不需要100%肯定才行動。」[[⏎back⏎|ResetS0]]&lt;/span&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《撕開紗布的真相》&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -1363,7 +1371,7 @@ $(document).on(':passageend', function () {
         /* 情節 1 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[1].completed&gt;&gt;\
-                &lt;span style=&quot;color: #C36200; font-size: 14px;&quot;&gt;✓ 任務完成：診室角落那個退縮的影子&lt;br&gt;「沒有瘀傷不代表沒有傷害。」[[◄◅◄v🔙|ResetS1]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #FFC6A3; font-size: 14px;&quot;&gt;✓ 任務完成：診室角落那個退縮的影子&lt;br&gt;「沒有瘀傷不代表沒有傷害。」[[⏎back⏎|ResetS1]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[0].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《無聲的驚恐症》&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1374,7 +1382,7 @@ $(document).on(':passageend', function () {
         /* 情節 2 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[2].completed&gt;&gt;\
-                &lt;span style=&quot;color: #816300; font-size: 14px;&quot;&gt;✓ 任務完成：高度保密下的證據保衛戰&lt;br&gt;「孩子的沉默，是開不了口的求救。」[[◄◅◄🔙|ResetS2]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #FEE4A8; font-size: 14px;&quot;&gt;✓ 任務完成：高度保密下的證據保衛戰&lt;br&gt;「孩子的沉默，是開不了口的求救。」[[⏎back⏎|ResetS2]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《撕裂的洋娃娃》&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1385,7 +1393,7 @@ $(document).on(':passageend', function () {
         /* 情節 3 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
-                &lt;span style=&quot;color: #597F00; font-size: 14px;&quot;&gt;✓ 任務完成：急著回家背後的獨留危機&lt;br&gt;「過度懂事的，很多時並非被照顧得很好。」[[◄◅◄🔙|ResetS3]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #CDE8B5; font-size: 14px;&quot;&gt;✓ 任務完成：急著回家背後的獨留危機&lt;br&gt;「過度懂事的，很多時並非被照顧得很好。」[[⏎back⏎|ResetS3]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《深夜診室的秘密》&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;magicforest&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1396,7 +1404,7 @@ $(document).on(':passageend', function () {
         /* 情節 4 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[4].completed&gt;&gt;\
-                &lt;span style=&quot;color: #007D7C; font-size: 14px;&quot;&gt;✓ 任務完成：診所外看不到的定時炸彈&lt;br&gt;「適應了危險，不代表危險不存在。」[[◄◅◄🔙|ResetS4]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #CBF0FF; font-size: 14px;&quot;&gt;✓ 任務完成：診所外看不到的定時炸彈&lt;br&gt;「適應了危險，不代表危險不存在。」[[⏎back⏎|ResetS4]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[3].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《垃圾堆中的小珍珠》&quot; &quot;NeglectEnvironment&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1407,7 +1415,7 @@ $(document).on(':passageend', function () {
         /* 情節 5 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[5].completed&gt;&gt;\
-                &lt;span style=&quot;color: #00438F; font-size: 14px;&quot;&gt;✓ 任務完成：由皮膚潰爛揭發的冰山一角&lt;br&gt;「一罐藥膏掩蓋不了正被慢性毀滅的童年。」[[◄◅◄🔙|ResetS5]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #BEC5FF; font-size: 14px;&quot;&gt;✓ 任務完成：由皮膚潰爛揭發的冰山一角&lt;br&gt;「一罐藥膏掩蓋不了正被慢性毀滅的童年。」[[⏎back⏎|ResetS5]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[4].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《隱蔽的惡臭》&quot; &quot;NeglectHygiene&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1418,7 +1426,7 @@ $(document).on(':passageend', function () {
         /* 情節 6 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[6].completed&gt;&gt;\
-                &lt;span style=&quot;color: #2A0075; font-size: 14px;&quot;&gt;✓ 任務完成：發育障礙與稀米水的真相&lt;br&gt;「不是所有 neglect 都來自惡意。」[[◄◅◄🔙|ResetS6]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #D9B9FE; font-size: 14px;&quot;&gt;✓ 任務完成：發育障礙與稀米水的真相&lt;br&gt;「不是所有 neglect 都來自惡意。」[[⏎back⏎|ResetS6]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[5].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《無聲的飢餓》&quot; &quot;NeglectDiet&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -1426,7 +1434,20 @@ $(document).on(':passageend', function () {
             &lt;&lt;/if&gt;&gt;\
         &lt;/div&gt;\
     &lt;/span&gt;\
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,50" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;music/tetris_bgm.mp3&quot;&gt;&gt;
+&lt;/div&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;run $(&#39;#dialogue-box-container&#39;).fadeIn(1000)&gt;&gt;
+    &lt;&lt;run $(&#39;.full-screen-clicker a&#39;).css(&#39;display&#39;, &#39;block&#39;)&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;style&gt;
+#dialogue-box-container {
+  display: none;
+}
+.full-screen-clicker a {
+  display: none; 
+}
+&lt;/style&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,50" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;music/tetris_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;news&quot; &quot;music/news_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;crybaby&quot; &quot;music/crybaby_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;corporate&quot; &quot;music/corporate_bgm.mp3&quot;&gt;&gt;
