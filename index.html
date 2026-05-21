@@ -154,6 +154,7 @@ html[data-tags~="Quiz"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Ready"] body {
@@ -162,6 +163,7 @@ html[data-tags~="Ready"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Start"] body {
@@ -170,6 +172,7 @@ html[data-tags~="Start"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Dx"] body {
@@ -187,6 +190,7 @@ html[data-tags~="Psy"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Sa"] body {
@@ -195,6 +199,7 @@ html[data-tags~="Sa"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Nc"] body {
@@ -203,6 +208,7 @@ html[data-tags~="Nc"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Ne"] body {
@@ -211,6 +217,7 @@ html[data-tags~="Ne"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Nh"] body {
@@ -219,6 +226,7 @@ html[data-tags~="Nh"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 html[data-tags~="Nd"] body {
@@ -227,6 +235,7 @@ html[data-tags~="Nd"] body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  position: relative;
 }
   
 /* 把所有關卡的標籤用逗號隔開，集體綁定動畫效果 */
@@ -2195,12 +2204,12 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="22" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;set $decisionHistory to []&gt;&gt;
 &lt;&lt;set $currentScenarioId = 0&gt;&gt;
 &lt;&lt;set $totalSafety = 0&gt;&gt;
 &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;set $progress = 0&gt;&gt;
+&lt;&lt;set $progress = 0&gt;&gt;&lt;br&gt;&lt;br&gt;
  &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
 &lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
