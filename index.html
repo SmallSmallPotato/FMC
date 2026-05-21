@@ -1444,6 +1444,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;cacheaudio &quot;plane&quot; &quot;music/plane_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;moon&quot; &quot;music/moon_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;tear&quot; &quot;music/tear_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;error&quot; &quot;music/error_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;magicforest&quot; &quot;music/magicforest_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;magictree&quot; &quot;music/magictree_bgm.mp3&quot;&gt;&gt;
 
@@ -1702,7 +1703,7 @@ $(document).on(':passageend', function () {
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="PhAObs" tags="Dx" position="325,600" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="PhAObs" tags="Dx" position="325,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你保持沉默，觀察母親。
@@ -1943,7 +1944,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="15" name="ResetS2" tags="" position="700,775" size="100,100">&lt;&lt;silent&gt;&gt;
+</tw-passagedata><tw-passagedata pid="15" name="ResetS2" tags="" position="700,800" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[2].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[2].legal&gt;&gt;
 &lt;&lt;set $scenarios[2].safety = 0&gt;&gt;
@@ -1954,7 +1955,7 @@ $(document).on(':passageend', function () {
 &lt;&lt;set $currentScenarioId = 2&gt;&gt;
 &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;
-&lt;&lt;goto &quot;SexualAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,775" size="100,100">&lt;&lt;set $currentScenarioId = 2&gt;&gt;
+&lt;&lt;goto &quot;SexualAbuse&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="SexualAbuse" tags="Sa" position="600,800" size="100,100">&lt;&lt;set $currentScenarioId = 2&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -2436,7 +2437,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="PhAIncon" tags="Dx" position="325,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="PhAIncon" tags="Dx" position="25,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你指出跌倒不可能造成背部和手臂的條狀及手掌印瘀傷。母親最初說：「樓梯跌親。」&lt;br&gt;當你指出顏色深淺不同、明顯有舊傷時，她改口：「學校撞到。」
@@ -2561,20 +2562,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;wah&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;:passagerender&#39;, function (ev) {
-        var track = SimpleAudio.tracks.get(&quot;wah&quot;);
-        if (track) {
-            $(track).one(&#39;ended&#39;, function () {
-                $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
-            });
-        }
-    });
-&lt;&lt;/script&gt;&gt;
-
-
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -3402,8 +3390,7 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    阿俊領完藥，一個人默默離開了診所。&lt;br&gt;
-                    在那之後，你忙於其他病人，漸漸忘記了那個瘦小的背影。
+                    阿俊領完藥，一個人默默離開了診所。&lt;br&gt; 在那之後，你忙於其他病人，漸漸忘記了那個瘦小的背影。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
@@ -3458,7 +3445,7 @@ Thinking: $totalTime s
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
                     但你腦中揮之不去的是：&lt;br&gt;
-                    一個8歲的孩子，正獨自承擔另一個生命的重量。
+                    一個 7 歲的孩子，正獨自承擔另一個生命的重量。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -3552,24 +3539,12 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="NC4DOC" tags="Nc" position="650,400" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;wah&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;:passagerender&#39;, function (ev) {
-        var track = SimpleAudio.tracks.get(&quot;wah&quot;);
-        if (track) {
-            $(track).one(&#39;ended&#39;, function () {
-                $.wiki(&#39;&lt;&lt;audio &quot;magicforest&quot; play&gt;&gt;&#39;);
-            });
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="NC4DOC" tags="Nc" position="650,400" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        ⚠️ **專業回饋：文件紀錄原則**&lt;br&gt;
-        你的紀錄包含過多「主觀評判」與「情緒性字眼」。
+        ⚠️ &lt;strong&gt;專業回饋：文件紀錄原則&lt;/strong&gt;&lt;br&gt;你的紀錄包含過多「主觀評判」與「情緒性字眼」。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面查看修正&lt;/div&gt;
@@ -3580,14 +3555,13 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    ✔️ **應做**：客觀描述事實（如：兒童獨自到診）、引用孩子原話。&lt;br&gt;
-                    ❌ **避開**：評價家長人格（如：不負責任）、臆測未見之事。
+                    ✔️ 應做：客觀描述事實（如：兒童獨自到診）、引用孩子原話。&lt;br&gt;
+                    ❌ 避開：評價家長人格（如：不負責任）、臆測未見之事。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    紀錄是為了給其他醫護與社工提供事實根據，&lt;br&gt;
-                    情緒化的文字反而會降低報告的信服力。
+                    紀錄是為了給其他醫護與社工提供事實根據，&lt;br&gt;情緒化的文字反而會降低報告的信服力。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;run $(&quot;.full-screen-clicker&quot;).hide(); $(&quot;.click-hint&quot;).hide(); $(&quot;#final-options&quot;).fadeIn();&gt;&gt;
@@ -3628,8 +3602,7 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    這是一個艱難的決定，但你清楚知道：&lt;br&gt;
-                    **醫護人員的職責是 Safeguarding（守護），而非評判。**
+                    這是一個艱難的決定，但你清楚知道：&lt;br&gt;&lt;strong&gt;醫護人員的職責是 Safeguarding（守護），而非評判。&lt;/strong&gt;
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
@@ -3725,8 +3698,7 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    阿俊的媽媽不是不愛他，而是被生活逼得沒有選擇。&lt;br&gt;
-                    但作為專業醫護，你的天平必須傾向孩子。
+                    阿俊的媽媽不是不愛他，而是被生活逼得沒有選擇。&lt;br&gt;但作為專業醫護，你的天平必須傾向孩子。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
@@ -4173,22 +4145,11 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 10&gt;&gt;
     &lt;&lt;set $totalLegal -= 10&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;sadsong&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;:passagerender&#39;, function (ev) {
-        var track = SimpleAudio.tracks.get(&quot;sadsong&quot;);
-        if (track) {
-            $(track).one(&#39;ended&#39;, function () {
-                $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
-            });
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        ⚠️ **專業回饋：文件紀錄原則**&lt;br&gt;
+        ⚠️ &lt;strong&gt;專業回饋：文件紀錄原則&lt;/strong&gt;&lt;br&gt;
         你的紀錄包含過多「主觀評判」與「情緒性字眼」。
     &lt;/span&gt;
     
@@ -4503,7 +4464,7 @@ Thinking: $totalTime s
 </tw-passagedata><tw-passagedata pid="75" name="PsAWAIT" tags="Psy" position="1125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你決定先觀察一段時間。&lt;br&gt;三星期後，阿晴獨自來門診求診，被診斷自殘行為。&lt;br&gt;需要被escort去急症室。
+        你決定先觀察一段時間。&lt;br&gt;三星期後，阿晴獨自來門診求診，
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -4513,12 +4474,16 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    因為未能及時介入，孩子的心理創傷迅速惡化。
+                    &lt;&lt;type 80ms&gt;&gt;被診斷自殘行為。需要被escort去急症室。&lt;&lt;/type&gt;&gt;
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
+               &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;因為未能及時介入，孩子的心理創傷迅速惡化。
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
               /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 2&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
              /* 最後一次點擊才執行跳轉 */
           &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
                 &lt;&lt;goto &quot;PsABAD&quot;&gt;&gt;
@@ -5231,18 +5196,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="SA5DocError" tags="Sa" position="600,1250" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
-&lt;&lt;audio &quot;wah&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;:passagerender&#39;, function (ev) {
-        var track = SimpleAudio.tracks.get(&quot;wah&quot;);
-        if (track) {
-            $(track).one(&#39;ended&#39;, function () {
-                $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
-            });
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="SA5DocError" tags="Sa" position="600,1250" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
