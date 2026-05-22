@@ -974,7 +974,7 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
 
 #fixed-handbook-anchor {
     position: fixed;
-    Top: -26px;
+    Top: -40px;
     left: 15px;
     z-index: 9999;
     text-align: center;
@@ -1359,6 +1359,19 @@ $(document).on(':passageend', function () {
             Dialog.open();
         });
     }
+});
+
+$(document).on(':passagedisplay', function () {
+    // 尋找現有的 viewport meta 標籤
+    var $meta = $('meta[name="viewport"]');
+    
+    // 如果找不到，就自己建立一個放進 <head>
+    if ($meta.length === 0) {
+        $meta = $('<meta name="viewport">').appendTo('head');
+    }
+    
+    // 強制寫入鎖定縮放的設定
+    $meta.attr('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
 });
 </script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
@@ -2602,7 +2615,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PhA4D" tags="Dx" position="125,1050" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
