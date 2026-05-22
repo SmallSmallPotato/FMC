@@ -426,7 +426,7 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
     }
 
     /* 縮小標題字體，防止在手機上過大而把下方的對話框擠出螢幕 */
-    h3 {
+    h6 {
         font-size: 17px !important;
         text-align: center;
         line-height: 1.4 !important;
@@ -712,6 +712,25 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
   z-index: 10;
   line-height: 1.6;
   margin-top: 40px;
+}
+
+/* 當玩家處於 Good Ending 時的黑板外觀 */
+.good-ending #dialogue-box-container {
+  border: 8px solid #d4af37 !important; /* 🌟 升級為金色/亮黃木色邊框 */
+  box-shadow: 
+    0 10px 25px rgba(212, 175, 55, 0.4),       /* 淡淡的金色外光暈 */
+    inset -4px -4px 0px #aa8010,               /* 金框暗部 */
+    inset 4px 4px 0px #f3e5ab;                 /* 金框亮部 */
+}
+/* 當玩家處於 Bad Ending 時的黑板外觀 */
+.bad-ending #dialogue-box-container {
+  background: #151c16 !important;             /* 板面變成近乎黑色的死寂深綠 */
+  border: 8px solid #2b1d16 !important;       /* 變成腐朽、燒焦般的黑木頭邊框 */
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.8),            /* 更沉重的黑色陰影 */
+    inset -4px -4px 0px #1a110d, 
+    inset 4px 4px 0px #443025;
+  color: #c0c0c0 !important;                  /* 文字變成冰冷的死灰色 */
 }
   
 #story-test, #text-display {
@@ -2831,7 +2850,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad" position="25,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad bad-ending" position="25,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -2846,11 +2865,10 @@ Thinking: $totalTime s
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用過往經驗迅速應變，此案例共花費了 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒。&lt;&lt;/replace&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        兩個月後，&lt;br&gt;你再次見到阿樂。他右眼完全瘀黑，左手前臂呈現骨折的異常彎曲。父親在暴怒下，將他推落樓梯。
+        兩個月後......
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2860,7 +2878,7 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 這次，&lt;br&gt;他右眼瘀黑。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你再次見到阿樂。他右眼完全瘀黑，左手前臂呈現骨折的異常彎曲。父親在暴怒下，將他推落樓梯。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
@@ -2912,7 +2930,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="41" name="PhAENDING_DELAY" tags="Dx no-timer scenario-0-bad" position="125,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="41" name="PhAENDING_DELAY" tags="Dx no-timer scenario-0-bad bad-ending" position="125,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -2928,7 +2946,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你在等待什麼？&lt;br&gt;舉報並非要你查案。
     &lt;/span&gt;
@@ -2988,7 +3006,7 @@ Thinking: $totalTime s
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer" position="225,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer good-ending" position="225,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -3004,7 +3022,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         數星期後，個案通過了「保護兒童個案會議」。阿樂暫時交由在外地的外婆照顧，遠離了施虐的父親。社工與心理學家正式介入這個家庭。
     &lt;/span&gt;
@@ -3482,7 +3500,7 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer scenario-3-bad" position="550,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer scenario-3-bad bad-ending" position="550,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
@@ -3497,7 +3515,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。但在那次診症的兩個月後，你在新聞中看到了熟悉的名字。
     &lt;/span&gt;
@@ -3611,7 +3629,7 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你聯絡了醫務社工，並向護理主管呈報。&lt;br&gt;
+                    你聯絡了醫務社工，並向當局主管呈報。&lt;br&gt;
                     這不是為了懲罰家長，而是為了啟動社會安全網。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
@@ -3741,7 +3759,7 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer" position="450,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer good-ending" position="450,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
@@ -3756,7 +3774,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         通報後，社工介入並連結了社區資源。
     &lt;/span&gt;
@@ -3778,7 +3796,7 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你僅用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒就過關行動。因你明白到：及時的介入，是給予這個家庭重生的機會。&lt;&lt;/replace&gt;&gt;
+                    你僅用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒就過關。因你明白到：及時的介入，是給予這個家庭重生的機會。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「 有病不醫非大意，持續拒絕屬不顧；健康受損風險在，履行責任莫等待。」&lt;&lt;/replace&gt;&gt;
@@ -4356,7 +4374,7 @@ Thinking: $totalTime s
     &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer" position="1125,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer good-ending" position="1125,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
@@ -4371,7 +4389,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         數星期後，&lt;br&gt;阿晴開始接受兒童心理支援。
     &lt;/span&gt;
@@ -4482,7 +4500,7 @@ Thinking: $totalTime s
         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="75" name="PsAWAIT" tags="Psy" position="1125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="75" name="PsAWAIT" tags="Psy" position="1225,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你決定先觀察一段時間。&lt;br&gt;三星期後，阿晴獨自來門診求診，
@@ -4542,7 +4560,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer scenario-1-bad" position="1225,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer scenario-1-bad bad-ending" position="1225,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
     $(document).one(&#39;trackended&#39;, function (ev) {
@@ -4557,7 +4575,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         半年後，&lt;br&gt;你在新聞中看到一名 10 歲女孩失蹤的消息，名字非常熟悉。
     &lt;/span&gt;
@@ -5013,7 +5031,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="Sa no-timer scenario-2-bad" position="500,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="Sa no-timer scenario-2-bad bad-ending" position="500,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -5029,7 +5047,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你選擇了放行，&lt;br&gt;欣欣在看完醫生後離開診所。
     &lt;/span&gt;
@@ -5299,7 +5317,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="Sa no-timer" position="400,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="Sa no-timer good-ending" position="400,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -5324,7 +5342,7 @@ Thinking: $totalTime s
             &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
        你溫柔地陪伴她，遞給她溫水。&lt;br&gt;停止重覆盤問細節，避免造成重複陳述的心理創傷，並嚴格將她與大堂其他病人隔離。
     &lt;/span&gt;
@@ -5921,7 +5939,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="SA5Bad1" tags="Sa no-timer scenario-2-bad" position="600,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="SA5Bad1" tags="Sa no-timer scenario-2-bad bad-ending" position="600,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;sadsong&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -5946,7 +5964,7 @@ window.quizTimer = setInterval(function() {
             &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
        警方與衛生署調查小組隨即介入。&lt;br&gt;翻查當日FMC的閉路電視和登記記錄：
     &lt;/span&gt;
@@ -6101,7 +6119,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="NEGood" tags="Ne no-timer" position="1050,1250" size="100,100">&lt;&lt;audio &quot;fight&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="NEGood" tags="Ne no-timer good-ending" position="1050,1250" size="100,100">&lt;&lt;audio &quot;fight&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6117,7 +6135,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
     &lt;/span&gt;
@@ -6174,7 +6192,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="SA5Bad2" tags="Sa no-timer scenario-2-bad" position="700,1450" size="100,100"> &lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="SA5Bad2" tags="Sa no-timer scenario-2-bad bad-ending" position="700,1450" size="100,100"> &lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6190,7 +6208,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         覺得欣欣很可憐，出於好心，&lt;br&gt;用溫水讓她徹底洗澡、更換乾淨的衣服。
     &lt;/span&gt;
@@ -6358,7 +6376,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="NEBad" tags="Ne no-timer scenario-4-bad" position="1150,1250" size="100,100"> &lt;&lt;audio &quot;fight&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="NEBad" tags="Ne no-timer scenario-4-bad bad-ending" position="1150,1250" size="100,100"> &lt;&lt;audio &quot;fight&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6374,7 +6392,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ____
     &lt;/span&gt;
@@ -6438,7 +6456,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHBad" tags="Nh no-timer scenario-5-bad" position="1600,1300" size="100,100"> &lt;&lt;audio &quot;boss&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHBad" tags="Nh no-timer scenario-5-bad bad-ending" position="1600,1300" size="100,100"> &lt;&lt;audio &quot;boss&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6454,7 +6472,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ____
     &lt;/span&gt;
@@ -6518,7 +6536,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="135" name="NHGood" tags="Nh no-timer" position="1500,1300" size="100,100">&lt;&lt;audio &quot;boss&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="135" name="NHGood" tags="Nh no-timer good-ending" position="1500,1300" size="100,100">&lt;&lt;audio &quot;boss&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6534,7 +6552,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
     &lt;/span&gt;
@@ -6591,7 +6609,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="NDGood" tags="Nd no-timer" position="2100,1000" size="100,100">&lt;&lt;audio &quot;star&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="NDGood" tags="Nd no-timer good-ending" position="2100,1000" size="100,100">&lt;&lt;audio &quot;star&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6607,7 +6625,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #27ae60;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ___&lt;br&gt;___
     &lt;/span&gt;
@@ -6664,7 +6682,7 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="NDBad" tags="Nd no-timer scenario-6-bad" position="2200,1000" size="100,100"> &lt;&lt;audio &quot;star&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2200,1000" size="100,100"> &lt;&lt;audio &quot;star&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -6680,7 +6698,7 @@ window.quizTimer = setInterval(function() {
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot; style=&quot;border: 2px solid #c0392b;&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         ____
     &lt;/span&gt;
@@ -6787,7 +6805,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="139" name="NE3B" tags="" position="1075,925" size="100,100"></tw-passagedata><tw-passagedata pid="140" name="NE3C" tags="" position="1175,925" size="100,100"></tw-passagedata><tw-passagedata pid="141" name="NE4con" tags="" position="1275,1025" size="100,100"></tw-passagedata><tw-passagedata pid="142" name="NE4A" tags="" position="975,1025" size="100,100"></tw-passagedata><tw-passagedata pid="143" name="NE4B" tags="" position="1075,1025" size="100,100"></tw-passagedata><tw-passagedata pid="144" name="NE4C" tags="" position="1175,1025" size="100,100"></tw-passagedata><tw-passagedata pid="145" name="Before_test" tags="no-handbk no-timer" position="500,1925" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;h3&gt;🏥 CLINICAL SIMULATION PLATFORM&lt;br&gt;《強制舉報虐待兒童條例》臨床實務培訓&lt;/h3&gt;
+&lt;h6&gt;🏥 CLINICAL SIMULATION PLATFORM&lt;br&gt;《強制舉報虐待兒童條例》臨床實務培訓&lt;/h6&gt;
 
 &lt;p&gt;歡迎參與本次培訓模擬器。在開始之前，請先登記閣下的名稱，以便後台系統自動記錄培訓結果。&lt;/p&gt;
 
