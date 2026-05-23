@@ -2708,7 +2708,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-⚠️ 【法規 Feedback：病歷記錄大忌】&lt;br&gt;Documentation應記錄：&lt;br&gt;✔️ 客觀臨床觀察(如：瘀傷形狀、面積大小、深淺顏色、位置)&lt;br&gt;✔️ 直接引述字句(如：男童說「我唔記得」，母親說「樓梯跌親」)
+⚠️ 【法規 Feedback：病歷記錄大忌】&lt;br&gt;&lt;strong&gt;$staffID&lt;/strong&gt;，Documentation應記錄：&lt;br&gt;✔️ 客觀臨床觀察(如：瘀傷形狀、面積大小、深淺顏色、位置)&lt;br&gt;✔️ 直接引述字句(如：男童說「我唔記得」，母親說「樓梯跌親」)
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -2925,7 +2925,7 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;  
-資深護士說：&lt;br&gt;「你唔需要100%肯定。&lt;br&gt;合理懷疑已經足夠...&lt;&lt;/replace&gt;&gt;
+資深護士說：&lt;br&gt;「&lt;strong&gt;$staffID&lt;/strong&gt;，你唔需要100%肯定。&lt;br&gt;合理懷疑已經足夠...&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...我們現在分工：我致電醫務社工(MSW)去系統查背景，並陪著家長在獨立房間內，你立刻提起電話致電社署 FCPSU 作法定口頭舉報！」&lt;&lt;/replace&gt;&gt;
@@ -3094,8 +3094,8 @@ Thinking: $totalTime s
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;lofi&quot; play&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;&lt;audio &quot;lofi&quot; play&gt;&gt;\
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -3123,7 +3123,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;✔ 你已採取適當行動保護兒童&lt;br&gt;🏆 結局：Timely Protection&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【恭喜通關！You Win!】&lt;br&gt;「意外受傷有故事，虐待痕跡不吻合；傷勢達標即時報，莫用『頑皮』蓋殘暴。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【&lt;strong&gt;$staffID&lt;/strong&gt;，恭喜通關！You Win!】&lt;br&gt;「意外受傷有故事，虐待痕跡不吻合；傷勢達標即時報，莫用『頑皮』蓋殘暴。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
@@ -4247,9 +4247,7 @@ Thinking: $totalTime s
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;
-        ⚠️ &lt;strong&gt;專業回饋：文件紀錄原則&lt;/strong&gt;&lt;br&gt;
-        你的紀錄包含過多「主觀評判」與「情緒性字眼」。
+    &lt;span id=&quot;story-text&quot;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;，⚠️ 不好意思，&lt;br&gt;你的紀錄包含過多「主觀評判」與「情緒性字眼」。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -4260,8 +4258,8 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 
-                    ✔️ **應做**：描述觀察、記錄直接引述。&lt;br&gt;
-                    ❌ **避開**：主觀診斷、情緒化字眼或臆測未見之事。
+                    ✔️ 應做：描述觀察、記錄直接引述。&lt;br&gt;
+                    ❌ 避開：主觀診斷、情緒化字眼或臆測未見之事。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
@@ -4300,8 +4298,7 @@ Thinking: $totalTime s
         &lt;&lt;link &quot; &quot;&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你詳細記錄了對話細節、阿晴的反應，&lt;br&gt;
-                    並聯絡了相關部門。
+                    你詳細記錄了對話細節、阿晴的反應，&lt;br&gt;並聯絡了相關部門。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
@@ -4445,7 +4442,7 @@ Thinking: $totalTime s
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「 言語威嚇無血跡，精神摧殘損智力；持續恐嚇成嚴重，臨床退縮是警鐘。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;，你完美通關！&lt;br&gt;「 言語威嚇無血跡，精神摧殘損智力；持續恐嚇成嚴重，臨床退縮是警鐘。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
@@ -5311,7 +5308,7 @@ Thinking: $totalTime s
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="92" name="SA5OverAsk" tags="Sa" position="775,1150" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-       過度追問細節，可能會：&lt;br&gt;- 增加孩子壓力&lt;br&gt;- 造成二次傷害&lt;br&gt;- 影響正式調查/污染法庭證據
+       &lt;strong&gt;$staffID&lt;/strong&gt;，過度追問細節，可能會：&lt;br&gt;- 增加孩子壓力&lt;br&gt;- 造成二次傷害&lt;br&gt;- 影響正式調查/污染法庭證據
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -5414,13 +5411,6 @@ Thinking: $totalTime s
     outline: none !important;
 }
 &lt;/style&gt;
-
-&lt;&lt;silent&gt;&gt;
-&lt;&lt;if $scenarios[2].completed is false&gt;&gt;
-    &lt;&lt;set $progress += 1&gt;&gt;
-    &lt;&lt;set $scenarios[2].completed = true&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/silent&gt;&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
@@ -5696,7 +5686,7 @@ window.quizTimer = setInterval(function() {
     &lt;div class=&quot;story-text&quot; style=&quot;min-height: 0px; line-height: 1.5;&quot;&gt;\
         &lt;&lt;type 50ms&gt;&gt;\
         [ 評估小測試 ]&lt;br&gt;
-        歡迎&lt;strong&gt;$staffID&lt;/strong&gt;進入測試。接下來你將面臨一系列知識測試、臨床判斷以及自我評價態度與信心。
+        歡迎&lt;strong&gt;$staffID&lt;/strong&gt;進入此測試。接下來你將面臨一系列知識測試、臨床判斷以及自我評價態度與信心。
         &lt;br&gt;
         &lt;span style=&quot;color: #ff4444;&quot;&gt;無論你的選擇是對是錯，&lt;br&gt;請跟隨你的直覺......&lt;/span&gt;&lt;&lt;/type&gt;&gt;\
         
@@ -6828,8 +6818,8 @@ window.quizTimer = setInterval(function() {
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="147" name="SAGoodthen" tags="Sa no-timer no-handbk" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;lofi&quot; play&gt;&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="147" name="SAGoodthen" tags="Sa no-timer no-handbk" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;&lt;audio &quot;lofi&quot; play&gt;&gt;\
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6862,7 +6852,7 @@ window.quizTimer = setInterval(function() {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，在 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒內成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;成功通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
 
                /* 更改提示文字，引導玩家去點擊跳轉 */
