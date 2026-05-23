@@ -115,7 +115,11 @@ body {
   font-family: 'DotGothic16', sans-serif !important;
 }
 
+/* 確保遊戲主區塊背景純黑、零多餘邊框 */
 .passage {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   font-size: 1.2em;
   image-rendering: pixelated;
   letter-spacing: 1px;
@@ -136,7 +140,6 @@ a:active {
 .warning-shudder {
     color: #ff4757;
     font-weight: bold;
-    text-align: center;
     animation: shake 0.5s infinite;
 }
 @keyframes shake {
@@ -393,10 +396,12 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
     cursor: pointer !important;
     border-radius: 0px !important;
     -webkit-appearance: none !important;
+    transition: none !important;
 }
 
 /* 3. 🎯 手指按下時的即時下沉反饋 */
-.btn-container button:active {
+.btn-container button:active 
+.btn-container button:focus {
     background-color: #c0392b !important;
     border-top: 4px solid #c0392b !important;
     border-left: 4px solid #c0392b !important;
@@ -404,6 +409,7 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
     border-bottom: 4px solid #ff7675 !important;
     transform: translate(4px, 4px) !important;
     box-shadow: 2px 2px 0px #000000 !important;
+    outline: none !important;
 }
 
 
@@ -1340,7 +1346,28 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     0% { transform: translateX(0); }
     100% { transform: translateX(100%); }
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
+
+/* ================================ */
+/* 📱 憑證頁面終極定格：鎖死視窗，將底色完全塗黑 */
+/* ============================== */
+body:has(#is-certificate-page) {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: #000000 !important;
+}
+
+body:has(#is-certificate-page) #story,
+body:has(#is-certificate-page) #passages,
+body:has(#is-certificate-page) .passage {
+    background-color: #000000 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
 
@@ -1373,7 +1400,70 @@ $(document).on(':passagedisplay', function () {
     // 強制寫入鎖定縮放的設定
     $meta.attr('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
 });
-</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
+
+
+/* ============================ */
+/* 📱 雙方括號連結專用：按下變色彈起 ➔ 延時 0.2 秒 ➔ 正式跳轉 */
+/* ============================ */
+$(document).on('touchstart mousedown', '#final-options a.link-internal', function(e) {
+    // 1. 手指一戳，立刻加上你的精緻 .is-tapped 樣式 (左上彈起、變綠光)
+    $(this).addClass('is-tapped');
+});
+
+$(document).on('touchend mouseup', '#final-options a.link-internal', function(e) {
+    // 🎯 核心關鍵：阻止 SugarCube 預設的「瞬間轉頁」行為
+    e.preventDefault(); 
+    e.stopPropagation();
+
+    var $btn = $(this);
+    
+    // 從 SugarCube 的原生屬性中提取出你想跳轉的 Passage 名字
+    var destination = $btn.attr('data-passage'); 
+
+    // 2. 讓完美的「彈起綠光」動畫在手機螢幕上定格 200 毫秒
+    setTimeout(function() {
+        $btn.removeClass('is-tapped'); // 動態放開按鈕
+        
+        if (destination) {
+            Engine.play(destination); // 3. 延時結束，順暢切換到下一頁！
+        }
+    }, 200);
+});
+
+// 如果手指滑出按鈕範圍，立刻復原狀態
+$(document).on('touchcancel mouseleave', '#final-options a.link-internal', function(e) {
+    $(this).removeClass('is-tapped');
+});
+
+/* ============================= */
+/* 📱 萬用全網頁盲點：動態讀取目的地 ➔ 延時 0.2 秒 ➔ 自動跳轉 */
+/* =============================== */
+$(document).on('touchstart mousedown', 'body', function(e) {
+    // 檢查目前畫面上，有沒有帶有目的地屬性的隱形標記
+    var $marker = $('#is-certificate-page');
+    if ($marker.length > 0) {
+        // 抓取 HTML 裡寫好的 data-target 名字
+        window.nextDestination = $marker.attr('data-target');
+        window.clickTimer = true;
+    }
+});
+
+$(document).on('touchend mouseup', 'body', function(e) {
+    if (window.clickTimer) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.clickTimer = false;
+        
+        var destination = window.nextDestination;
+        
+        setTimeout(function() {
+            // 🎯 核心：如果抓得到目的地，就帥氣地跳轉過去！
+            if (destination) {
+                Engine.play(destination); 
+            }
+        }, 200);
+    }
+});</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
     &lt;div class=&quot;mario-opening-container&quot;&gt;        
         &lt;div class=&quot;mario-block&quot;&gt;&lt;/div&gt;        
@@ -4673,7 +4763,7 @@ Thinking: $totalTime s
     [[轉問姑姑|SA3C]]
     [[繼續開放式提問|SA3A]]
     [[怕問得太多|SA3B]]
-&lt;/div&gt;
+&lt;/div&gt; 
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
@@ -5309,7 +5399,8 @@ Thinking: $totalTime s
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;停止追問細節： &lt;br&gt;聽取初步的透露(Disclosure)即可。&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;audio &quot;error&quot; play&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;div class=&quot;warning-shudder&quot;&gt;停止追問細節， &lt;br&gt;聽取初步的透露(Disclosure)即可。&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;請記住：&lt;br&gt;你不是調查員。&lt;&lt;/replace&gt;&gt;
@@ -5330,7 +5421,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="Sa no-timer good-ending" position="400,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="Sa good-ending" position="400,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
 /* 播放新音效，並用 script 監聽它播完的時刻 */
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
 &lt;&lt;script&gt;&gt;
@@ -5340,11 +5431,6 @@ Thinking: $totalTime s
         }
     });
 &lt;&lt;/script&gt;&gt;
-&lt;&lt;nobr&gt;&gt;
-    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
-    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
-    &lt;&lt;set $totalTime = 0&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
             &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
@@ -5384,27 +5470,12 @@ Thinking: $totalTime s
                 &lt;&lt;elseif $page == 6&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;1. 你的個人手機順利接收到 短訊驗證碼 (OTP)，完成身份驗證。&lt;br&gt;2. 填寫兒童資料時，平台鎖定人數為「1人」(系統與昨天的口頭舉報自動關聯)。&lt;br&gt;3. 你在事件摘要中填寫極其客觀、無主觀猜測的臨床記錄。&lt;br&gt;4. 你按下提交，成功獲取 【案件參考編號：Ref-2026-SEX-XXXX】，並親自妥善保存。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
-                &lt;&lt;elseif $page == 7&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;半年後，&lt;br&gt;法庭作出宣判。&lt;br&gt;由於你在第一時間進行了高度保密的口頭舉報，&lt;br&gt;成功阻止了施虐者滅證及潛逃；&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 8&gt;&gt;
-                &lt;&lt;elseif $page == 8&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;更因為你完美的證據保留程序，法醫成功提取了關鍵的 DNA 證據。&lt;br&gt;涉嫌施虐者在鐵證如山下無從抵賴，被判處重刑入獄 10 年。&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 9&gt;&gt;
-                &lt;&lt;elseif $page == 9&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;欣欣的媽媽在趕回香港後，在社署和醫務社工的長遠福利計劃下，欣欣正接受兒童心理學家的創傷輔導，逐步走出陰霾，重新綻放笑容。&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 10&gt;&gt;
-                &lt;&lt;elseif $page == 10&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 11&gt;&gt;
-                &lt;&lt;elseif $page == 11&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $page = 12&gt;&gt;
 
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $page == 12&gt;&gt;
+            &lt;&lt;elseif $page == 7&gt;&gt;
                 /* 最後一次點擊才執行跳轉 */
-                &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+                &lt;&lt;goto &quot;SAbox&quot;&gt;&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
@@ -6233,7 +6304,7 @@ window.quizTimer = setInterval(function() {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 問了她一些受虐的細節，&lt;br&gt;甚至在CMS Child Abuse Record上寫滿了你個人的推測。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 問了她一些受虐的細節，&lt;br&gt;甚至在CMS內上寫滿了你個人的推測。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;當法醫(Forensic Pathologist)和警方虐兒組(CAU)趕到時，&lt;br&gt;發現欣欣身上本可提取的施虐者 DNA、體液、纖維等關鍵法庭證據，&lt;br&gt;已經全部被你提供的溫水和肥皂「徹底清洗乾淨」。&lt;&lt;/replace&gt;&gt;
@@ -6328,7 +6399,8 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="SAWrong" tags="Sa" position="400,1350" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="SAWrong" tags="Sa" position="400,1350" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
        程序大忌與時間流失 (The Diluted Liability)
@@ -6844,6 +6916,133 @@ window.quizTimer = setInterval(function() {
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="146" name="SAbox" tags="no-handbk no-timer" position="400,1550" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100vw !important; /* 💡 強制外框吃滿手機 100% 寬度 */
+    max-width: 480px !important; /* 限制 PC 端最大寬度，防止無限放大 */
+    height: auto !important;
+    z-index: 5000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+&quot;&gt;
+
+    &lt;img src=&quot;https://smallsmallpotato.github.io/FMC/images/SAbox.jpeg&quot; style=&quot;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        object-fit: contain !important;
+        border: none !important;
+        box-shadow: none !important;
+    &quot;&gt;
+    
+&lt;div class=&quot;fixed-bottom-text-zone&quot; style=&quot;
+    position: fixed !important;
+    bottom: 70px !important; /* 💡 距離手機螢幕最底部的距離，可依實機視覺微調 */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 86% !important;
+    max-width: 410px !important;
+    z-index: 9999 !important;
+    pointer-events: none !important; /* 確保文字不會擋住盲點點擊 */
+    text-align: left !important;
+&quot;&gt;
+&lt;div class=&quot;click-hint&quot; style=&quot;
+        font-size: 10px !important; 
+        color: #2ecc71 !important; 
+        font-weight: bold !important;
+        text-align: right !important;
+        text-shadow: 2px 2px 2px #000000 !important;
+    &quot;&gt;
+        ▼ 點擊畫面返回主選單&lt;/div&gt;
+    &lt;p style=&quot;
+        font-size: 12px !important; 
+        line-height: 1.45 !important; 
+        color: #ced6e0 !important; 
+        margin: 0 0 8px 0 !important;
+        text-shadow: 2px 2px 4px #000000, -2px -2px 4px #000000 !important;
+    &quot;&gt;&lt;em&gt;此編號已加密存入系統。根據條例，你已獲得&lt;strong&gt;法定免責保障&lt;/strong&gt;。天塌下來法律都會保護你，因為你完美履行了個人責任，更為欣欣織好了活下去的保護網！&lt;/em&gt;
+    &lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="147" name="SAGoodthen" tags="Sa no-timer no-handbk" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
+    &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
+    &lt;&lt;set $totalTime = 0&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;dialogue-box-container&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;
+       半年後，&lt;br&gt;法庭作出宣判。
+    &lt;/span&gt;
+    &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
+
+    &lt;span class=&quot;full-screen-clicker&quot;&gt;
+        &lt;&lt;link &quot; &quot;&gt;&gt;
+            &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
+
+            &lt;&lt;if $page == 1&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 由於你在第一時間進行了高度保密的口頭舉報，&lt;br&gt;成功阻止了施虐者滅證及潛逃；&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 2&gt;&gt;
+            &lt;&lt;elseif $page == 2&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;更因為你完美的證據保留程序，法醫成功提取了關鍵的 DNA 證據。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 3&gt;&gt;
+            &lt;&lt;elseif $page == 3&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;涉嫌施虐者在鐵證如山下無從抵賴，被判處重刑入獄 10 年。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 4&gt;&gt;
+                &lt;&lt;elseif $page == 4&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;欣欣的媽媽在趕回香港後，在社署和醫務社工的長遠福利計劃下，欣欣正接受兒童心理學家的創傷輔導，逐步走出陰霾，重新綻放笑容。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 5&gt;&gt;
+                &lt;&lt;elseif $page == 5&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，在 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒內成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 6&gt;&gt;
+                &lt;&lt;elseif $page == 6&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;set $page = 7&gt;&gt;
+
+               /* 更改提示文字，引導玩家去點擊跳轉 */
+                &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;elseif $page == 7&gt;&gt;
+                /* 最後一次點擊才執行跳轉 */
+                &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+                    &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.full-screen-clicker a {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    border: none !important;
+    display: block !important;
+}
+
+/* 隱藏那個自動生成的虛擬連結邊框 */
+.full-screen-clicker a:focus {
+    outline: none !important;
+}
+&lt;/style&gt;
+
+&lt;&lt;silent&gt;&gt;
+&lt;&lt;if $scenarios[2].completed is false&gt;&gt;
+    &lt;&lt;set $progress += 1&gt;&gt;
+    &lt;&lt;set $scenarios[2].completed = true&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/silent&gt;&gt;
+
+/* 進入這頁時重置頁數 */
+&lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
