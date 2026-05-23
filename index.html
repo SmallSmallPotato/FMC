@@ -1956,7 +1956,7 @@ $(document).on('touchend mouseup', 'body', function(e) {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="PhAReport" tags="Dx" position="125,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;news&quot; play&gt;&gt;
+&lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -2949,7 +2949,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad bad-ending" position="25,925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -3031,7 +3031,7 @@ Thinking: $totalTime s
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="41" name="PhAENDING_DELAY" tags="Dx no-timer scenario-0-bad bad-ending" position="125,925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -3579,7 +3579,7 @@ Thinking: $totalTime s
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer scenario-3-bad bad-ending" position="550,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -3701,14 +3701,12 @@ Thinking: $totalTime s
 
             &lt;&lt;if $page == 1&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你聯絡了醫務社工，並向當局主管呈報。&lt;br&gt;
-                    這不是為了懲罰家長，而是為了啟動社會安全網。
+                    你聯絡了醫務社工，並向當局主管呈報。&lt;br&gt;這不是為了懲罰家長，而是為了啟動社會安全網。
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-                    你在報告中寫道：&lt;br&gt;
-                    「7 歲兒童與幼兒長期在無成人監管下留家，存在顯著安全風險。」
+                    你在報告中寫道：&lt;br&gt;「7 歲兒童與幼兒長期在無成人監管下留家，存在顯著安全風險。」
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
@@ -4583,7 +4581,7 @@ Thinking: $totalTime s
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
 &lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer scenario-1-bad bad-ending" position="1225,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -5048,7 +5046,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="Sa no-timer scenario-2-bad bad-ending" position="500,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -5827,7 +5825,7 @@ window.quizTimer = setInterval(function() {
 &gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="Quiz_20" tags="no-handbk no-timer Quiz" position="700,2425" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;如果我要與上司就舉報決定產生分歧，我有信心能堅持履行法律義務。&quot; 
     &quot;Quiz_Result&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;
@@ -5932,7 +5930,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="SA5Bad1" tags="Sa no-timer scenario-2-bad bad-ending" position="600,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;sadsong&quot; play&gt;&gt;
+&lt;&lt;audio &quot;sadsong&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -6183,7 +6181,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="SA5Bad2" tags="Sa no-timer scenario-2-bad bad-ending" position="700,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -6361,7 +6359,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="NEBad" tags="Ne no-timer scenario-4-bad bad-ending" position="1050,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6440,7 +6438,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHBad" tags="Nh no-timer scenario-5-bad bad-ending" position="1600,1300" size="100,100"> &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -6645,7 +6643,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2200,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -7072,7 +7070,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="145" name="NE5B" tags="Ne no-timer" position="1150,1100" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;news&quot; play&gt;&gt;
+&lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
 
 &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
             &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
@@ -7135,7 +7133,7 @@ window.quizTimer = setInterval(function() {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="146" name="NEBad2" tags="no-timer Ne bad-ending scenario-4-bad" position="1050,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;tear&quot; play&gt;&gt;
+&lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
