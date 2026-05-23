@@ -3094,7 +3094,8 @@ Thinking: $totalTime s
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;audio &quot;lofi&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -4189,11 +4190,7 @@ Thinking: $totalTime s
     &lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-   &lt;&lt;link &quot;決定啟動通報程序&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PsAREPORT&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[決定啟動通報程序|PsAREPORT]]
     [[與資深護士討論|PsASUPPORT]]
     [[仍然懷疑是否「太小題大做」|PsAGRAY]]
 &lt;/div&gt;
@@ -4234,11 +4231,7 @@ Thinking: $totalTime s
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
 [[重新評估|PsA4A]]
-&lt;&lt;link &quot;再等等吧&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PsAWAIT&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+[[再等等吧|PsAWAIT]]
 &lt;/div&gt;
 
 /* 進入這頁時重置頁數 */
@@ -4382,16 +4375,8 @@ Thinking: $totalTime s
 &lt;/div&gt;
 
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    &lt;&lt;link &quot;聽從意見，進行通報&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PsAREPORT&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;仍然猶豫不決&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PsAWAIT&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[聽從意見，進行通報|PsAREPORT]]
+    [[仍然猶豫不決|PsAWAIT]]
 &lt;/div&gt;
 
 
@@ -4429,16 +4414,8 @@ Thinking: $totalTime s
     &lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&quot;final-options&quot; style=&quot;display:none; margin-top:20px;&quot;&gt;
-    &lt;&lt;link &quot;決定啟動通報程序&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PsAREPORT&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-    &lt;&lt;link &quot;需要思考一段日子&quot;&gt;&gt;
-    /* 將這次的時間「推」進歷史清單裡 */
-    &lt;&lt;run $decisionHistory.push($totalTime)&gt;&gt; 
-    &lt;&lt;goto &quot;PsAWAIT&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
+    [[決定啟動通報程序|PsAREPORT]]
+    [[需要思考一段日子|PsAWAIT]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer good-ending" position="1125,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
@@ -6851,7 +6828,8 @@ window.quizTimer = setInterval(function() {
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="147" name="SAGoodthen" tags="Sa no-timer no-handbk" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="147" name="SAGoodthen" tags="Sa no-timer no-handbk" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;audio &quot;lofi&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
