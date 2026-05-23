@@ -6085,7 +6085,7 @@ window.quizTimer = setInterval(function() {
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="128" name="NE4A" tags="Ne" position="975,1025" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        小茹被留置在診症室內接受急救，血氧回復安全水平。&lt;br&gt;此時門診醫生加入。
+        小茹被留置在診症室內接受相應治療，血氧回復安全水平。
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -6095,7 +6095,7 @@ window.quizTimer = setInterval(function() {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;醫生在 CMS 電腦病歷上寫道：「這是典型的基層家庭居住環境問題及家長精神健康危機，建議先由社工跟進房屋編配，暫緩強制舉報。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;主診醫生在 CMS 電腦病歷上寫道：「這是典型的基層家庭居住環境問題及家長精神健康危機，建議先由社工跟進，暫緩強制舉報。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你作為最初產生「合理理由懷疑」的指明專業人士，面對醫生的「消極自保」，你該怎麼辦？&lt;&lt;/replace&gt;&gt;
@@ -6395,7 +6395,7 @@ window.quizTimer = setInterval(function() {
 「&lt;strong&gt;$staffID&lt;/strong&gt;護士，根據《強制舉報虐兒條例》，你作為指明專業人士，在臨床接觸中已經親自產生了合理理由懷疑，但你未能在法定 24 小時內履行個人舉報責任。我們現在正式對你進行拘捕。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;刑事後果：&lt;br&gt;你被正式落案起訴違反《強制舉報虐兒條例》，由於欣欣期間遭受了可預防的二次致命傷害，情節嚴重，你被判處監禁 2 個月，並處罰款港幣 $30,000。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;刑事後果：&lt;br&gt;你被正式落案起訴違反《強制舉報虐兒條例》，由於小茹期間遭受了可預防的二次致命傷害，情節嚴重，你被判處監禁 2 個月，並處罰款港幣 $30,000。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
                 &lt;&lt;elseif $page == 7&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;專業後果：&lt;br&gt;護士管理局（Nursing Council）隨即啟動專業品格除牌聆訊。因觸犯刑事罪行且涉及嚴重臨床疏忽，你被判處無限期吊銷註冊護士執照（除牌），專業生涯徹底結束。&lt;&lt;/replace&gt;&gt;
