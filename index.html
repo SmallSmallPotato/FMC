@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="145" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="114" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 body {
   font-family: 'DotGothic16', sans-serif !important;
@@ -1963,16 +1963,8 @@ $(document).on('touchend mouseup', 'body', function(e) {
                 &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
             &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
-&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -2960,16 +2952,9 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety += 10&gt;&gt;
     &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad bad-ending" position="25,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad bad-ending" position="25,925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -3040,16 +3025,9 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="41" name="PhAENDING_DELAY" tags="Dx no-timer scenario-0-bad bad-ending" position="125,925" size="100,100">&lt;&lt;audio &quot;tetris&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+</tw-passagedata><tw-passagedata pid="41" name="PhAENDING_DELAY" tags="Dx no-timer scenario-0-bad bad-ending" position="125,925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;tetris&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -3601,15 +3579,9 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer scenario-3-bad bad-ending" position="550,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="53" name="NCBad" tags="Nc no-timer scenario-3-bad bad-ending" position="550,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;magicforest&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -3860,15 +3832,9 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer good-ending" position="450,600" size="100,100">&lt;&lt;audio &quot;magicforest&quot; pause&gt;&gt;
+</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer good-ending" position="450,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;magicforest&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -4475,15 +4441,9 @@ Thinking: $totalTime s
     &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer good-ending" position="1125,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer good-ending" position="1125,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -4661,15 +4621,9 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer scenario-1-bad bad-ending" position="1225,500" size="100,100">&lt;&lt;audio &quot;moon&quot; pause&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="PsABAD" tags="Psy no-timer scenario-1-bad bad-ending" position="1225,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;moon&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -5132,16 +5086,9 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="Sa no-timer scenario-2-bad bad-ending" position="500,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="SA5Bad" tags="Sa no-timer scenario-2-bad bad-ending" position="500,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -5419,16 +5366,9 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="Sa good-ending" position="400,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="SA6Good" tags="Sa good-ending" position="400,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
             &lt;&lt;set $unlocked.quotes to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Legal &amp; Professional Quotes]&lt;/div&gt;
@@ -5868,14 +5808,14 @@ window.quizTimer = setInterval(function() {
     &quot;C. 要求家長簽署承諾書不再玩火&quot; 
     &quot;D. 告知家長下次若再發生才舉報&quot; 
     &quot;B. 認為有合理理由懷疑兒童正遭受嚴重傷害，必須啟動強制舉報程序&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="Quiz_12" tags="no-handbk no-timer Quiz" position="600,2125" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;Case 2: 一名患有慢性心臟病的 8 歲兒童，其照顧者連續三次無故缺席專科覆診，且拒絕領取維持生命的藥物。診所護士家訪發現兒童呼吸困難且神志淡漠。&lt;br&gt;問：這是否屬於強制舉報範疇？&quot; 
-    &quot;Quiz_13&quot; 
-    &quot;A. 否，這屬於家長的自主選擇&quot; 
-    &quot;B. 否，應先聯絡社區組織，暫不報警&quot;
-    &quot;C. 否，因為家長沒有直接動武&quot; 
-    &quot;D. 是，這屬於「嚴重疏忽」且已對兒童生命構成實際風險&quot; 
-    &quot;D. 是，這屬於「嚴重疏忽」且已對兒童生命構成實際風險&quot;
+&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="Quiz_12" tags="no-handbk no-timer Quiz" position="600,2125" size="100,100">&lt;&lt;PixelQuiz
+    &quot;Case 2: 一對有海洛英史且正接受美沙酮治療的夫婦，帶18個月大女嬰來就診。護士在靠近女嬰時聞強烈尿羶與霉味，發現尿布疹已潰爛出血。女嬰體重處於生長曲線第3百分位以下，眼神呆滯、對外界刺激無反應。父母瞳孔呈針尖樣。&lt;br&gt;問：根據分析框架，下列臨床決定何者最正確？&quot;
+    &quot;Quiz_13&quot;
+    &quot;A. 家長沒有表現出惡意傷害女嬰的意向，純粹是能力不足，不符合條例中有意圖的刑事虐兒定義&quot;
+    &quot;B. 屬於社會經濟問題導致的照顧不當，因無直接肉體虐待痕跡，應先轉介給門診營養師及母嬰健康院跟進，觀察一個月&quot;
+    &quot;C. 由於父母正接受美沙酮治療，屬於積極戒毒人士，醫護應予包容，先由護士為女嬰清洗傷口並塗抹藥膏，暫不申報&quot;
+    &quot;D. 屬於嚴重慢性疏忽，已對幼童生命構成即時風險，且家長因藥癮失去照顧能力(風險極高)，必須立刻啟動強制舉報，並聯絡兒科急診收留嬰兒&quot;
+    &quot;D. 屬於嚴重慢性疏忽，已對幼童生命構成即時風險，且家長因藥癮失去照顧能力(風險極高)，必須立刻啟動強制舉報，並聯絡兒科急診收留嬰兒&quot;
 &gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="Quiz_13" tags="no-handbk no-timer Quiz" position="600,2225" size="100,100">&lt;&lt;PixelQuiz 
     &quot;Case 3: 一名 10 歲女童向診所職員透露，家中繼父經常要求她觸摸其私密部位，並威脅不准告訴母親。&lt;br&gt;問：根據指引，你的判斷是？&quot; 
     &quot;Quiz_14&quot; 
@@ -6021,16 +5961,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="SA5Bad1" tags="Sa no-timer scenario-2-bad bad-ending" position="600,1450" size="100,100">&lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="SA5Bad1" tags="Sa no-timer scenario-2-bad bad-ending" position="600,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;sadsong&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;sadsong&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6201,16 +6134,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="NEGood" tags="Ne no-timer good-ending" position="1050,1250" size="100,100">&lt;&lt;audio &quot;fight&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="NEGood" tags="Ne no-timer good-ending" position="1050,1250" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;fight&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6274,16 +6200,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="SA5Bad2" tags="Sa no-timer scenario-2-bad bad-ending" position="700,1450" size="100,100"> &lt;&lt;audio &quot;plane&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="SA5Bad2" tags="Sa no-timer scenario-2-bad bad-ending" position="700,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;plane&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6459,16 +6378,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="NEBad" tags="Ne no-timer scenario-4-bad bad-ending" position="1150,1250" size="100,100"> &lt;&lt;audio &quot;fight&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="NEBad" tags="Ne no-timer scenario-4-bad bad-ending" position="1150,1250" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;fight&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6539,16 +6451,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHBad" tags="Nh no-timer scenario-5-bad bad-ending" position="1600,1300" size="100,100"> &lt;&lt;audio &quot;boss&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHBad" tags="Nh no-timer scenario-5-bad bad-ending" position="1600,1300" size="100,100"> &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;boss&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6619,16 +6524,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="135" name="NHGood" tags="Nh no-timer good-ending" position="1500,1300" size="100,100">&lt;&lt;audio &quot;boss&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="135" name="NHGood" tags="Nh no-timer good-ending" position="1500,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;boss&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6692,16 +6590,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="NDGood" tags="Nd no-timer good-ending" position="2100,1000" size="100,100">&lt;&lt;audio &quot;star&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="NDGood" tags="Nd no-timer good-ending" position="2100,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;news&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;star&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6765,16 +6656,9 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2200,1000" size="100,100"> &lt;&lt;audio &quot;star&quot; pause&gt;&gt;
-/* 播放新音效，並用 script 監聽它播完的時刻 */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2200,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    $(document).one(&#39;trackended&#39;, function (ev) {
-        if (ev.track.id === &quot;tear&quot;) {
-            $.wiki(&#39;&lt;&lt;audio &quot;star&quot; play&gt;&gt;&#39;);
-        }
-    });
-&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
