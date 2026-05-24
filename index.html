@@ -1377,6 +1377,10 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
+// 🎯 設定 1：開啟自動預載（緩存）機制
+Config.audio.preload = true;
+// 🎯 設定 2：容許的最大並行下載數
+Config.audio.maxSimultaneousLoads = 2;
 
 $(document).on(':passageend', function () {
     // 檢查是否已經存在按鈕，避免重複產生
@@ -1473,8 +1477,7 @@ $(document).on('touchend mouseup', 'body', function(e) {
 });
 
 (function () {
-    var imagesToPreload = [
-        "https://smallsmallpotato.github.io/FMC/images/bgs.webp",
+    var imagesToPreload = [        "https://smallsmallpotato.github.io/FMC/images/bgs.webp",
 "https://smallsmallpotato.github.io/FMC/images/bgq.webp",
 "https://smallsmallpotato.github.io/FMC/images/bgq1.webp",
 "https://smallsmallpotato.github.io/FMC/images/bg0.webp",
@@ -1606,29 +1609,29 @@ $(document).on('touchend mouseup', 'body', function(e) {
 .full-screen-clicker a {
   display: none; 
 }
-&lt;/style&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,50" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;music/tetris_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;news&quot; &quot;music/news_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;crybaby&quot; &quot;music/crybaby_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;corporate&quot; &quot;music/corporate_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;wah&quot; &quot;music/wah_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;sadsong&quot; &quot;music/sadsong_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;wizard&quot; &quot;music/wizard_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;fight&quot; &quot;music/fight_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;boss&quot; &quot;music/boss_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;rush&quot; &quot;music/rush_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;star&quot; &quot;music/star_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;server&quot; &quot;music/server_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;lofi&quot; &quot;music/lofi_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;get&quot; &quot;music/get_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;bingo&quot; &quot;music/bingo_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;plane&quot; &quot;music/plane_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;moon&quot; &quot;music/moon_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;tear&quot; &quot;music/tear_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;error&quot; &quot;music/error_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;magicforest&quot; &quot;music/magicforest_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;magictree&quot; &quot;music/magictree_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;busy&quot; &quot;music/busy_bgm.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;ring&quot; &quot;music/ring_bgm.mp3&quot;&gt;&gt;
+&lt;/style&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,50" size="100,100">&lt;&lt;cacheaudio &quot;tetris&quot; &quot;https://smallsmallpotato.github.io/FMC/music/tetris_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;news&quot; &quot;https://smallsmallpotato.github.io/FMC/music/news_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;crybaby&quot; &quot;https://smallsmallpotato.github.io/FMC/music/crybaby_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;corporate&quot; &quot;https://smallsmallpotato.github.io/FMC/music/corporate_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;wah&quot; &quot;https://smallsmallpotato.github.io/FMC/music/wah_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;sadsong&quot; &quot;https://smallsmallpotato.github.io/FMC/music/sadsong_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;wizard&quot; &quot;https://smallsmallpotato.github.io/FMC/music/wizard_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;fight&quot; &quot;https://smallsmallpotato.github.io/FMC/music/fight_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;boss&quot; &quot;https://smallsmallpotato.github.io/FMC/music/boss_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;rush&quot; &quot;https://smallsmallpotato.github.io/FMC/music/rush_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;star&quot; &quot;https://smallsmallpotato.github.io/FMC/music/star_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;server&quot; &quot;https://smallsmallpotato.github.io/FMC/music/server_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;lofi&quot; &quot;https://smallsmallpotato.github.io/FMC/music/lofi_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;get&quot; &quot;https://smallsmallpotato.github.io/FMC/music/get_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;bingo&quot; &quot;https://smallsmallpotato.github.io/FMC/music/bingo_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;plane&quot; &quot;https://smallsmallpotato.github.io/FMC/music/plane_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;moon&quot; &quot;https://smallsmallpotato.github.io/FMC/music/moon_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;tear&quot; &quot;https://smallsmallpotato.github.io/FMC/music/tear_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;error&quot; &quot;https://smallsmallpotato.github.io/FMC/music/error_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;magicforest&quot; &quot;https://smallsmallpotato.github.io/FMC/music/magicforest_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;magictree&quot; &quot;https://smallsmallpotato.github.io/FMC/music/magictree_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;busy&quot; &quot;https://smallsmallpotato.github.io/FMC/music/busy_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;ring&quot; &quot;https://smallsmallpotato.github.io/FMC/music/ring_bgm.mp3&quot;&gt;&gt;
 
 
 &lt;&lt;run $(&#39;#ui-bar-body&#39;).append(&#39;&lt;div id=&quot;game-hud&quot;&gt;&lt;/div&gt;&#39;)&gt;&gt;
@@ -1993,7 +1996,7 @@ $(document).on('touchend mouseup', 'body', function(e) {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="PhAReport" tags="Dx" position="125,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="PhAReport" tags="Dx" position="150,625" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
