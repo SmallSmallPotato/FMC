@@ -107,8 +107,14 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 	<tw-storydata name="index" startnode="139" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 body {
-  font-family: 'DotGothic16', sans-serif !important;
-  font-size: 16px !important;
+    font-family: 'DotGothic16', sans-serif !important;
+    font-size: 16px !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important; 
+    overflow: hidden !important;
+    height: 100vh !important;
+    width: 100vw !important;
 }
 
 #ui-bar, #story-caption {
@@ -1305,9 +1311,9 @@ to { opacity: 1; text-shadow: 0 0 12px #3498db, 0 0 20px #2980b9, 0 0 30px #2980
     100% { opacity: 0.6; }
 }
 
-/* ========================================== */
+/* ============================= */
 /* 🚀 觸發動畫：當加入 .start-opening 時的動作 */
-/* ========================================== */
+/* ============================= */
 
 /* 磚塊：1秒時向上彈起，然後迅速墜落 */
 .start-opening .mario-block {
@@ -1647,7 +1653,7 @@ $(document).on('touchend mouseup', 'body', function(e) {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 一位母親帶著8歲男童進來。&lt;br&gt;男童叫阿樂。你注意到他右腳有大片磨損。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 一位母親帶著 5 歲男童進來。&lt;br&gt;男童叫阿樂。你注意到他右腳有大片磨損。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂母親：「佢跌親啫，小朋友成日撞到。快啲洗完傷口，我哋趕住走。」&lt;br&gt;阿樂低著頭，很安靜，雙手死死抓著衣角。&lt;&lt;/replace&gt;&gt;
@@ -1975,7 +1981,7 @@ $(document).on('touchend mouseup', 'body', function(e) {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;口頭通報： &lt;br&gt;你致電阿樂居住地址所屬分區的社會福利署 — 保護家庭及兒童服務課(FCPSU)直通電話。當局人員記錄了資料，並登記了你的個人手機號碼以作立案。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊皮膚藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
@@ -2467,7 +2473,7 @@ Thinking: $totalTime s
 *  舉報條件：
 ** 「合理理由懷疑」
 ** 「嚴重傷害」或「實際風險」
-* 對象：18歲以下兒童
+* 對象：1以下兒童
 * 涉及四大類：
 ** 身體虐待 (physical abuse)
 ** 心理虐待 (psychological abuse)
@@ -3126,15 +3132,36 @@ Thinking: $totalTime s
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="Dx no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="PhAENDING_GOOD" tags="no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;\
+&lt;style&gt;
+    html, body {
+        background-color: #FFCCC9 !important; /* 💡 這裡填入你圖片的粉色底色 */
+        background-image: none !important;
+        overflow: hidden !important;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;full-screen-bg-box&quot; style=&quot;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/bg0g.webp&#39;) no-repeat center center !important;
+    background-size: cover !important; 
+    z-index: 1 !important;
+    pointer-events: none !important; /* 點擊穿透 */
+&quot;&gt;
+&lt;/div&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
     &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;div id=&quot;dialogue-box-container&quot;&gt;
+&lt;div id=&quot;dialogue-box-container&quot; style=&quot;
+    z-index: 6000 !important; 
+&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         雖然你此時感到心跳加速、有些不安，但你知道：&lt;br&gt;孩子的安全，永遠比醫護人員當下的舒服更重要。
     &lt;/span&gt;
@@ -3852,9 +3879,27 @@ Thinking: $totalTime s
 
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="Nc no-timer good-ending" position="450,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+</tw-passagedata><tw-passagedata pid="58" name="NCGood" tags="no-timer good-ending" position="450,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
-
+&lt;style&gt;
+    html, body {
+        background-color: #CDE8B5 !important;
+        background-image: none !important;
+        overflow: hidden !important;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;full-screen-bg-box&quot; style=&quot;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/bg3g.webp&#39;) no-repeat center center !important;
+    background-size: cover !important; 
+    z-index: 1 !important;
+    pointer-events: none !important; /* 點擊穿透 */
+&quot;&gt;
+&lt;/div&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -4427,9 +4472,27 @@ Thinking: $totalTime s
     [[需要思考一段日子|PsAWAIT]]
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="Psy no-timer good-ending" position="1125,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAGood" tags="no-timer good-ending" position="1125,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
-
+&lt;style&gt;
+    html, body {
+        background-color: #FFC6A3 !important;
+        background-image: none !important;
+        overflow: hidden !important;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;full-screen-bg-box&quot; style=&quot;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/bg1g.webp&#39;) no-repeat center center !important;
+    background-size: cover !important; 
+    z-index: 1 !important;
+    pointer-events: none !important; /* 點擊穿透 */
+&quot;&gt;
+&lt;/div&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -5896,7 +5959,7 @@ window.quizTimer = setInterval(function() {
     &quot;D. 診所的行政工作效率&quot; 
     &quot;B. 兒童的安全和最佳利益&quot;
 &gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="Quiz_11" tags="no-handbk no-timer Quiz" position="600,2025" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;Case 1: 一名 5 歲兒童因流感就診，護士發現其腹部有明顯的煙頭灼傷痕跡。家長聲稱是孩子自己玩火受傷，但灼傷位置在背部及腹部多處。&lt;br&gt;問：你應如何處理？&quot; 
+    &quot;Case 1: 一名 兒童因流感就診，護士發現其腹部有明顯的煙頭灼傷痕跡。家長聲稱是孩子自己玩火受傷，但灼傷位置在背部及腹部多處。&lt;br&gt;問：你應如何處理？&quot; 
     &quot;Quiz_12&quot; 
     &quot;A. 相信家長解釋，記錄病歷後讓其回家&quot; 
     &quot;B. 認為有合理理由懷疑兒童正遭受嚴重傷害，必須啟動強制舉報程序&quot;
@@ -6239,8 +6302,27 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="128" name="NEGood" tags="Ne no-timer good-ending" position="1150,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="128" name="NEGood" tags="no-timer good-ending" position="1150,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;
+&lt;style&gt;
+    html, body {
+        background-color: #CBF0FF !important;
+        background-image: none !important;
+        overflow: hidden !important;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;full-screen-bg-box&quot; style=&quot;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/bg4g.webp&#39;) no-repeat center center !important;
+    background-size: cover !important; 
+    z-index: 1 !important;
+    pointer-events: none !important; /* 點擊穿透 */
+&quot;&gt;
+&lt;/div&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
@@ -6624,7 +6706,26 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHGood" tags="Nh no-timer good-ending" position="1375,1500" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NHGood" tags="no-timer good-ending" position="1375,1500" size="100,100">&lt;style&gt;
+    html, body {
+        background-color: #BEC5FF !important;
+        background-image: none !important;
+        overflow: hidden !important;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;full-screen-bg-box&quot; style=&quot;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/bg5g.webp&#39;) no-repeat center center !important;
+    background-size: cover !important; 
+    z-index: 1 !important;
+    pointer-events: none !important; /* 點擊穿透 */
+&quot;&gt;
+&lt;/div&gt;
+&lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
     &lt;&lt;set $totalTime = 0&gt;&gt;
@@ -7006,8 +7107,27 @@ window.quizTimer = setInterval(function() {
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="141" name="SAGoodthen" tags="Sa no-timer good-ending" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="141" name="SAGoodthen" tags="no-timer good-ending" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;\
+&lt;style&gt;
+    html, body {
+        background-color: #FEE4A8 !important; 
+        background-image: none !important;
+        overflow: hidden !important;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;full-screen-bg-box&quot; style=&quot;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/bg2g.webp&#39;) no-repeat center center !important;
+    background-size: cover !important; 
+    z-index: 1 !important;
+    pointer-events: none !important; /* 點擊穿透 */
+&quot;&gt;
+&lt;/div&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
     &lt;&lt;set $lastDecisionTime = $totalTime&gt;&gt;
