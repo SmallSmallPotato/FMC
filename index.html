@@ -106,22 +106,6 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 	</div>
 	<tw-storydata name="index" startnode="139" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  /* dvh 會自動扣除手機瀏覽器網址列和工具列的實際高度 */
-  height: 100dvh; 
-  overflow: hidden; /* 禁止整個網頁上下橡皮筋式的滾動 */
-}
-/* 你的遊戲主容器 */
-#story-container {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto; /* 只允許遊戲文本內容在內部滾動 */
-  -webkit-overflow-scrolling: touch;
-}
-
 
 body {
     font-family: 'DotGothic16', sans-serif !important;
@@ -1394,6 +1378,8 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
+
+
 $(document).on(':passageend', function () {
     // 檢查是否已經存在按鈕，避免重複產生
     if ($("#fixed-hud-container").length === 0) {
@@ -1561,7 +1547,15 @@ $(document).on('touchend mouseup', 'body', function(e) {
             }
         });
     }
-})();</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
+})();
+
+
+$(document).on(':storyready', function () {
+    var link = document.createElement('link');
+    link.rel = 'apple-touch-icon';
+    link.href = 'icon.png'; // 確保這跟你上傳到 GitHub 的圖片檔名一模一樣
+    document.head.appendChild(link);
+});</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
     &lt;div class=&quot;mario-opening-container&quot;&gt;        
         &lt;div class=&quot;mario-block&quot;&gt;&lt;/div&gt;        
@@ -3031,7 +3025,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,550" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你與資深護士討論。
@@ -7262,7 +7256,7 @@ window.quizTimer = setInterval(function() {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;欣欣的媽媽在趕回香港後，在社署和醫務社工的長遠福利計劃下，欣欣正接受兒童心理學家的創傷輔導，逐步走出陰霾，重新綻放笑容。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，在 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒內成為了這個受虐女孩生命中最強大的盾牌！&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，在 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒內成為了這個女孩生命裡其中一位強大的盾牌！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;成功通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
