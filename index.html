@@ -1377,13 +1377,12 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-
 $(document).on(':passageend', function () {
     // 檢查是否已經存在按鈕，避免重複產生
     if ($("#fixed-hud-container").length === 0) {
         var btnHtml = '<div id="fixed-hud-container">' +
-                      '<button class="retro-circle-btn">STATS<br>DATA</button>' +
-                      '</div>';
+            '<button class="retro-circle-btn">STATS<br>DATA</button>' +
+            '</div>';
         $(document.body).append(btnHtml);
 
         // 綁定點擊事件
@@ -1398,12 +1397,12 @@ $(document).on(':passageend', function () {
 $(document).on(':passagedisplay', function () {
     // 尋找現有的 viewport meta 標籤
     var $meta = $('meta[name="viewport"]');
-    
+
     // 如果找不到，就自己建立一個放進 <head>
     if ($meta.length === 0) {
         $meta = $('<meta name="viewport">').appendTo('head');
     }
-    
+
     // 強制寫入鎖定縮放的設定
     $meta.attr('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
 });
@@ -1423,14 +1422,14 @@ $(document).on('touchend mouseup', '#final-options a.link-internal', function(e)
     e.stopPropagation();
 
     var $btn = $(this);
-    
+
     // 從 SugarCube 的原生屬性中提取出你想跳轉的 Passage 名字
     var destination = $btn.attr('data-passage'); 
 
     // 2. 讓完美的「彈起綠光」動畫在手機螢幕上定格 200 毫秒
     setTimeout(function() {
         $btn.removeClass('is-tapped'); // 動態放開按鈕
-        
+
         if (destination) {
             Engine.play(destination); // 3. 延時結束，順暢切換到下一頁！
         }
@@ -1442,27 +1441,34 @@ $(document).on('touchcancel mouseleave', '#final-options a.link-internal', funct
     $(this).removeClass('is-tapped');
 });
 
+
 /* ============================= */
-/* 📱 萬用全網頁盲點：動態讀取目的地 ➔ 延時 0.2 秒 ➔ 自動跳轉 */
+/* 📱 萬用全網頁盲點：安全地將變數存放在 SugarCube 的 setup 物件中 */
 /* =============================== */
+// 先確保我們自己要用的暫存物件存在
+setup.blindClick = {
+    nextDestination: null,
+    clickTimer: false
+};
+
 $(document).on('touchstart mousedown', 'body', function(e) {
     // 檢查目前畫面上，有沒有帶有目的地屬性的隱形標記
     var $marker = $('#is-certificate-page');
     if ($marker.length > 0) {
-        // 抓取 HTML 裡寫好的 data-target 名字
-        window.nextDestination = $marker.attr('data-target');
-        window.clickTimer = true;
+        // 💡 修正點：將變數改存在 setup 內，絕不污染 window 物件
+        setup.blindClick.nextDestination = $marker.attr('data-target');
+        setup.blindClick.clickTimer = true;
     }
 });
 
 $(document).on('touchend mouseup', 'body', function(e) {
-    if (window.clickTimer) {
+    if (setup.blindClick.clickTimer) {
         e.preventDefault();
         e.stopPropagation();
-        window.clickTimer = false;
-        
-        var destination = window.nextDestination;
-        
+        setup.blindClick.clickTimer = false;
+
+        var destination = setup.blindClick.nextDestination;
+
         setTimeout(function() {
             // 🎯 核心：如果抓得到目的地，就帥氣地跳轉過去！
             if (destination) {
@@ -1472,15 +1478,10 @@ $(document).on('touchend mouseup', 'body', function(e) {
     }
 });
 
-/* ================================================== */
-/* 🎵 設定 1：音頻子系統頻寬優化（限制排隊下載數） */
-/* ================================================== */
-Config.audio.preload = true;
-Config.audio.maxSimultaneousLoads = 2; 
 
-/* ================================================== */
-/* 🖼️ 設定 2：圖片預加載系統（開局偷偷下載所有 .webp） */
-/* ================================================== */
+/* ============================= */
+/* 🖼️ 圖片預載入區 */
+/* ============================= */
 (function () {
     var imagesToPreload = [
         "https://smallsmallpotato.github.io/FMC/images/bgs.webp",
@@ -1509,6 +1510,40 @@ Config.audio.maxSimultaneousLoads = 2;
         var img = new Image();
         img.src = url;
     });
+})();
+
+/* ======================================================== */
+/* 🎵 遊戲音樂庫批次註冊與自動預載入（Preload） */
+/* ======================================================== */
+(function () {
+    // 1. 這裡已經把你所有的 23 首音樂全部打包成乾淨的清單
+    var audioPlaylist = {
+        "server": "https://smallsmallpotato.github.io/FMC/music/server_bgm.mp3",
+        "rush": "https://smallsmallpotato.github.io/FMC/music/rush_bgm.mp3",
+        "lofi": "https://smallsmallpotato.github.io/FMC/music/lofi_bgm.mp3",
+        "wizard": "https://smallsmallpotato.github.io/FMC/music/wizard_bgm.mp3"
+
+    };
+
+    // 2. 自動執行安全註冊與加載，絕不噴出白色報錯視窗
+    if (typeof SimpleAudio !== 'undefined' && SimpleAudio.tracks) {
+        Object.keys(audioPlaylist).forEach(function (trackId) {
+            try {
+                var url = audioPlaylist[trackId];
+                
+                // 註冊音軌 (等同於之前的 <<cacheaudio>>)
+                SimpleAudio.tracks.add(trackId, url);
+                
+                // 執行緩存預載入 (解決你最一開始想設定的 Config.audio.preload)
+                var track = SimpleAudio.tracks.get(trackId);
+                if (track && typeof track.load === 'function') {
+                    track.load();
+                }
+            } catch (audioError) {
+                console.warn("音軌載入失敗或被瀏覽器攔截: " + trackId, audioError);
+            }
+        });
+    }
 })();</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
     &lt;div class=&quot;mario-opening-container&quot;&gt;        
@@ -2002,7 +2037,7 @@ Config.audio.maxSimultaneousLoads = 2;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="PhAReport" tags="Dx" position="150,625" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="PhAReport" tags="Dx" position="125,600" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
