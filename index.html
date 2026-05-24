@@ -106,6 +106,23 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 	</div>
 	<tw-storydata name="index" startnode="139" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* dvh 會自動扣除手機瀏覽器網址列和工具列的實際高度 */
+  height: 100dvh; 
+  overflow: hidden; /* 禁止整個網頁上下橡皮筋式的滾動 */
+}
+/* 你的遊戲主容器 */
+#story-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* 只允許遊戲文本內容在內部滾動 */
+  -webkit-overflow-scrolling: touch;
+}
+
+
 body {
     font-family: 'DotGothic16', sans-serif !important;
     font-size: 16px !important;
@@ -3014,7 +3031,7 @@ Thinking: $totalTime s
     /* 2. 更新總分數 */
     &lt;&lt;set $totalSafety -= 20&gt;&gt;
     &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,700" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhASupport" tags="Dx" position="125,550" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你與資深護士討論。
