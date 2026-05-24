@@ -1377,10 +1377,6 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-// 🎯 設定 1：開啟自動預載（緩存）機制
-Config.audio.preload = true;
-// 🎯 設定 2：容許的最大並行下載數
-Config.audio.maxSimultaneousLoads = 2;
 
 $(document).on(':passageend', function () {
     // 檢查是否已經存在按鈕，避免重複產生
@@ -1476,33 +1472,43 @@ $(document).on('touchend mouseup', 'body', function(e) {
     }
 });
 
-(function () {
-    var imagesToPreload = [        "https://smallsmallpotato.github.io/FMC/images/bgs.webp",
-"https://smallsmallpotato.github.io/FMC/images/bgq.webp",
-"https://smallsmallpotato.github.io/FMC/images/bgq1.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg0.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg0g.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg1.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg1g.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg2.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg2g.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg3.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg3g.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg4.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg4g.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg5.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg5g.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg6.webp",
-"https://smallsmallpotato.github.io/FMC/images/bg6g.webp",
-"https://smallsmallpotato.github.io/FMC/images/PhAbox.webp", "https://smallsmallpotato.github.io/FMC/images/SAbox.webp",
-"https://smallsmallpotato.github.io/FMC/images/NHbox.webp"
-      
-    ];
+/* ================================================== */
+/* 🎵 設定 1：音頻子系統頻寬優化（限制排隊下載數） */
+/* ================================================== */
+Config.audio.preload = true;
+Config.audio.maxSimultaneousLoads = 2; 
 
-    imagesToPreload.forEach(function (url) {
-        var img = new Image();
-        img.src = url;
-    });
+/* ================================================== */
+/* 🖼️ 設定 2：圖片預加載系統（開局偷偷下載所有 .webp） */
+/* ================================================== */
+(function () {
+    var imagesToPreload = [
+        "https://smallsmallpotato.github.io/FMC/images/bgs.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bgq.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bgq1.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg0.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg0g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg1.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg1g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg2.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg2g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg3.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg3g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg4.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg4g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg5.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg5g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg6.webp",
+        "https://smallsmallpotato.github.io/FMC/images/bg6g.webp",
+        "https://smallsmallpotato.github.io/FMC/images/PhAbox.webp",
+        "https://smallsmallpotato.github.io/FMC/images/SAbox.webp",
+        "https://smallsmallpotato.github.io/FMC/images/NHbox.webp"
+    ];
+
+    imagesToPreload.forEach(function (url) {
+        var img = new Image();
+        img.src = url;
+    });
 })();</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
     &lt;div class=&quot;mario-opening-container&quot;&gt;        
