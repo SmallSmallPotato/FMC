@@ -1470,7 +1470,40 @@ $(document).on('touchend mouseup', 'body', function(e) {
             }
         }, 200);
     }
-});</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
+});
+
+如果我加以下代碼入Story JavaScript，玩家會下載圖片到哪裏？
+
+
+(function () {
+    var imagesToPreload = [
+        "https://smallsmallpotato.github.io/FMC/images/bgs.webp",
+"https://smallsmallpotato.github.io/FMC/images/bgq.webp",
+"https://smallsmallpotato.github.io/FMC/images/bgq1.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg0.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg0g.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg1.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg1g.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg2.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg2g.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg3.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg3g.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg4.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg4g.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg5.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg5g.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg6.webp",
+"https://smallsmallpotato.github.io/FMC/images/bg6g.webp",
+"https://smallsmallpotato.github.io/FMC/images/PhAbox.webp", "https://smallsmallpotato.github.io/FMC/images/SAbox.webp",
+"https://smallsmallpotato.github.io/FMC/images/NHbox.webp"
+      
+    ];
+
+    imagesToPreload.forEach(function (url) {
+        var img = new Image();
+        img.src = url;
+    });
+})();</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
     &lt;div class=&quot;mario-opening-container&quot;&gt;        
         &lt;div class=&quot;mario-block&quot;&gt;&lt;/div&gt;        
