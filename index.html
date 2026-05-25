@@ -8893,16 +8893,14 @@ window.quizTimer = setInterval(function() {
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 4&gt;&gt;
-        /* 最後一次點擊才執行跳轉 */       
-        /* 1. 先把 Pre-test 的分數鎖定存入新變數 */
+        /* 最後一次點擊才執行跳轉 */        
         &lt;&lt;set $preTestScore to $score&gt;&gt;
-        /* 2. 啟動 Post-test 開關 */
         &lt;&lt;set $isPostTest to true&gt;&gt;
-        /* 3. 清空舊數據，為 Post-test 重新計分 */
         &lt;&lt;set $score to 0&gt;&gt;            
         &lt;&lt;set $currentQuestion to 1&gt;&gt;   
         &lt;&lt;set $playerAnswer to &quot;&quot;&gt;&gt;
-        /* 4. 執行你原本的音效與跳轉 */
+        /* 💡【清空並重置答題歷史紀錄陣列】 */
+        &lt;&lt;set $decisionHistory to []&gt;&gt;
         &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
         &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;
         &lt;&lt;goto &quot;Quiz_1&quot;&gt;&gt;
@@ -8939,7 +8937,7 @@ window.quizTimer = setInterval(function() {
         SYSTEM: EVALUATION COMPLETED&lt;/div&gt;
     &lt;div class=&quot;story-text&quot;&gt;\
         &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 🎓最終評估報告 ✦&lt;/h2&gt;\
-        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;(Pre-test 成績: $preTestScore 分)&lt;br&gt;Post-test score / 成績：
+        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;(Pre-test 成績: $preTestScore 分)&lt;br&gt;Post-test 成績: 
             &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt; 分 &lt;/p&gt;\
         &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
         &lt;table class=&quot;pixel-report-table&quot;&gt;
@@ -8980,7 +8978,7 @@ window.quizTimer = setInterval(function() {
         &lt;/table&gt;\
     &lt;/div&gt;\
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-        &lt;&lt;link &quot;重溫&lt;br&gt;Again?&quot; &quot;Ready&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;案件重溫&quot; &quot;Ready&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
     &lt;/div&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
