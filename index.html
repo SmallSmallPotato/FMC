@@ -5986,26 +5986,29 @@ window.quizTimer = setInterval(function() {
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
+
 &lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    // 1. 讀取儲存在 Twine 裡的所有前後測數據
+    console.log(&quot;SubmitToBackend 啟動：開始打包數據...&quot;);
+
+    // 1. 讀取 Twine 變數
     var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
-    var preScore  = State.variables.preTestScore;
-    var postScore = State.variables.score;
+    var preScore  = State.variables.preTestScore || 0;
+    var postScore = State.variables.score || 0;
     
     var preHistory  = State.variables.preDecisionHistory || [];
     var postHistory = State.variables.decisionHistory || [];
 
-    // 2. 跑迴圈：把 Pre-test 陣列「拉平」成用逗號隔開的純文字字串
+    // 2. 打包 Pre-test
     var preResultsArray = [];
     for (var i = 0; i &lt; preHistory.length; i++) {
         var item = preHistory[i];
         var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
         preResultsArray.push(resText);
     }
-    var preResultsStr = preResultsArray.join(&quot;, &quot;); // 輸出如: PASS, FAIL, 4/5...
+    var preResultsStr = preResultsArray.join(&quot;, &quot;);
 
-    // 3. 跑迴圈：把 Post-test 陣列的結果與時間各自拉平成字串
+    // 3. 打包 Post-test
     var postResultsArray = [];
     var postTimesArray   = [];
     for (var j = 0; j &lt; postHistory.length; j++) {
@@ -6017,32 +6020,34 @@ window.quizTimer = setInterval(function() {
     var postResultsStr = postResultsArray.join(&quot;, &quot;);
     var postTimesStr   = postTimesArray.join(&quot;, &quot;);
 
-    // 4. 打包準備發送 (請替換下面的【表單ID】)
+    // 4. 正確的後門網址 (尾端是 formResponse)
     var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
     var formData = new URLSearchParams();
     
-    // ⚠️ 請精準替換成你第一步得到的 entry.XXXXXXXX 編號
-    // ⚠️ 這是你專屬的表單欄位對接，一字都不能錯：
-    formData.append(&#39;entry.370813207&#39;, staffId);        // 名稱 (=111)
-    formData.append(&#39;entry.1115313582&#39;, preScore);      // Pre-test 總分 (=222)
-    formData.append(&#39;entry.2009874748&#39;, postScore);     // Post-test 總分 (=333)
-    formData.append(&#39;entry.2060064796&#39;, preResultsStr); // Pre-test 每題結果 (=444)
-    formData.append(&#39;entry.542305056&#39;, postResultsStr); // Post-test 每題結果 (=555)
-    formData.append(&#39;entry.1000920267&#39;, postTimesStr);  // Pre-test 猶豫時間 (=666)
-    formData.append(&#39;entry.1629469786&#39;, postTimesStr);  // Post-test 猶豫時間 (=777)
+    // ⚠️ 這裡依據你提供的 4332 截圖順序與網址精準對接
+    formData.append(&#39;entry.370813207&#39;, staffId);        // 第一格：名稱 (員工編號)
+    formData.append(&#39;entry.1115313582&#39;, preScore);      // 第二格：Pre總分
+    formData.append(&#39;entry.2009874748&#39;, postScore);     // 第三格：Post總分
+    formData.append(&#39;entry.2060064796&#39;, preResultsStr); // 第四格：Pre每題結果
+    formData.append(&#39;entry.542305056&#39;, postResultsStr); // 第五格：Post每題結果
+    formData.append(&#39;entry.1000920267&#39;, preTimesStr);  // 第六格：Pre猶豫時間
+    formData.append(&#39;entry.1629469786&#39;, postTimesStr);  // 第七格：Post猶豫時間
 
-    // 5. 使用 Fetch 在背景靜默發送（無感體驗，不跳視窗）
+    console.log(&quot;準備發射數據至 Google Form...&quot;);
+
+    // 5. 發送
     fetch(formUrl, {
         method: &#39;POST&#39;,
-        mode: &#39;no-cors&#39;, // 繞過跨網域限制
+        mode: &#39;no-cors&#39;,
         headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
         body: formData.toString()
     }).then(function() {
-        console.log(&quot;前後測對比數據已完美導出！&quot;);
+        console.log(&quot;【成功】數據已成功射向 Google 表單！&quot;);
+    }).catch(function(error) {
+        console.error(&quot;【失敗】發送時出現 Error:&quot;, error);
     });
 &lt;&lt;/script&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
- </tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
     &quot;1. 下列哪一項最準確描述「強制舉報」的法律時限？&quot; 
     &quot;Quiz_2&quot; 
     &quot;A. 發現後 24 小時內提交書面報告&quot; 
@@ -8993,7 +8998,8 @@ window.quizTimer = setInterval(function() {
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="168" name="Game_Ultimate_Ending" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="168" name="Game_Ultimate_Ending" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;SubmitToBackend&gt;&gt;\
+&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;
