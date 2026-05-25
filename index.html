@@ -5986,6 +5986,62 @@ window.quizTimer = setInterval(function() {
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
+&lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    // 1. 讀取儲存在 Twine 裡的所有前後測數據
+    var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
+    var preScore  = State.variables.preTestScore;
+    var postScore = State.variables.score;
+    
+    var preHistory  = State.variables.preDecisionHistory || [];
+    var postHistory = State.variables.decisionHistory || [];
+
+    // 2. 跑迴圈：把 Pre-test 陣列「拉平」成用逗號隔開的純文字字串
+    var preResultsArray = [];
+    for (var i = 0; i &lt; preHistory.length; i++) {
+        var item = preHistory[i];
+        var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
+        preResultsArray.push(resText);
+    }
+    var preResultsStr = preResultsArray.join(&quot;, &quot;); // 輸出如: PASS, FAIL, 4/5...
+
+    // 3. 跑迴圈：把 Post-test 陣列的結果與時間各自拉平成字串
+    var postResultsArray = [];
+    var postTimesArray   = [];
+    for (var j = 0; j &lt; postHistory.length; j++) {
+        var item = postHistory[j];
+        var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
+        postResultsArray.push(resText);
+        postTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
+    }
+    var postResultsStr = postResultsArray.join(&quot;, &quot;);
+    var postTimesStr   = postTimesArray.join(&quot;, &quot;);
+
+    // 4. 打包準備發送 (請替換下面的【表單ID】)
+    var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
+    var formData = new URLSearchParams();
+    
+    // ⚠️ 請精準替換成你第一步得到的 entry.XXXXXXXX 編號
+    // ⚠️ 這是你專屬的表單欄位對接，一字都不能錯：
+    formData.append(&#39;entry.370813207&#39;, staffId);        // 名稱 (=111)
+    formData.append(&#39;entry.1115313582&#39;, preScore);      // Pre-test 總分 (=222)
+    formData.append(&#39;entry.2009874748&#39;, postScore);     // Post-test 總分 (=333)
+    formData.append(&#39;entry.2060064796&#39;, preResultsStr); // Pre-test 每題結果 (=444)
+    formData.append(&#39;entry.542305056&#39;, postResultsStr); // Post-test 每題結果 (=555)
+    formData.append(&#39;entry.1000920267&#39;, postTimesStr);  // Pre-test 猶豫時間 (=666)
+    formData.append(&#39;entry.1629469786&#39;, postTimesStr);  // Post-test 猶豫時間 (=777)
+
+    // 5. 使用 Fetch 在背景靜默發送（無感體驗，不跳視窗）
+    fetch(formUrl, {
+        method: &#39;POST&#39;,
+        mode: &#39;no-cors&#39;, // 繞過跨網域限制
+        headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
+        body: formData.toString()
+    }).then(function() {
+        console.log(&quot;前後測對比數據已完美導出！&quot;);
+    });
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
  </tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
     &quot;1. 下列哪一項最準確描述「強制舉報」的法律時限？&quot; 
     &quot;Quiz_2&quot; 
@@ -8893,18 +8949,25 @@ window.quizTimer = setInterval(function() {
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 4&gt;&gt;
-        /* 最後一次點擊才執行跳轉 */        
-        &lt;&lt;set $preTestScore to $score&gt;&gt;
-        &lt;&lt;set $isPostTest to true&gt;&gt;
-        &lt;&lt;set $score to 0&gt;&gt;            
-        &lt;&lt;set $currentQuestion to 1&gt;&gt;   
-        &lt;&lt;set $playerAnswer to &quot;&quot;&gt;&gt;
-        /* 💡【清空並重置答題歷史紀錄陣列】 */
-        &lt;&lt;set $decisionHistory to []&gt;&gt;
-        &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-        &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;
-        &lt;&lt;goto &quot;Quiz_1&quot;&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
+    /* 最後一次點擊才執行跳轉 */    
+    /* 1. 把 Pre-test 的總分和詳細答題歷史備份起來 */
+    &lt;&lt;set $preTestScore to $score&gt;&gt;
+    &lt;&lt;set $preDecisionHistory to $decisionHistory&gt;&gt;
+    /* 2. 啟動 Post-test 開關 */
+    &lt;&lt;set $isPostTest to true&gt;&gt;
+    /* 3. 徹底清空數據，讓 $score 由 0 開始為 Post-test 重新計分 */
+    &lt;&lt;set $score to 0&gt;&gt;            
+    &lt;&lt;set $currentQuestion to 1&gt;&gt;   
+    &lt;&lt;set $playerAnswer to &quot;&quot;&gt;&gt;    
+    /* 4. 將歷史重置為空盒子，起跑時間對齊現在 */
+    &lt;&lt;set $decisionHistory to []&gt;&gt; 
+    &lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
+    /* 5. 執行原本的音效與跳轉 */
+    &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+    &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;
+    &lt;&lt;goto &quot;Quiz_1&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+    
         &lt;&lt;/link&gt;&gt;
     &lt;/span&gt;
 &lt;/div&gt;
