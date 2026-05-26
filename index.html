@@ -5989,7 +5989,7 @@ window.quizTimer = setInterval(function() {
 
 &lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    console.log(&quot;SubmitToBackend 啟動：開始打包數據...&quot;);
+    console.log(&quot;SubmitToBackend 啟動：開始打包 7 欄位數據...&quot;);
 
     // 1. 讀取 Twine 變數
     var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
@@ -5999,16 +5999,19 @@ window.quizTimer = setInterval(function() {
     var preHistory  = State.variables.preDecisionHistory || [];
     var postHistory = State.variables.decisionHistory || [];
 
-    // 2. 打包 Pre-test
+    // 2. 打包 Pre-test 的【結果】與【猶豫時間】
     var preResultsArray = [];
+    var preTimesArray   = [];
     for (var i = 0; i &lt; preHistory.length; i++) {
         var item = preHistory[i];
         var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
         preResultsArray.push(resText);
+        preTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
     }
     var preResultsStr = preResultsArray.join(&quot;, &quot;);
+    var preTimesStr   = preTimesArray.join(&quot;, &quot;); // 👈 補上了這個！消滅變數找不到的 Error
 
-    // 3. 打包 Post-test
+    // 3. 打包 Post-test 的【結果】與【猶豫時間】
     var postResultsArray = [];
     var postTimesArray   = [];
     for (var j = 0; j &lt; postHistory.length; j++) {
@@ -6020,22 +6023,22 @@ window.quizTimer = setInterval(function() {
     var postResultsStr = postResultsArray.join(&quot;, &quot;);
     var postTimesStr   = postTimesArray.join(&quot;, &quot;);
 
-    // 4. 正確的後門網址 (尾端是 formResponse)
+    // 4. 背景發送網址
     var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
     var formData = new URLSearchParams();
     
-    // ⚠️ 這裡依據你提供的 4332 截圖順序與網址精準對接
+    // 5. 🎯 依據你表單的實際順序精準填入
     formData.append(&#39;entry.370813207&#39;, staffId);        // 第一格：名稱 (員工編號)
     formData.append(&#39;entry.1115313582&#39;, preScore);      // 第二格：Pre總分
     formData.append(&#39;entry.2009874748&#39;, postScore);     // 第三格：Post總分
     formData.append(&#39;entry.2060064796&#39;, preResultsStr); // 第四格：Pre每題結果
     formData.append(&#39;entry.542305056&#39;, postResultsStr); // 第五格：Post每題結果
-    formData.append(&#39;entry.1000920267&#39;, preTimesStr);  // 第六格：Pre猶豫時間
-    formData.append(&#39;entry.1629469786&#39;, postTimesStr);  // 第七格：Post猶豫時間
+    formData.append(&#39;entry.1000920267&#39;, preTimesStr);  // 第六格：Pre猶豫時間 (修正對齊！)
+    formData.append(&#39;entry.1629469786&#39;, postTimesStr); // 第七格：Post猶豫時間 (修正對齊！)
 
-    console.log(&quot;準備發射數據至 Google Form...&quot;);
+    console.log(&quot;正在發射全量數據至 Google Form...&quot;);
 
-    // 5. 發送
+    // 6. 靜默發送
     fetch(formUrl, {
         method: &#39;POST&#39;,
         mode: &#39;no-cors&#39;,
