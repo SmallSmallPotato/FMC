@@ -5987,19 +5987,28 @@ window.quizTimer = setInterval(function() {
 &lt;&lt;/widget&gt;&gt;
 
 
+
 &lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    console.log(&quot;SubmitToBackend 啟動：開始打包 7 欄位數據...&quot;);
+    // 🌟 防重複安全鎖：如果發送過，就直接攔截跳出
+    if (window.hasSubmittedData) {
+        console.log(&quot;數據已經發送過，攔截重複發送！&quot;);
+        return;
+    }
+    window.hasSubmittedData = true; // 鎖上保險絲
 
-    // 1. 讀取 Twine 變數
+    console.log(&quot;SubmitToBackend 安全啟動...&quot;);
+
     var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
-    var preScore  = State.variables.preTestScore || 0;
+    
+    // 🌟 如果你的 Pre 箱子是空的，這裡會自動抓取防呆，避免 Google 表單空白
+    var preScore  = State.variables.preTestScore !== undefined ? State.variables.preTestScore : &quot;未記錄&quot;;
     var postScore = State.variables.score || 0;
     
     var preHistory  = State.variables.preDecisionHistory || [];
     var postHistory = State.variables.decisionHistory || [];
 
-    // 2. 打包 Pre-test 的【結果】與【猶豫時間】
+    // 打包 Pre-test
     var preResultsArray = [];
     var preTimesArray   = [];
     for (var i = 0; i &lt; preHistory.length; i++) {
@@ -6008,10 +6017,11 @@ window.quizTimer = setInterval(function() {
         preResultsArray.push(resText);
         preTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
     }
-    var preResultsStr = preResultsArray.join(&quot;, &quot;);
-    var preTimesStr   = preTimesArray.join(&quot;, &quot;); // 👈 補上了這個！消滅變數找不到的 Error
+    // 防呆：如果陣列是空的，填入「無資料」
+    var preResultsStr = preResultsArray.length &gt; 0 ? preResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
+    var preTimesStr   = preTimesArray.length &gt; 0 ? preTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
 
-    // 3. 打包 Post-test 的【結果】與【猶豫時間】
+    // 打包 Post-test
     var postResultsArray = [];
     var postTimesArray   = [];
     for (var j = 0; j &lt; postHistory.length; j++) {
@@ -6023,31 +6033,24 @@ window.quizTimer = setInterval(function() {
     var postResultsStr = postResultsArray.join(&quot;, &quot;);
     var postTimesStr   = postTimesArray.join(&quot;, &quot;);
 
-    // 4. 背景發送網址
     var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
     var formData = new URLSearchParams();
     
-    // 5. 🎯 依據你表單的實際順序精準填入
-    formData.append(&#39;entry.370813207&#39;, staffId);        // 第一格：名稱 (員工編號)
-    formData.append(&#39;entry.1115313582&#39;, preScore);      // 第二格：Pre總分
-    formData.append(&#39;entry.2009874748&#39;, postScore);     // 第三格：Post總分
-    formData.append(&#39;entry.2060064796&#39;, preResultsStr); // 第四格：Pre每題結果
-    formData.append(&#39;entry.542305056&#39;, postResultsStr); // 第五格：Post每題結果
-    formData.append(&#39;entry.1000920267&#39;, preTimesStr);  // 第六格：Pre猶豫時間 (修正對齊！)
-    formData.append(&#39;entry.1629469786&#39;, postTimesStr); // 第七格：Post猶豫時間 (修正對齊！)
+    formData.append(&#39;entry.370813207&#39;, staffId);        
+    formData.append(&#39;entry.1115313582&#39;, preScore);      
+    formData.append(&#39;entry.2009874748&#39;, postScore);     
+    formData.append(&#39;entry.2060064796&#39;, preResultsStr); 
+    formData.append(&#39;entry.542305056&#39;, postResultsStr); 
+    formData.append(&#39;entry.1000920267&#39;, preTimesStr);  
+    formData.append(&#39;entry.1629469786&#39;, postTimesStr); 
 
-    console.log(&quot;正在發射全量數據至 Google Form...&quot;);
-
-    // 6. 靜默發送
     fetch(formUrl, {
         method: &#39;POST&#39;,
         mode: &#39;no-cors&#39;,
         headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
         body: formData.toString()
     }).then(function() {
-        console.log(&quot;【成功】數據已成功射向 Google 表單！&quot;);
-    }).catch(function(error) {
-        console.error(&quot;【失敗】發送時出現 Error:&quot;, error);
+        console.log(&quot;數據成功射入後台！&quot;);
     });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
@@ -6261,8 +6264,24 @@ window.quizTimer = setInterval(function() {
         &lt;/table&gt;\
     &lt;/div&gt;\
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-        &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot; &quot;Ready&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
-    &lt;/div&gt;</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
+       
+
+    &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
+        /* 🌟 1. 當點擊按鈕時，立刻把前測數據鎖進備份箱子 */
+        &lt;&lt;set $preTestScore to $score&gt;&gt;
+        &lt;&lt;set $preDecisionHistory to clone($decisionHistory)&gt;&gt;
+
+        /* 🌟 2. 隨後將原本的計分器與歷史紀錄「安全歸零」，留給後測 */
+        &lt;&lt;set $score to 0&gt;&gt;
+        &lt;&lt;set $decisionHistory to []&gt;&gt;
+
+        /* 🌟 3. 控制音樂並跳轉（你原本的代碼） */
+        &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+        &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
+        &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你跟她們說：「這裡是家庭醫學門診，&lt;br&gt;做不了詳細檢查，不如去醫院急症室吧。」
