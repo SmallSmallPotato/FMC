@@ -1694,9 +1694,12 @@ $(document).on(':storyready', function () {
 &lt;&lt;set $progress = 0&gt;&gt;
 &lt;&lt;set $total = 7&gt;&gt;
 &lt;&lt;set $totalTime = 0&gt;&gt;
-&lt;&lt;set $decisionHistory to []&gt;&gt;
 &lt;&lt;set $currentScenarioId = 0&gt;&gt;
-  
+&lt;&lt;set $decisionHistory to []&gt;&gt;
+&lt;&lt;set $preDecisionHistory to []&gt;&gt;
+&lt;&lt;set $postDecisionHistory to []&gt;&gt;
+&lt;&lt;set $isPostTest to false&gt;&gt;
+ 
 &lt;&lt;set $scenarios = [
     { id: 0, name: &quot;PhysicalAbuse&quot;, completed: false, safety: 0, legal: 0 },
     { id: 1, name: &quot;PsychologicalAbuse&quot;, completed: false, safety: 0, legal: 0 },
@@ -5790,12 +5793,10 @@ Thinking: $totalTime s
 &lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
 
 &lt;div id=&quot;quiz-box&quot;&gt;
-&lt;!-- 這裡換成無限循環的 16bit 像素動畫 --&gt;
 &lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot; class=&quot;pixel-loop-animation&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;quiz-status&quot;&gt;
 SYSTEM: DECISION REQUIRED
-&lt;!-- 移除了右上角的倒數時間文字 --&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
@@ -5812,7 +5813,13 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;else&gt;&gt;
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+
+/* 🌟 自動閘門分流 */
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
@@ -5825,7 +5832,13 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;else&gt;&gt;
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+
+/* 🌟 自動閘門分流 */
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
@@ -5838,7 +5851,13 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;else&gt;&gt;
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+
+/* 🌟 自動閘門分流 */
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
@@ -5851,7 +5870,13 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;else&gt;&gt;
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+
+/* 🌟 自動閘門分流 */
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5861,27 +5886,26 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;script&gt;&gt;
 $(&#39;.quiz-option a&#39;).on(&#39;click&#39;, function(e) {
-    var $btn = $(this);
-    if ($btn.hasClass(&#39;is-tapped&#39;)) return;
-    e.preventDefault();
-    e.stopPropagation();
-    $btn.addClass(&#39;is-tapped&#39;);
-    clearInterval(window.quizTimer);
-    var targetPage = State.variables.quizNextPassage;
-    setTimeout(function() {
-        $.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetPage + &#39;&quot;&gt;&gt;&#39;);
-    }, 50);
+var $btn = $(this);
+if ($btn.hasClass(&#39;is-tapped&#39;)) return;
+e.preventDefault();
+e.stopPropagation();
+$btn.addClass(&#39;is-tapped&#39;);
+clearInterval(window.quizTimer);
+var targetPage = State.variables.quizNextPassage;
+setTimeout(function() {
+$.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetPage + &#39;&quot;&gt;&gt;&#39;);
+}, 50);
 });
 
 // 後台靜默正向計時（不設置上限，僅記錄時間）
 window.quizTimer = setInterval(function() {
-    State.variables.quizElapsedTime += 1;
+State.variables.quizElapsedTime += 1;
 }, 1000);
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/done&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
-
 
 &lt;&lt;widget &quot;PixelLikertBar&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
@@ -5892,12 +5916,10 @@ window.quizTimer = setInterval(function() {
 &lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
 
 &lt;div id=&quot;quiz-box&quot;&gt;
-&lt;!-- 這裡換成無限循環的 16bit 像素動畫 --&gt;
 &lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot; class=&quot;pixel-loop-animation&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;quiz-status&quot;&gt;
 SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
-&lt;!-- 移除了右上角的倒數時間文字 --&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
@@ -5910,7 +5932,11 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;1&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5919,7 +5945,11 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;2&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5928,7 +5958,11 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;3&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
+&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5937,7 +5971,11 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;4&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5946,7 +5984,11 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;5&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;run $decisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5963,24 +6005,24 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;script&gt;&gt;
 $(&#39;.likert-scale-bar a&#39;).on(&#39;click&#39;, function(e) {
-    var $btn = $(this);
-    if ($btn.hasClass(&#39;is-tapped&#39;)) return;
-    
-    e.preventDefault();
-    e.stopPropagation();
-    
-    $btn.addClass(&#39;is-tapped&#39;); 
-    
-    clearInterval(window.quizTimer);
-    var targetLikert = State.variables.likertNextPassage;
-    
-    setTimeout(function() {
-        $.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetLikert + &#39;&quot;&gt;&gt;&#39;);
-    }, 50);
+var $btn = $(this);
+if ($btn.hasClass(&#39;is-tapped&#39;)) return;
+
+e.preventDefault();
+e.stopPropagation();
+
+$btn.addClass(&#39;is-tapped&#39;); 
+
+clearInterval(window.quizTimer);
+var targetLikert = State.variables.likertNextPassage;
+
+setTimeout(function() {
+$.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetLikert + &#39;&quot;&gt;&gt;&#39;);
+}, 50);
 });
 
 window.quizTimer = setInterval(function() {
-    State.variables.likertElapsedTime += 1;
+State.variables.likertElapsedTime += 1;
 }, 1000);
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/done&gt;&gt;
@@ -5989,18 +6031,18 @@ window.quizTimer = setInterval(function() {
 
 &lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    // 🌟 安全防重複鎖
     if (!window.hasSubmittedData) {
         window.hasSubmittedData = true; 
         
-        console.log(&quot;SubmitToBackend 全新表單對接啟動...&quot;);
+        console.log(&quot;SubmitToBackend 獨立分流發送中...&quot;);
 
         var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
         var preScore  = State.variables.preTestScore !== undefined ? State.variables.preTestScore : 0;
-        var postScore = State.variables.score || 0;
+        var postScore = State.variables.score || 0; 
         
+        // 🌟 直接讀取兩個全新獨立、絕不交叉污染的專用箱子
         var preHistory  = State.variables.preDecisionHistory || [];
-        var postHistory = State.variables.decisionHistory || [];
+        var postHistory = State.variables.postDecisionHistory || [];
 
         // 打包 Pre-test 數據
         var preResultsArray = [];
@@ -6030,7 +6072,7 @@ window.quizTimer = setInterval(function() {
         var postResultsStr = postResultsArray.length &gt; 0 ? postResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
         var postTimesStr   = postTimesArray.length &gt; 0 ? postTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
 
-        // 🌟 你的全新 Google 表單網址 (已改為 formResponse 後台發送模式)
+        // 🌟 你的最新 Google 表單網址 (formResponse 後台發送模式)
         var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSfjsy0qUWXztgSFLlIr0cfwZU17KIJELYtFwMGScSwQMZdWrg/formResponse&quot;;
         var formData = new URLSearchParams();
         
@@ -6049,7 +6091,7 @@ window.quizTimer = setInterval(function() {
             headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
             body: formData.toString()
         }).then(function() {
-            console.log(&quot;數據已成功分離並發射！&quot;);
+            console.log(&quot;數據已完美分離並成功發射！&quot;);
         });
 
     } else {
@@ -6266,19 +6308,19 @@ window.quizTimer = setInterval(function() {
             &lt;/tbody&gt;\
         &lt;/table&gt;\
     &lt;/div&gt;\
-    &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-    /* 🌟 核心修正：用 JSON 語法進行「深層真空複製」，前測和後測從此徹底分家，後測再怎麼變都不會動到前測！ */
+  
+&lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
+
     &lt;&lt;set $preTestScore to $score&gt;&gt;
-    &lt;&lt;set $preDecisionHistory to JSON.parse(JSON.stringify($decisionHistory))&gt;&gt;
 
     &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
-        /* 🌟 重大安全策略：點擊按鈕時，我們不在這裡清空！我們安全的跳轉到下一頁 */
-        &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-        &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
-        &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
+        &lt;&lt;set $isPostTest to true&gt;&gt;\
+        &lt;&lt;set $score to 0&gt;&gt;\
+        &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+        &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;\
+        &lt;&lt;goto &quot;Ready&quot;&gt;&gt;\
+    &lt;&lt;/link&gt;&gt;\
+&lt;/div&gt;\</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你跟她們說：「這裡是家庭醫學門診，&lt;br&gt;做不了詳細檢查，不如去醫院急症室吧。」
