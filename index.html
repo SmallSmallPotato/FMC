@@ -5814,11 +5814,11 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
 
-/* 🌟 自動閘門分流 */
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+/* 🌟 嚴謹的分流閘門 */
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5833,11 +5833,11 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
 
-/* 🌟 自動閘門分流 */
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+/* 🌟 嚴謹的分流閘門 */
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5852,11 +5852,11 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
 
-/* 🌟 自動閘門分流 */
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+/* 🌟 嚴謹的分流閘門 */
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5871,11 +5871,11 @@ SYSTEM: DECISION REQUIRED
 &lt;&lt;set _isRight to false&gt;&gt;
 &lt;&lt;endif&gt;&gt;
 
-/* 🌟 自動閘門分流 */
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+/* 🌟 嚴謹的分流閘門 */
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $quizNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5932,10 +5932,10 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;1&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5945,10 +5945,10 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;2&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5958,11 +5958,11 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;3&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
-&lt;/if&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -5971,10 +5971,10 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;4&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -5984,10 +5984,10 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;&lt;link &quot;5&quot;&gt;&gt;
 &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
 &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
+&lt;&lt;if $isPostTest is true&gt;&gt;
     &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;goto $likertNextPassage&gt;&gt;
 &lt;&lt;/link&gt;&gt;
