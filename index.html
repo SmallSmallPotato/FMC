@@ -5990,68 +5990,67 @@ window.quizTimer = setInterval(function() {
 
 &lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    // 🌟 防重複安全鎖：如果發送過，就直接攔截跳出
-    if (window.hasSubmittedData) {
-        console.log(&quot;數據已經發送過，攔截重複發送！&quot;);
-        return;
+    // 🌟 改用最安全的 if 判斷式，完全棄用 return，徹底消滅紅色 Error！
+    if (!window.hasSubmittedData) {
+        window.hasSubmittedData = true; // 立刻鎖上保險絲
+        
+        console.log(&quot;SubmitToBackend 安全啟動，正在處理數據...&quot;);
+
+        var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
+        var preScore  = State.variables.preTestScore !== undefined ? State.variables.preTestScore : 0;
+        var postScore = State.variables.score || 0;
+        
+        var preHistory  = State.variables.preDecisionHistory || [];
+        var postHistory = State.variables.decisionHistory || [];
+
+        // 打包 Pre-test
+        var preResultsArray = [];
+        var preTimesArray   = [];
+        for (var i = 0; i &lt; preHistory.length; i++) {
+            var item = preHistory[i];
+            var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
+            preResultsArray.push(resText);
+            preTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
+        }
+        var preResultsStr = preResultsArray.length &gt; 0 ? preResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
+        var preTimesStr   = preTimesArray.length &gt; 0 ? preTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
+
+        // 打包 Post-test
+        var postResultsArray = [];
+        var postTimesArray   = [];
+        for (var j = 0; j &lt; postHistory.length; j++) {
+            var item = postHistory[j];
+            var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
+            postResultsArray.push(resText);
+            postTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
+        }
+        var postResultsStr = postResultsArray.length &gt; 0 ? postResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
+        var postTimesStr   = postTimesArray.length &gt; 0 ? postTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
+
+        // 背景發送網址
+        var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
+        var formData = new URLSearchParams();
+        
+        formData.append(&#39;entry.370813207&#39;, staffId);        
+        formData.append(&#39;entry.1115313582&#39;, preScore);      
+        formData.append(&#39;entry.2009874748&#39;, postScore);     
+        formData.append(&#39;entry.2060064796&#39;, preResultsStr); 
+        formData.append(&#39;entry.542305056&#39;, postResultsStr); 
+        formData.append(&#39;entry.1000920267&#39;, preTimesStr);  
+        formData.append(&#39;entry.1629469786&#39;, postTimesStr); 
+
+        fetch(formUrl, {
+            method: &#39;POST&#39;,
+            mode: &#39;no-cors&#39;,
+            headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
+            body: formData.toString()
+        }).then(function() {
+            console.log(&quot;數據已成功發射！&quot;);
+        });
+
+    } else {
+        console.log(&quot;偵測到重複呼叫，已攔截發送。&quot;);
     }
-    window.hasSubmittedData = true; // 鎖上保險絲
-
-    console.log(&quot;SubmitToBackend 安全啟動...&quot;);
-
-    var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
-    
-    // 🌟 如果你的 Pre 箱子是空的，這裡會自動抓取防呆，避免 Google 表單空白
-    var preScore  = State.variables.preTestScore !== undefined ? State.variables.preTestScore : &quot;未記錄&quot;;
-    var postScore = State.variables.score || 0;
-    
-    var preHistory  = State.variables.preDecisionHistory || [];
-    var postHistory = State.variables.decisionHistory || [];
-
-    // 打包 Pre-test
-    var preResultsArray = [];
-    var preTimesArray   = [];
-    for (var i = 0; i &lt; preHistory.length; i++) {
-        var item = preHistory[i];
-        var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
-        preResultsArray.push(resText);
-        preTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
-    }
-    // 防呆：如果陣列是空的，填入「無資料」
-    var preResultsStr = preResultsArray.length &gt; 0 ? preResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
-    var preTimesStr   = preTimesArray.length &gt; 0 ? preTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
-
-    // 打包 Post-test
-    var postResultsArray = [];
-    var postTimesArray   = [];
-    for (var j = 0; j &lt; postHistory.length; j++) {
-        var item = postHistory[j];
-        var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
-        postResultsArray.push(resText);
-        postTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
-    }
-    var postResultsStr = postResultsArray.join(&quot;, &quot;);
-    var postTimesStr   = postTimesArray.join(&quot;, &quot;);
-
-    var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
-    var formData = new URLSearchParams();
-    
-    formData.append(&#39;entry.370813207&#39;, staffId);        
-    formData.append(&#39;entry.1115313582&#39;, preScore);      
-    formData.append(&#39;entry.2009874748&#39;, postScore);     
-    formData.append(&#39;entry.2060064796&#39;, preResultsStr); 
-    formData.append(&#39;entry.542305056&#39;, postResultsStr); 
-    formData.append(&#39;entry.1000920267&#39;, preTimesStr);  
-    formData.append(&#39;entry.1629469786&#39;, postTimesStr); 
-
-    fetch(formUrl, {
-        method: &#39;POST&#39;,
-        mode: &#39;no-cors&#39;,
-        headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
-        body: formData.toString()
-    }).then(function() {
-        console.log(&quot;數據成功射入後台！&quot;);
-    });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
     &quot;1. 下列哪一項最準確描述「強制舉報」的法律時限？&quot; 
