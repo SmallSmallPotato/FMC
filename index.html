@@ -5990,11 +5990,11 @@ window.quizTimer = setInterval(function() {
 
 &lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
-    // 🌟 改用最安全的 if 判斷式，完全棄用 return，徹底消滅紅色 Error！
+    // 🌟 安全防重複鎖
     if (!window.hasSubmittedData) {
-        window.hasSubmittedData = true; // 立刻鎖上保險絲
+        window.hasSubmittedData = true; 
         
-        console.log(&quot;SubmitToBackend 安全啟動，正在處理數據...&quot;);
+        console.log(&quot;SubmitToBackend 新表單對接啟動...&quot;);
 
         var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
         var preScore  = State.variables.preTestScore !== undefined ? State.variables.preTestScore : 0;
@@ -6003,7 +6003,7 @@ window.quizTimer = setInterval(function() {
         var preHistory  = State.variables.preDecisionHistory || [];
         var postHistory = State.variables.decisionHistory || [];
 
-        // 打包 Pre-test
+        // 打包 Pre-test 數據
         var preResultsArray = [];
         var preTimesArray   = [];
         for (var i = 0; i &lt; preHistory.length; i++) {
@@ -6015,7 +6015,7 @@ window.quizTimer = setInterval(function() {
         var preResultsStr = preResultsArray.length &gt; 0 ? preResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
         var preTimesStr   = preTimesArray.length &gt; 0 ? preTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
 
-        // 打包 Post-test
+        // 打包 Post-test 數據
         var postResultsArray = [];
         var postTimesArray   = [];
         for (var j = 0; j &lt; postHistory.length; j++) {
@@ -6027,17 +6027,18 @@ window.quizTimer = setInterval(function() {
         var postResultsStr = postResultsArray.length &gt; 0 ? postResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
         var postTimesStr   = postTimesArray.length &gt; 0 ? postTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
 
-        // 背景發送網址
-        var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSeNpgeog7uOBkf-PAijwFz5qhOHsLABHAIw6Ze8KmPzIzCW0w/formResponse&quot;;
+        // 🌟 4. 新的背景發送網址 (已自動去除 viewform 改為 formResponse)
+        var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSc6KSDcYA8XeaXoLiMv3T9MLUONaIrlv8hNwR5zVzAjUReiww/formResponse&quot;;
         var formData = new URLSearchParams();
         
-        formData.append(&#39;entry.370813207&#39;, staffId);        
-        formData.append(&#39;entry.1115313582&#39;, preScore);      
-        formData.append(&#39;entry.2009874748&#39;, postScore);     
-        formData.append(&#39;entry.2060064796&#39;, preResultsStr); 
-        formData.append(&#39;entry.542305056&#39;, postResultsStr); 
-        formData.append(&#39;entry.1000920267&#39;, preTimesStr);  
-        formData.append(&#39;entry.1629469786&#39;, postTimesStr); 
+        // 🌟 5. 精準對接你的全新 Entry 編號
+        formData.append(&#39;entry.1339741445&#39;, staffId);        // 第一格：名稱
+        formData.append(&#39;entry.1342097744&#39;, preScore);       // 第二格：Pre總分
+        formData.append(&#39;entry.1012300969&#39;, postScore);      // 第三格：Post總分
+        formData.append(&#39;entry.560656134&#39;,  preResultsStr);  // 第四格：Pre每題結果
+        formData.append(&#39;entry.1525182297&#39;, postResultsStr); // 第五格：Post每題結果
+        formData.append(&#39;entry.1800444588&#39;, preTimesStr);    // 第六格：Pre猶豫時間
+        formData.append(&#39;entry.1080137104&#39;, postTimesStr);   // 第七格：Post猶豫時間
 
         fetch(formUrl, {
             method: &#39;POST&#39;,
@@ -6045,11 +6046,11 @@ window.quizTimer = setInterval(function() {
             headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
             body: formData.toString()
         }).then(function() {
-            console.log(&quot;數據已成功發射！&quot;);
+            console.log(&quot;數據已成功發射至新表單！&quot;);
         });
 
     } else {
-        console.log(&quot;偵測到重複呼叫，已攔截發送。&quot;);
+        console.log(&quot;偵測到重複呼叫，已自動攔截。&quot;);
     }
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
@@ -6265,16 +6266,18 @@ window.quizTimer = setInterval(function() {
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
        
 
+    &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
+
     &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
         /* 🌟 1. 當點擊按鈕時，立刻把前測數據鎖進備份箱子 */
         &lt;&lt;set $preTestScore to $score&gt;&gt;
-        &lt;&lt;set $preDecisionHistory to clone($decisionHistory)&gt;&gt;
+        &lt;&lt;set $preDecisionHistory to [ ...$decisionHistory ] &gt;&gt;
 
-        /* 🌟 2. 隨後將原本的計分器與歷史紀錄「安全歸零」，留給後測 */
+        /* 🌟 2. 隨後將原本的計分器與歷史紀錄「安全歸零」，留給後測重新計算 */
         &lt;&lt;set $score to 0&gt;&gt;
         &lt;&lt;set $decisionHistory to []&gt;&gt;
 
-        /* 🌟 3. 控制音樂並跳轉（你原本的代碼） */
+        /* 🌟 3. 控制音樂並跳轉到故事起點 */
         &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
         &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
         &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
