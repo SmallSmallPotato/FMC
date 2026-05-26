@@ -5804,7 +5804,7 @@ SYSTEM: DECISION REQUIRED
 &lt;/div&gt;
 
 &lt;div class=&quot;quiz-option&quot;&gt; 
-&lt;&lt;link _args[2] $quizNextPassage&gt;&gt;
+&lt;&lt;link _args[2]&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if _args[2] == _correctAnswer&gt;&gt;
@@ -5814,15 +5814,18 @@ SYSTEM: DECISION REQUIRED
         &lt;&lt;set _isRight to false&gt;&gt;
     &lt;&lt;endif&gt;&gt;
 
-    /* 🌟 100% 穩定的純變數寫入 */
+    /* 🌟 純 SugarCube 驅動：精準寫入前測/後測獨立箱子 */
     &lt;&lt;if $isPostTest is true&gt;&gt;
         &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    
+    /* 🌟 數據錄入完成後，執行安全的毫秒級微延遲跳轉，確保特效完整不搶跳 */
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$quizNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-&lt;&lt;link _args[3] $quizNextPassage&gt;&gt;
+&lt;&lt;link _args[3]&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if _args[3] == _correctAnswer&gt;&gt;
@@ -5837,9 +5840,10 @@ SYSTEM: DECISION REQUIRED
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$quizNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-&lt;&lt;link _args[4] $quizNextPassage&gt;&gt;
+&lt;&lt;link _args[4]&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if _args[4] == _correctAnswer&gt;&gt;
@@ -5854,9 +5858,10 @@ SYSTEM: DECISION REQUIRED
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$quizNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-&lt;&lt;link _args[5] $quizNextPassage&gt;&gt;
+&lt;&lt;link _args[5]&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if _args[5] == _correctAnswer&gt;&gt;
@@ -5871,13 +5876,13 @@ SYSTEM: DECISION REQUIRED
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$quizNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;&lt;done&gt;&gt;
 &lt;&lt;script&gt;&gt;
-// 後台靜默正向計時（不設置上限，僅記錄時間）
 clearInterval(window.quizTimer);
 window.quizTimer = setInterval(function() {
     State.variables.quizElapsedTime += 1;
@@ -5910,7 +5915,7 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 &lt;div class=&quot;likert-horizontal-container&quot;&gt;
 &lt;div class=&quot;likert-scale-bar&quot;&gt;
 &lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;1&quot; $likertNextPassage&gt;&gt;
+&lt;&lt;link &quot;1&quot;&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if $isPostTest is true&gt;&gt;
@@ -5918,11 +5923,12 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$likertNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;2&quot; $likertNextPassage&gt;&gt;
+&lt;&lt;link &quot;2&quot;&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if $isPostTest is true&gt;&gt;
@@ -5930,11 +5936,12 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$likertNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;3&quot; $likertNextPassage&gt;&gt;
+&lt;&lt;link &quot;3&quot;&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if $isPostTest is true&gt;&gt;
@@ -5942,11 +5949,12 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$likertNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;4&quot; $likertNextPassage&gt;&gt;
+&lt;&lt;link &quot;4&quot;&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if $isPostTest is true&gt;&gt;
@@ -5954,11 +5962,12 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$likertNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;5&quot; $likertNextPassage&gt;&gt;
+&lt;&lt;link &quot;5&quot;&gt;&gt;
     &lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
     &lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
     &lt;&lt;if $isPostTest is true&gt;&gt;
@@ -5966,6 +5975,7 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;run setTimeout(function() { $.wiki(&#39;&lt;&lt;goto &quot;$likertNextPassage&quot;&gt;&gt;&#39;) }, 50)&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5979,11 +5989,12 @@ SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
 
 &lt;&lt;done&gt;&gt;
 &lt;&lt;script&gt;&gt;
+/* 🌟 這裡完美修復為正確的 SugarCube 結束標籤 */
 clearInterval(window.quizTimer);
 window.quizTimer = setInterval(function() {
     State.variables.likertElapsedTime += 1;
 }, 1000);
-&lt;/script&gt;
+&lt;&lt;/script&gt;&gt;
 &lt;&lt;/done&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
