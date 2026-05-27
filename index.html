@@ -1537,15 +1537,19 @@ body:has(#is-certificate-page) .passage {
 Config.history.maxStates = 1;
 
 
+/* =========================================================
+   🔒 iOS Web App 專用：安全傳送門機制（精準手術、不碰 Scenario 版）
+   ========================================================= */
 
 // 1. 每當換頁完成，實時死守進度
 $(document).on(':passagedisplay', function () {
+    // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始保存
     if (passage() !== "Initialization" && passage() !== "Player_Register" && passage() !== "Quiz_Intro") {
         
         var rawBackup = {
             passageName: passage(),               
             staffID: State.variables.staffID,     
-            allVars: clone(State.variables)       
+            allVars: clone(State.variables)       // 備份當前變數快照
         };
         
         if (State.variables.staffID && State.variables.staffID.trim() !== "") {
@@ -1563,6 +1567,7 @@ window.restoreFmcGame = function () {
         var backup = JSON.parse(raw);
         if (backup && backup.passageName) {
             
+            // 將備份的變數還原回去
             Object.keys(backup.allVars).forEach(function(key) {
                 State.variables[key] = backup.allVars[key];
             });
@@ -1574,26 +1579,16 @@ window.restoreFmcGame = function () {
     }
 };
 
-// 3. 🎯 核心修正：清空記憶體的同時，必須為前測與答題系統預先初始化陣列！
+// 3. 🎯 溫和修正：全新開始時，只清除跟進度鎖相關的變數，絕對不碰你的 scenario 和其他原始設定！
 window.clearFmcMemory = function () {
-    // 1. 擦除瀏覽器硬碟紀錄
+    // 1. 擦除硬碟紀錄
     localStorage.removeItem('FMC_PWA_SAFE_PORTAL'); 
     
-    // 2. 逐一抹除舊變數
-    Object.keys(State.variables).forEach(function(key) {
-        delete State.variables[key];
-    });
-    
-    // 3. 補回最核心的名字變數
+    // 2. 💡 只把這兩個我們新增的變數重置，不去 delete 整個 State.variables 的 key！
     State.variables.staffID = "";
-    
-    // 4. 💡 修正關鍵：為答題系統重新補上乾淨的空陣列，防止 push 出現 undefined 報錯！
     State.variables.preDecisionHistory = []; 
     
-    // 備註：如果你還有其他類似的答題記錄陣列（例如記錄對錯、按鈕歷史等），請在這裡一併加上 initialized。
-    // 例如：
-    // State.variables.preTestAnswers = [];
-    // State.variables.postDecisionHistory = [];
+    // 這樣做可以確保你原本專案裡定義的 $scenarios 等物件完好無損
 };
 
 // 4. 判斷函式
@@ -1610,6 +1605,7 @@ window.hasFmcBackup = function () {
     }
     return false;
 };
+
 
 
 $(document).on(':passageend', function () {
