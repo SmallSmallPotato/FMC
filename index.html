@@ -1538,15 +1538,15 @@ Config.history.maxStates = 1;
 
 
 
-// 1. 每當換頁完成，只封存「當前頁面名稱」與「當前核心變數」，不打包複雜的歷史指針
+// 1. 每當換頁完成，實時死守進度
 $(document).on(':passagedisplay', function () {
-    // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始實時死守進度
+    // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始保存
     if (passage() !== "Initialization" && passage() !== "Player_Register" && passage() !== "Quiz_Intro") {
         
         var rawBackup = {
-            passageName: passage(),               // 記錄卡在內哪一個情景（例如 Case 1）
-            staffID: State.variables.staffID,     // 護理師名字
-            allVars: clone(State.variables)       // 當時所有的變數現場快照
+            passageName: passage(),               
+            staffID: State.variables.staffID,     
+            allVars: clone(State.variables)       // 完美備份當前變數快照
         };
         
         if (State.variables.staffID && State.variables.staffID.trim() !== "") {
@@ -1555,7 +1555,7 @@ $(document).on(':passagedisplay', function () {
     }
 });
 
-// 2. 全域讀檔傳送函式：捨棄 deserialize，改用 100% 安全合法的 Engine.play
+// 2. 全域讀檔傳送函式：不使用 jQuery.extend 觸碰唯讀屬性，改用安全賦值
 window.restoreFmcGame = function () {
     var raw = localStorage.getItem('FMC_PWA_SAFE_PORTAL');
     if (!raw) return;
@@ -1563,11 +1563,13 @@ window.restoreFmcGame = function () {
     try {
         var backup = JSON.parse(raw);
         if (backup && backup.passageName) {
-            // 💡 第一步：將當初的變數原封不動灌回現場
-            jQuery.extend(State.variables, backup.allVars);
-            State.variables.staffID = backup.staffID;
             
-            // 💡 第二步：使用溫和傳送門，直接讓畫面跳轉到中斷的地方，iOS 100% 放行，按鈕絕對有反應！
+            // 💡 安全注入法：不覆蓋 State.variables 本身，而是逐一將備份變數灌回去
+            Object.keys(backup.allVars).forEach(function(key) {
+                State.variables[key] = backup.allVars[key];
+            });
+            
+            // 溫和傳送門，iOS 100% 放行
             Engine.play(backup.passageName);
         }
     } catch (e) {
@@ -1575,10 +1577,18 @@ window.restoreFmcGame = function () {
     }
 };
 
-// 3. 智能清除函式：當玩家選擇「全新開始」時，必須在第一時間「物理抹除」所有殘留快取！
+// 3. 💡 核心修正：合法的記憶體清空鎖，絕對不會觸發唯讀報錯！
 window.clearFmcMemory = function () {
-    localStorage.removeItem('FMC_PWA_SAFE_PORTAL'); // 擦除硬碟
-    State.variables = {};                          // 徹底清空 SugarCube 當前內存變數
+    // 1. 擦除瀏覽器硬碟紀錄
+    localStorage.removeItem('FMC_PWA_SAFE_PORTAL'); 
+    
+    // 2. 逐一抹除內存變數，而不是覆蓋整個 State.variables 物件
+    Object.keys(State.variables).forEach(function(key) {
+        delete State.variables[key];
+    });
+    
+    // 3. 確保最核心的名字變數回歸絕對乾淨的初始狀態
+    State.variables.staffID = "";
 };
 
 // 4. 判斷函式
@@ -1595,7 +1605,6 @@ window.hasFmcBackup = function () {
     }
     return false;
 };
-
 
 
 $(document).on(':passageend', function () {
