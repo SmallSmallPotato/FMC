@@ -1536,31 +1536,45 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-// 1. 每當玩家跳轉換頁完成時，強行將目前遊戲的「全變數與歷史快照」塞進手機瀏覽器
+
+// 1. 每當換頁完成，強制將進度寫入官方第 0 號安全存檔槽
 $(document).on(':passagedisplay', function () {
-    // 排除一開始的第一頁和介紹頁，進入前測後才開始死守
+    // 排除一開始的第一頁和介紹頁，進入前測後才開始死守進度
     if (passage() !== "Initialization" && passage() !== "Quiz_Intro") {
-        var backupData = {
-            passageName: passage(),               // 當前停留在哪一頁（例如第一個情景）
-            variables: clone(State.variables)    // 當時所有的變數（名字、分數、歷史陣列）
-        };
-        // 繞過 SugarCube，直接鎖進手機底層緩存
-        localStorage.setItem('FMC_Training_Backup', JSON.stringify(backupData));
+        Save.slots.save(0, "FMC_Emergency_Backup");
     }
 });
 
-// 2. 建立一個全域全自動讀檔函式，供首頁按鈕調用
+// 2. 建立一個安全的讀檔全域函式，供首頁按鈕調用
 window.restoreFmcGame = function () {
-    var raw = localStorage.getItem('FMC_Training_Backup');
-    if (!raw) return;
+    if (Save.slots.has(0)) {
+        Save.slots.load(0);
+    }
+};
+
+// 3. 💡 智能過濾核心：精準判斷存檔內是否真的含有已登記的玩家名字
+window.hasFmcBackup = function () {
+    // 如果連存檔格都是空的，直接返回 false
+    if (!Save.slots.has(0)) return false;
     
-    var backup = JSON.parse(raw);
-    
-    // 完美復原當初離開時的變數現場
-    jQuery.extend(State.variables, backup.variables);
-    
-    // 強制彈回當時斷線的那一頁
-    Engine.play(backup.passageName);
+    try {
+        // 讀取 SugarCube 的 Slot 0 歷史紀錄細節
+        var savedDetails = Save.slots.ok(0);
+        if (savedDetails && savedDetails.state && savedDetails.state.history) {
+            var historyLen = savedDetails.state.history.length;
+            if (historyLen > 0) {
+                // 抓取最後一次換頁時的變數快照
+                var lastVariables = savedDetails.state.history[historyLen - 1].variables;
+                // 只有當名字存在且不是空字串時，才算「有效進度」
+                if (lastVariables && lastVariables.staffID && lastVariables.staffID.trim() !== "") {
+                    return true;
+                }
+            }
+        }
+    } catch (e) {
+        console.error("Backup check error:", e);
+    }
+    return false;
 };
 
 
@@ -7538,14 +7552,15 @@ _target
         &lt;div class=&quot;resume-btn-wrapper&quot;&gt;
             &lt;&lt;button &quot;💾 RESUME GAME (繼續上次進度)&quot;&gt;&gt;
                 &lt;&lt;run window.restoreFmcGame()&gt;&gt;
-            &lt;&lt;/button&gt;&gt; &lt;/div&gt;
+            &lt;&lt;/button&gt;&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;pixel-or-divider&quot;&gt;&lt;span&gt;OR START NEW SESSION&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;&lt;done&gt;&gt;
     &lt;&lt;run 
-        if (localStorage.getItem(&#39;FMC_Training_Backup&#39;)) {
+        if (window.hasFmcBackup()) {
             $(&quot;#native-resume-box&quot;).show();
         }
     &gt;&gt;
