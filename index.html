@@ -1536,46 +1536,58 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-// 1. 每當換頁完成，強制將當前 Passage 名稱與玩家名字鎖進底層 localStorage
+
+// 1. 每當換頁完成，強制進行現場快照
 $(document).on(':passagedisplay', function () {
-    // 排除一開始的第一頁和介紹頁，進入前測後才開始死守進度
     if (passage() !== "Initialization" && passage() !== "Quiz_Intro") {
         
+        // 讀取當前的名字，如果 State 裡有就用 State 的，如果沒有就去挖歷史緩存裡的
+        var currentName = State.variables.staffID;
+        if (!currentName) {
+            var oldRaw = localStorage.getItem('FMC_HARD_LOCK_DATA');
+            if (oldRaw) {
+                var oldData = JSON.parse(oldRaw);
+                currentName = oldData.staffID;
+                // 順便幫 SugarCube 把遺失的名字補回去
+                State.variables.staffID = currentName;
+            }
+        }
+
         var rawBackup = {
-            passageName: passage(),               // 當前停留在哪一頁（例如第一個情景）
-            staffID: State.variables.staffID,     // 玩家登記的名字
-            score: State.variables.score,         // 假設你有算前測分數的變數（若無也無妨）
-            allVars: clone(State.variables)       // 拷貝當時所有的變數現場
+            passageName: passage(),               
+            staffID: currentName,     
+            allVars: clone(State.variables)       
         };
         
-        // 直接繞過 SugarCube，用網頁最底層的強硬手段寫入手機
-        localStorage.setItem('FMC_HARD_LOCK_DATA', JSON.stringify(rawBackup));
+        // 只要名字有保住，就立刻鎖死硬碟
+        if (currentName && currentName.trim() !== "") {
+            localStorage.setItem('FMC_HARD_LOCK_DATA', JSON.stringify(rawBackup));
+        }
     }
 });
 
-// 2. 建立全域讀檔函式：這次直接用底層代碼「原地復活」歷史
+// 2. 全域讀檔復活函式
 window.restoreFmcGame = function () {
     var raw = localStorage.getItem('FMC_HARD_LOCK_DATA');
     if (!raw) return;
     
     var backup = JSON.parse(raw);
     
-    // 100% 完全還原當初離開時的所有變數
+    // 完全還原變數與名字
     jQuery.extend(State.variables, backup.allVars);
     State.variables.staffID = backup.staffID;
     
-    // 強制將畫面瞬間彈回當時斷線的那一頁，並且重置 SugarCube 的 UI 狀態
+    // 強制瞬間彈回中斷的頁面
     Engine.play(backup.passageName);
 };
 
-// 3. 建立判斷函式：精準確認有沒有真正玩到一半的紀錄
+// 3. 判斷函式
 window.hasFmcBackup = function () {
     var raw = localStorage.getItem('FMC_HARD_LOCK_DATA');
     if (!raw) return false;
     
     try {
         var backup = JSON.parse(raw);
-        // 只有當名字存在，且不是空字串時，才亮起續關面板
         if (backup && backup.staffID && backup.staffID.trim() !== "") {
             return true;
         }
@@ -1584,7 +1596,6 @@ window.hasFmcBackup = function () {
     }
     return false;
 };
-
 
 
 $(document).on(':passageend', function () {
@@ -7604,6 +7615,14 @@ _target
         &lt;&lt;if $staffID.trim() is &quot;&quot;&gt;&gt;
             &lt;&lt;run $(&quot;#login-error&quot;).slideDown(150)&gt;&gt;
         &lt;&lt;else&gt;&gt;
+            &lt;&lt;run 
+                var firstLock = {
+                    passageName: &quot;Quiz_Intro&quot;,
+                    staffID: State.variables.staffID,
+                    allVars: clone(State.variables)
+                };
+                localStorage.setItem(&#39;FMC_HARD_LOCK_DATA&#39;, JSON.stringify(firstLock));
+            &gt;&gt;
             &lt;&lt;goto &quot;Quiz_Intro&quot;&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/button&gt;&gt;
