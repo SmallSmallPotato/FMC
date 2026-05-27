@@ -1536,14 +1536,32 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-// 每當頁面渲染完成（也就是玩家進到新的一題或新的情景故事時）
+// 1. 每當玩家跳轉換頁完成時，強行將目前遊戲的「全變數與歷史快照」塞進手機瀏覽器
 $(document).on(':passagedisplay', function () {
-    // 確保 SugarCube 的存檔模組已經就緒
-    if (Save && Save.autosave) {
-        // 強制執行一次自動存檔，直接把當前快照塞進瀏覽器緩存
-        Save.autosave.save();
+    // 排除一開始的第一頁和介紹頁，進入前測後才開始死守
+    if (passage() !== "Initialization" && passage() !== "Quiz_Intro") {
+        var backupData = {
+            passageName: passage(),               // 當前停留在哪一頁（例如第一個情景）
+            variables: clone(State.variables)    // 當時所有的變數（名字、分數、歷史陣列）
+        };
+        // 繞過 SugarCube，直接鎖進手機底層緩存
+        localStorage.setItem('FMC_Training_Backup', JSON.stringify(backupData));
     }
 });
+
+// 2. 建立一個全域全自動讀檔函式，供首頁按鈕調用
+window.restoreFmcGame = function () {
+    var raw = localStorage.getItem('FMC_Training_Backup');
+    if (!raw) return;
+    
+    var backup = JSON.parse(raw);
+    
+    // 完美復原當初離開時的變數現場
+    jQuery.extend(State.variables, backup.variables);
+    
+    // 強制彈回當時斷線的那一頁
+    Engine.play(backup.passageName);
+};
 
 
 $(document).on(':passageend', function () {
@@ -7512,19 +7530,28 @@ _target
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="Before_test" tags="no-handbk no-timer" position="500,1925" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;&lt;if Save.autosave.has()&gt;&gt;
-&lt;div class=&quot;resume-panel&quot;&gt;
-    &lt;div class=&quot;resume-blink-badge&quot;&gt;📂 SYSTEM RECOVERY&lt;/div&gt;
-    &lt;div class=&quot;resume-title&quot;&gt;偵測到尚未完成的培訓評估進度&lt;/div&gt;
-    &lt;p class=&quot;resume-text&quot;&gt;系統已為閣下安全保存快照，可直接免登記續關。&lt;/p&gt;
-    &lt;div class=&quot;resume-btn-wrapper&quot;&gt;
-        &lt;&lt;button &quot;💾 RESUME GAME (繼續上次進度)&quot;&gt;&gt;
-            &lt;&lt;run Save.autosave.load()&gt;&gt;
-        &lt;&lt;/button&gt;&gt;
+&lt;div id=&quot;native-resume-box&quot; style=&quot;display: none;&quot;&gt;
+    &lt;div class=&quot;resume-panel&quot;&gt;
+        &lt;div class=&quot;resume-blink-badge&quot;&gt;📂 SYSTEM RECOVERY&lt;/div&gt;
+        &lt;div class=&quot;resume-title&quot;&gt;偵測到尚未完成的培訓評估進度&lt;/div&gt;
+        &lt;p class=&quot;resume-text&quot;&gt;系統已為閣下安全保存快照，可直接免登記續關。&lt;/p&gt;
+        &lt;div class=&quot;resume-btn-wrapper&quot;&gt;
+            &lt;&lt;button &quot;💾 RESUME GAME (繼續上次進度)&quot;&gt;&gt;
+                &lt;&lt;run window.restoreFmcGame()&gt;&gt;
+            &lt;&lt;/button&gt;&gt; &lt;/div&gt;
     &lt;/div&gt;
+    &lt;div class=&quot;pixel-or-divider&quot;&gt;&lt;span&gt;OR START NEW SESSION&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class=&quot;pixel-or-divider&quot;&gt;&lt;span&gt;OR START NEW SESSION&lt;/span&gt;&lt;/div&gt;
-&lt;&lt;/if&gt;&gt; &lt;div class=&quot;terminal-banner&quot;&gt;
+
+&lt;&lt;done&gt;&gt;
+    &lt;&lt;run 
+        if (localStorage.getItem(&#39;FMC_Training_Backup&#39;)) {
+            $(&quot;#native-resume-box&quot;).show();
+        }
+    &gt;&gt;
+&lt;&lt;/done&gt;&gt;
+
+&lt;div class=&quot;terminal-banner&quot;&gt;
     &lt;div class=&quot;scanline-effect&quot;&gt;&lt;/div&gt;
     &lt;span class=&quot;terminal-status&quot;&gt;● SYSTEM READY&lt;/span&gt;
     &lt;h6&gt;🏥 CLINICAL SIMULATION PLATFORM&lt;/h6&gt;
