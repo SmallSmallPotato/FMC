@@ -1817,7 +1817,7 @@ $(document).on(':storyready', function () {
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="5" name="PhAAccept" tags="Dx" position="25,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="PhAAccept" tags="Dx" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
 &lt;span id=&quot;story-text&quot;&gt;你選擇接受家長解釋。&lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -6285,13 +6285,13 @@ State.variables.likertElapsedTime += 1;
             &lt;/thead&gt;
             &lt;tbody&gt;
             &lt;&lt;if def $preDecisionHistory and $preDecisionHistory.length &gt; 0&gt;&gt;
-                &lt;&lt;for _i to 0; _i &lt; $preDecisionHistory.length; _i++&gt;&gt;\
+                &lt;&lt;for _i to 0; _i &lt; $preDecisionHistory.length; _i++&gt;&gt;&lt;&lt;/if&gt;&gt;\
                     &lt;tr&gt;\
                         &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
                         &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;\
                             /* 🎯 根據題目類型完美判斷樣式 */
                             &lt;&lt;if $preDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $preDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;\
+                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $preDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;&lt;&lt;/if&gt;&gt;\
                             &lt;&lt;else&gt;&gt;\
                                 &lt;&lt;if $preDecisionHistory[_i].isCorrect&gt;&gt;\
                                     &lt;span style=&quot;color: #00ff00;&quot;&gt;✓&lt;/span&gt;\
@@ -6307,7 +6307,7 @@ State.variables.likertElapsedTime += 1;
                 &lt;&lt;/for&gt;&gt;\
             &lt;&lt;else&gt;&gt;
                 &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000;&quot;&gt;⚠️ 暫無前測數據歷史&lt;/td&gt;&lt;/tr&gt;
-            &lt;&lt;/if&gt;&gt;
+           
             &lt;/tbody&gt;\
         &lt;/table&gt;\
     &lt;/div&gt;\
@@ -9090,7 +9090,7 @@ State.variables.likertElapsedTime += 1;
             &lt;/thead&gt;
             &lt;tbody&gt;
             &lt;&lt;if def $preDecisionHistory and $preDecisionHistory.length &gt; 0&gt;&gt;
-                &lt;&lt;for _i to 0; _i &lt; $preDecisionHistory.length; _i++&gt;&gt;\
+                &lt;&lt;for _i to 0; _i &lt; $preDecisionHistory.length; _i++&gt;&gt;&lt;&lt;/if&gt;&gt;\
                     &lt;tr&gt;\
                         &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
                         &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;\
@@ -9111,7 +9111,7 @@ State.variables.likertElapsedTime += 1;
                 &lt;&lt;/for&gt;&gt;\
             &lt;&lt;else&gt;&gt;
                 &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000; padding: 10px;&quot;&gt;⚠️ 系統未偵測到前測數據歷史&lt;/td&gt;&lt;/tr&gt;
-            &lt;&lt;/if&gt;&gt;
+            
             &lt;/tbody&gt;
         &lt;/table&gt;
 
@@ -9126,12 +9126,12 @@ State.variables.likertElapsedTime += 1;
             &lt;/thead&gt;
             &lt;tbody&gt;
             &lt;&lt;if def $postDecisionHistory and $postDecisionHistory.length &gt; 0&gt;&gt;
-                &lt;&lt;for _i to 0; _i &lt; $postDecisionHistory.length; _i++&gt;&gt;\
+                &lt;&lt;for _i to 0; _i &lt; $postDecisionHistory.length; _i++&gt;&gt;&lt;&lt;/if&gt;&gt;\
                     &lt;tr&gt;\
                         &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
                         &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;\
                             &lt;&lt;if $postDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;\
+                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;&lt;&lt;/if&gt;&gt;\
                             &lt;&lt;else&gt;&gt;\
                                 &lt;&lt;if $postDecisionHistory[_i].isCorrect&gt;&gt;\
                                     &lt;span style=&quot;color: #00ff00;&quot;&gt;✓&lt;/span&gt;\
@@ -9147,7 +9147,7 @@ State.variables.likertElapsedTime += 1;
                 &lt;&lt;/for&gt;&gt;\
             &lt;&lt;else&gt;&gt;
                 &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000; padding: 10px;&quot;&gt;⚠️ 系統未偵測到後測數據歷史&lt;/td&gt;&lt;/tr&gt;
-            &lt;&lt;/if&gt;&gt;
+            
             &lt;/tbody&gt;
         &lt;/table&gt;
     &lt;/div&gt;
