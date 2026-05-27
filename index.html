@@ -2502,17 +2502,18 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="21" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;set $score to 0&gt;&gt;\
-&lt;&lt;set $decisionHistory to []&gt;&gt;\
-&lt;&lt;set $totalTime = 0&gt;&gt;
-&lt;&lt;set $currentScenarioId = 0&gt;&gt;
-&lt;&lt;set $totalSafety = 0&gt;&gt;
-&lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;set $progress = 0&gt;&gt;&lt;br&gt;&lt;br&gt;
- &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
-&lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="22" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
+</tw-passagedata><tw-passagedata pid="21" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;if !$isPostTest&gt;&gt;\
+    &lt;&lt;set $decisionHistory to []&gt;&gt;&lt;&lt;/if&gt;&gt;\
+&lt;&lt;set $score to 0&gt;&gt;\
+&lt;&lt;set $totalTime to 0&gt;&gt;
+&lt;&lt;set $currentScenarioId to 0&gt;&gt;
+&lt;&lt;set $totalSafety to 0&gt;&gt;
+&lt;&lt;set $totalLegal to 0&gt;&gt;
+&lt;&lt;set $progress to 0&gt;&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
+&lt;&lt;link &quot;▶ Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
     &lt;tr&gt;\
         &lt;td&gt;\
             &lt;&lt;if $unlocked.redFlags&gt;&gt;\
@@ -6260,8 +6261,9 @@ _target
 &gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 
-/* 🔒 安全鎖定前測分數 */
+/* 🔒 安全鎖定前測分數與歷史數據（使用 .clone() 複製獨立副本，從此不與主變數連動） */
 &lt;&lt;set $preTestScore to $score&gt;&gt;
+&lt;&lt;set $preDecisionHistory to $decisionHistory.clone()&gt;&gt;
 
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: PRE-TEST COMPLETED&lt;/div&gt;
