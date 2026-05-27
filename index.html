@@ -1536,24 +1536,14 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-
-try {
-    // 1. 使用底層屬性定義，強制穿透 2.37.3 的物件防禦鎖
-    Object.defineProperty(Config.saves, 'isAutosave', {
-        value: function (mode) {
-            return true; // 100% 強制所有頁面一載入就自動背景存檔
-        },
-        writable: true,
-        configurable: true
-    });
-} catch (e) {
-    // 2. 備用安全鎖：如果連穿透都被拒絕，直接在換頁完成時強制把快照寫入瀏覽器
-    $(document).on(':passagedisplay', function () {
-        if (Save && Save.autosave) {
-            Save.autosave.save(); 
-        }
-    });
-}
+// 每當頁面渲染完成（也就是玩家進到新的一題或新的情景故事時）
+$(document).on(':passagedisplay', function () {
+    // 確保 SugarCube 的存檔模組已經就緒
+    if (Save && Save.autosave) {
+        // 強制執行一次自動存檔，直接把當前快照塞進瀏覽器緩存
+        Save.autosave.save();
+    }
+});
 
 
 $(document).on(':passageend', function () {
@@ -1572,6 +1562,7 @@ $(document).on(':passageend', function () {
         });
     }
 });
+
 
 $(document).on(':passagedisplay', function () {
     // 尋找現有的 viewport meta 標籤
@@ -7533,9 +7524,7 @@ _target
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;pixel-or-divider&quot;&gt;&lt;span&gt;OR START NEW SESSION&lt;/span&gt;&lt;/div&gt;
-&lt;&lt;endif&gt;&gt;
-
-&lt;div class=&quot;terminal-banner&quot;&gt;
+&lt;&lt;/if&gt;&gt; &lt;div class=&quot;terminal-banner&quot;&gt;
     &lt;div class=&quot;scanline-effect&quot;&gt;&lt;/div&gt;
     &lt;span class=&quot;terminal-status&quot;&gt;● SYSTEM READY&lt;/span&gt;
     &lt;h6&gt;🏥 CLINICAL SIMULATION PLATFORM&lt;/h6&gt;
