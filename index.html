@@ -312,8 +312,8 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
     box-shadow: 
         inset 0 0 0 4px #000000,
         8px 8px 0px rgba(0, 0, 0, 0.7); /* 強烈硬陰影 */
-    padding: 20px; /* 手機適度縮小內邊距 */
-    margin: 20px auto; /* 置中 */
+    padding: 10px; /* 手機適度縮小內邊距 */
+    margin: 10px auto; /* 置中 */
     width: 90%; /* 寬度佔螢幕 90% */
     max-width: 500px;
     text-align: center;
@@ -1537,49 +1537,57 @@ body:has(#is-certificate-page) .passage {
 Config.history.maxStates = 1;
 
 
-// 1. 每當換頁完成，強制將 SugarCube 完整的官方序列化打包字串鎖進硬碟
+
+// 1. 每當換頁完成，只封存「當前頁面名稱」與「當前核心變數」，不打包複雜的歷史指針
 $(document).on(':passagedisplay', function () {
-    // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始死守進度
+    // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始實時死守進度
     if (passage() !== "Initialization" && passage() !== "Player_Register" && passage() !== "Quiz_Intro") {
         
-        var fullEngineSnapshot = Save.serialize();
-        
         var rawBackup = {
-            passageName: passage(),
-            staffID: State.variables.staffID,
-            serializedString: fullEngineSnapshot
+            passageName: passage(),               // 記錄卡在內哪一個情景（例如 Case 1）
+            staffID: State.variables.staffID,     // 護理師名字
+            allVars: clone(State.variables)       // 當時所有的變數現場快照
         };
         
         if (State.variables.staffID && State.variables.staffID.trim() !== "") {
-            localStorage.setItem('FMC_PWA_PERFECT_LOCK', JSON.stringify(rawBackup));
+            localStorage.setItem('FMC_PWA_SAFE_PORTAL', JSON.stringify(rawBackup));
         }
     }
 });
 
-// 2. 全域讀檔復活函式
+// 2. 全域讀檔傳送函式：捨棄 deserialize，改用 100% 安全合法的 Engine.play
 window.restoreFmcGame = function () {
-    var raw = localStorage.getItem('FMC_PWA_PERFECT_LOCK');
+    var raw = localStorage.getItem('FMC_PWA_SAFE_PORTAL');
     if (!raw) return;
     
     try {
         var backup = JSON.parse(raw);
-        if (backup && backup.serializedString) {
-            // 透過官方反序列化一秒解包，完美還原所有變數與歷史，並自動激活所有按鈕
-            Save.deserialize(backup.serializedString);
+        if (backup && backup.passageName) {
+            // 💡 第一步：將當初的變數原封不動灌回現場
+            jQuery.extend(State.variables, backup.allVars);
+            State.variables.staffID = backup.staffID;
+            
+            // 💡 第二步：使用溫和傳送門，直接讓畫面跳轉到中斷的地方，iOS 100% 放行，按鈕絕對有反應！
+            Engine.play(backup.passageName);
         }
     } catch (e) {
-        console.error("重組解包失敗:", e);
+        console.error("傳送失敗:", e);
     }
 };
 
-// 3. 智能判斷函式
+// 3. 智能清除函式：當玩家選擇「全新開始」時，必須在第一時間「物理抹除」所有殘留快取！
+window.clearFmcMemory = function () {
+    localStorage.removeItem('FMC_PWA_SAFE_PORTAL'); // 擦除硬碟
+    State.variables = {};                          // 徹底清空 SugarCube 當前內存變數
+};
+
+// 4. 判斷函式
 window.hasFmcBackup = function () {
-    var raw = localStorage.getItem('FMC_PWA_PERFECT_LOCK');
+    var raw = localStorage.getItem('FMC_PWA_SAFE_PORTAL');
     if (!raw) return false;
-    
     try {
         var backup = JSON.parse(raw);
-        if (backup && backup.staffID && backup.staffID.trim() !== "" && backup.serializedString) {
+        if (backup && backup.staffID && backup.staffID.trim() !== "" && backup.passageName) {
             return true;
         }
     } catch(e) {
@@ -1587,6 +1595,7 @@ window.hasFmcBackup = function () {
     }
     return false;
 };
+
 
 
 $(document).on(':passageend', function () {
@@ -7561,7 +7570,7 @@ _target
         &lt;div class=&quot;resume-title&quot;&gt;偵測到尚未完成的培訓評估進度&lt;/div&gt;
         &lt;p class=&quot;resume-text&quot;&gt;系統已為閣下安全保存進度，可直接免登記續關。&lt;/p&gt;
         &lt;div class=&quot;resume-btn-wrapper&quot;&gt;
-            &lt;&lt;button &quot;💾 RESUME GAME (繼續上次進度)&quot;&gt;&gt;
+            &lt;&lt;button &quot;💾 RESUME GAME &lt;br&gt;(繼續上次進度)&quot;&gt;&gt;
                 &lt;&lt;run window.restoreFmcGame()&gt;&gt;
             &lt;&lt;/button&gt;&gt;
         &lt;/div&gt;
@@ -7581,8 +7590,9 @@ _target
 &lt;br&gt;
 
 &lt;div class=&quot;btn-container&quot;&gt;
-    &lt;&lt;button &quot;🕹️ START NEW SESSION (全新開始)&quot;&gt;&gt;
-        &lt;&lt;goto &quot;Player_Register&quot;&gt;&gt; &lt;&lt;/button&gt;&gt;
+    &lt;&lt;button &quot;🕹️ START NEW SESSION &lt;br&gt;(全新開始)&quot;&gt;&gt;
+        &lt;&lt;run window.clearFmcMemory()&gt;&gt; &lt;&lt;goto &quot;Player_Register&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
 &lt;&lt;done&gt;&gt;
