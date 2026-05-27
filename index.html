@@ -1537,58 +1537,52 @@ body:has(#is-certificate-page) .passage {
 Config.history.maxStates = 1;
 
 
-// 1. 每當換頁完成，強制進行現場快照
+// 1. 每當換頁完成，強制將 SugarCube 完整的官方序列化打包字串（包含引擎所有歷史指針）鎖進硬碟
 $(document).on(':passagedisplay', function () {
+    // 排除一開始的第一頁和介紹頁，進入前測後才開始死守進度
     if (passage() !== "Initialization" && passage() !== "Quiz_Intro") {
         
-        // 讀取當前的名字，如果 State 裡有就用 State 的，如果沒有就去挖歷史緩存裡的
-        var currentName = State.variables.staffID;
-        if (!currentName) {
-            var oldRaw = localStorage.getItem('FMC_HARD_LOCK_DATA');
-            if (oldRaw) {
-                var oldData = JSON.parse(oldRaw);
-                currentName = oldData.staffID;
-                // 順便幫 SugarCube 把遺失的名字補回去
-                State.variables.staffID = currentName;
-            }
-        }
-
+        // 💡 核心黑科技：Save.serialize() 會把 SugarCube 引擎當前的完整靈魂（變數+歷史+狀態）打包成一段文字
+        var fullEngineSnapshot = Save.serialize();
+        
         var rawBackup = {
-            passageName: passage(),               
-            staffID: currentName,     
-            allVars: clone(State.variables)       
+            passageName: passage(),
+            staffID: State.variables.staffID,
+            serializedString: fullEngineSnapshot // 鎖定這段靈魂字串
         };
         
-        // 只要名字有保住，就立刻鎖死硬碟
-        if (currentName && currentName.trim() !== "") {
-            localStorage.setItem('FMC_HARD_LOCK_DATA', JSON.stringify(rawBackup));
+        // 確保有名字才存檔，避免無效覆蓋
+        if (State.variables.staffID && State.variables.staffID.trim() !== "") {
+            localStorage.setItem('FMC_PWA_PERFECT_LOCK', JSON.stringify(rawBackup));
         }
     }
 });
 
-// 2. 全域讀檔復活函式
+// 2. 全域讀檔復活函式：利用官方反序列化，100% 喚醒引擎與按鈕
 window.restoreFmcGame = function () {
-    var raw = localStorage.getItem('FMC_HARD_LOCK_DATA');
+    var raw = localStorage.getItem('FMC_PWA_PERFECT_LOCK');
     if (!raw) return;
     
-    var backup = JSON.parse(raw);
-    
-    // 完全還原變數與名字
-    jQuery.extend(State.variables, backup.allVars);
-    State.variables.staffID = backup.staffID;
-    
-    // 強制瞬間彈回中斷的頁面
-    Engine.play(backup.passageName);
+    try {
+        var backup = JSON.parse(raw);
+        if (backup && backup.serializedString) {
+            // 💡 官方核心 API：deserialize 會把打包的靈魂字串完整灌回引擎，並自動執行換頁與按鈕激活，絕不死機！
+            Save.deserialize(backup.serializedString);
+        }
+    } catch (e) {
+        console.error("重組解包失敗:", e);
+        alert("⚠️ 續關檔案解析失敗，請重新挑戰！");
+    }
 };
 
-// 3. 判斷函式
+// 3. 智能判斷函式
 window.hasFmcBackup = function () {
-    var raw = localStorage.getItem('FMC_HARD_LOCK_DATA');
+    var raw = localStorage.getItem('FMC_PWA_PERFECT_LOCK');
     if (!raw) return false;
     
     try {
         var backup = JSON.parse(raw);
-        if (backup && backup.staffID && backup.staffID.trim() !== "") {
+        if (backup && backup.staffID && backup.staffID.trim() !== "" && backup.serializedString) {
             return true;
         }
     } catch(e) {
@@ -1596,6 +1590,7 @@ window.hasFmcBackup = function () {
     }
     return false;
 };
+
 
 
 $(document).on(':passageend', function () {
@@ -7615,14 +7610,6 @@ _target
         &lt;&lt;if $staffID.trim() is &quot;&quot;&gt;&gt;
             &lt;&lt;run $(&quot;#login-error&quot;).slideDown(150)&gt;&gt;
         &lt;&lt;else&gt;&gt;
-            &lt;&lt;run 
-                var firstLock = {
-                    passageName: &quot;Quiz_Intro&quot;,
-                    staffID: State.variables.staffID,
-                    allVars: clone(State.variables)
-                };
-                localStorage.setItem(&#39;FMC_HARD_LOCK_DATA&#39;, JSON.stringify(firstLock));
-            &gt;&gt;
             &lt;&lt;goto &quot;Quiz_Intro&quot;&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/button&gt;&gt;
