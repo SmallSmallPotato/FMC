@@ -1540,13 +1540,12 @@ Config.history.maxStates = 1;
 
 // 1. 每當換頁完成，實時死守進度
 $(document).on(':passagedisplay', function () {
-    // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始保存
     if (passage() !== "Initialization" && passage() !== "Player_Register" && passage() !== "Quiz_Intro") {
         
         var rawBackup = {
             passageName: passage(),               
             staffID: State.variables.staffID,     
-            allVars: clone(State.variables)       // 完美備份當前變數快照
+            allVars: clone(State.variables)       
         };
         
         if (State.variables.staffID && State.variables.staffID.trim() !== "") {
@@ -1555,7 +1554,7 @@ $(document).on(':passagedisplay', function () {
     }
 });
 
-// 2. 全域讀檔傳送函式：不使用 jQuery.extend 觸碰唯讀屬性，改用安全賦值
+// 2. 全域讀檔傳送函式
 window.restoreFmcGame = function () {
     var raw = localStorage.getItem('FMC_PWA_SAFE_PORTAL');
     if (!raw) return;
@@ -1564,12 +1563,10 @@ window.restoreFmcGame = function () {
         var backup = JSON.parse(raw);
         if (backup && backup.passageName) {
             
-            // 💡 安全注入法：不覆蓋 State.variables 本身，而是逐一將備份變數灌回去
             Object.keys(backup.allVars).forEach(function(key) {
                 State.variables[key] = backup.allVars[key];
             });
             
-            // 溫和傳送門，iOS 100% 放行
             Engine.play(backup.passageName);
         }
     } catch (e) {
@@ -1577,18 +1574,26 @@ window.restoreFmcGame = function () {
     }
 };
 
-// 3. 💡 核心修正：合法的記憶體清空鎖，絕對不會觸發唯讀報錯！
+// 3. 🎯 核心修正：清空記憶體的同時，必須為前測與答題系統預先初始化陣列！
 window.clearFmcMemory = function () {
     // 1. 擦除瀏覽器硬碟紀錄
     localStorage.removeItem('FMC_PWA_SAFE_PORTAL'); 
     
-    // 2. 逐一抹除內存變數，而不是覆蓋整個 State.variables 物件
+    // 2. 逐一抹除舊變數
     Object.keys(State.variables).forEach(function(key) {
         delete State.variables[key];
     });
     
-    // 3. 確保最核心的名字變數回歸絕對乾淨的初始狀態
+    // 3. 補回最核心的名字變數
     State.variables.staffID = "";
+    
+    // 4. 💡 修正關鍵：為答題系統重新補上乾淨的空陣列，防止 push 出現 undefined 報錯！
+    State.variables.preDecisionHistory = []; 
+    
+    // 備註：如果你還有其他類似的答題記錄陣列（例如記錄對錯、按鈕歷史等），請在這裡一併加上 initialized。
+    // 例如：
+    // State.variables.preTestAnswers = [];
+    // State.variables.postDecisionHistory = [];
 };
 
 // 4. 判斷函式
