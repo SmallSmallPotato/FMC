@@ -6246,81 +6246,147 @@ State.variables.likertElapsedTime += 1;
 &gt;&gt;</tw-passagedata><tw-passagedata pid="119" name="Quiz_19" tags="no-handbk no-timer Quiz" position="700,2325" size="100,100">&lt;&lt;PixelLikertBar 
     &quot;我認為強制舉報制度能有效保護診所接觸到的高風險兒童。&quot; 
     &quot;Quiz_20&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="Quiz_20" tags="no-handbk no-timer Quiz" position="700,2425" size="100,100">&lt;&lt;PixelLikertBar 
+&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="Quiz_20" tags="no-handbk no-timer Quiz" position="700,2425" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
+    /* 前測時，第20題做完去 Quiz_Result */
+    &lt;&lt;set _target to &quot;Quiz_Result&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    /* 後測時，第20題做完去大結局 */
+    &lt;&lt;set _target to &quot;Game_Ultimate_Ending&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;\
+&lt;&lt;PixelLikertBar 
  &quot;如果我要與上司就舉報決定產生分歧，我有信心能堅持履行法律義務。&quot; 
- &quot;Quiz_Result&quot;
+ _target
 &gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 
-/* 🌟 一進入前測結果頁，最頂端這個判斷式用來進行後測的分流跳轉 */
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    /* 後測做完第20題也會來到這裡，但在這裡一瞬間就會被打包複製並轉移 */
-    &lt;&lt;set $postDecisionHistory to clone($decisionHistory)&gt;&gt;
-    &lt;&lt;goto &quot;Game_Ultimate_Ending&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;
 
-&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
-    &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: EVALUATION COMPLETED&lt;/div&gt;
-    &lt;div class=&quot;story-text&quot;&gt;\
-        &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 前測評估報告 ✦&lt;/h2&gt;\
-        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;TOTAL SCORE / 總得分：
-            &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;= $score &gt;&gt;&lt;/span&gt; 分 &lt;/p&gt;\
-        &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
-        &lt;table class=&quot;pixel-report-table&quot;&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
-                    &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
-                    &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-            /* 🌟 前測直接讀取當前的 $decisionHistory，保證表格和分數 100% 完美回歸 */
-            &lt;&lt;for _i to 0; _i &lt; $decisionHistory.length; _i++&gt;&gt;\
-                &lt;tr&gt;\
-                    &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;\
-                        #&lt;&lt;print _i + 1&gt;&gt;\
-                    &lt;/td&gt;\      
-                    &lt;td style=&quot;text-align: center;&quot;&gt;\
-                    &lt;&lt;if $decisionHistory[_i].choice == &quot;TIMEOUT&quot;&gt;&gt;\
-                        &lt;span class=&quot;glow-red&quot;&gt;[ 超時 ]&lt;/span&gt;\
-                    &lt;&lt;else&gt;&gt;\     
-                        &lt;&lt;if $decisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                            &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold; font-size: 0.75em;&quot;&gt;&lt;= $decisionHistory[_i].choice &gt;&gt;&lt;/span&gt;\
-                        &lt;&lt;else&gt;&gt;\
-                            &lt;&lt;if $decisionHistory[_i].isCorrect == true&gt;&gt;\
-                                &lt;span class=&quot;glow-green&quot;&gt; ✓ &lt;/span&gt;\
+    &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
+        &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: PRE-TEST COMPLETED&lt;/div&gt;
+        &lt;div class=&quot;story-text&quot;&gt;\
+            &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 前測評估報告 ✦&lt;/h2&gt;\
+            &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;TOTAL SCORE / 總得分：
+                &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt; 分 &lt;/p&gt;\
+            &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
+            
+            &lt;table class=&quot;pixel-report-table&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
+                        &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
+                        &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                &lt;&lt;for _i to 0; _i &lt; $decisionHistory.length; _i++&gt;&gt;\
+                    &lt;tr&gt;\
+                        &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
+                        &lt;td style=&quot;text-align: center;&quot;&gt;\
+                        &lt;&lt;if $decisionHistory[_i].choice == &quot;TIMEOUT&quot;&gt;&gt;\
+                            &lt;span class=&quot;glow-red&quot;&gt;[ 超時 ]&lt;/span&gt;\
+                        &lt;&lt;else&gt;&gt;\     
+                            &lt;&lt;if $decisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
+                                &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold; font-size: 0.75em;&quot;&gt;&lt;&lt;print $decisionHistory[_i].choice&gt;&gt;&lt;/span&gt;\
                             &lt;&lt;else&gt;&gt;\
-                                &lt;span class=&quot;glow-red&quot;&gt; ✗ &lt;/span&gt;\
-                            &lt;&lt;endif&gt;&gt;\
+                                &lt;&lt;if $decisionHistory[_i].isCorrect == true&gt;&gt;\
+                                    &lt;span class=&quot;glow-green&quot;&gt; ✓ &lt;/span&gt;\
+                                &lt;&lt;else&gt;&gt;\
+                                    &lt;span class=&quot;glow-red&quot;&gt; ✗ &lt;/span&gt;\
+                                &lt;&lt;endif&gt;&gt;\
+                            &lt;&lt;/if&gt;&gt;\
                         &lt;&lt;/if&gt;&gt;\
-                    &lt;&lt;/if&gt;&gt;\
-                    &lt;/td&gt;\     
-                    &lt;td style=&quot;text-align: center;&quot;&gt;\
-                        &lt;span class=&quot;glow-green&quot;&gt;&lt;= $decisionHistory[_i].time.toFixed(2) &gt;&gt;&lt;/span&gt; 秒
-                    &lt;/td&gt;\
-                &lt;/tr&gt;\
-            &lt;&lt;/for&gt;&gt;\
-            &lt;/tbody&gt;\
-        &lt;/table&gt;\
-    &lt;/div&gt;\
-  
-&lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-    /* 🌟 點擊按鈕的瞬間打包前測，清空主計分器，為後測鋪路！ */
-    &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
-        &lt;&lt;set $preTestScore to $score&gt;&gt;
-        &lt;&lt;set $preDecisionHistory to clone($decisionHistory)&gt;&gt;
+                        &lt;/td&gt;\     
+                        &lt;td style=&quot;text-align: center;&quot;&gt;\
+                            &lt;span class=&quot;glow-green&quot;&gt;&lt;&lt;print $decisionHistory[_i].time.toFixed(2)&gt;&gt;&lt;/span&gt; 秒
+                        &lt;/td&gt;\
+                    &lt;/tr&gt;\
+                &lt;&lt;/for&gt;&gt;\
+                &lt;/tbody&gt;\
+            &lt;/table&gt;\
+        &lt;/div&gt;\
+      
+        &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
+            /* 🌟 只有在玩家按下這個按鈕的「微秒瞬間」，我們才把數據安全移轉，絕不干擾畫面的渲染！ */
+            &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
+                &lt;&lt;set $preTestScore to $score&gt;&gt;
+                &lt;&lt;set $preDecisionHistory to clone($decisionHistory)&gt;&gt;
+                
+                /* 清空主計分板，徹底留給後測 */
+                &lt;&lt;set $score to 0&gt;&gt;
+                &lt;&lt;set $decisionHistory to []&gt;&gt;
+                &lt;&lt;set $isPostTest to true&gt;&gt;
+                
+                &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+                &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
+                &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
+            &lt;&lt;/link&gt;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;&lt;else&gt;&gt;
+
+    &lt;&lt;set $postTestScore to $score&gt;&gt;
+    &lt;&lt;set $postDecisionHistory to clone($decisionHistory)&gt;&gt;
+
+    /* 🌟 在這裡執行發送！因為 Step 1 刪除了 return，這裡絕對不會再崩潰卡死！ */
+    &lt;&lt;SubmitToBackend&gt;&gt;
+
+    &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
+        &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: FINAL EVALUATION SUMMARY&lt;/div&gt;
+        &lt;div class=&quot;story-text&quot;&gt;\
+            &lt;h2 style=&quot;text-align: center; color: #00ffff; text-shadow: 0 0 6px #00ffff; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 最終評估報告 ✦&lt;/h2&gt;\
+            
+            &lt;p style=&quot;font-size: 1.2em; text-align: center; margin-bottom: 5px; color: #aaa;&quot;&gt;(Pre-test 成績：&lt;&lt;print $preTestScore&gt;&gt; 分)&lt;/p&gt;\
+            &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px; color: #00ff00;&quot;&gt;Post-test 成績：
+                &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;= $postTestScore &gt;&gt;&lt;/span&gt; 分&lt;/p&gt;\
+            
+            &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
+            
+            &lt;table class=&quot;pixel-report-table&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
+                        &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
+                        &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                &lt;&lt;for _i to 0; _i &lt; $postDecisionHistory.length; _i++&gt;&gt;\
+                    &lt;tr&gt;\
+                        &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
+                        &lt;td style=&quot;text-align: center;&quot;&gt;\
+                        &lt;&lt;if $postDecisionHistory[_i].choice == &quot;TIMEOUT&quot;&gt;&gt;\
+                            &lt;span class=&quot;glow-red&quot;&gt;[ 超時 ]&lt;/span&gt;\
+                        &lt;&lt;else&gt;&gt;\     
+                            &lt;&lt;if $postDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
+                                &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold; font-size: 0.75em;&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].choice&gt;&gt;&lt;/span&gt;\
+                            &lt;&lt;else&gt;&gt;\
+                                &lt;&lt;if $postDecisionHistory[_i].isCorrect == true&gt;&gt;\
+                                    &lt;span class=&quot;glow-green&quot;&gt; ✓ &lt;/span&gt;\
+                                &lt;&lt;else&gt;&gt;\
+                                    &lt;span class=&quot;glow-red&quot;&gt; ✗ &lt;/span&gt;\
+                                &lt;&lt;endif&gt;&gt;\
+                            &lt;&lt;/if&gt;&gt;\
+                        &lt;&lt;/if&gt;&gt;\
+                        &lt;/td&gt;\     
+                        &lt;td style=&quot;text-align: center;&quot;&gt;\
+                            &lt;span class=&quot;glow-green&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].time.toFixed(2)&gt;&gt;&lt;/span&gt; 秒
+                        &lt;/td&gt;\
+                    &lt;/tr&gt;\
+                &lt;&lt;/for&gt;&gt;\
+                &lt;/tbody&gt;\
+            &lt;/table&gt;\
+        &lt;/div&gt;\
         
-        &lt;&lt;set $score to 0&gt;&gt;
-        &lt;&lt;set $decisionHistory to []&gt;&gt;
-        &lt;&lt;set $isPostTest to true&gt;&gt;
-        
-        &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-        &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
-        &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-&lt;/div&gt;\
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
+        &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
+            &lt;&lt;link &quot;案件重溫&quot;&gt;&gt;
+                &lt;&lt;goto &quot;Start&quot;&gt;&gt; /* 換成你的重溫 Passage 名字 */
+            &lt;&lt;/link&gt;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你跟她們說：「這裡是家庭醫學門診，&lt;br&gt;做不了詳細檢查，不如去醫院急症室吧。」
@@ -9062,6 +9128,11 @@ State.variables.likertElapsedTime += 1;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="168" name="Game_Ultimate_Ending" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 
+/* 🌟 核心關鍵：一進入頁面，立刻將後測的數據打包鎖定進 $postDecisionHistory 盒子裡！ */
+&lt;&lt;set $postTestScore to $score&gt;&gt;
+&lt;&lt;set $postDecisionHistory to clone($decisionHistory)&gt;&gt;
+
+/* 🌟 數據完全就位後，發射給 Google 表單（此時巨集已被 Step 1 修復，不再崩潰） */
 &lt;&lt;SubmitToBackend&gt;&gt;
 
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
@@ -9069,8 +9140,11 @@ State.variables.likertElapsedTime += 1;
     
     &lt;div class=&quot;story-text&quot;&gt;\
         &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 🎓最終評估報告 ✦&lt;/h2&gt;\
-        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;(Pre-test 成績: &lt;&lt;print $preTestScore&gt;&gt; 分)&lt;br&gt;Post-test 成績: 
-            &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt; 分&lt;/p&gt;\
+        
+        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;\
+            (Pre-test 成績: &lt;&lt;print $preTestScore&gt;&gt; 分)&lt;br&gt;\
+            Post-test 成績: &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $postTestScore&gt;&gt;&lt;/span&gt; 分\
+        &lt;/p&gt;\
         
         &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
         
@@ -9083,7 +9157,6 @@ State.variables.likertElapsedTime += 1;
                 &lt;/tr&gt;
             &lt;/thead&gt;
             &lt;tbody&gt;
-            /* 🌟 後測在大結局畫面上，直接讀取已經轉存好的 $postDecisionHistory */
             &lt;&lt;for _i to 0; _i &lt; $postDecisionHistory.length; _i++&gt;&gt;\
                 &lt;tr&gt;\
                     &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;\
@@ -9094,7 +9167,7 @@ State.variables.likertElapsedTime += 1;
                         &lt;span class=&quot;glow-red&quot;&gt;[ 超時 ]&lt;/span&gt;\
                     &lt;&lt;else&gt;&gt;\     
                         &lt;&lt;if $postDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                            &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold; font-size: 0.75em;&quot;&gt;&lt;= $postDecisionHistory[_i].choice &gt;&gt;&lt;/span&gt;\
+                            &lt;span style=&quot;color: #ffffff; text-shadow: 0 0 3px #ffffff; font-weight: bold; font-size: 0.75em;&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].choice&gt;&gt;&lt;/span&gt;\
                         &lt;&lt;else&gt;&gt;\
                             &lt;&lt;if $postDecisionHistory[_i].isCorrect == true&gt;&gt;\
                                 &lt;span class=&quot;glow-green&quot;&gt; ✓ &lt;/span&gt;\
@@ -9105,7 +9178,7 @@ State.variables.likertElapsedTime += 1;
                     &lt;&lt;/if&gt;&gt;\
                     &lt;/td&gt;\     
                     &lt;td style=&quot;text-align: center;&quot;&gt;\
-                        &lt;span class=&quot;glow-green&quot;&gt;&lt;= $postDecisionHistory[_i].time.toFixed(2) &gt;&gt;&lt;/span&gt; 秒
+                        &lt;span class=&quot;glow-green&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].time.toFixed(2)&gt;&gt;&lt;/span&gt; 秒
                     &lt;/td&gt;\
                 &lt;/tr&gt;\
             &lt;&lt;/for&gt;&gt;\
@@ -9115,12 +9188,11 @@ State.variables.likertElapsedTime += 1;
     
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
         &lt;&lt;link &quot;案件重溫&quot;&gt;&gt;
-            /* 這裡可以放你的案件重溫 Passage 目的地 */
-&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-        &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;
-        &lt;&lt;goto &quot;Start&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-&lt;/div&gt;\
+            &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+            &lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;
+            &lt;&lt;goto &quot;Start&quot;&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
