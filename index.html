@@ -454,6 +454,164 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
     }
 }
 
+/* 全局強制套用像素字型與暗黑底色 */
+.passage, .passage *, .resume-panel, .terminal-banner {
+    font-family: 'DotGothic16', monospace !important;
+}
+
+/* 1. 頂部醫療模擬器終端機外殼 */
+.terminal-banner {
+    background: #111412 !important;
+    border: 4px solid #34495e !important;
+    padding: 15px !important;
+    margin: 10px auto 15px auto !important;
+    width: 90% !important;
+    max-width: 500px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 4px 4px 0px rgba(0,0,0,0.5) !important;
+    text-align: center !important;
+}
+
+.terminal-banner h6 {
+    color: #bdc3c7 !important;
+    font-size: 11px !important;
+    margin: 5px 0 !important;
+    letter-spacing: 1px !important;
+}
+
+.main-title {
+    color: #ffffff !important;
+    font-size: 20px !important;
+    margin: 5px 0 0 0 !important;
+    line-height: 1.4 !important;
+    font-weight: bold !important;
+}
+
+/* 經典朱砂橘紅焦點字 */
+.vibrant-red {
+    color: #e74c3c !important;
+    text-shadow: 2px 2px 0px #000 !important;
+}
+
+/* 綠色系統健康燈 */
+.terminal-status {
+    position: absolute !important;
+    top: 8px !important;
+    right: 12px !important;
+    font-size: 9px !important;
+    color: #2ed573 !important;
+    font-weight: bold !important;
+    animation: pixel-pulse 1.6s infinite ease-in-out !important;
+}
+
+/* 2. 頂部黃色復古卡帶防斷線面板 */
+.resume-panel {
+    background-color: #111922 !important;
+    border: 5px solid #f1c40f !important; /* 皇家卡帶金 */
+    box-shadow: inset 0 0 0 3px #000000, 6px 6px 0px rgba(0,0,0,0.8) !important;
+    padding: 15px !important;
+    margin: 0 auto 15px auto !important;
+    width: 90% !important;
+    max-width: 500px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+.resume-blink-badge {
+    color: #f1c40f !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+    animation: pixel-blink 1s infinite steps(2) !important;
+}
+
+.resume-title {
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    margin: 6px 0 !important;
+}
+
+.resume-text {
+    color: #bdc3c7 !important;
+    font-size: 12px !important;
+    margin: 0 0 12px 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* 讓續關按鈕尺寸適配面板 */
+.resume-btn-wrapper button {
+    font-family: 'DotGothic16', monospace !important;
+    font-size: 14px !important;
+    background-color: #2ecc71 !important; /* 續關採用安全熒光綠 */
+    color: #ffffff !important;
+    width: 90% !important;
+    max-width: 280px !important;
+    padding: 10px !important;
+    border-top: 3px solid #55efc4 !important;
+    border-left: 3px solid #55efc4 !important;
+    border-right: 3px solid #27ae60 !important;
+    border-bottom: 3px solid #27ae60 !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    cursor: pointer !important;
+    border-radius: 0px !important;
+}
+
+.resume-btn-wrapper button:active {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+}
+
+/* 點陣分隔線 */
+.pixel-or-divider {
+    text-align: center !important;
+    margin: 15px auto !important;
+    width: 90% !important;
+    max-width: 500px !important;
+    border-bottom: 4px dotted #7f8c8d !important;
+    line-height: 0.1em !important;
+}
+.pixel-or-divider span {
+    background: #0d0d0d !important; /* 與底色融為一體 */
+    padding: 0 10px !important;
+    color: #7f8c8d !important;
+    font-size: 11px !important;
+}
+
+/* 調整歡迎語間距 */
+.welcome-intro, .intro-paragraph {
+    font-size: 13px !important;
+    color: #bdc3c7 !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+    width: 90% !important;
+    max-width: 500px !important;
+    margin: 0 auto 10px auto !important;
+}
+
+/* 3. 紅白機警報式錯誤提示 */
+.pixel-error-alert {
+    color: #ff4757 !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    margin-top: 12px !important;
+    display: none;
+    text-shadow: 1px 1px 0px #000 !important;
+    animation: pixel-blink 0.8s infinite steps(2) !important;
+}
+
+
+@keyframes pixel-pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+@keyframes pixel-blink {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 
 /* 終端機外殼 */
 #quiz-box {
@@ -1378,6 +1536,24 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
+
+try {
+    // 1. 使用底層屬性定義，強制穿透 2.37.3 的物件防禦鎖
+    Object.defineProperty(Config.saves, 'isAutosave', {
+        value: function (mode) {
+            return true; // 100% 強制所有頁面一載入就自動背景存檔
+        },
+        writable: true,
+        configurable: true
+    });
+} catch (e) {
+    // 2. 備用安全鎖：如果連穿透都被拒絕，直接在換頁完成時強制把快照寫入瀏覽器
+    $(document).on(':passagedisplay', function () {
+        if (Save && Save.autosave) {
+            Save.autosave.save(); 
+        }
+    });
+}
 
 
 $(document).on(':passageend', function () {
@@ -7345,16 +7521,37 @@ _target
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="Before_test" tags="no-handbk no-timer" position="500,1925" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;h6&gt;🏥 CLINICAL SIMULATION PLATFORM&lt;br&gt;《強制舉報虐待兒童條例》臨床實務培訓&lt;/h6&gt;
+&lt;&lt;if Save.autosave.has()&gt;&gt;
+&lt;div class=&quot;resume-panel&quot;&gt;
+    &lt;div class=&quot;resume-blink-badge&quot;&gt;📂 SYSTEM RECOVERY&lt;/div&gt;
+    &lt;div class=&quot;resume-title&quot;&gt;偵測到尚未完成的培訓評估進度&lt;/div&gt;
+    &lt;p class=&quot;resume-text&quot;&gt;系統已為閣下安全保存快照，可直接免登記續關。&lt;/p&gt;
+    &lt;div class=&quot;resume-btn-wrapper&quot;&gt;
+        &lt;&lt;button &quot;💾 RESUME GAME (繼續上次進度)&quot;&gt;&gt;
+            &lt;&lt;run Save.autosave.load()&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pixel-or-divider&quot;&gt;&lt;span&gt;OR START NEW SESSION&lt;/span&gt;&lt;/div&gt;
+&lt;&lt;endif&gt;&gt;
 
-&lt;p&gt;歡迎參與本次培訓模擬器。在開始之前，請先登記閣下的名稱，以便後台系統自動記錄培訓結果。&lt;/p&gt;
+&lt;div class=&quot;terminal-banner&quot;&gt;
+    &lt;div class=&quot;scanline-effect&quot;&gt;&lt;/div&gt;
+    &lt;span class=&quot;terminal-status&quot;&gt;● SYSTEM READY&lt;/span&gt;
+    &lt;h6&gt;🏥 CLINICAL SIMULATION PLATFORM&lt;/h6&gt;
+    &lt;h1 class=&quot;main-title&quot;&gt;《強制舉報虐待兒童條例》&lt;br&gt;&lt;span class=&quot;vibrant-red&quot;&gt;臨床實務培訓&lt;/span&gt;&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;intro-paragraph&quot;&gt;歡迎參與本次培訓模擬器。在開始之前，請先登記閣下的名稱，以便後台系統自動記錄培訓結果。&lt;/p&gt;
 
 &lt;div class=&quot;login-box&quot;&gt;
     &lt;label&gt;✏️ ENTER PLAYER NAME :&lt;/label&gt;
-&lt;&lt;textbox &quot;$staffID&quot; &quot;&quot; autofocus&gt;&gt;
-    &lt;div id=&quot;login-error&quot; style=&quot;color: #e74c3c; font-size: 12px; margin-top: 10px; display: none;&quot;&gt;
-        [ERROR: NAME CANNOT BE EMPTY!]
+    &lt;&lt;textbox &quot;$staffID&quot; &quot;&quot; autofocus&gt;&gt;
+    
+    &lt;div id=&quot;login-error&quot; class=&quot;pixel-error-alert&quot;&gt;
+        [❌ ERROR: NAME CANNOT BE EMPTY!]
     &lt;/div&gt;
+    
     &lt;div class=&quot;hint-text&quot;&gt;
         [TAP TEXTBOX TO TYPE, TAP BUTTON TO START]
     &lt;/div&gt;
@@ -7365,7 +7562,7 @@ _target
 &lt;div class=&quot;btn-container&quot;&gt;
     &lt;&lt;button &quot;🕹️ PUSH START&quot;&gt;&gt;
         &lt;&lt;if $staffID.trim() is &quot;&quot;&gt;&gt;
-            &lt;&lt;run $(&quot;#login-error&quot;).fadeIn(200)&gt;&gt;
+            &lt;&lt;run $(&quot;#login-error&quot;).slideDown(150)&gt;&gt;
         &lt;&lt;else&gt;&gt;
             &lt;&lt;goto &quot;Quiz_Intro&quot;&gt;&gt;
         &lt;&lt;/if&gt;&gt;
