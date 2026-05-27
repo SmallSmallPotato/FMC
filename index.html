@@ -2512,8 +2512,9 @@ Thinking: $totalTime s
 &lt;&lt;set $progress to 0&gt;&gt;&lt;br&gt;&lt;br&gt;
 
 &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
-&lt;&lt;link &quot;▶ Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
+&lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="22" name="Handbook_Content" tags="" position="25,250" size="100,100">&lt;table class=&quot;pixel-handbook-table&quot;&gt;\
     &lt;tr&gt;\
         &lt;td&gt;\
             &lt;&lt;if $unlocked.redFlags&gt;&gt;\
@@ -6261,9 +6262,8 @@ _target
 &gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
 
-/* 🔒 安全鎖定前測分數與歷史數據（使用 .clone() 複製獨立副本，從此不與主變數連動） */
+/* 🔒 精確鎖定前測分數 */
 &lt;&lt;set $preTestScore to $score&gt;&gt;
-&lt;&lt;set $preDecisionHistory to $decisionHistory.clone()&gt;&gt;
 
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: PRE-TEST COMPLETED&lt;/div&gt;
@@ -6303,7 +6303,7 @@ _target
                     &lt;/tr&gt;\
                 &lt;&lt;/for&gt;&gt;\
             &lt;&lt;else&gt;&gt;
-                &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000;&quot;&gt;⚠️ 暫無前測數據歷史&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000; padding: 15px;&quot;&gt;⚠️ 暫無前測數據歷史&lt;/td&gt;&lt;/tr&gt;
             &lt;&lt;/if&gt;&gt;
             &lt;/tbody&gt;\
         &lt;/table&gt;\
@@ -6311,7 +6311,7 @@ _target
   
     &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
         &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
-            /* 🌟 清空主計分板並切換後測閘門 */
+            /* 🌟 按下按鈕的瞬間，開啟後測分離閘門，計分板歸零 */
             &lt;&lt;set $score to 0&gt;&gt;
             &lt;&lt;set $isPostTest to true&gt;&gt;
             &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
@@ -9014,20 +9014,20 @@ _target
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
             &lt;&lt;elseif $page == 4&gt;&gt;
-    /* 最後一次點擊才執行跳轉 */    
-    /* 1. 把 Pre-test 的總分和詳細答題歷史備份起來 */
-    &lt;&lt;set $preTestScore to $score&gt;&gt;
-    &lt;&lt;set $preDecisionHistory to $decisionHistory&gt;&gt;
-    /* 2. 啟動 Post-test 開關 */
+    /* 最後一次點擊：啟動後測獨立開關 */
     &lt;&lt;set $isPostTest to true&gt;&gt;
-    /* 3. 徹底清空數據，讓 $score 由 0 開始為 Post-test 重新計分 */
-    &lt;&lt;set $score to 0&gt;&gt;            
+    
+    /* 1. 這裡【完全不要】去備份或抹除原本的 $score 和 $decisionHistory */
+    /* 2. 直接初始化一組全新、專屬於後測的獨立變數 */
+    &lt;&lt;set $postTestScore to 0&gt;&gt;
+    &lt;&lt;set $postDecisionHistory to []&gt;&gt;
+    
+    /* 3. 重置其他題號與答題狀態（這些可以共用） */
     &lt;&lt;set $currentQuestion to 1&gt;&gt;   
     &lt;&lt;set $playerAnswer to &quot;&quot;&gt;&gt;    
-    /* 4. 將歷史重置為空盒子，起跑時間對齊現在 */
-    &lt;&lt;set $decisionHistory to []&gt;&gt; 
     &lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
-    /* 5. 執行原本的音效與跳轉 */
+    
+    /* 4. 執行原本的音效與跳轉 */
     &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
     &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;
     &lt;&lt;goto &quot;Quiz_1&quot;&gt;&gt;
@@ -9060,10 +9060,8 @@ _target
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="168" name="Game_Ultimate_Ending" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
-
 /* 🔒 安全鎖定後測最終分數 */
 &lt;&lt;set $postTestScore to $score&gt;&gt;
-
 &lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
     &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: FINAL EVALUATION SUMMARY&lt;/div&gt;
     
@@ -9072,46 +9070,15 @@ _target
         &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;\
             (Pre-test 成績：&lt;&lt;print $preTestScore&gt;&gt; 分)&lt;br&gt;\
             Post-test 成績：&lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $postTestScore&gt;&gt;&lt;/span&gt; 分\
-        &lt;/p&gt;\
-        
+        &lt;/p&gt;\        
+/* 加上判斷式：只有在「不是後測」的情況下，才顯示前測詳細表格 */
+&lt;&lt;if !$isPostTest&gt;&gt;
+    &lt;div class=&quot;pre-test-table-container&quot;&gt;
+        &lt;table class=&quot;quiz-table&quot;&gt;
+            &lt;/table&gt;
+    &lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
         &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
-
-        &lt;h3 style=&quot;color: #00ff00; text-shadow: 0 0 4px #00ff00; margin: 15px 0 5px 0; font-size: 1.1em;&quot;&gt;📋 Pre-test 每題結果&lt;/h3&gt;
-        &lt;table class=&quot;pixel-report-table&quot; style=&quot;margin-bottom: 25px;&quot;&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
-                    &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
-                    &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-            &lt;&lt;if def $preDecisionHistory and $preDecisionHistory.length &gt; 0&gt;&gt;
-                &lt;&lt;for _i to 0; _i &lt; $preDecisionHistory.length; _i++&gt;&gt;\
-                    &lt;tr&gt;\
-                        &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
-                        &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;\
-                            &lt;&lt;if $preDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $preDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;\
-                            &lt;&lt;else&gt;&gt;\
-                                &lt;&lt;if $preDecisionHistory[_i].isCorrect&gt;&gt;\
-                                    &lt;span style=&quot;color: #00ff00;&quot;&gt;✓&lt;/span&gt;\
-                                &lt;&lt;else&gt;&gt;\
-                                    &lt;span style=&quot;color: #ff0000;&quot;&gt;✗&lt;/span&gt;\
-                                &lt;&lt;/if&gt;&gt;\
-                            &lt;&lt;/if&gt;&gt;\
-                        &lt;/td&gt;\     
-                        &lt;td style=&quot;text-align: center;&quot;&gt;\
-                            &lt;span class=&quot;glow-green&quot;&gt;&lt;&lt;&lt;print $preDecisionHistory[_i].time.toFixed(2)&gt;&gt;&lt;/span&gt; 秒
-                        &lt;/td&gt;\
-                    &lt;/tr&gt;\
-                &lt;&lt;/for&gt;&gt;\
-            &lt;&lt;else&gt;&gt;
-                &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000; padding: 10px;&quot;&gt;⚠️ 系統未偵測到前測數據歷史&lt;/td&gt;&lt;/tr&gt;
-            &lt;&lt;/if&gt;&gt;
-            &lt;/tbody&gt;
-        &lt;/table&gt;
-
         &lt;h3 style=&quot;color: #00ffff; text-shadow: 0 0 4px #00ffff; margin: 15px 0 5px 0; font-size: 1.1em;&quot;&gt;📋 Post-test 每題結果&lt;/h3&gt;
         &lt;table class=&quot;pixel-report-table&quot;&gt;
             &lt;thead&gt;
