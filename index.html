@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="138" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="21" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 
 body {
@@ -1536,11 +1536,6 @@ body:has(#is-certificate-page) .passage {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
-
-/* =========================================================
-   🔒 iOS Web App 專用：安全傳送門機制（精準手術、不碰 Scenario 版）
-   ========================================================= */
-
 // 1. 每當換頁完成，實時死守進度
 $(document).on(':passagedisplay', function () {
     // 排除一開始的第一頁、登記頁和介紹頁，進入前測後才開始保存
@@ -1624,6 +1619,7 @@ $(document).on(':passageend', function () {
         });
     }
 });
+
 
 
 $(document).on(':passagedisplay', function () {
@@ -1913,6 +1909,16 @@ $(document).on(':storyready', function () {
 &lt;&lt;cacheaudio &quot;busy&quot; &quot;https://smallsmallpotato.github.io/FMC/music/busy_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;ring&quot; &quot;https://smallsmallpotato.github.io/FMC/music/ring_bgm.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;tense&quot; &quot;https://smallsmallpotato.github.io/FMC/music/tense_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;ringback&quot; &quot;https://smallsmallpotato.github.io/FMC/music/ringback_bgm.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;PhA1&quot; &quot;https://smallsmallpotato.github.io/FMC/music/PhA1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;PhAreport1&quot; &quot;https://smallsmallpotato.github.io/FMC/music/PhAreport1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;PhAreport2&quot; &quot;https://smallsmallpotato.github.io/FMC/music/PhAreport2.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;PhAreport3&quot; &quot;https://smallsmallpotato.github.io/FMC/music/PhAreport3.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;SAreport1&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAreport1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;SAgood1&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;SAgood2&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood2.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;SAgood3&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood3.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;SAgood4&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood4.mp3&quot;&gt;&gt;
 
 
 &lt;&lt;run $(&#39;#ui-bar-body&#39;).append(&#39;&lt;div id=&quot;game-hud&quot;&gt;&lt;/div&gt;&#39;)&gt;&gt;
@@ -1976,7 +1982,7 @@ $(document).on(':storyready', function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 一位母親帶著 5 歲男童進來。&lt;br&gt;男童叫阿樂。你注意到他右腳有大片磨損。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;阿樂母親：「佢跌親啫，小朋友成日撞到。快啲洗完傷口，我哋趕住走。」&lt;br&gt;阿樂低著頭，很安靜，雙手死死抓著衣角。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhA1&quot; play&gt;&gt;阿樂母親：「佢跌親啫，小朋友成日都撞到㗎啦。快啲洗完傷口，我哋趕住走啊。」&lt;br&gt;阿樂低著頭，很安靜，雙手死死抓著衣角。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你打算：&lt;&lt;/replace&gt;&gt;
@@ -2298,14 +2304,14 @@ $(document).on(':storyready', function () {
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;口頭通報： &lt;br&gt;你致電阿樂居住地址所屬分區的社會福利署 — 保護家庭及兒童服務課(FCPSU)直通電話。當局人員記錄了資料，並登記了你的個人手機號碼以作立案。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport1&quot; play&gt;&gt;口頭通報： &lt;br&gt;你致電阿樂居住地址所屬分區的社會福利署 — 保護家庭及兒童服務課(FCPSU)直通電話。當局人員記錄了資料，並登記了你的個人手機號碼以作立案。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport2&quot; play&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;後續法定書面程序： &lt;br&gt;翌日上午，你登入「社會福利署強制舉報電子平台」，憑手機收到的 短訊驗證碼 (OTP) 順利登入，填寫客觀的臨床記錄。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport3&quot; play&gt;&gt;後續法定書面程序： &lt;br&gt;翌日上午，你登入「社會福利署強制舉報電子平台」，憑手機收到的 短訊驗證碼 (OTP) 順利登入，填寫客觀的臨床記錄。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
@@ -5645,7 +5651,7 @@ Thinking: $totalTime s
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="SA5Report" tags="Sa" position="600,1350" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;
+    &lt;span id=&quot;story-text&quot;&gt;&lt;&lt;audio &quot;ringback&quot; play&gt;&gt;
        你馬上撥打 999(或九龍中警區的 RCCC 指揮中心熱線)，&lt;br&gt;向警方清晰、冷靜地報告：
     &lt;/span&gt;
     
@@ -5665,7 +5671,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;...要求警方及社署 FCPSU 專責小組立刻派員到場提供法律保護。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;警方高度重視，立刻立案，並與你確認了你的個人手機號碼以作稍後電子平台登入之用。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAreport1&quot; play&gt;&gt;警方高度重視，立刻立案，並與你確認了你的個人手機號碼以作稍後電子平台登入之用。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在等待警方和社工趕來的時間，欣欣因為害怕而一直哭泣，且衣服上有些黏稠的污漬。&lt;&lt;/replace&gt;&gt;
@@ -5821,16 +5827,16 @@ Thinking: $totalTime s
                 &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
             &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;①首先，你的個人手機順利接收到短訊驗證碼 (OTP)，完成身份驗證。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood1&quot; play&gt;&gt;①首先，你的個人手機順利接收到短訊驗證碼 (OTP)，完成身份驗證。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
                 &lt;&lt;elseif $page == 7&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;②之後，填寫兒童資料時，平台鎖定人數為「1人」(系統與昨天的口頭舉報自動關聯)。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood2&quot; play&gt;&gt;②之後，填寫兒童資料時，平台鎖定人數為「1人」(系統與昨天的口頭舉報自動關聯)。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 8&gt;&gt;
                 &lt;&lt;elseif $page == 8&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;③接下來，你在事件摘要中填寫極其客觀、無主觀猜測的臨床記錄。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood3&quot; play&gt;&gt;③接下來，你在事件摘要中填寫極其客觀、無主觀猜測的臨床記錄。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 9&gt;&gt;
                 &lt;&lt;elseif $page == 9&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;④最後，你按下提交，成功獲取 【案件參考編號：Ref-2026-SEX-XXXX】，並親自妥善保存。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood4&quot; play&gt;&gt;④最後，你按下提交，成功獲取 【案件參考編號：Ref-2026-SEX-XXXX】，並親自妥善保存。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 10&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
