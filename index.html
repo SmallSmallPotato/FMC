@@ -1919,7 +1919,16 @@ $(document).on(':storyready', function () {
 &lt;&lt;cacheaudio &quot;SAgood2&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood2.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;SAgood3&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood3.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;SAgood4&quot; &quot;https://smallsmallpotato.github.io/FMC/music/SAgood4.mp3&quot;&gt;&gt;
-
+&lt;&lt;cacheaudio &quot;quotes&quot; &quot;https://smallsmallpotato.github.io/FMC/music/quotes.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;flow&quot; &quot;https://smallsmallpotato.github.io/FMC/music/flow.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;redflags&quot; &quot;https://smallsmallpotato.github.io/FMC/music/redflags.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold0&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold0.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold1&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold1.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold2&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold2.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold3&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold3.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold4&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold4.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold5&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold5.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;gold6&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold6.mp3&quot;&gt;&gt;
 
 &lt;&lt;run $(&#39;#ui-bar-body&#39;).append(&#39;&lt;div id=&quot;game-hud&quot;&gt;&lt;/div&gt;&#39;)&gt;&gt;
 &lt;&lt;set $totalSafety = 0&gt;&gt;
@@ -2839,12 +2848,12 @@ Thinking: $totalTime s
 *  舉報條件：
 ** 「合理理由懷疑」
 ** 「嚴重傷害」或「實際風險」
-* 對象：1以下兒童
+* 對象：未滿18歲的人士
 * 涉及四大類：
 ** 身體虐待 (physical abuse)
 ** 心理虐待 (psychological abuse)
 ** 性侵犯 (sexual abuse)
-** 疏忽照顧 (neglect)
+** 疏忽 (neglect)：疏忽照顧、居住環境惡劣、忽視衛生和忽略飲食
 
 參考連結：
 1. &lt;a href=&quot;https://www.swd.gov.hk/storage/asset/section/652/tc/Bilingual%20Leaflet_We%20All%20Have%20a%20Duty%20(March%202026).pdf&quot; target=&quot;_blank&quot;&gt;社會福利署SWD leaflet (PDF)&lt;/a&gt;
@@ -3540,7 +3549,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;✔ 你已採取適當行動保護兒童&lt;br&gt;🏆 結局：Timely Protection&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【&lt;strong&gt;$staffID&lt;/strong&gt;，恭喜通關！You Win!】&lt;br&gt;「意外受傷有故事，虐待痕跡不吻合；傷勢達標即時報，莫用『頑皮』蓋殘暴。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold0&quot; play&gt;&gt;【&lt;strong&gt;$staffID&lt;/strong&gt;，恭喜通關！You Win!】&lt;br&gt;「意外受傷有故事，虐待痕跡不吻合；傷勢達標即時報，莫用『頑皮』蓋殘暴。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
@@ -4291,7 +4300,7 @@ Thinking: $totalTime s
                     你僅用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒就過關。因你明白到：及時的介入，是給予這個家庭重生的機會。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！You Win!&lt;br&gt;「 獨留兒童在家中，意外發生一秒鐘；莫因同情掩疏忽，及早通報護童心。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold3&quot; play&gt;&gt;完美通關！You Win!&lt;br&gt;「 獨留兒童在家中，意外發生一秒鐘；莫因同情掩疏忽，及早通報護童心。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
@@ -4879,7 +4888,7 @@ Thinking: $totalTime s
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間完成了強制舉報行動。&lt;br&gt;你的敏感度，保護了一個正在枯萎的小生命。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;，你完美通關！&lt;br&gt;「 言語威嚇無血跡，精神摧殘損智力；持續恐嚇成嚴重，臨床退縮是警鐘。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold1&quot; play&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;，你完美通關！&lt;br&gt;「 言語威嚇無血跡，精神摧殘損智力；持續恐嚇成嚴重，臨床退縮是警鐘。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面回到主選單&lt;&lt;/replace&gt;&gt;
@@ -6839,7 +6848,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;萬事都有法律和制度保護你，因為你完美履行了護士的專業與個人責任！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;完美通關！&lt;br&gt;「病歷上的『暫緩』，遮不掉環境的深淵；跨專業的『共識』，擋不住個人的刑責。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold4&quot; play&gt;&gt;完美通關！&lt;br&gt;「病歷上的『暫緩』，遮不掉環境的深淵；跨專業的『共識』，擋不住個人的刑責。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -7248,7 +7257,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;並用極其專業的手法履行了法律義務！時間只不過 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【遊戲通關！You Win!】&lt;br&gt;「破舊衣服因貧窮，破潰流膿是疏忽；惡臭發黑藏敗血，警號留痕即時捉。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold5&quot; play&gt;&gt;【遊戲通關！You Win!】&lt;br&gt;「破舊衣服因貧窮，破潰流膿是疏忽；惡臭發黑藏敗血，警號留痕即時捉。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -7351,7 +7360,7 @@ _target
 正是因為你在 FMC 那份專業的敏銳度與果斷的強制通報，不僅將小寶從器官衰竭的邊緣救了回來，更拉了這個無知邊緣的媽媽一把。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
                 &lt;&lt;elseif $page == 7&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold6&quot; play&gt;&gt;
 【$staffID，恭喜通關！You Win!】&lt;br&gt;「通報非為判對錯，廿四小時不能拖；拉回無助盲目媽，換來孩子平安家。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 8&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
@@ -7724,7 +7733,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你憑藉精準的法規知識、高度的保密操守和完美的臨床證據保留意識，在 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒內成為了這個女孩生命裡其中一位強大的盾牌！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;成功通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;gold2&quot; play&gt;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;成功通關！You Win!&lt;br&gt;「透露性侵零盤問，秘密保護速報警；切勿洗澡換衣物，法醫鐵證不容污。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
 
                /* 更改提示文字，引導玩家去點擊跳轉 */
@@ -8914,7 +8923,7 @@ _target
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-你憑住臨床敏銳度與果斷嘅決策，成功幫助咗唔少兒童。喺我們進入最後嘅評估之前，我哋用十秒鐘，簡單重溫一次：&lt;&lt;/replace&gt;&gt;
+你憑住臨床敏銳度與果斷嘅決策，成功幫助咗唔少兒童。喺我們進入最後嘅評估之前，我哋用少少時間，簡單重溫一次。&lt;br&gt;&lt;div class=&quot;warning-shudder&quot;&gt;記得開聲～&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -8947,7 +8956,8 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="161" name="Redflags" tags="no-handbk no-timer" position="1950,1500" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="161" name="Redflags" tags="no-handbk no-timer" position="1950,1500" size="100,100">&lt;&lt;audio &quot;redflags&quot; play&gt;&gt;\
+&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -8992,7 +9002,8 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Flow&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="162" name="Flow" tags="no-handbk no-timer" position="2050,1500" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Flow&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="162" name="Flow" tags="no-handbk no-timer" position="2050,1500" size="100,100">&lt;&lt;audio &quot;flow&quot; play&gt;&gt;\
+&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -9127,7 +9138,8 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Quotes&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="165" name="Quotes" tags="no-handbk no-timer" position="2050,1600" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Quotes&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="165" name="Quotes" tags="no-handbk no-timer" position="2050,1600" size="100,100">&lt;&lt;audio &quot;quotes&quot; play&gt;&gt;\
+&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
