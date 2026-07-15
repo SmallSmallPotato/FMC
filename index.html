@@ -965,7 +965,7 @@ body.scenario-6-bad::after { background-image: url("https://smallsmallpotato.git
 /* 數據高亮（分數與秒數） */
 .glow-green {
     color: #00ff00 !important;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.6);
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.6);
     font-weight: bold;
 }
 
@@ -5200,14 +5200,11 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="ScenarioResultsPanel" tags="" position="0,1500" size="100,100">&lt;div class=&quot;results-container&quot;&gt;
-    &lt;h3&gt;各場景評核結果&lt;/h3&gt;
+    &lt;h3&gt;個案完成狀況&lt;/h3&gt;
     &lt;table class=&quot;score-table&quot;&gt;
         &lt;tr&gt;
             &lt;th&gt;Situation&lt;/th&gt;
             &lt;th&gt;Progress&lt;/th&gt;
-            &lt;th&gt;Safety&lt;/th&gt;
-            &lt;th&gt;Legal&lt;/th&gt;
-            &lt;th&gt;Rank&lt;/th&gt;
         &lt;/tr&gt;
         &lt;&lt;for _i = 0; _i &lt; $scenarios.length; _i++&gt;&gt;
             &lt;&lt;set _s = $scenarios[_i]&gt;&gt;
@@ -5220,38 +5217,9 @@ Thinking: $totalTime s
                         &lt;span style=&quot;color: #95a5a6;&quot;&gt;⏳&lt;/span&gt;
                     &lt;&lt;/if&gt;&gt;
                 &lt;/td&gt;
-                &lt;td&gt;&lt;&lt;print _s.safety&gt;&gt;&lt;/td&gt;
-                &lt;td&gt;&lt;&lt;print _s.legal&gt;&gt;&lt;/td&gt;
-                &lt;td&gt;
-                    &lt;&lt;if _s.completed&gt;&gt;\
-                        /* 個別場景等級判定 */\
-                        &lt;&lt;if _s.safety &gt;= 15&gt;&gt;\
-                            &lt;b style=&quot;color: #f1c40f;&quot;&gt;Expert&lt;/b&gt;
-                        &lt;&lt;elseif _s.safety &gt;= 10&gt;&gt;\
-                            &lt;b style=&quot;color: #3498db;&quot;&gt;Competent&lt;/b&gt;
-                        &lt;&lt;else&gt;&gt;\
-                            &lt;b style=&quot;color: #e67e22;&quot;&gt;Novice&lt;/b&gt;
-                        &lt;&lt;/if&gt;&gt;
-                    &lt;&lt;else&gt;&gt;
-                        --
-                    &lt;&lt;/if&gt;&gt;\
-                &lt;/td&gt;
             &lt;/tr&gt;
         &lt;&lt;/for&gt;&gt;
     &lt;/table&gt;
-    &lt;hr&gt;
-    &lt;h4&gt;當前總分統計&lt;/h4&gt;
-    &lt;p&gt;Total Safety: &lt;b&gt;$totalSafety&lt;/b&gt; | Total Legal: &lt;b&gt;$totalLegal&lt;/b&gt;&lt;/p&gt;
-    &lt;div class=&quot;current-rank&quot;&gt;
-        當前總評級：
-        &lt;&lt;if $totalSafety &gt;= 100&gt;&gt;\
-            &lt;span class=&quot;rank-gold&quot;&gt;🏆 Expert&lt;/span&gt;
-        &lt;&lt;elseif $totalSafety &gt;= 50&gt;&gt;\
-            &lt;span class=&quot;rank-silver&quot;&gt;👍 Competent&lt;/span&gt;
-        &lt;&lt;else&gt;&gt;\
-            &lt;span class=&quot;rank-bronze&quot;&gt;⚠️ Needs Improvement&lt;/span&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;/div&gt;
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="74" name="PsAWAIT" tags="Psy" position="1225,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -9571,7 +9539,7 @@ _target
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/beforepost.webp&#39;) no-repeat center center !important;
+    background: url(&#39;https://smallsmallpotato.github.io/FMC/images/beforepost.png&#39;) no-repeat center center !important;
     background-size: cover !important; 
     z-index: 1 !important;
     pointer-events: none !important; /* 點擊穿透 */
@@ -9581,7 +9549,7 @@ _target
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;
     z-index: 6000 !important; 
 &quot;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;&lt;div class=&quot;warning-shudder&quot;&gt;辛苦你了！$staffID！&lt;/div&gt;
+    &lt;span id=&quot;story-text&quot;&gt;&lt;div class=&quot;warning-shudder&quot;&gt; Congratulations！$staffID！你完成咗七大主題嘅強制舉報兒童個案。&lt;/div&gt;
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
@@ -9590,14 +9558,14 @@ _target
         &lt;&lt;link &quot; &quot;&gt;&gt;
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;係時間驗收學習成果喇！仲記得呢個 pre test 嗎？&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;依家可以隨時重溫每個主題。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;題目完全一模一樣，但我相信，經歷過呢七個個案洗禮後，依家嘅你，睇呢啲題目嘅眼光已經完全唔同哂。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;相信經歷過呢七個個案洗禮，對red flags及舉報流程都瞭如指掌。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-我哋會喺後台收集 pre 和 post test 的數據用作比較。請保持你剛剛在門診救人時嘅清醒與果斷。謝謝你的參與！&lt;&lt;/replace&gt;&gt;
+係真實生活中，都請保持清醒與果斷。謝謝你的參與！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -9617,8 +9585,8 @@ _target
     
     /* 4. 執行原本的音效與跳轉 */
     &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-    &lt;&lt;audio &quot;server&quot; play loop&gt;&gt;
-    &lt;&lt;goto &quot;Quiz_1&quot;&gt;&gt;
+    &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
+    &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
     
         &lt;&lt;/link&gt;&gt;
@@ -9741,7 +9709,9 @@ _target
         &lt;&lt;if $staffID.trim() is &quot;&quot;&gt;&gt;
             &lt;&lt;run $(&quot;#login-error&quot;).slideDown(150)&gt;&gt;
         &lt;&lt;else&gt;&gt;
-            &lt;&lt;goto &quot;Quiz_Intro&quot;&gt;&gt;
+            &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+            &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
+            &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
