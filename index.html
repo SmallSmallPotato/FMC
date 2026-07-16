@@ -2586,11 +2586,11 @@ $(document).on(':storyready', function () {
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport1&quot; play&gt;&gt;口頭通報： &lt;br&gt;你致電阿樂居住地址所屬分區的社會福利署 — 保護家庭及兒童服務課(FCPSU)直通電話。當局人員記錄了資料，並登記了你的個人手機號碼以作立案。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport2&quot; play&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport1&quot; stop&gt;&gt;&lt;&lt;audio &quot;PhAreport2&quot; play&gt;&gt;現場管理： &lt;br&gt;醫務社工(MSW)與護士長配合，以「配製特殊藥膏需時」為臨床藉口，安排母子在具私隱的獨立會客室等候。社署外展社工及便衣警員在45分鐘內低調趕到診所接手，成功避免了大堂衝突，保障了安全與保密。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport3&quot; play&gt;&gt;後續法定書面程序： &lt;br&gt;翌日上午，你登入「社會福利署強制舉報電子平台」，憑手機收到的 短訊驗證碼 (OTP) 順利登入，填寫客觀的臨床記錄。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;PhAreport2&quot; stop&gt;&gt;&lt;&lt;audio &quot;PhAreport3&quot; play&gt;&gt;後續法定書面程序： &lt;br&gt;翌日上午，你登入「社會福利署強制舉報電子平台」，憑手機收到的 短訊驗證碼 (OTP) 順利登入，填寫客觀的臨床記錄。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
@@ -6077,13 +6077,13 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood1&quot; play&gt;&gt;①首先，你的個人手機順利接收到短訊驗證碼 (OTP)，完成身份驗證。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
                 &lt;&lt;elseif $page == 7&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood2&quot; play&gt;&gt;②之後，填寫兒童資料時，平台鎖定人數為「1人」(系統與昨天的口頭舉報自動關聯)。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood1&quot; stop&gt;&gt;&lt;&lt;audio &quot;SAgood2&quot; play&gt;&gt;②之後，填寫兒童資料時，平台鎖定人數為「1人」(系統與昨天的口頭舉報自動關聯)。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 8&gt;&gt;
                 &lt;&lt;elseif $page == 8&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood3&quot; play&gt;&gt;③接下來，你在事件摘要中填寫極其客觀、無主觀猜測的臨床記錄。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood2&quot; stop&gt;&gt;&lt;&lt;audio &quot;SAgood3&quot; play&gt;&gt;③接下來，你在事件摘要中填寫極其客觀、無主觀猜測的臨床記錄。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 9&gt;&gt;
                 &lt;&lt;elseif $page == 9&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood4&quot; play&gt;&gt;④最後，你按下提交，成功獲取 【案件參考編號：Ref-2026-SEX-XXXX】，並親自妥善保存。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;&lt;audio &quot;SAgood3&quot; stop&gt;&gt;&lt;&lt;audio &quot;SAgood4&quot; play&gt;&gt;④最後，你按下提交，成功獲取 【案件參考編號：Ref-2026-SEX-XXXX】，並親自妥善保存。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 10&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -7857,7 +7857,7 @@ _target
         &lt;&lt;/script&gt;&gt;
     &lt;&lt;/link&gt;&gt;
     &lt;&lt;link &quot;♫ FMC650➋&quot;&gt;&gt;
-        &lt;&lt;audio &quot;FMC650-2&quot; play&gt;&gt;
+        &lt;&lt;audio &quot;FMC650-1&quot; stop&gt;&gt;&lt;&lt;audio &quot;FMC650-2&quot; play&gt;&gt;
         &lt;&lt;script&gt;&gt;
             try {
                 Dialog.setup(&quot;條例 RAP 播放中 - Part 2&quot;, &quot;spotify-theme-dialog&quot;);
@@ -9299,7 +9299,8 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Flow&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="162" name="Flow" tags="no-handbk no-timer" position="2050,1500" size="100,100">&lt;&lt;audio &quot;flow&quot; play&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Flow&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="162" name="Flow" tags="no-handbk no-timer" position="2050,1500" size="100,100">&lt;&lt;audio &quot;redflags&quot; stop&gt;&gt;\
+&lt;&lt;audio &quot;flow&quot; play&gt;&gt;\
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
@@ -9435,7 +9436,8 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Quotes&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="165" name="Quotes" tags="no-handbk no-timer" position="2050,1600" size="100,100">&lt;&lt;audio &quot;quotes&quot; play&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Quotes&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="165" name="Quotes" tags="no-handbk no-timer" position="2050,1600" size="100,100">&lt;&lt;audio &quot;flow&quot; stop&gt;&gt;\
+&lt;&lt;audio &quot;quotes&quot; play&gt;&gt;\
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
@@ -9481,7 +9483,8 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Contacts&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="166" name="Contacts" tags="no-handbk no-timer" position="2150,1600" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Contacts&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="166" name="Contacts" tags="no-handbk no-timer" position="2150,1600" size="100,100">&lt;&lt;audio &quot;quotes&quot; stop&gt;&gt;\
+&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
