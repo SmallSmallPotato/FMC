@@ -3651,7 +3651,7 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-        你用了 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在法定 24 小時內 履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
+        你用了 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在合理範圍時間內履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
             
@@ -6888,7 +6888,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 證實欣欣曾向醫護透露遭受性侵，&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但護士卻以「無設備」為由&lt;br&gt;拒絕在法定的隨即及不遲於 24 小時內作出舉報。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但護士卻以「無設備」為由&lt;br&gt;拒絕在盡快且合理範圍的時間內作出舉報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你與醫生因漏報嚴重虐兒個案，正式被警方落案起訴，面臨監禁 3 三個月及罰款港幣 $50,000。&lt;&lt;/replace&gt;&gt;
@@ -7335,11 +7335,11 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;病歷顯示：你清晰記錄了「小茹身上有強烈死老鼠與發霉異味、背部濕疹因環境髒污大面積潰爛、氣管有微弱喘鳴聲」。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但你在發現這些「環境疏忽」的客觀臨床特徵後，在接下來法定的 24 小時之內，電子舉報平台上沒有收到任何來自你們門診團隊的書面個案申報。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但你在發現這些「環境疏忽」的客觀臨床特徵後，在接下來的 24 小時之內，電子舉報平台上沒有收到任何來自你們門診團隊的書面個案申報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;探員面無表情地對你說：&lt;br&gt;
-「&lt;strong&gt;$staffID&lt;/strong&gt;護士，根據《強制舉報虐兒條例》，你作為指明專業人士，在臨床接觸中已經親自產生了合理理由懷疑，但你未能在法定 24 小時內履行個人舉報責任。我們現在正式對你進行拘捕。」&lt;&lt;/replace&gt;&gt;
+「&lt;strong&gt;$staffID&lt;/strong&gt;護士，根據《強制舉報虐兒條例》，你作為指明專業人士，在臨床接觸中已經親自產生了合理理由懷疑，但你未能在盡快且合理的時間內履行個人舉報責任。我們現在正式對你進行拘捕。」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;刑事後果：&lt;br&gt;你被正式落案起訴違反《強制舉報虐兒條例》，由於小茹期間遭受了可預防的二次致命傷害，情節嚴重，你被判處監禁 2 個月，並處罰款港幣 $30,000。&lt;&lt;/replace&gt;&gt;
@@ -8261,10 +8261,10 @@ _target
             &lt;&lt;if $page is undefined&gt;&gt;&lt;&lt;set $page = 1&gt;&gt;&lt;&lt;endif&gt;&gt;
 
             &lt;&lt;if $page == 1&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 警方在 CMS 系統中追查三日前在門診的分流記錄，發現你記錄了「Hygiene poor、有喘鳴」，卻沒有在 24 小時內舉報。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 警方在 CMS 系統中追查三日前在門診的分流記錄，發現你記錄了「Hygiene poor、有喘鳴」，卻沒有在盡快且合理的時間內舉報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-            &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;法律後果：&lt;br&gt;你被警方落案檢控違反《強制舉報虐兒條例》中「隨即並在不遲於 24 小時內舉報」的法定要求。&lt;&lt;/replace&gt;&gt;
+            &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;法律後果：&lt;br&gt;你被警方落案檢控違反《強制舉報虐兒條例》中「隨即並在合理時間內舉報」的法定要求。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;由於你未履行獨立責任，面臨最高監禁 3 個月及罰款港幣 $50,000 的刑事處分，護士管理局同時啟動除牌聆訊。&lt;&lt;/replace&gt;&gt;
@@ -8569,7 +8569,7 @@ _target
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 6&gt;&gt;
                 &lt;&lt;elseif $page == 6&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 雖然你詳細記錄了傷口潰爛和惡臭，但未能在法律規定的隨即及不遲於 24 小時內作出舉報。
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 雖然你詳細記錄了傷口潰爛和惡臭，但未能在法律規定的隨即及在合理時間範圍內作出舉報。
 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 7&gt;&gt;
                 &lt;&lt;elseif $page == 7&gt;&gt;
