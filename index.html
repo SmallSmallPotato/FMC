@@ -9216,11 +9216,11 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 辛苦你了！$staffID！&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你完成咗七個個案，呢啲都唔係完全憑空捏造嘅劇本。喺現實中，好多悲劇嘅發生，就是因為前線醫護抱住『再觀察一下、多一事不如少一事』嘅心態，最後細路離開門診後，就可能發生不可逆轉嘅致命傷害。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;喺現實中，好多悲劇嘅發生，就是因為前線醫護抱住『再觀察一下、多一事不如少一事』嘅心態，最後細路離開門診後，就可能發生不可逆轉嘅致命傷害。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-你憑住臨床敏銳度與果斷嘅決策，成功幫助咗唔少兒童。喺我們進入最後嘅評估之前，我哋用少少時間，簡單重溫一次。&lt;br&gt;&lt;div class=&quot;warning-shudder&quot;&gt;記得開聲～&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+你憑住臨床敏銳度與果斷嘅決策，成功幫助咗唔少兒童。唔知道你有冇留意畫面左上方的黃色按鈕「Guide」，可以查看自己透過遊戲中的決策來unlock items。依家我哋用少少時間，簡單重溫一次。&lt;br&gt;&lt;div class=&quot;warning-shudder&quot;&gt;記得開聲～&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                /* 更改提示文字，引導玩家去點擊跳轉 */
                 &lt;&lt;replace &quot;.click-hint&quot;&gt;&gt;▼ 點擊畫面換頁&lt;&lt;/replace&gt;&gt;
@@ -9552,7 +9552,7 @@ _target
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;
     z-index: 6000 !important; 
 &quot;&gt;
-    &lt;span id=&quot;story-text&quot;&gt;&lt;div class=&quot;warning-shudder&quot;&gt; Congratulations！$staffID！你完成咗七大主題嘅強制舉報兒童個案。&lt;/div&gt;
+    &lt;span id=&quot;story-text&quot;&gt;&lt;div class=&quot;warning-shudder&quot;&gt; $staffID，以上係臨床實務培訓嘅全部內容。&lt;/div&gt;
     &lt;/span&gt;
     
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
