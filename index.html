@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="138" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="115" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 
 body {
@@ -1684,6 +1684,42 @@ body:has(#is-certificate-page) .passage {
     padding: 0 !important;
     margin: 0 !important;
     overflow: hidden !important;
+}
+
+
+/* 極致精緻數碼小方格溶解遮罩 */
+#dissolve-snapshot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+  background: #000;
+  
+  /* --- 關鍵設定：極細的小正方形遮罩網格 --- */
+  /* 1. 使用 radial-gradient 來模擬精緻的小方格網格 */
+  -webkit-mask-image: radial-gradient(circle, #000 80%, transparent 85%);
+  mask-image: radial-gradient(circle, #000 80%, transparent 85%);
+  
+  /* 2. 控制方格的大小 (6px x 6px 的極細小正方形) */
+  -webkit-mask-size: 6px 6px;
+  mask-size: 6px 6px;
+  
+  /* 動畫設定：確保格仔跳躍感與淡出感並存 */
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 1, 1);
+  opacity: 1;
+}
+
+/* 觸發溶解：格仔交錯、分散消失 */
+#dissolve-snapshot.start-dissolve {
+  /* 將整體網格變亮並變大，營造顆粒交錯散開並透明的效果 */
+  opacity: 0;
+  
+  /* 配合 SVG 濾鏡增加像素點陣化 (Pixelate) */
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="pixelate"><feFlood x="4" y="4" width="2" height="2"/><feComposite width="10" height="10" in="SourceGraphic" in2="flood" operator="arithmetic" k1="0" k2="1" k3="0" k4="0"/></filter></svg>#pixelate');
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
@@ -2055,6 +2091,19 @@ $(document).on(':storyready', function () {
     link.rel = 'apple-touch-icon';
     link.href = 'icon.png'; // 確保這跟你上傳到 GitHub 的圖片檔名一模一樣
     document.head.appendChild(link);
+});
+
+
+$(document).on(':passagestart', function (ev) {
+  if (State.variables.takeSnapshot) {
+    // 複製整個 #passages 內容並鎖定在最上層
+    var $snapshot = $('<div id="dissolve-snapshot"></div>');
+    var $clonedContent = $('#passages').html();
+    $snapshot.html($clonedContent);
+    
+    $('body').append($snapshot);
+    delete State.variables.takeSnapshot;
+  }
 });</script><tw-tag name="Dx" color="purple"></tw-tag><tw-tag name="Start" color="green"></tw-tag><tw-tag name="no-timer" color="red"></tw-tag><tw-tag name="no-handbk" color="blue"></tw-tag><tw-tag name="Nc" color="orange"></tw-tag><tw-tag name="Psy" color="yellow"></tw-tag><tw-tag name="Ne" color="green"></tw-tag><tw-tag name="Nd" color="orange"></tw-tag><tw-tag name="Sa" color="red"></tw-tag><tw-tag name="Nh" color="blue"></tw-tag><tw-tag name="widget" color="yellow"></tw-tag><tw-tag name="Widget" color="blue"></tw-tag><tw-tag name="Quiz" color="yellow"></tw-tag><tw-tag name="Ready" color="green"></tw-tag><tw-tag name="scenario-0-bad" color="blue"></tw-tag><tw-tag name="scenario-1-bad" color="blue"></tw-tag><tw-tag name="scenario-2-bad" color="blue"></tw-tag><tw-tag name="scenario-3-bad" color="blue"></tw-tag><tw-tag name="scenario-4-bad" color="blue"></tw-tag><tw-tag name="scenario-5-bad" color="blue"></tw-tag><tw-tag name="scenario-6-bad" color="blue"></tw-tag><tw-tag name="Register" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="Start no-timer" position="325,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;  
     &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;   
     &lt;div class=&quot;mario-opening-container&quot;&gt;        
@@ -2209,19 +2258,10 @@ $(document).on(':storyready', function () {
 &lt;&lt;cacheaudio &quot;gold6&quot; &quot;https://smallsmallpotato.github.io/FMC/music/gold6.mp3&quot;&gt;&gt;
 
 &lt;&lt;run $(&#39;#ui-bar-body&#39;).append(&#39;&lt;div id=&quot;game-hud&quot;&gt;&lt;/div&gt;&#39;)&gt;&gt;
-&lt;&lt;set $totalSafety = 0&gt;&gt;
-&lt;&lt;set $totalLegal = 0&gt;&gt;
 &lt;&lt;set $progress = 0&gt;&gt;
 &lt;&lt;set $total = 7&gt;&gt;
 &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;set $currentScenarioId = 0&gt;&gt;
-&lt;&lt;set $score to 0&gt;&gt;
-&lt;&lt;set $preTestScore to 0&gt;&gt;
-&lt;&lt;set $postTestScore to 0&gt;&gt;
-&lt;&lt;set $preDecisionHistory to []&gt;&gt;
-&lt;&lt;set $postDecisionHistory to []&gt;&gt;
-&lt;&lt;set $isPostTest to false&gt;&gt;
- 
  
 &lt;&lt;set $scenarios = [
     { id: 0, name: &quot;PhysicalAbuse&quot;, completed: false, safety: 0, legal: 0 },
@@ -2233,11 +2273,6 @@ $(document).on(':storyready', function () {
     { id: 6, name: &quot;NeglectDiet&quot;, completed: false, safety: 0, legal: 0 }
 ]&gt;&gt;
 
-&lt;&lt;set $rankThresholds = {
-    expert: { text: &quot;🏆 Expert Mandatory Reporter&quot;, class: &quot;rank-gold&quot; },
-    competent: { text: &quot;👍 Competent Performer&quot;, class: &quot;rank-silver&quot; },
-    needsImprovement: { text: &quot;⚠️ Needs Improvement&quot;, class: &quot;rank-bronze&quot; }
-}&gt;&gt;
 
 
 /* 初始化解鎖狀態 (初始只有 Contacts 為 true) */
@@ -2364,14 +2399,7 @@ $(document).on(':storyready', function () {
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety -= 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt;    
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="PhAHistory" tags="Dx" position="125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="6" name="PhAHistory" tags="Dx" position="125,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你蹲下問：「點整親㗎？」 &lt;br&gt;阿樂恐懼地望向母親，停了幾秒，全身僵硬。 &lt;/span&gt;
@@ -2404,14 +2432,6 @@ $(document).on(':storyready', function () {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;
 </tw-passagedata><tw-passagedata pid="7" name="PhAExam" tags="Dx" position="225,400" size="100,100">        &lt;&lt;if $unlocked.redFlags is false&gt;&gt;\
             &lt;&lt;set $unlocked.redFlags to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Red Flags Guideline]&lt;/div&gt;
@@ -2461,14 +2481,7 @@ $(document).on(':storyready', function () {
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="PhAObs" tags="Dx" position="325,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="PhAObs" tags="Dx" position="325,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你保持沉默，觀察母親。
@@ -2536,14 +2549,7 @@ $(document).on(':storyready', function () {
     [[堅持等醫生決定|PhAWait]]
 &lt;/div&gt;
 
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;
+
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -2637,14 +2643,7 @@ $(document).on(':storyready', function () {
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 20&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal += 20&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 20&gt;&gt;
-    &lt;&lt;set $totalLegal += 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="ResetS3" tags="" position="600,100" size="100,100">&lt;&lt;silent&gt;&gt;
+</tw-passagedata><tw-passagedata pid="12" name="ResetS3" tags="" position="600,100" size="100,100">&lt;&lt;silent&gt;&gt;
 &lt;&lt;set $totalSafety -= $scenarios[3].safety&gt;&gt;
 &lt;&lt;set $totalLegal -= $scenarios[3].legal&gt;&gt;
 &lt;&lt;set $scenarios[3].safety = 0&gt;&gt;
@@ -3024,24 +3023,22 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="21" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;\
-    &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;\
-    &lt;div class=&quot;mario-opening-container&quot;&gt;
-        &lt;div class=&quot;mario-block&quot;&gt;&lt;/div&gt;&lt;/div&gt;\   
-    &lt;div class=&quot;mario-curtain-right&quot;&gt;&lt;/div&gt;\   
-&lt;/div&gt;\
-&lt;&lt;timed 0.5s&gt;&gt;\
-    &lt;&lt;addclass &quot;#mario-curtain&quot; &quot;start-opening&quot;&gt;&gt;\
-&lt;&lt;/timed&gt;&gt;
-&lt;&lt;timed 2.5s&gt;&gt;
-    &lt;&lt;remove &quot;#mario-curtain&quot;&gt;&gt;
-&lt;&lt;/timed&gt;&gt;
+</tw-passagedata><tw-passagedata pid="21" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;if $(&quot;#dissolve-snapshot&quot;).length&gt;&gt;\
+  &lt;&lt;timed 50ms&gt;&gt;\
+    &lt;&lt;addclass &quot;#dissolve-snapshot&quot; &quot;start-dissolve&quot;&gt;&gt;\
+  &lt;&lt;/timed&gt;&gt;\
+  &lt;&lt;timed 2.3s&gt;&gt;\
+    &lt;&lt;remove &quot;#dissolve-snapshot&quot;&gt;&gt;\
+  &lt;&lt;/timed&gt;&gt;\
+&lt;&lt;/if&gt;&gt;
+
+
 &lt;&lt;if !$isPostTest&gt;&gt;\
     &lt;&lt;set $decisionHistory to []&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;set $score to 0&gt;&gt;\
 &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;set $currentScenarioId to 0&gt;&gt;
-&lt;&lt;set $progress to 0&gt;&gt;&lt;br&gt;
+&lt;&lt;set $progress to 0&gt;&gt;&lt;br&gt;&lt;br&gt;
 &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
 &lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
@@ -3263,14 +3260,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="PhAIncon" tags="Dx" position="25,500" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="31" name="PhAIncon" tags="Dx" position="25,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你指出跌倒不可能造成背部和手臂的條狀及手掌印瘀傷。母親最初說：「樓梯跌親。」&lt;br&gt;當你指出顏色深淺不同、明顯有舊傷時，她改口：「學校撞到。」
@@ -3300,14 +3290,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="PhADoc" tags="Dx" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="32" name="PhADoc" tags="Dx" position="225,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         根據《強制舉報者指南》，所有書面記錄將來都可能作為法庭證據。你會怎樣寫？
@@ -3338,14 +3321,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal += 10&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal += 10&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="PhA4A" tags="Dx" position="25,600" size="100,100">        &lt;&lt;if $unlocked.doc is false&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="33" name="PhA4A" tags="Dx" position="25,600" size="100,100">        &lt;&lt;if $unlocked.doc is false&gt;&gt;\
             &lt;&lt;set $unlocked.doc to true&gt;&gt;\
             &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Documentation Tips]&lt;/div&gt;
             
@@ -3388,14 +3364,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
+</tw-passagedata><tw-passagedata pid="34" name="PhA4D" tags="Dx" position="25,800" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -3494,14 +3463,6 @@ Thinking: $totalTime s
     outline: none !important;
 }
 &lt;/style&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety -= 30&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 30&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 30&gt;&gt;
-    &lt;&lt;set $totalLegal -= 30&gt;&gt;
-&lt;&lt;/silent&gt;&gt;
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -3555,14 +3516,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety -= 20&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 20&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 20&gt;&gt;
-    &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="PhAGrey" tags="Dx" position="225,700" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="37" name="PhAGrey" tags="Dx" position="225,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你心想：&lt;br&gt;「香港好多家庭都會體罰…如果每宗都報警，會不會破壞別人家庭？」
@@ -3595,14 +3549,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety -= 20&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 20&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 20&gt;&gt;
-    &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="PhASupport" tags="Dx" position="125,700" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="38" name="PhASupport" tags="Dx" position="125,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你與資深護士討論。
@@ -3636,14 +3583,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad bad-ending" position="25,925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+</tw-passagedata><tw-passagedata pid="39" name="PhAENDING_BAD" tags="Dx no-timer scenario-0-bad bad-ending" position="25,925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
@@ -4654,14 +4594,7 @@ Thinking: $totalTime s
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="PsA2B" tags="Psy" position="1225,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="59" name="PsA2B" tags="Psy" position="1225,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你轉向母親，用溫和的語氣問：「阿晴媽咪，阿晴最近喺學校或者屋企有冇發生咩特別事？」&lt;/span&gt;
@@ -4751,14 +4684,7 @@ Thinking: $totalTime s
 &lt;/div&gt;
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="PsA3B" tags="Psy" position="1225,200" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="62" name="PsA3B" tags="Psy" position="1225,200" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         母親突然對孩子說：&lt;br&gt;「你又喊？你知唔知你好丟架？」
@@ -4790,14 +4716,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal = 0&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal = 0&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="PsA3C" tags="Psy" position="1325,200" size="100,100">&lt;&lt;if $unlocked.doc is false&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="63" name="PsA3C" tags="Psy" position="1325,200" size="100,100">&lt;&lt;if $unlocked.doc is false&gt;&gt;\
 &lt;&lt;set $unlocked.doc to true&gt;&gt;\
 &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;[Documentation Tips]&lt;/div&gt;            
             /* 音效與自動清理邏輯 */
@@ -4923,14 +4842,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal += 10&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal += 10&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="PsA4B" tags="Psy" position="1225,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="67" name="PsA4B" tags="Psy" position="1225,300" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你開始懷疑：「係咪我太敏感？會唔會只係家長壓力大？」
@@ -4962,14 +4874,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety -= 10&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal -= 10&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 10&gt;&gt;
-    &lt;&lt;set $totalLegal -= 10&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
+</tw-passagedata><tw-passagedata pid="68" name="PsADOC" tags="Psy" position="1325,300" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot; style=&quot;border-color: #f39c12;&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;&lt;strong&gt;$staffID&lt;/strong&gt;，⚠️ 不好意思，&lt;br&gt;你的紀錄包含過多「主觀評判」與「情緒性字眼」。
@@ -5056,14 +4961,6 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety += 20&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal += 20&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 20&gt;&gt;
-    &lt;&lt;set $totalLegal += 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;
 </tw-passagedata><tw-passagedata pid="70" name="PsASUPPORT" tags="Psy" position="1525,300" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -5095,14 +4992,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety += 10&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal += 10&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety += 10&gt;&gt;
-    &lt;&lt;set $totalLegal += 10&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="PsAGRAY" tags="Psy" position="1425,300" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="71" name="PsAGRAY" tags="Psy" position="1425,300" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你心想：&lt;br&gt;「佢冇受傷。」&lt;br&gt;「會唔會未去到report程度？」
@@ -5291,14 +5181,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[1].safety -= 20&gt;&gt;
-    &lt;&lt;set $scenarios[1].legal -= 20&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 20&gt;&gt;
-    &lt;&lt;set $totalLegal -= 20&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="75" name="PsABAD" tags="Psy no-timer scenario-1-bad bad-ending" position="1225,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+</tw-passagedata><tw-passagedata pid="75" name="PsABAD" tags="Psy no-timer scenario-1-bad bad-ending" position="1225,500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
@@ -5721,14 +5604,7 @@ Thinking: $totalTime s
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;silent&gt;&gt;
-    /* 1. 更新場景分數 (因為不能重複進，所以直接 += 是安全的) */
-    &lt;&lt;set $scenarios[0].safety -= 30&gt;&gt;
-    &lt;&lt;set $scenarios[0].legal -= 30&gt;&gt; 
-    /* 2. 更新總分數 */
-    &lt;&lt;set $totalSafety -= 30&gt;&gt;
-    &lt;&lt;set $totalLegal -= 30&gt;&gt;
-&lt;&lt;/silent&gt;&gt;</tw-passagedata><tw-passagedata pid="85" name="SA4C" tags="Sa" position="675,1150" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="85" name="SA4C" tags="Sa" position="675,1150" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你呼喚了姑姑過來。
@@ -6277,548 +6153,7 @@ Thinking: $totalTime s
 &lt;&lt;set $currentScenarioId = 6&gt;&gt;
 &lt;&lt;set $totalTime = 0&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;
-&lt;&lt;goto &quot;NeglectDiet&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="99" name="Quiz_Widget" tags="widget" position="600,1825" size="100,100">&lt;&lt;widget &quot;PixelQuiz&quot;&gt;&gt;
-&lt;&lt;nobr&gt;&gt;
-&lt;&lt;set $quizNextPassage to _args[1]&gt;&gt;
-&lt;&lt;set _correctAnswer to _args[6]&gt;&gt;
-
-/* 初始化正向計時器 */
-&lt;&lt;set $quizElapsedTime to 0&gt;&gt;
-&lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
-
-&lt;div id=&quot;quiz-box&quot;&gt;
-&lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot; class=&quot;pixel-loop-animation&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;quiz-status&quot;&gt;
-SYSTEM: DECISION REQUIRED
-&lt;/div&gt;
-
-&lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
-&lt;&lt;type 30ms&gt;&gt;_args[0]&lt;&lt;/type&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;quiz-option&quot;&gt; 
-&lt;&lt;link _args[2]&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if _args[2] == _correctAnswer&gt;&gt;
-&lt;&lt;set $score += 10&gt;&gt;
-&lt;&lt;set _isRight to true&gt;&gt;
-&lt;&lt;else&gt;&gt;
-&lt;&lt;set _isRight to false&gt;&gt;
-&lt;&lt;endif&gt;&gt;
-
-/* 🌟 嚴謹的分流閘門 */
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[2], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $quizNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-
-&lt;&lt;link _args[3]&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if _args[3] == _correctAnswer&gt;&gt;
-&lt;&lt;set $score += 10&gt;&gt;
-&lt;&lt;set _isRight to true&gt;&gt;
-&lt;&lt;else&gt;&gt;
-&lt;&lt;set _isRight to false&gt;&gt;
-&lt;&lt;endif&gt;&gt;
-
-/* 🌟 嚴謹的分流閘門 */
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[3], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $quizNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-
-&lt;&lt;link _args[4]&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if _args[4] == _correctAnswer&gt;&gt;
-&lt;&lt;set $score += 10&gt;&gt;
-&lt;&lt;set _isRight to true&gt;&gt;
-&lt;&lt;else&gt;&gt;
-&lt;&lt;set _isRight to false&gt;&gt;
-&lt;&lt;endif&gt;&gt;
-
-/* 🌟 嚴謹的分流閘門 */
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[4], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $quizNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-
-&lt;&lt;link _args[5]&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if _args[5] == _correctAnswer&gt;&gt;
-&lt;&lt;set $score += 10&gt;&gt;
-&lt;&lt;set _isRight to true&gt;&gt;
-&lt;&lt;else&gt;&gt;
-&lt;&lt;set _isRight to false&gt;&gt;
-&lt;&lt;endif&gt;&gt;
-
-/* 🌟 嚴謹的分流閘門 */
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: _args[5], time: _elapsed, isCorrect: _isRight})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $quizNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;&lt;done&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;script&gt;&gt;
-$(&#39;.quiz-option a&#39;).on(&#39;click&#39;, function(e) {
-var $btn = $(this);
-if ($btn.hasClass(&#39;is-tapped&#39;)) return;
-e.preventDefault();
-e.stopPropagation();
-$btn.addClass(&#39;is-tapped&#39;);
-clearInterval(window.quizTimer);
-var targetPage = State.variables.quizNextPassage;
-setTimeout(function() {
-$.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetPage + &#39;&quot;&gt;&gt;&#39;);
-}, 50);
-});
-
-// 後台靜默正向計時（不設置上限，僅記錄時間）
-window.quizTimer = setInterval(function() {
-State.variables.quizElapsedTime += 1;
-}, 1000);
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;/done&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;PixelLikertBar&quot;&gt;&gt;
-&lt;&lt;nobr&gt;&gt;
-&lt;&lt;set $likertNextPassage to _args[1]&gt;&gt;
-
-/* 初始化正向計時器 */
-&lt;&lt;set $likertElapsedTime to 0&gt;&gt;
-&lt;&lt;set $questionStartTime to Date.now()&gt;&gt;
-
-&lt;div id=&quot;quiz-box&quot;&gt;
-&lt;div id=&quot;timer-bar-container&quot;&gt;&lt;div id=&quot;timer-bar&quot; class=&quot;pixel-loop-animation&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;quiz-status&quot;&gt;
-SYSTEM: ATTITUDE &amp; CONFIDENCE SCALE
-&lt;/div&gt;
-
-&lt;div class=&quot;story-text&quot; style=&quot;min-height: 80px; line-height: 1.6;&quot;&gt;
-&lt;&lt;type 30ms&gt;&gt;_args[0]&lt;&lt;/type&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;likert-horizontal-container&quot;&gt;
-&lt;div class=&quot;likert-scale-bar&quot;&gt;
-&lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;1&quot;&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;1/5&lt;br&gt;Strongly Disagree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $likertNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;2&quot;&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;2/5&lt;br&gt;Disagree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $likertNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;3&quot;&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;3/5&lt;br&gt;Neutral&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $likertNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;4&quot;&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;4/5&lt;br&gt;Agree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $likertNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;likert-circle-node&quot;&gt;
-&lt;&lt;link &quot;5&quot;&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;set _elapsed = (Date.now() - $questionStartTime) / 1000&gt;&gt;
-&lt;&lt;if $isPostTest is true&gt;&gt;
-    &lt;&lt;run $postDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;run $preDecisionHistory.push({q: passage(), choice: &quot;5/5&lt;br&gt;Strongly Agree&quot;, time: _elapsed})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;goto $likertNextPassage&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;likert-labels&quot;&gt;
-&lt;span class=&quot;label-left&quot;&gt;◄ 非常不同意&lt;/span&gt;
-&lt;span class=&quot;label-right&quot;&gt;非常同意 ►&lt;/span&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;&lt;done&gt;&gt;
-&lt;&lt;run clearInterval(window.quizTimer)&gt;&gt;
-&lt;&lt;script&gt;&gt;
-$(&#39;.likert-scale-bar a&#39;).on(&#39;click&#39;, function(e) {
-var $btn = $(this);
-if ($btn.hasClass(&#39;is-tapped&#39;)) return;
-
-e.preventDefault();
-e.stopPropagation();
-
-$btn.addClass(&#39;is-tapped&#39;); 
-
-clearInterval(window.quizTimer);
-var targetLikert = State.variables.likertNextPassage;
-
-setTimeout(function() {
-$.wiki(&#39;&lt;&lt;goto &quot;&#39; + targetLikert + &#39;&quot;&gt;&gt;&#39;);
-}, 50);
-});
-
-window.quizTimer = setInterval(function() {
-State.variables.likertElapsedTime += 1;
-}, 1000);
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;/done&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;SubmitToBackend&quot;&gt;&gt;
-&lt;&lt;script&gt;&gt;
-    if (!window.hasSubmittedData) {
-        window.hasSubmittedData = true; 
-        
-        console.log(&quot;SubmitToBackend 獨立分流發送中...&quot;);
-
-        var staffId   = State.variables.staffID || &quot;Anonymous&quot;;
-        var preScore  = State.variables.preTestScore !== undefined ? State.variables.preTestScore : 0;
-        var postScore = State.variables.score || 0; 
-        
-        // 🌟 直接讀取兩個全新獨立、絕不交叉污染的專用箱子
-        var preHistory  = State.variables.preDecisionHistory || [];
-        var postHistory = State.variables.postDecisionHistory || [];
-
-        // 打包 Pre-test 數據
-        var preResultsArray = [];
-        var preTimesArray   = [];
-        for (var i = 0; i &lt; preHistory.length; i++) {
-            var item = preHistory[i];
-            if (item) {
-                var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
-                preResultsArray.push(resText);
-                preTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
-            }
-        }
-        var preResultsStr = preResultsArray.length &gt; 0 ? preResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
-        var preTimesStr   = preTimesArray.length &gt; 0 ? preTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
-
-        // 打包 Post-test 數據
-        var postResultsArray = [];
-        var postTimesArray   = [];
-        for (var j = 0; j &lt; postHistory.length; j++) {
-            var item = postHistory[j];
-            if (item) {
-                var resText = (item.choice === &quot;TIMEOUT&quot;) ? &quot;TIMEOUT&quot; : (item.choice &amp;&amp; item.choice.includes(&quot;/5&quot;) ? item.choice : (item.isCorrect ? &quot;PASS&quot; : &quot;FAIL&quot;));
-                postResultsArray.push(resText);
-                postTimesArray.push(item.time ? item.time.toFixed(2) : &quot;0.00&quot;);
-            }
-        }
-        var postResultsStr = postResultsArray.length &gt; 0 ? postResultsArray.join(&quot;, &quot;) : &quot;無資料&quot;;
-        var postTimesStr   = postTimesArray.length &gt; 0 ? postTimesArray.join(&quot;, &quot;) : &quot;無資料&quot;;
-
-        // 🌟 你的最新 Google 表單網址 (formResponse 後台發送模式)
-        var formUrl = &quot;https://docs.google.com/forms/d/e/1FAIpQLSfjsy0qUWXztgSFLlIr0cfwZU17KIJELYtFwMGScSwQMZdWrg/formResponse&quot;;
-        var formData = new URLSearchParams();
-        
-        // 🌟 精準對接你的最新 Entry 編號
-        formData.append(&#39;entry.645510610&#39;,  staffId);         // 員工編號
-        formData.append(&#39;entry.1353230292&#39;, preScore);        // Pre總分
-        formData.append(&#39;entry.748921387&#39;,  postScore);       // Post總分
-        formData.append(&#39;entry.1984827880&#39;, preResultsStr);   // Pre每題結果
-        formData.append(&#39;entry.1979713019&#39;, postResultsStr);  // Post每題結果
-        formData.append(&#39;entry.1221234926&#39;, preTimesStr);     // Pre猶豫時間
-        formData.append(&#39;entry.1173075373&#39;, postTimesStr);    // Post猶豫時間
-
-        fetch(formUrl, {
-            method: &#39;POST&#39;,
-            mode: &#39;no-cors&#39;,
-            headers: { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39; },
-            body: formData.toString()
-        }).then(function() {
-            console.log(&quot;數據已完美分離並成功發射！&quot;);
-        });
-
-    } else {
-        console.log(&quot;偵測到重複呼叫，已自動攔截。&quot;);
-    }
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="Quiz_1" tags="no-handbk no-timer Quiz" position="500,2025" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;1. 下列哪一項最準確描述「強制舉報」的法律時限？&quot; 
-    &quot;Quiz_2&quot; 
-    &quot;A. 發現後 24 小時內提交書面報告&quot; 
-    &quot;B. 隨即並在不遲於 24 小時內作出舉報&quot;
-    &quot;C. 發現後 48 小時內致電警方&quot; 
-    &quot;D. 視乎傷勢，若不嚴重可於下一個工作天處理&quot; 
-    &quot;B. 隨即並在不遲於 24 小時內作出舉報&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="Quiz_Intro" tags="no-handbk no-timer Quiz" position="600,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
-&lt;&lt;audio &quot;server&quot; play loop&gt;&gt;\
-&lt;&lt;if typeof $score !== &quot;number&quot; || isNaN($score)&gt;&gt;&lt;&lt;set $score to 0&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;nobr&gt;&gt;\
-&lt;&lt;set $decisionHistory to []&gt;&gt;\
-&lt;&lt;/nobr&gt;&gt;\
-&lt;div id=&quot;quiz-box&quot;&gt;\
-    &lt;div class=&quot;quiz-status&quot;&gt;\
-        SYSTEM: INITIALIZING...
-    &lt;/div&gt;\
-    &lt;div class=&quot;story-text&quot; style=&quot;min-height: 0px; line-height: 1.5;&quot;&gt;\
-        &lt;&lt;type 50ms&gt;&gt;\
-        [ 評估小測試 ]&lt;br&gt;
-        歡迎&lt;strong&gt;$staffID&lt;/strong&gt;進入此測試。接下來你將面臨一系列知識測試、臨床判斷以及自我評價態度與信心。
-        &lt;br&gt;
-        &lt;span style=&quot;color: #ff4444;&quot;&gt;無論你的選擇是對是錯，&lt;br&gt;請跟隨你的直覺......&lt;/span&gt;&lt;&lt;/type&gt;&gt;\
-        
-    &lt;/div&gt;\
-    /* 經典的閃爍提示或開始按鈕 */\
-    &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 20px;&quot;&gt;
-        &lt;&lt;link &quot;開始測試&quot; &quot;Quiz_1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;\
-    &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="102" name="Quiz_2" tags="no-handbk no-timer Quiz" position="500,2125" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;2. 在診所環境中，若醫護人員懷疑虐兒，法定的「指明方式」舉報程序為何？&quot; 
-    &quot;Quiz_3&quot; 
-    &quot;A. 直接在電子平台填寫報告，無需致電&quot; 
-    &quot;B. 寄送掛號信至社會福利署保護家庭及兒童服務課&quot;
-    &quot;C. 先致電主管當局（警方或社署）口頭舉報，再以書面形式提供資料&quot; 
-    &quot;D. 填寫醫院管理局內部意外報告（AIRS）即視作完成法律責任&quot; 
-    &quot;C. 先致電主管當局（警方或社署）口頭舉報，再以書面形式提供資料&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="Quiz_3" tags="no-handbk no-timer Quiz" position="500,2225" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;3. 根據《應用手冊》，在電子舉報平台進行身份驗證的登入碼（OTP）會透過什麼途徑發送？&quot; 
-    &quot;Quiz_4&quot; 
-    &quot;A. 電郵 (Email)&quot; 
-    &quot;B. 診所傳真 (Fax)&quot;
-    &quot;C. 舉報者提供的個人手機短訊 (SMS)&quot; 
-    &quot;D. 郵寄紙本驗證碼&quot; 
-    &quot;C. 舉報者提供的個人手機短訊 (SMS)&quot; 
-&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="Quiz_4" tags="no-handbk no-timer Quiz" position="500,2325" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;4. 關於在舉報平台輸入「受影響兒童」的數目，下列何者正確？&quot; 
-    &quot;Quiz_5&quot; 
-    &quot;A. 舉報者可隨時在平台上自行增加兒童數目&quot; 
-    &quot;B. 兒童數目是根據早前口頭舉報時提供的資料預設的，不能在平台上直接增加&quot;
-    &quot;C. 平台不設人數限制，亦不需預先核實&quot; 
-    &quot;D. 若有多名受影響兒童，只需填寫其中一人的資料&quot; 
-    &quot;B. 兒童數目是根據早前口頭舉報時提供的資料預設的，不能在平台上直接增加&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="105" name="Quiz_5" tags="no-handbk no-timer Quiz" position="500,2425" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;5. 若一名註冊護士未能在法定期限內舉報懷疑嚴重虐兒個案，最高刑事處罰為：&quot; 
-    &quot;Quiz_6&quot; 
-    &quot;A. 罰款港幣 $5,000&quot; 
-    &quot;B. 監禁 1 個月&quot;
-    &quot;C. 監禁 3 個月及罰款港幣 $50,000&quot; 
-    &quot;D. 僅受所屬專業委員會紀律處分&quot; 
-    &quot;C. 監禁 3 個月及罰款港幣 $50,000&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="Quiz_6" tags="no-timer no-handbk Quiz" position="500,2525" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;6. 下列哪一項不屬於《條例》中定義的「嚴重傷害」範疇？&quot; 
-    &quot;Quiz_7&quot; 
-    &quot;A. 嚴重的身體傷害（如骨折、內傷）&quot; 
-    &quot;B. 強迫或誘使兒童參與性活動&quot;
-    &quot;C. 嚴重的疏忽（如持續拒絕提供致命疾病的藥物）&quot; 
-    &quot;D. 偶爾因管教問題導致的輕微皮膚紅印&quot; 
-    &quot;D. 偶爾因管教問題導致的輕微皮膚紅印&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="Quiz_7" tags="no-handbk no-timer Quiz" position="500,2625" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;7. 誰有責任保存舉報後的參考編號（Reference Number）？&quot; 
-    &quot;Quiz_8&quot; 
-    &quot;A. 診所護士站IC&quot; 
-    &quot;B. 只有醫生&quot;
-    &quot;C. 進行舉報的指明專業人士（如護士或醫生個人）&quot; 
-    &quot;D. 社署派出的社工&quot; 
-    &quot;C. 進行舉報的指明專業人士（如護士或醫生個人）&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="Quiz_8" tags="no-handbk no-timer Quiz" position="500,2725" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;8. 根據《程序指引》，如果受害兒童超過一名，在診所等待調查或治療時應：&quot; 
-    &quot;Quiz_9&quot; 
-    &quot;A. 安排他們一起玩耍以緩解情緒&quot; 
-    &quot;B. 安排他們分開，避免互相影響陳述&quot;
-    &quot;C. 立即交由行政職員帶到診所外觀察&quot; 
-    &quot;D. 讓家長同時照顧所有受影響兒童&quot; 
-    &quot;B. 安排他們分開，避免互相影響陳述&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="Quiz_9" tags="no-handbk no-timer Quiz" position="500,2825" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;9. 若舉報者「真誠地」作出了舉報，但最後調查證實不構成虐待，《條例》提供：&quot; 
-    &quot;Quiz_10&quot; 
-    &quot;A. 法律豁免及民事責任保障&quot; 
-    &quot;B. 心理輔導補償&quot;
-    &quot;C. 僅提供口頭表揚，不設法律保障&quot; 
-    &quot;D. 舉報者仍需自費聘請律師應對可能的民事訴訟&quot; 
-    &quot;A. 法律豁免及民事責任保障&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="Quiz_10" tags="no-handbk no-timer Quiz" position="500,2925" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;10. 根據醫管局指引，在診所進行初步評估時，首要考慮的是：&quot; 
-    &quot;Quiz_11&quot; 
-    &quot;A. 收集證據以備法庭判案&quot; 
-    &quot;B. 診所的行政工作效率&quot;
-    &quot;C. 維持與家長的良好醫患關係&quot; 
-    &quot;D. 兒童的安全和最佳利益&quot; 
-    &quot;D. 兒童的安全和最佳利益&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="Quiz_11" tags="no-handbk no-timer Quiz" position="600,2025" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;Case 1: 一名兒童因流感就診，護士發現其腹部有明顯的煙頭灼傷痕跡。家長聲稱是孩子自己玩火受傷，但灼傷位置在背部及腹部多處。&lt;br&gt;問：你應如何處理？&quot; 
-    &quot;Quiz_12&quot; 
-    &quot;A. 相信家長解釋，記錄病歷後讓其回家&quot; 
-    &quot;B. 告知家長下次若再發生才舉報&quot;
-    &quot;C. 要求家長簽署承諾書不再玩火&quot; 
-    &quot;D. 有合理理由懷疑兒童正遭受嚴重傷害，必須啟動強制舉報程序&quot; 
-    &quot;D. 有合理理由懷疑兒童正遭受嚴重傷害，必須啟動強制舉報程序&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="Quiz_12" tags="no-handbk no-timer Quiz" position="600,2125" size="100,100">&lt;&lt;PixelQuiz
-    &quot;Case 2: 一對有海洛英史且正接受美沙酮治療的夫婦，帶18個月大女嬰來就診。護士在靠近女嬰時聞強烈尿羶與霉味，發現尿布疹已潰爛出血。女嬰體重處於生長曲線第3百分位以下，眼神呆滯、對外界刺激無反應。父母瞳孔呈針尖樣。&lt;br&gt;問：根據分析框架，下列臨床決定何者最正確？&quot;
-    &quot;Quiz_13&quot;
-    &quot;A. 家長沒有表現出惡意傷害女嬰的意向，純粹是能力不足，不符合條例中有意圖的刑事虐兒定義&quot;
-    &quot;B. 屬於社會經濟問題導致的照顧不當，因無直接肉體虐待痕跡，應先轉介給門診營養師及母嬰健康院跟進，觀察一個月&quot;
-    &quot;C. 由於父母正接受美沙酮治療，屬於積極戒毒人士，醫護應予包容，先由護士為女嬰清洗傷口並塗抹藥膏，暫不申報&quot;
-    &quot;D. 屬於嚴重慢性疏忽，已對幼童生命構成即時風險，且家長因藥癮失去照顧能力(風險極高)，必須立刻啟動強制舉報，並聯絡兒科急診收留嬰兒&quot;
-    &quot;D. 屬於嚴重慢性疏忽，已對幼童生命構成即時風險，且家長因藥癮失去照顧能力(風險極高)，必須立刻啟動強制舉報，並聯絡兒科急診收留嬰兒&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="Quiz_13" tags="no-handbk no-timer Quiz" position="600,2225" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;Case 3: 一名 10 歲女童向診所職員透露，家中繼父經常要求她觸摸其私密部位，並威脅不准告訴母親。&lt;br&gt;問：根據指引，你的判斷是？&quot; 
-    &quot;Quiz_14&quot; 
-    &quot;A. 屬於性侵犯，必須立即舉報，不論有無身體受傷跡象&quot; 
-    &quot;B. 由於沒有暴力傷痕，應先觀察&quot;
-    &quot;C. 否，因為家長沒有直接動武&quot; 
-    &quot;D. 先與繼父對質，核實後再舉報&quot; 
-    &quot;A. 屬於性侵犯，必須立即舉報，不論有無身體受傷跡象&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="Quiz_14" tags="no-handbk no-timer Quiz" position="600,2325" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;Case 4: 診所醫生認為個案不需要舉報，但作為護士的你根據專業判斷認為兒童面對極大危險。&lt;br&gt;問：根據法律，你應該？&quot; 
-    &quot;Quiz_15&quot; 
-    &quot;A. 履行個人法律責任，自行向主管當局舉報&quot; 
-    &quot;B. 遵從醫生指令，因為他是診所負責人&quot;
-    &quot;C. 要求醫生簽署免責聲明&quot; 
-    &quot;D. 向同事求助，由同事代為舉報&quot; 
-    &quot;A. 履行個人法律責任，自行向主管當局舉報&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="Quiz_15" tags="no-handbk no-timer Quiz" position="600,2425" size="100,100">&lt;&lt;PixelQuiz 
-    &quot;Case 5: 一名 3 歲幼童頭部有不尋常腫塊，家長解釋是從床上掉下。但檢查發現傷勢與高度不吻合（例如傷勢非常嚴重）。&lt;br&gt;問：哪一個分析因素最支持你舉報？&quot; 
-    &quot;Quiz_16&quot; 
-    &quot;A. 兒童的年齡（年幼者風險較高）&quot; 
-    &quot;B. 解釋與傷勢不吻合（性質不尋常）&quot;
-    &quot;C. 家長神情緊張&quot; 
-    &quot;D. 以上皆是&quot; 
-    &quot;D. 以上皆是&quot;
-&gt;&gt;
-
-</tw-passagedata><tw-passagedata pid="116" name="Quiz_16" tags="no-handbk no-timer Quiz" position="700,2025" size="100,100">&lt;&lt;PixelLikertBar 
-    &quot;我清楚了解自己在《強制舉報虐待兒童條例》下的個人法律責任。&quot; 
-    &quot;Quiz_17&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="Quiz_17" tags="no-handbk no-timer Quiz" position="700,2125" size="100,100">&lt;&lt;PixelLikertBar 
-    &quot;我有信心能準確辨識哪些傷勢或行為屬於「嚴重傷害」。&quot; 
-    &quot;Quiz_18&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="Quiz_18" tags="no-handbk no-timer Quiz" position="700,2225" size="100,100">&lt;&lt;PixelLikertBar 
-    &quot;我熟悉使用電子舉報平台提交書面資料的流程。&quot; 
-    &quot;Quiz_19&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="119" name="Quiz_19" tags="no-handbk no-timer Quiz" position="700,2325" size="100,100">&lt;&lt;PixelLikertBar 
-    &quot;我認為強制舉報制度能有效保護診所接觸到的高風險兒童。&quot; 
-    &quot;Quiz_20&quot;
-&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="Quiz_20" tags="no-handbk no-timer Quiz" position="700,2425" size="100,100">/* 🎯 根據前後測，動態決定按完按鈕後要前進的最終 Passage 目的地 */
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;&lt;set _target to &quot;Quiz_Result&quot;&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set _target to &quot;Game_Ultimate_Ending&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;PixelLikertBar 
-&quot;如果要與上司就舉報決定產生分歧，我有信心能堅持履行法律義務。&quot; 
-_target
-&gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="Quiz_Result" tags="no-handbk no-timer Quiz" position="700,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
-
-/* 🔒 精確鎖定前測分數 */
-&lt;&lt;set $preTestScore to $score&gt;&gt;
-
-&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
-    &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: PRE-TEST COMPLETED&lt;/div&gt;
-    &lt;div class=&quot;story-text&quot;&gt;\
-        &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 前測評估報告 ✦&lt;/h2&gt;\
-        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;TOTAL SCORE / 總得分：
-            &lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $preTestScore&gt;&gt;&lt;/span&gt; 分 &lt;/p&gt;\
-        &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
-        
-        &lt;table class=&quot;pixel-report-table&quot;&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
-                    &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
-                    &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-            &lt;&lt;if def $preDecisionHistory and $preDecisionHistory.length &gt; 0&gt;&gt;
-                &lt;&lt;for _i to 0; _i &lt; $preDecisionHistory.length; _i++&gt;&gt;\
-                    &lt;tr&gt;\
-                        &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
-                        &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;\
-                            &lt;&lt;if $preDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $preDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;\
-                            &lt;&lt;else&gt;&gt;\
-                                &lt;&lt;if $preDecisionHistory[_i].isCorrect&gt;&gt;\
-                                    &lt;span style=&quot;color: #00ff00;&quot;&gt;✓&lt;/span&gt;\
-                                &lt;&lt;else&gt;&gt;\
-                                    &lt;span style=&quot;color: #ff0000;&quot;&gt;✗&lt;/span&gt;\
-                                &lt;&lt;/if&gt;&gt;\
-                            &lt;&lt;/if&gt;&gt;\
-                        &lt;/td&gt;\     
-                        &lt;td style=&quot;text-align: center;&quot;&gt;\
-                            &lt;span class=&quot;glow-green&quot;&gt;&lt;&lt;print $preDecisionHistory[_i].time.toFixed(2)&gt;&gt;&lt;/span&gt; 秒
-                        &lt;/td&gt;\
-                    &lt;/tr&gt;\
-                &lt;&lt;/for&gt;&gt;\
-            &lt;&lt;else&gt;&gt;
-                &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000; padding: 15px;&quot;&gt;⚠️ 暫無前測數據歷史&lt;/td&gt;&lt;/tr&gt;
-            &lt;&lt;/if&gt;&gt;
-            &lt;/tbody&gt;\
-        &lt;/table&gt;\
-    &lt;/div&gt;\
-  
-    &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-        &lt;&lt;link &quot;進入遊戲介面&lt;br&gt;Are you ready?&quot;&gt;&gt;
-            /* 🌟 按下按鈕的瞬間，開啟後測分離閘門，計分板歸零 */
-            &lt;&lt;set $score to 0&gt;&gt;
-            &lt;&lt;set $isPostTest to true&gt;&gt;
-            &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-            &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;
-            &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
-        &lt;&lt;/link&gt;&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="122" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;goto &quot;NeglectDiet&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="99" name="SA5AED" tags="Sa" position="400,1250" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你跟她們說：「這裡是家庭醫學門診，&lt;br&gt;做不了詳細檢查，不如去醫院急症室吧。」
@@ -6873,7 +6208,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="SA5Bad1" tags="Sa no-timer scenario-2-bad bad-ending" position="600,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="100" name="SA5Bad1" tags="Sa no-timer scenario-2-bad bad-ending" position="600,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;sadsong&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
@@ -6951,7 +6286,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="124" name="NE2A" tags="Ne" position="1050,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="NE2A" tags="Ne" position="1050,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
        你拉上隔簾，溫和地詢問外婆家居居住環境與照顧人狀況，並檢查小茹衣服覆蓋下的皮膚。
@@ -6984,7 +6319,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="NE2B" tags="Ne" position="1150,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="102" name="NE2B" tags="Ne" position="1150,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你認為基層家庭衛生差很常見，不作深究，僅記錄「Hygiene poor」，依常規程序安排進入大堂等候醫生叫號。
@@ -7023,7 +6358,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="126" name="NE4A" tags="Ne" position="1100,1000" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="NE4A" tags="Ne" position="1100,1000" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         小茹被留置在診症室內接受相應治療，血氧回復安全水平。
@@ -7056,7 +6391,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="NEGood" tags="no-timer good-ending" position="1150,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="NEGood" tags="no-timer good-ending" position="1150,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;ring&quot; play loop&gt;&gt;
 &lt;style&gt;
     html, body {
@@ -7145,7 +6480,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="128" name="SA5Bad2" tags="Sa no-timer scenario-2-bad bad-ending" position="700,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="105" name="SA5Bad2" tags="Sa no-timer scenario-2-bad bad-ending" position="700,1450" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
@@ -7218,7 +6553,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="SA5preReport" tags="Sa" position="500,1350" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="SA5preReport" tags="Sa" position="500,1350" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你保持冷靜。&lt;br&gt;立刻告知醫生後並進入診症室。&lt;/span&gt;
@@ -7261,7 +6596,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="SAWrong" tags="Sa" position="400,1350" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="SAWrong" tags="Sa" position="400,1350" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -7323,7 +6658,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="131" name="NEBad" tags="Ne no-timer scenario-4-bad bad-ending" position="1050,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="NEBad" tags="Ne no-timer scenario-4-bad bad-ending" position="1050,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -7402,7 +6737,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="NHBad" tags="Nh no-timer scenario-5-bad bad-ending" position="1475,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="NHBad" tags="Nh no-timer scenario-5-bad bad-ending" position="1475,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -7462,7 +6797,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="NHGood" tags="no-timer good-ending" position="1375,1500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="NHGood" tags="no-timer good-ending" position="1375,1500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;ring&quot; play loop&gt;&gt;
 &lt;style&gt;
     html, body {
@@ -7554,7 +6889,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="NDGood" tags="Nd no-timer good-ending" position="2050,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="NDGood" tags="Nd no-timer good-ending" position="2050,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;\
 &lt;style&gt;
     html, body {
@@ -7658,7 +6993,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="135" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2225,900" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2225,900" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -7749,7 +7084,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="NE3A" tags="Ne" position="1050,900" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="NE3A" tags="Ne" position="1050,900" size="100,100">&lt;&lt;audio &quot;error&quot; play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
@@ -7795,7 +7130,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="NE3B" tags="Ne" position="1150,900" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="NE3B" tags="Ne" position="1150,900" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你指示保安維持秩序，確保自身安全下避免搏鬥，並立刻致電 999 報警。
@@ -7843,7 +7178,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="Before_test" tags="no-handbk no-timer" position="500,1925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="Before_test" tags="no-handbk no-timer" position="500,1925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div class=&quot;music-panel-container&quot;&gt;
     &lt;div class=&quot;music-panel-header&quot;&gt;🎵 AUDIO BROADCAST STATION&lt;/div&gt;
     &lt;&lt;link &quot;♫ FMC650➊&quot;&gt;&gt;
@@ -7939,7 +7274,7 @@ _target
         }
     &gt;&gt;
 &lt;&lt;/done&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="139" name="SAbox" tags="no-handbk no-timer" position="400,1550" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="116" name="SAbox" tags="no-handbk no-timer" position="400,1550" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -7992,7 +7327,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="140" name="SAGoodthen" tags="no-timer good-ending" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;SAGoodthen&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="117" name="SAGoodthen" tags="no-timer good-ending" position="400,1650" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;ring&quot; play loop&gt;&gt;
 &lt;style&gt;
     html, body {
@@ -8088,7 +7423,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="141" name="PhAbox" tags="no-handbk no-timer" position="225,925" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="PhAbox" tags="no-handbk no-timer" position="225,925" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -8141,7 +7476,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;PhAENDING_GOOD&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="142" name="NE5A" tags="Ne no-timer" position="1050,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;PhAENDING_GOOD&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="119" name="NE5A" tags="Ne no-timer" position="1050,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
        你認為既然醫生已經在 CMS 上寫明「建議暫緩舉報」，自己作為護士，已經向團隊反映了疑慮，行政上已經完成了交辦職責。&lt;br&gt;在當天門診結束後，你如常下班。
@@ -8193,7 +7528,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="143" name="NE5B" tags="Ne no-timer" position="1150,1100" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="NE5B" tags="Ne no-timer" position="1150,1100" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
 
 &lt;&lt;if $unlocked.quotes is false&gt;&gt;\
@@ -8256,7 +7591,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="144" name="NEBad2" tags="no-timer Ne bad-ending scenario-4-bad" position="1050,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="NEBad2" tags="no-timer Ne bad-ending scenario-4-bad" position="1050,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -8322,7 +7657,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="145" name="NH3B" tags="Nh" position="1425,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="NH3B" tags="Nh" position="1425,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;busy&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -8371,7 +7706,7 @@ _target
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="146" name="NH3A" tags="Nh" position="1525,1200" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="123" name="NH3A" tags="Nh" position="1525,1200" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你認為這是衛生問題，法律責任應該可以由已知道情況的社工代為舉報，你只負責記錄病歷就可以了。
@@ -8436,7 +7771,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="147" name="NH4B" tags="Nh" position="1375,1300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="124" name="NH4B" tags="Nh" position="1375,1300" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         李先生被你的專業態度和「特效藥水」的借口安撫，帶著他的女兒走進了安靜、具高度私隱的獨立房間。你安排同事密切留意門口，確保安全與保密。
@@ -8497,7 +7832,7 @@ _target
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="148" name="NH4A" tags="Nh" position="1475,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+</tw-passagedata><tw-passagedata pid="125" name="NH4A" tags="Nh" position="1475,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;crybaby&quot; play loop&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
@@ -8552,7 +7887,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="149" name="NHBad1" tags="bad-ending scenario-5-bad Nh no-timer" position="1575,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="126" name="NHBad1" tags="bad-ending scenario-5-bad Nh no-timer" position="1575,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -8636,7 +7971,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="150" name="NHbox" tags="no-handbk no-timer" position="1375,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="NHbox" tags="no-handbk no-timer" position="1375,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;news&quot; play loop&gt;&gt;
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
@@ -8691,7 +8026,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;NHGood&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="151" name="ND2A" tags="Nd" position="2025,900" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;NHGood&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="128" name="ND2A" tags="Nd" position="2025,900" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你知道小寶的體重和臨床徵狀顯示他正處於飢餓與嚴重的生理損害中，這屬於極度嚴重的飲食疏忽(Neglect of Diet)，已構成健康受損的實際風險。
@@ -8741,7 +8076,7 @@ _target
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="152" name="ND2B" tags="Nd" position="2125,900" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="129" name="ND2B" tags="Nd" position="2125,900" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         黃太提到了「沒錢買奶粉」，這顯然是基層家庭的經濟困難（Poverty）。
@@ -8793,7 +8128,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="153" name="ND3A" tags="Nd" position="1975,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="ND3A" tags="Nd" position="1975,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tense&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -8842,7 +8177,7 @@ _target
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="154" name="ND3B" tags="Nd" position="2075,1000" size="100,100">&lt;&lt;nobr&gt;&gt;
+</tw-passagedata><tw-passagedata pid="131" name="ND3B" tags="Nd" position="2075,1000" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         既然是非意外受傷的慢性飲食問題，我先打給醫務社工，讓社工評估一下黃太是否真的沒錢買奶粉，再決定報不報警。
@@ -8900,7 +8235,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="155" name="ND4A" tags="Nd" position="1950,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="ND4A" tags="Nd" position="1950,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;&lt;&lt;audio &quot;error&quot; play&gt;&gt;
         你為了不讓她走，吩咐行政職員關上診所大閘，並在大堂當眾高喊：「黃太，你涉嫌嚴重虐兒，警察正在路上，你現在哪裡都不准去！」
@@ -8951,7 +8286,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="156" name="ND4B" tags="Nd" position="2050,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="ND4B" tags="Nd" position="2050,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你保持冷靜，與醫生配合以醫學理由留人：「黃太，小寶目前的咳嗽需要吸氧氣，我們正在為他準備氧氣罩，現在拔掉管線會很危險，請在獨立房間內稍等救護車。」
@@ -9026,7 +8361,7 @@ _target
 &lt;&lt;set $page = 1&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="157" name="NDBad1" tags="Nd scenario-6-bad bad-ending" position="2175,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+</tw-passagedata><tw-passagedata pid="134" name="NDBad1" tags="Nd scenario-6-bad bad-ending" position="2175,1000" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;wah&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -9086,7 +8421,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="158" name="NDBadrestart" tags="Nd bad-ending scenario-6-bad" position="1950,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="135" name="NDBadrestart" tags="Nd bad-ending scenario-6-bad" position="1950,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;sadsong&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -9141,7 +8476,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="159" name="NDbox" tags="no-handbk no-timer" position="2050,1200" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="NDbox" tags="no-handbk no-timer" position="2050,1200" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -9194,7 +8529,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;NDGood&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="160" name="after7" tags="no-handbk no-timer" position="2050,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;NDGood&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="137" name="after7" tags="no-handbk no-timer" position="2050,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;corporate&quot; play loop&gt;&gt;\
 &lt;style&gt;
     html, body {
@@ -9268,7 +8603,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="161" name="Redflags" tags="no-handbk no-timer" position="1950,1500" size="100,100">&lt;&lt;audio &quot;redflags&quot; play&gt;&gt;\
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="Redflags" tags="no-handbk no-timer" position="1950,1500" size="100,100">&lt;&lt;audio &quot;redflags&quot; play&gt;&gt;\
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
@@ -9314,7 +8649,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Flow&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="162" name="Flow" tags="no-handbk no-timer" position="2050,1500" size="100,100">&lt;&lt;audio &quot;redflags&quot; stop&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Flow&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="139" name="Flow" tags="no-handbk no-timer" position="2050,1500" size="100,100">&lt;&lt;audio &quot;redflags&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;flow&quot; play&gt;&gt;\
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
@@ -9361,7 +8696,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Doctips&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="163" name="Doctips" tags="no-handbk no-timer" position="2150,1500" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Doctips&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="140" name="Doctips" tags="no-handbk no-timer" position="2150,1500" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -9406,7 +8741,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Dodont&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="164" name="Dodont" tags="no-handbk no-timer" position="1950,1600" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Dodont&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="141" name="Dodont" tags="no-handbk no-timer" position="1950,1600" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -9451,7 +8786,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Quotes&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="165" name="Quotes" tags="no-handbk no-timer" position="2050,1600" size="100,100">&lt;&lt;audio &quot;flow&quot; stop&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Quotes&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="142" name="Quotes" tags="no-handbk no-timer" position="2050,1600" size="100,100">&lt;&lt;audio &quot;flow&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;quotes&quot; play&gt;&gt;\
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
@@ -9498,7 +8833,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Contacts&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="166" name="Contacts" tags="no-handbk no-timer" position="2150,1600" size="100,100">&lt;&lt;audio &quot;quotes&quot; stop&gt;&gt;\
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;Contacts&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="143" name="Contacts" tags="no-handbk no-timer" position="2150,1600" size="100,100">&lt;&lt;audio &quot;quotes&quot; stop&gt;&gt;\
 &lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
@@ -9544,7 +8879,7 @@ _target
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;beforepost&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="167" name="beforepost" tags="no-handbk no-timer" position="2050,1700" size="100,100">&lt;style&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;beforepost&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="144" name="beforepost" tags="no-handbk no-timer" position="2050,1700" size="100,100">&lt;style&gt;
     html, body {
         background-color: #000 !important;
         background-image: none !important;
@@ -9632,73 +8967,7 @@ _target
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="168" name="Game_Ultimate_Ending" tags="no-handbk no-timer Quiz" position="800,1925" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;rush&quot; play loop&gt;&gt;
-/* 🔒 安全鎖定後測最終分數 */
-&lt;&lt;set $postTestScore to $score&gt;&gt;
-&lt;div id=&quot;quiz-box&quot; style=&quot;padding-top: 2px; overflow-y: auto; max-height: 88vh;&quot;&gt;
-    &lt;div class=&quot;quiz-status&quot;&gt;SYSTEM: FINAL EVALUATION SUMMARY&lt;/div&gt;
-    
-    &lt;div class=&quot;story-text&quot;&gt;\
-        &lt;h2 style=&quot;text-align: center; color: #00ff00; text-shadow: 0 0 6px #00ff00; margin-top: 10px; margin-bottom: 15px;&quot;&gt;✦ 最終評估報告 ✦&lt;/h2&gt;\
-        &lt;p style=&quot;font-size: 1.5em; text-align: center; margin-bottom: 20px;&quot;&gt;\
-            (Pre-test 成績：&lt;&lt;print $preTestScore&gt;&gt; 分)&lt;br&gt;\
-            Post-test 成績：&lt;span class=&quot;glow-blue&quot; style=&quot;font-size: 1.5em;&quot;&gt;&lt;&lt;print $postTestScore&gt;&gt;&lt;/span&gt; 分\
-        &lt;/p&gt;\        
-/* 加上判斷式：只有在「不是後測」的情況下，才顯示前測詳細表格 */
-&lt;&lt;if !$isPostTest&gt;&gt;
-    &lt;div class=&quot;pre-test-table-container&quot;&gt;
-        &lt;table class=&quot;quiz-table&quot;&gt;
-            &lt;/table&gt;
-    &lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-        &lt;hr style=&quot;border: 1px dashed #333; margin: 20px 0;&quot;&gt;
-        &lt;h3 style=&quot;color: #00ffff; text-shadow: 0 0 4px #00ffff; margin: 15px 0 5px 0; font-size: 1.1em;&quot;&gt;📋 Post-test 每題結果&lt;/h3&gt;
-        &lt;table class=&quot;pixel-report-table&quot;&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th style=&quot;width: 25%; text-align: center;&quot;&gt;題目&lt;/th&gt;
-                    &lt;th style=&quot;width: 45%; text-align: center;&quot;&gt;結果&lt;/th&gt;
-                    &lt;th style=&quot;width: 30%; text-align: center;&quot;&gt;猶豫時間&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-            &lt;&lt;if def $postDecisionHistory and $postDecisionHistory.length &gt; 0&gt;&gt;
-                &lt;&lt;for _i to 0; _i &lt; $postDecisionHistory.length; _i++&gt;&gt;\
-                    &lt;tr&gt;\
-                        &lt;td style=&quot;text-align: center; font-weight: bold; color: #aaa;&quot;&gt;#&lt;&lt;print _i + 1&gt;&gt;&lt;/td&gt;\      
-                        &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;\
-                            &lt;&lt;if $postDecisionHistory[_i].choice.includes(&quot;/5&quot;)&gt;&gt;\
-                                &lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].choice.split(&quot;&lt;br&gt;&quot;)[0]&gt;&gt;&lt;/span&gt;\
-                            &lt;&lt;else&gt;&gt;\
-                                &lt;&lt;if $postDecisionHistory[_i].isCorrect&gt;&gt;\
-                                    &lt;span style=&quot;color: #00ff00;&quot;&gt;✓&lt;/span&gt;\
-                                &lt;&lt;else&gt;&gt;\
-                                    &lt;span style=&quot;color: #ff0000;&quot;&gt;✗&lt;/span&gt;\
-                                &lt;&lt;/if&gt;&gt;\
-                            &lt;&lt;/if&gt;&gt;\
-                        &lt;/td&gt;\     
-                        &lt;td style=&quot;text-align: center;&quot;&gt;\
-                            &lt;span class=&quot;glow-green&quot;&gt;&lt;&lt;print $postDecisionHistory[_i].time.toFixed(2)&gt;&gt;&lt;/span&gt; 秒
-                        &lt;/td&gt;\
-                    &lt;/tr&gt;\
-                &lt;&lt;/for&gt;&gt;\
-            &lt;&lt;else&gt;&gt;
-                &lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; color:#ff0000; padding: 10px;&quot;&gt;⚠️ 系統未偵測到後測數據歷史&lt;/td&gt;&lt;/tr&gt;
-            &lt;&lt;/if&gt;&gt;
-            &lt;/tbody&gt;
-        &lt;/table&gt;
-    &lt;/div&gt;
-    
-    &lt;div class=&quot;quiz-option&quot; style=&quot;margin-top: 30px;&quot;&gt;
-        &lt;&lt;link &quot;案件重溫&quot;&gt;&gt;
-            &lt;&lt;goto &quot;Start&quot;&gt;&gt; 
-        &lt;&lt;/link&gt;&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-/* 🌟 後台完美封包發射 */
-&lt;&lt;SubmitToBackend&gt;&gt;</tw-passagedata><tw-passagedata pid="169" name="Player_Register" tags="no-handbk no-timer Register" position="500,1825" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="145" name="Player_Register" tags="no-handbk no-timer Register" position="500,1825" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
 &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;\
 &lt;&lt;nobr&gt;&gt;\
     &lt;span class=&quot;terminal-status&quot;&gt;● REGISTRATION&lt;/span&gt;
@@ -9714,17 +8983,18 @@ _target
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;btn-container&quot;&gt;
-    &lt;&lt;button &quot;🕹️ PUSH START&quot;&gt;&gt;
-        &lt;&lt;if $staffID.trim() is &quot;&quot;&gt;&gt;
-            &lt;&lt;run $(&quot;#login-error&quot;).slideDown(150)&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-        &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
-        &lt;&lt;audio &quot;magictree&quot; play loop&gt;&gt;
-            &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/button&gt;&gt;
+  &lt;&lt;button &quot;🕹️ PUSH START&quot;&gt;&gt;
+    &lt;&lt;if $staffID.trim() is &quot;&quot;&gt;&gt;
+      &lt;&lt;run $(&quot;#login-error&quot;).slideDown(150)&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+      &lt;&lt;audio &quot;magictree&quot; play loop&gt;&gt;
+      &lt;&lt;set $takeSnapshot to true&gt;&gt;
+      &lt;&lt;goto &quot;Ready&quot;&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="FmcRapLyrics" tags="" position="400,2000" size="100,100">[00:00.00]Welcome
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="146" name="FmcRapLyrics" tags="" position="600,1875" size="100,100">[00:00.00]Welcome
 [00:03.50]to the Academy of Safeguarding
 [00:11.00]Every wound tells a story
 [00:14.00]Every silence hides a clue
@@ -9792,7 +9062,7 @@ _target
 [03:55.10]The law does not ask for certainty
 [04:01.50]It asks&lt;br&gt;Will you notice?
 
-</tw-passagedata><tw-passagedata pid="171" name="FMCRapLyrics" tags="" position="400,2100" size="100,100">[00:00.00]Welcome back
+</tw-passagedata><tw-passagedata pid="147" name="FMCRapLyrics" tags="" position="600,1975" size="100,100">[00:00.00]Welcome back
 [00:09.70]點樣舉報 程序方式你要認清
 [00:11.00]緊急風險 九九九即刻駁通警方系統
 [00:13.50]跟手登入電子平台 逐步去完成
