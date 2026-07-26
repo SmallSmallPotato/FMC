@@ -3651,7 +3651,7 @@ Thinking: $totalTime s
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;
-        你用了 &lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在合理範圍時間內履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
+        你最後沒有行動。警方重案組與虐兒組（CAU）正式介入調查。翻查兩個月前你填寫的診所電子病歷，記錄清清楚楚寫著他當時已有「多處非意外瘀傷及口供矛盾」，但你卻沒有在合理範圍時間內履行強制舉報責任。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
             
@@ -3727,7 +3727,7 @@ Thinking: $totalTime s
              &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在當晚那個漫長的黑夜裡，阿樂已經承受了本不該屬於他的顱骨骨折。雖然經 ICU 搶救後保住了性命，但腦部缺氧造成了不可逆轉的永久性神經受損，小宇下半生將需要坐輪椅。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你浪費的&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒，仍沒有行動。&lt;br&gt;「等待更多證據」是否有時就是風險？而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「等待更多證據」是否有時就是風險？而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;【遊戲結束：遺憾的結局】&lt;&lt;/replace&gt;&gt;
@@ -4282,7 +4282,7 @@ Thinking: $totalTime s
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
-        你用了&lt;&lt;print $scenarios[$currentScenarioId].time&gt;&gt; 秒時間猶豫，但最後沒有行動。但在那次診症的兩個月後，你在新聞中看到了熟悉的名字。
+        你最後沒有行動。但在那次診症的兩個月後，你在新聞中看到了熟悉的名字。
     &lt;/span&gt;
     &lt;div class=&quot;click-hint&quot;&gt;▼ 點擊畫面換頁&lt;/div&gt;
     &lt;span class=&quot;full-screen-clicker&quot;&gt;
@@ -7335,7 +7335,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;病歷顯示：你清晰記錄了「小茹身上有強烈死老鼠與發霉異味、背部濕疹因環境髒污大面積潰爛、氣管有微弱喘鳴聲」。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但你在發現這些「環境疏忽」的客觀臨床特徵後，在接下來的 24 小時之內，電子舉報平台上沒有收到任何來自你們門診團隊的書面個案申報。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;但你在發現這些「環境疏忽」的客觀臨床特徵後，再隨即的合理時間範圍內，電子舉報平台上沒有收到任何來自你們門診團隊的書面個案申報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 5&gt;&gt;
                 &lt;&lt;elseif $page == 5&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;探員面無表情地對你說：&lt;br&gt;
@@ -8205,7 +8205,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt; 醫生的操作不能免除護士的刑事責任。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你明確告知團隊必須在 24 小時內提交書面舉報。&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;你明確告知團隊必須盡快在合理時間範圍內提交書面舉報。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;若團隊不配合，你親自登入電子舉報平台完成申報，並將得到的 Reference Number 寫入CMS Child Abuse Case Record中。&lt;&lt;/replace&gt;&gt;
@@ -8846,7 +8846,7 @@ _target
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「$staffID護士，3 歲 11 公斤？這已經不是一般的福利個案！」&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 3&gt;&gt;
                 &lt;&lt;elseif $page == 3&gt;&gt;
-                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;div class=&quot;warning-shudder&quot;&gt;「這是嚴重的刑事疏忽照顧，隨時有生命危險！」&lt;/div&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;&lt;span class=&quot;warning-shudder&quot;&gt;「這是嚴重的刑事疏忽照顧，隨時有生命危險！」&lt;/span&gt;&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 4&gt;&gt;
                 &lt;&lt;elseif $page == 4&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「而且《條例》規定，強制舉報必須直接聯絡警方或社署專責小組(FCPSU)，打給我不能代替你的個人法律舉報責任！」&lt;&lt;/replace&gt;&gt;
