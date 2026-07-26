@@ -3024,15 +3024,24 @@ Thinking: $totalTime s
 
 
 
-</tw-passagedata><tw-passagedata pid="21" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;&lt;if !$isPostTest&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="21" name="Ready" tags="no-timer no-handbk Ready" position="225,50" size="100,100">&lt;div id=&quot;mario-curtain&quot; class=&quot;mario-opening-stage&quot;&gt;\
+    &lt;div class=&quot;mario-curtain-left&quot;&gt;&lt;/div&gt;\
+    &lt;div class=&quot;mario-opening-container&quot;&gt;
+        &lt;div class=&quot;mario-block&quot;&gt;&lt;/div&gt;&lt;/div&gt;\   
+    &lt;div class=&quot;mario-curtain-right&quot;&gt;&lt;/div&gt;\   
+&lt;/div&gt;\
+&lt;&lt;timed 0.5s&gt;&gt;\
+    &lt;&lt;addclass &quot;#mario-curtain&quot; &quot;start-opening&quot;&gt;&gt;\
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 2.5s&gt;&gt;
+    &lt;&lt;remove &quot;#mario-curtain&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;if !$isPostTest&gt;&gt;\
     &lt;&lt;set $decisionHistory to []&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;set $score to 0&gt;&gt;\
 &lt;&lt;set $totalTime to 0&gt;&gt;
 &lt;&lt;set $currentScenarioId to 0&gt;&gt;
-&lt;&lt;set $totalSafety to 0&gt;&gt;
-&lt;&lt;set $totalLegal to 0&gt;&gt;
 &lt;&lt;set $progress to 0&gt;&gt;&lt;br&gt;&lt;br&gt;
-
 &lt;div style=&quot;font-size: 40px; font-weight: bold; color: white; text-align: center; text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 15px #ffcc00;&quot;&gt;
 &lt;&lt;link &quot;► Start&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;lofi&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
