@@ -1758,6 +1758,150 @@ body:has(#is-certificate-page) .passage {
   
   /* 配合 SVG 濾鏡增加像素點陣化 (Pixelate) */
   filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="pixelate"><feFlood x="4" y="4" width="2" height="2"/><feComposite width="10" height="10" in="SourceGraphic" in2="flood" operator="arithmetic" k1="0" k2="1" k3="0" k4="0"/></filter></svg>#pixelate');
+}
+
+
+
+/* 畫廊總容器 */
+.gallery-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.gallery-sub {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* 網格系統：4 欄網格 */
+.pikmin-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    background: #0f172a; /* 改為深色底，跟背景融合 */
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    min-height: 200px; /* 設定最小高度 */
+}
+
+/* 單個格子結構 */
+.grid-box {
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    background: #1e293b;
+    border: 1px solid #334155;
+    box-sizing: border-box;
+}
+
+/* 解鎖狀態：純圖片 */
+.grid-box.unlocked {
+    cursor: pointer;
+    border-color: #38bdf8;
+}
+
+.grid-box.unlocked:hover {
+    transform: scale(1.05);
+    border-color: #f59e0b;
+}
+
+.grid-box.unlocked img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 未解鎖狀態：灰色沙漏 */
+.grid-box.locked {
+    border: 1px dashed #475569;
+    background: #1e293b;
+}
+
+.hourglass {
+    font-size: 20px;
+    opacity: 0.6;
+}
+
+/* 燈箱彈窗 */
+#image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background: #1e293b;
+    border-radius: 12px;
+    max-width: 360px;
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border: 1px solid #475569;
+}
+
+.modal-content img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.modal-tag {
+    font-size: 12px;
+    color: #38bdf8;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.modal-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #f8fafc;
+}
+
+.modal-desc {
+    font-size: 12px;
+    color: #cbd5e1;
+    line-height: 1.5;
+    text-align: left;
+    background: #0f172a;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.modal-close-btn {
+    margin-top: 12px;
+    background: #334155;
+    color: #fff;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
 Config.history.maxStates = 1;
 
@@ -2163,7 +2307,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 0 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[0].completed&gt;&gt;\
-                &lt;span style=&quot;color: #FFCCC9; font-size: 14px;&quot;&gt;✓ 任務完成：洗傷口撕出的非意外瘀傷&lt;br&gt;「你不需要100%肯定才行動。」&lt;br&gt;[[⏎back⏎|ResetS0]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #FFCCC9; font-size: 14px;&quot;&gt;✓ 「你不需要100%肯定才行動。」&lt;br&gt;[[⏎back⏎|ResetS0]]&lt;/span&gt;\
             &lt;&lt;else&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《撕開紗布的真相》&quot; &quot;PhysicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;tetris&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;/if&gt;&gt;\
@@ -2172,7 +2316,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 1 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[1].completed&gt;&gt;\
-                &lt;span style=&quot;color: #FFC6A3; font-size: 14px;&quot;&gt;✓ 任務完成：診室角落那個退縮的影子&lt;br&gt;「沒有瘀傷不代表沒有傷害。」&lt;br&gt;[[⏎back⏎|ResetS1]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #FFC6A3; font-size: 14px;&quot;&gt;✓ 「沒有瘀傷不代表沒有傷害。」&lt;br&gt;[[⏎back⏎|ResetS1]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[0].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《無聲的驚恐症》&quot; &quot;PsychologicalAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;moon&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2183,7 +2327,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 2 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[2].completed&gt;&gt;\
-                &lt;span style=&quot;color: #FEE4A8; font-size: 14px;&quot;&gt;✓ 任務完成：高度保密下的證據保衛戰&lt;br&gt;「孩子的沉默，是開不了口的求救。」&lt;br&gt;[[⏎back⏎|ResetS2]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #FEE4A8; font-size: 14px;&quot;&gt;✓ 「孩子的沉默，是開不了口的求救。」&lt;br&gt;[[⏎back⏎|ResetS2]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[1].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《被推開的晚安》&quot; &quot;SexualAbuse&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;plane&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2194,7 +2338,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 3 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[3].completed&gt;&gt;\
-                &lt;span style=&quot;color: #CDE8B5; font-size: 14px;&quot;&gt;✓ 任務完成：急著回家背後的獨留危機&lt;br&gt;「過度懂事的，很多時並非被照顧得很好。」&lt;br&gt;[[⏎back⏎|ResetS3]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #CDE8B5; font-size: 14px;&quot;&gt;✓ 「過度懂事的，很多時並非被照顧得很好。」&lt;br&gt;[[⏎back⏎|ResetS3]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[2].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《深夜診室的秘密》&quot; &quot;NeglectCare&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;magicforest&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2205,7 +2349,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 4 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[4].completed&gt;&gt;\
-                &lt;span style=&quot;color: #CBF0FF; font-size: 14px;&quot;&gt;✓ 任務完成：診所外看不到的定時炸彈&lt;br&gt;「適應了危險，不代表危險不存在。」&lt;br&gt;[[⏎back⏎|ResetS4]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #CBF0FF; font-size: 14px;&quot;&gt;✓ 「適應了危險，不代表危險不存在。」&lt;br&gt;[[⏎back⏎|ResetS4]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[3].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《被淹沒的呼吸聲》&quot; &quot;NeglectEnvironment&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;fight&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2216,7 +2360,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 5 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[5].completed&gt;&gt;\
-                &lt;span style=&quot;color: #BEC5FF; font-size: 14px;&quot;&gt;✓ 任務完成：由皮膚潰爛揭發的冰山一角&lt;br&gt;「一罐藥膏掩蓋不了正被慢性毀滅的童年。」&lt;br&gt;[[⏎back⏎|ResetS5]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #BEC5FF; font-size: 14px;&quot;&gt;✓ 「一罐藥膏掩蓋不了正被慢性毀滅的童年。」&lt;br&gt;[[⏎back⏎|ResetS5]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[4].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《隱蔽的惡臭》&quot; &quot;NeglectHygiene&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;boss&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2227,7 +2371,7 @@ $(document).on(':passagestart', function (ev) {
         /* 情節 6 */\
         &lt;div style=&quot;height: 35px; display: flex; align-items: center;&quot;&gt;\
             &lt;&lt;if $scenarios[6].completed&gt;&gt;\
-                &lt;span style=&quot;color: #D9B9FE; font-size: 14px;&quot;&gt;✓ 任務完成：發育障礙與稀米水的真相&lt;br&gt;「有時 neglect 是源自無知。」&lt;br&gt;[[⏎back⏎|ResetS6]]&lt;/span&gt;\
+                &lt;span style=&quot;color: #D9B9FE; font-size: 14px;&quot;&gt;✓ 「有時 neglect 是源自無知。」&lt;br&gt;[[⏎back⏎|ResetS6]]&lt;/span&gt;\
             &lt;&lt;elseif $scenarios[5].completed&gt;&gt;\
                 &lt;&lt;link &quot;❑ 《無聲的飢餓》&quot; &quot;NeglectDiet&quot;&gt;&gt;&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;&lt;&lt;audio &quot;star&quot; play loop&gt;&gt;&lt;&lt;/link&gt;&gt;\
             &lt;&lt;else&gt;&gt;\
@@ -2310,6 +2454,110 @@ $(document).on(':passagestart', function (ev) {
     { id: 5, name: &quot;NeglectHygiene&quot;, completed: false, safety: 0, legal: 0 },
     { id: 6, name: &quot;NeglectDiet&quot;, completed: false, safety: 0, legal: 0 }
 ]&gt;&gt;
+
+
+/* 1. 設定版本號（更新資料結構時，版號 +1 以強制清空舊快取） */
+&lt;&lt;set $galleryVersion = &quot;v1.3&quot;&gt;&gt;
+
+/* 2. 檢查版本：如果版本不符，強制清空舊快取 */
+&lt;&lt;if recall(&#39;gallery_ver&#39;) !== $galleryVersion&gt;&gt;
+	&lt;&lt;run forget(&#39;gallery&#39;)&gt;&gt;
+	&lt;&lt;run memorize(&#39;gallery_ver&#39;, $galleryVersion)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+/* 3. 讀取快取 */
+&lt;&lt;set $gallery = recall(&#39;gallery&#39;)&gt;&gt;
+
+/* 4. 若無快取，寫入最新完整資料（共 7 Good + 11 Bad = 18 格） */
+&lt;&lt;if $gallery === undefined&gt;&gt;
+    &lt;&lt;set $gallery = [
+        /* 0. 身體虐待 (1 Good + 2 Bad = 3格) */
+        { 
+            id: 0, 
+            good: false, 
+            goodImg: &quot;images/bg0g.webp&quot;,
+            goodTitle: &quot;撕開紗布的真相&quot;,
+            goodDesc: &quot;任務完成：洗傷口撕出的非意外瘀傷&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;https://smallsmallpotato.github.io/FMC/images/bg0b1.png&quot;, title: &quot;過度接納家長解釋&quot;, desc: &quot;忽視非意外瘀傷，錯失舉報最佳時機。&quot; },
+                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg0b2.jpeg&quot;, title: &quot;打草驚蛇&quot;, desc: &quot;錯失了將兒童與施虐者隔離的黃金機會。&quot; }
+            }
+        },
+        /* 1. 心理虐待 (1 Good + 1 Bad = 2格) */
+        { 
+            id: 1, 
+            good: false, 
+            goodImg: &quot;images/bg1g.webp&quot;,
+            goodTitle: &quot;無聲的驚恐症&quot;,
+            goodDesc: &quot;任務完成：診室角落那個退縮的影子&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg1b1.jpeg&quot;, title: &quot;忽視情緒警號&quot;, desc: &quot;僅關注軀體檢查而忽略精神虐待指標。&quot; }
+            }
+        },
+        /* 2. 性侵犯 (1 Good + 3 Bad = 4格) */
+        { 
+            id: 2, 
+            good: false, 
+            goodImg: &quot;images/bg2g.webp&quot;,
+            goodTitle: &quot;被推開的晚安&quot;,
+            goodDesc: &quot;任務完成：高度保密下的證據保衛戰&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg2b1.png&quot;, title: &quot;信號微弱&quot;, desc: &quot;接收不到孩子安靜的求救聲。&quot; },
+                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg2b2.png&quot;, title: &quot;專業失德&quot;, desc: &quot;卸膊帶來的後果不堪設想。&quot; },
+                &quot;bad3&quot;: { unlocked: false, img: &quot;images/bg2b3.png&quot;, title: &quot;破壞關鍵證物&quot;, desc: &quot;過早進行過度清洗或未依規範留樣。&quot; }
+            }
+        },
+        /* 3. 疏忽照顧：照護 (1 Good + 2 Bad = 3格) */
+        { 
+            id: 3, 
+            good: false, 
+            goodImg: &quot;images/bg3g.webp&quot;,
+            goodTitle: &quot;深夜診室的秘密&quot;,
+            goodDesc: &quot;任務完成：急著回家背後的獨留危機&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg3b1.png&quot;, title: &quot;輕忽獨留危機&quot;, desc: &quot;未告誡獨留兒童之法律風險。&quot; },
+                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg3b2.png&quot;, title: &quot;獨留致火警悲劇&quot;, desc: &quot;醫護人員的沉默，有時會成為傷害的幫兇。&quot; }
+            }
+        },
+        /* 4. 疏忽照顧：環境 (1 Good + 2 Bad = 3格) */
+        { 
+            id: 4, 
+            good: false, 
+            goodImg: &quot;images/bg4g.webp&quot;,
+            goodTitle: &quot;被淹沒的呼吸聲&quot;,
+            goodDesc: &quot;任務完成：診所外看不到的定時炸彈&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg4b1.png&quot;, title: &quot;倒塌的紙堆&quot;, desc: &quot;無視個人法律責任而導致的悲劇落幕。&quot; },
+                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg4b2.png&quot;, title: &quot;無視居家風險&quot;, desc: &quot;誤會環境問題不屬門診防護範疇。&quot; }
+            }
+        },
+        /* 5. 疏忽照顧：衛生 (1 Good + 2 Bad = 3格) */
+        { 
+            id: 5, 
+            good: false, 
+            goodImg: &quot;images/bg5g.webp&quot;,
+            goodTitle: &quot;隱蔽的惡臭&quot;,
+            goodDesc: &quot;任務完成：由皮膚潰爛揭發的冰山一角&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg5b1.jpeg&quot;, title: &quot;對症不對人&quot;, desc: &quot;僅處方藥膏即讓患者離去，忽視背後疏忽。&quot; },
+                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg5b2.jpeg&quot;, title: &quot;壞死性筋膜炎&quot;, desc: &quot;傷口長期處於髒污環境，引發致命敗血性休克。&quot; }
+            }
+        },
+        /* 6. 疏忽照顧：飲食 (1 Good + 1 Bad = 2格) */
+        { 
+            id: 6, 
+            good: false, 
+            goodImg: &quot;images/bg6g.webp&quot;,
+            goodTitle: &quot;無聲的飢餓&quot;,
+            goodDesc: &quot;任務完成：發育障礙與稀米水的真相&quot;,
+            bads: {
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg6b1.png&quot;, title: &quot;無知的疏忽&quot;, desc: &quot;錯失提升健康素養的教育機會。&quot; }
+            }
+        }
+    ]&gt;&gt;
+    &lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
 
 
 
@@ -3670,6 +3918,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[0].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[0].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -3743,6 +3993,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[0].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[0].bads[&quot;bad2&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PhAENDING_GOOD" tags="no-timer good-ending" position="225,1025" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;\
@@ -3832,6 +4084,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[0].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[0].completed = true&gt;&gt;
+&lt;&lt;set $gallery[0].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -4314,6 +4568,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[3].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[3].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[3].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -4582,6 +4838,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[3].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[3].completed = true&gt;&gt;
+&lt;&lt;set $gallery[3].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -5120,34 +5378,109 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[1].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[1].completed = true&gt;&gt;
+&lt;&lt;set $gallery[1].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="ScenarioResultsPanel" tags="" position="0,1500" size="100,100">&lt;div class=&quot;results-container&quot;&gt;
-    &lt;h3&gt;個案完成狀況&lt;/h3&gt;
-    &lt;table class=&quot;score-table&quot;&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Situation&lt;/th&gt;
-            &lt;th&gt;Progress&lt;/th&gt;
-        &lt;/tr&gt;
-        &lt;&lt;for _i = 0; _i &lt; $scenarios.length; _i++&gt;&gt;
-            &lt;&lt;set _s = $scenarios[_i]&gt;&gt;
-            &lt;tr&gt;
-                &lt;td&gt;&lt;&lt;print _s.name&gt;&gt;&lt;/td&gt;
-                &lt;td&gt;
-                    &lt;&lt;if _s.completed&gt;&gt;\
-                        &lt;span style=&quot;color: #2ecc71;&quot;&gt;ℂ𝕠𝕞𝕡𝕝𝕖𝕥𝕖𝕕&lt;/span&gt;
-                    &lt;&lt;else&gt;&gt;\
-                        &lt;span style=&quot;color: #95a5a6;&quot;&gt;⏳&lt;/span&gt;
-                    &lt;&lt;/if&gt;&gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-        &lt;&lt;/for&gt;&gt;
-    &lt;/table&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="ScenarioResultsPanel" tags="" position="0,1500" size="100,100">&lt;div class=&quot;gallery-wrapper&quot;&gt;
+    &lt;div class=&quot;gallery-header&quot;&gt;
+        &lt;h2&gt;🏥 門診臨床經驗圖鑑集&lt;/h2&gt;
+        &lt;div class=&quot;gallery-sub&quot;&gt;點擊已解鎖圖片可放大查看臨床解析與法規檢討&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 18 格畫廊容器 --&gt;
+    &lt;div id=&quot;grid-container&quot; class=&quot;pikmin-grid&quot;&gt;&lt;/div&gt;
+
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="73" name="PsAWAIT" tags="Psy" position="1225,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+
+&lt;!-- 放大燈箱彈窗 --&gt;
+&lt;div id=&quot;image-modal&quot; onclick=&quot;window.closeGalleryModal()&quot;&gt;
+    &lt;div class=&quot;modal-content&quot; onclick=&quot;event.stopPropagation()&quot;&gt;
+        &lt;img id=&quot;modal-img&quot; src=&quot;&quot; alt=&quot;Enlarged View&quot;&gt;
+        &lt;div id=&quot;modal-caption&quot;&gt;&lt;/div&gt;
+        &lt;button class=&quot;modal-close-btn&quot; onclick=&quot;window.closeGalleryModal()&quot;&gt;✕ 關閉&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;&lt;done&gt;&gt;
+&lt;&lt;run
+    setTimeout(function () {
+        var container = document.getElementById(&#39;grid-container&#39;);
+        if (!container) return;
+
+        // 確保抓得到 $gallery，如果沒有就給預設陣列
+        var galleryData = State.variables.gallery || [];
+        var baseUrl = &quot;https://smallsmallpotato.github.io/FMC/&quot;;
+
+        // 先清空容器
+        container.innerHTML = &#39;&#39;;
+
+        if (galleryData.length === 0) {
+            container.innerHTML = &#39;&lt;div style=&quot;grid-column: 1/-1; color: #94a3b8; text-align: center; padding: 20px;&quot;&gt;載入圖鑑資料中...請重試&lt;/div&gt;&#39;;
+            return;
+        }
+
+        galleryData.forEach(function (item) {
+            // --- 1. Good Ending 格子 ---
+            var goodBox = document.createElement(&#39;div&#39;);
+            goodBox.className = &#39;grid-box&#39;;
+
+            if (item.good) {
+                goodBox.classList.add(&#39;unlocked&#39;);
+                var imgUrl = item.goodImg.startsWith(&#39;http&#39;) ? item.goodImg : baseUrl + item.goodImg;
+                goodBox.innerHTML = &#39;&lt;img src=&quot;&#39; + imgUrl + &#39;&quot; alt=&quot;Good Ending&quot;&gt;&#39;;
+                goodBox.onclick = function () {
+                    window.openGalleryModal(imgUrl, item.goodTitle, item.goodDesc, &quot;Good Ending&quot;);
+                };
+            } else {
+                goodBox.classList.add(&#39;locked&#39;);
+                goodBox.innerHTML = &#39;&lt;div class=&quot;hourglass&quot;&gt;⏳&lt;/div&gt;&#39;;
+            }
+            container.appendChild(goodBox);
+
+            // --- 2. Bad Endings 格子 ---
+            if (item.bads) {
+                Object.keys(item.bads).forEach(function (key) {
+                    var badItem = item.bads[key];
+                    var badBox = document.createElement(&#39;div&#39;);
+                    badBox.className = &#39;grid-box&#39;;
+
+                    if (badItem.unlocked) {
+                        badBox.classList.add(&#39;unlocked&#39;);
+                        var badImgUrl = badItem.img.startsWith(&#39;http&#39;) ? badItem.img : baseUrl + badItem.img;
+                        badBox.innerHTML = &#39;&lt;img src=&quot;&#39; + badImgUrl + &#39;&quot; alt=&quot;Bad Ending&quot;&gt;&#39;;
+                        badBox.onclick = function () {
+                            window.openGalleryModal(badImgUrl, badItem.title, badItem.desc, &quot;Bad Ending 檢討&quot;);
+                        };
+                    } else {
+                        badBox.classList.add(&#39;locked&#39;);
+                        badBox.innerHTML = &#39;&lt;div class=&quot;hourglass&quot;&gt;⏳&lt;/div&gt;&#39;;
+                    }
+                    container.appendChild(badBox);
+                });
+            }
+        });
+    }, 100);
+
+    window.openGalleryModal = function (imgSrc, title, desc, tag) {
+        var modal = document.getElementById(&#39;image-modal&#39;);
+        document.getElementById(&#39;modal-img&#39;).src = imgSrc;
+        document.getElementById(&#39;modal-caption&#39;).innerHTML = 
+            &#39;&lt;div class=&quot;modal-tag&quot;&gt;&#39; + tag + &#39;&lt;/div&gt;&#39; +
+            &#39;&lt;div class=&quot;modal-title&quot;&gt;&#39; + title + &#39;&lt;/div&gt;&#39; +
+            &#39;&lt;div class=&quot;modal-desc&quot;&gt;&#39; + desc + &#39;&lt;/div&gt;&#39;;
+        modal.style.display = &#39;flex&#39;;
+    };
+
+    window.closeGalleryModal = function () {
+        var modal = document.getElementById(&#39;image-modal&#39;);
+        if (modal) modal.style.display = &#39;none&#39;;
+    };
+&gt;&gt;
+&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PsAWAIT" tags="Psy" position="1225,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你決定先觀察一段時間。&lt;br&gt;三星期後，阿晴獨自來門診求診，
@@ -5261,6 +5594,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[1].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[1].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[1].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -5723,6 +6058,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[2].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[2].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[2].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -6300,6 +6637,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[2].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[2].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[2].bads[&quot;bad2&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -6493,7 +6832,9 @@ Thinking: $totalTime s
 &lt;&lt;silent&gt;&gt;
 &lt;&lt;if $scenarios[4].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
-    &lt;&lt;set $scenarios[4].completed = true&gt;&gt;
+    &lt;&lt;set $scenarios[4].completed = true&gt;&gt;   
+&lt;&lt;set $gallery[4].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -6567,6 +6908,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[2].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[2].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[2].bads[&quot;bad3&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -6751,6 +7094,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[4].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[4].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[4].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -6903,6 +7248,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[5].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[5].completed = true&gt;&gt;
+&lt;&lt;set $gallery[5].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -7007,12 +7354,14 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[6].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[6].completed = true&gt;&gt;
+&lt;&lt;set $gallery[6].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2225,900" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="NDBad" tags="Nd no-timer scenario-6-bad bad-ending" position="2150,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -7098,6 +7447,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[6].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[6].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[6].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -7462,6 +7813,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[2].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[2].completed = true&gt;&gt;
+&lt;&lt;set $gallery[2].good = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -7635,7 +7988,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="NEBad2" tags="no-timer Ne bad-ending scenario-4-bad" position="1050,1300" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="NEBad2" tags="no-timer Ne bad-ending scenario-4-bad" position="950,1200" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;set $scenarios[$currentScenarioId].time = $totalTime&gt;&gt;
@@ -7696,6 +8049,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[4].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[4].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[4].bads[&quot;bad2&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -7931,7 +8286,7 @@ Thinking: $totalTime s
 
 /* 進入這頁時重置頁數 */
 &lt;&lt;set $page = 1&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="NHBad1" tags="bad-ending scenario-5-bad Nh no-timer" position="1575,1400" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="NHBad1" tags="bad-ending scenario-5-bad Nh no-timer" position="1475,1500" size="100,100">&lt;&lt;audio &quot;:all&quot; stop&gt;&gt;
 &lt;&lt;audio &quot;tear&quot; play loop&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
@@ -8010,6 +8365,8 @@ Thinking: $totalTime s
 &lt;&lt;if $scenarios[5].completed is false&gt;&gt;
     &lt;&lt;set $progress += 1&gt;&gt;
     &lt;&lt;set $scenarios[5].completed = true&gt;&gt;
+    &lt;&lt;set $gallery[5].bads[&quot;bad1&quot;].unlocked = true&gt;&gt;
+&lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silent&gt;&gt;
 
@@ -9351,7 +9708,7 @@ A: 應依法舉報。 舉報門檻是以「有合理理由懷疑」(Reasonable g
 A: 社署在全港按地區劃分為 11 個 FCPSU 專責單位。&lt;a href=&quot;https://www.swd.gov.hk/vs/doc/FCPSU_contact_info_tc_en.pdf&quot; target=&quot;_blank&quot;&gt;FCPSU 的聯絡資料 (PDF)&lt;/a&gt;
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 為什麼要同時提供 FCPSU 與 999 兩種選擇？&lt;/strong&gt;
-A: FCPSU(社署專責部門)主要於辦公時間運作(非辦公時間設有社會工作緊急應變小組 SWEU 支援)，側重於家庭評估、長期福利跟進及兒童安置；999(警方)：提供 24 小時即時執法、現場保護及刑事調查。
+A: FCPSU(社署專責部門)主要於辦公時間運作(非辦公時間設有社會工作緊急應變小組 SWEU 支援)，側重於家庭評估、長期福利跟進及兒童安置；999(警方)提供 24 小時即時執法、現場保護及刑事調查。
 雙渠道讓醫護人員能根據臨床現場的實際風險，彈性選擇最合適且最快速的報案途徑。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 如何避免醫護人員在緊急時刻因選擇部門而產生疑慮？&lt;/strong&gt;
@@ -9409,7 +9766,8 @@ A: 照顧者無法合理解釋傷勢是重要的臨床警號(Red Flag)。
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 家長頻繁帶兒童到不同私人診所求診，主訴各種嚴重症狀，但臨床檢查完全正常，這算不算虐兒？&lt;/strong&gt;
 A: 這可能屬於「偽造或誘發兒童疾病」(Fabricated or Induced Illness, FII / 心理虐待)。
 - 家長為了獲得關注或藥物，人為編造症狀、篡改檢驗樣本、甚至故意給予兒童不當藥物/毒物，對兒童身體及心理造成重大傷害。
-- 處置方式：若診所醫護察覺此類「購物式求診(Doctor Shopping)」行為已導致兒童接受不必要的創傷性檢查、過量用藥或健康嚴重受損，已跨過「合理懷疑嚴重傷害」的強制舉報門檻，應盡快通報 FCPSU 或警方跟進。</tw-passagedata><tw-passagedata pid="151" name="Info_Patch" tags="" position="500,2325" size="100,100">v1.2 新增條例 RAP 音訊與 PWA 自動存檔。
+- 處置方式：若診所醫護察覺此類「購物式求診(Doctor Shopping)」行為已導致兒童接受不必要的創傷性檢查、過量用藥或健康嚴重受損，已跨過「合理懷疑嚴重傷害」的強制舉報門檻，應盡快通報 FCPSU 或警方跟進。</tw-passagedata><tw-passagedata pid="151" name="Info_Patch" tags="" position="500,2325" size="100,100">v1.3 圖鑑集系統上線 在STATS DATA查看
+v1.2 新增條例 RAP 音訊與 PWA 自動存檔。
 v1.0 模擬器系統上線。</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
