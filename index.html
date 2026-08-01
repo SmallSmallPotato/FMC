@@ -2456,20 +2456,21 @@ $(document).on(':passagestart', function (ev) {
 ]&gt;&gt;
 
 
-/* 1. 設定版本號（更新資料結構時，版號 +1 以強制清空舊快取） */
-&lt;&lt;set $galleryVersion = &quot;v1.4&quot;&gt;&gt;
+/* 1. 設定版本號 */
+&lt;&lt;set $galleryVersion = &quot;v2.0&quot;&gt;&gt;
 
-/* 2. 檢查版本：如果版本不符，強制清空舊快取 */
+/* 2. 檢查版本：如果版本不符，清空舊快取與變數 */
 &lt;&lt;if recall(&#39;gallery_ver&#39;) !== $galleryVersion&gt;&gt;
-	&lt;&lt;run forget(&#39;gallery&#39;)&gt;&gt;
-	&lt;&lt;run memorize(&#39;gallery_ver&#39;, $galleryVersion)&gt;&gt;
+    &lt;&lt;run forget(&#39;gallery&#39;)&gt;&gt;
+    &lt;&lt;run forget(&#39;gallery_ver&#39;)&gt;&gt;
+    &lt;&lt;set $gallery = null&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    /* 版本相同才讀取舊快取 */
+    &lt;&lt;set $gallery = recall(&#39;gallery&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-/* 3. 讀取快取 */
-&lt;&lt;set $gallery = recall(&#39;gallery&#39;)&gt;&gt;
-
-/* 4. 若無快取，寫入最新完整資料（共 7 Good + 11 Bad = 18 格） */
-&lt;&lt;if $gallery === undefined&gt;&gt;
+/* 3. 若無快取（版本更新後或首次進入），寫入最新完整資料並儲存版本號 */
+&lt;&lt;if !$gallery&gt;&gt;
     &lt;&lt;set $gallery = [
         /* 0. 身體虐待 (1 Good + 2 Bad = 3格) */
         { 
@@ -2553,7 +2554,9 @@ $(document).on(':passagestart', function (ev) {
             }
         }
     ]&gt;&gt;
-    &lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
+    /* 寫入最新的快取資料與版本號 */
+    &lt;&lt;run memorize(&#39;gallery&#39;, $gallery)&gt;&gt;
+    &lt;&lt;run memorize(&#39;gallery_ver&#39;, $galleryVersion)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 
