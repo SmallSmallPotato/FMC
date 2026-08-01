@@ -2457,7 +2457,7 @@ $(document).on(':passagestart', function (ev) {
 
 
 /* 1. 設定版本號（更新資料結構時，版號 +1 以強制清空舊快取） */
-&lt;&lt;set $galleryVersion = &quot;v1.3&quot;&gt;&gt;
+&lt;&lt;set $galleryVersion = &quot;v1.4&quot;&gt;&gt;
 
 /* 2. 檢查版本：如果版本不符，強制清空舊快取 */
 &lt;&lt;if recall(&#39;gallery_ver&#39;) !== $galleryVersion&gt;&gt;
@@ -2507,7 +2507,7 @@ $(document).on(':passagestart', function (ev) {
                 &quot;bad3&quot;: { unlocked: false, img: &quot;images/bg2b3.png&quot;, title: &quot;破壞關鍵證物&quot;, desc: &quot;過早進行過度清洗或未依規範留樣。&quot; }
             }
         },
-        /* 3. 疏忽照顧：照護 (1 Good + 2 Bad = 3格) */
+        /* 3. 疏忽照顧：照護 (1 Good + 1 Bad = 2格) */
         { 
             id: 3, 
             good: false, 
@@ -2515,8 +2515,7 @@ $(document).on(':passagestart', function (ev) {
             goodTitle: &quot;深夜診室的秘密&quot;,
             goodDesc: &quot;任務完成：急著回家背後的獨留危機&quot;,
             bads: {
-                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg3b1.png&quot;, title: &quot;輕忽獨留危機&quot;, desc: &quot;未告誡獨留兒童之法律風險。&quot; },
-                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg3b2.png&quot;, title: &quot;獨留致火警悲劇&quot;, desc: &quot;醫護人員的沉默，有時會成為傷害的幫兇。&quot; }
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg3b1.png&quot;, title: &quot;輕忽獨留危機&quot;, desc: &quot;醫護人員的沉默，有時會成為傷害的幫兇。&quot; }
             }
         },
         /* 4. 疏忽照顧：環境 (1 Good + 2 Bad = 3格) */
@@ -2531,7 +2530,7 @@ $(document).on(':passagestart', function (ev) {
                 &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg4b2.png&quot;, title: &quot;無視居家風險&quot;, desc: &quot;誤會環境問題不屬門診防護範疇。&quot; }
             }
         },
-        /* 5. 疏忽照顧：衛生 (1 Good + 2 Bad = 3格) */
+        /* 5. 疏忽照顧：衛生 (1 Good + 1 Bad = 2格) */
         { 
             id: 5, 
             good: false, 
@@ -2539,8 +2538,7 @@ $(document).on(':passagestart', function (ev) {
             goodTitle: &quot;隱蔽的惡臭&quot;,
             goodDesc: &quot;任務完成：由皮膚潰爛揭發的冰山一角&quot;,
             bads: {
-                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg5b1.jpeg&quot;, title: &quot;對症不對人&quot;, desc: &quot;僅處方藥膏即讓患者離去，忽視背後疏忽。&quot; },
-                &quot;bad2&quot;: { unlocked: false, img: &quot;images/bg5b2.jpeg&quot;, title: &quot;壞死性筋膜炎&quot;, desc: &quot;傷口長期處於髒污環境，引發致命敗血性休克。&quot; }
+                &quot;bad1&quot;: { unlocked: false, img: &quot;images/bg5b1.jpeg&quot;, title: &quot;對症不對人&quot;, desc: &quot;傷口長期處於髒污環境，僅處方藥膏而忽視背後疏忽。&quot; }
             }
         },
         /* 6. 疏忽照顧：飲食 (1 Good + 1 Bad = 2格) */
@@ -5419,7 +5417,7 @@ Thinking: $totalTime s
         container.innerHTML = &#39;&#39;;
 
         if (galleryData.length === 0) {
-            container.innerHTML = &#39;&lt;div style=&quot;grid-column: 1/-1; color: #94a3b8; text-align: center; padding: 20px;&quot;&gt;載入圖鑑資料中...請重試&lt;/div&gt;&#39;;
+             container.innerHTML = &#39;&lt;div style=&quot;grid-column: 1/-1; color: #94a3b8; text-align: center; padding: 20px;&quot;&gt;載入圖鑑資料中...請重試&lt;/div&gt;&#39;;
             return;
         }
 
@@ -9694,18 +9692,23 @@ A: 本系統僅作為培訓練習用途，不限次數，不會要求上傳個�
 
 &lt;strong style=&quot;color: #cbbac9;&quot;&gt;2. 關於《強制舉報虐待兒童條例》&lt;/strong&gt;
 
+&lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 《強制舉報虐待兒童條例》當中的「主管當局」代表什麼？&lt;/strong&gt;
+A: 「主管當局」（Specified Authority）指法定接收舉報、進行調查與保護行動的權責機關，即警務處處長（經 999/各警區）與社會福利署署長（經 FCPSU）。
+
+&lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: FCPSU在《強制舉報虐待兒童條例》下擔當什麼角色？&lt;/strong&gt;
+A: 代表社署署長接收強制舉報，負責辦公時間內的緊急評估、統籌多專業個案會議（MDCC）及向法庭申請《保護兒童及少年條例》（第213章）保護令。
+
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 兒童身在診所已經安全，我是應該先報警(999)，還是聯絡 FCPSU？&lt;/strong&gt;
 A: 視乎現場「即時風險程度」：有即時生命危險或現場秩序受威脅時致電 999；情況穩定者，可直報地區 FCPSU。
 
+&lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 致電 999 或聯絡 FCPSU 是否能在電話中取得 Access Code？&lt;/strong&gt;
+A: 可以，兩者皆可。電話初步舉報並提供手機號碼後，由警方/FCPSU 經 SMS 發送 Access Code 並於電話中核驗首 4 個字母，即可登入 &lt;a href=&quot;www.mrr.gov.hk&quot; target=&quot;_blank&quot;&gt;www.mrr.gov.hk&lt;/a&gt; 提交書面舉報。
+
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 由於觀察時間有限，如果不確定傷勢是虐待還是意外，該不該舉報？&lt;/strong&gt;
-A: 應依法舉報。 舉報門檻是以「有合理理由懷疑」(Reasonable grounds to suspect)兒童正遭受嚴重傷害或正面對實際風險為準，醫護人員無須像警方一樣搜證或確定罪名。若發現無法解釋的傷勢、兒童極度畏縮或家長解釋極不合情理，即符合舉報標準。
-法定免責與抗辯：
-- 法定免責條款(Civil &amp; Criminal Immunity)：只要是出於真誠(In good faith)作出舉報，舉報人獲法律保障，免負任何民事、刑事責任，亦不被視為違反專業道德守則或保密條款。
-- 法定抗辯理由(Statutory Defence)：若指明專業人員真誠且合理地相信「暫緩舉報符合兒童的最佳利益」，並在暫緩期間已採取合理必要的保護措施，可作為延遲舉報的法定抗辯理由。
-- 諮詢渠道：若不確定是否達標，可先致電社會福利署熱線(2343 2255)或諮詢轄區 FCPSU。
+A: 應依法舉報。門檻僅需「有合理理由懷疑」。真誠舉報獲民事及刑事法律責任豁免；若真誠相信「暫緩舉報符合兒童最佳利益」並已採保護措施，具法定抗辯理由。不確定可先致電社署熱線（2343 2255）諮詢。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: FCPSU 的電話號碼是什麼？&lt;/strong&gt;
-A: 社署在全港按地區劃分為 11 個 FCPSU 專責單位。&lt;a href=&quot;https://www.swd.gov.hk/vs/doc/FCPSU_contact_info_tc_en.pdf&quot; target=&quot;_blank&quot;&gt;FCPSU 的聯絡資料 (PDF)&lt;/a&gt;
+A: 全港分 11 個地區 FCPSU 專責單位，各自有獨立聯絡電話。&lt;a href=&quot;https://www.swd.gov.hk/vs/doc/FCPSU_contact_info_tc_en.pdf&quot; target=&quot;_blank&quot;&gt;FCPSU 的聯絡資料 (PDF)&lt;/a&gt;
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 為什麼要同時提供 FCPSU 與 999 兩種選擇？&lt;/strong&gt;
 A: FCPSU(社署專責部門)主要於辦公時間運作(非辦公時間設有社會工作緊急應變小組 SWEU 支援)，側重於家庭評估、長期福利跟進及兒童安置；999(警方)提供 24 小時即時執法、現場保護及刑事調查。
@@ -9715,12 +9718,6 @@ A: FCPSU(社署專責部門)主要於辦公時間運作(非辦公時間設有社
 A: 政府機制建立了「雙向資訊共享」及聯合調查機制(Joint Investigation Scheme)：
 - 即使撥打 999 報警，警方隨後也會通知 FCPSU 作出福利跟進；反之，若向 FCPSU 舉報且個案涉及刑事犯罪(如性侵、嚴重身體傷害)，FCPSU 也會聯絡警方的保護兒童案調查組(CAIU)跟進。
 - 法律已明確規定，只要向「主管當局(社署或警方)」任何一方完成舉報，即屬完成法定責任，醫護人員無須擔心「報錯部門」。
-
-&lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: FCPSU在《強制舉報虐待兒童條例》下擔當什麼角色？&lt;/strong&gt;
-A: 保護家庭及兒童服務課(FCPSU)是社會福利署轄下的地區專責部門。在《條例》(第650章)下，FCPSU代表「社會福利署署長」(即法定主管當局之一)接收指明專業人員的強制舉報。FCPSU負責：
-- 緊急介入與評估：接獲通報後進行個案安全評估及風險分類。
-- 多專業協調：統籌召開「多專業個案會議」(MDCC)，制定保護兒童計劃。
-- 法律與安置行動：向法庭申請《保護兒童及少年條例》(第213章)下的保護令(Care or Protection Order)，安排緊急住宿照顧或轉介心理支援。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 診所的文員在等候區發現家長對兒童有嚴重的言語恐嚇或暴力行為，文員能否舉報？如何配合？&lt;/strong&gt;
 A: 雖然診所文員不屬於《條例》附表1規定的「指明專業人員」，但文員是診所第一線觀察者。診所應建立內部機制：文員若在等候區發現異常(如家長極度情緒失控、猛烈搖晃嬰兒、嚴重的心理恐嚇)，應即時通知門診醫生或護士，由屬於「指明專業人員」的醫護人員進行臨床評估；若符合「嚴重傷害」或「面臨嚴重傷害之實際風險」門檻，即應執行法定強制舉報。
@@ -9736,32 +9733,19 @@ A: 不會。 根據《條例》(第650章)規定，指明專業人員為履行�
 - 身分保密與禁止阻撓：法例嚴禁任何人(包括雇主或家長)阻撓舉報，或非法披露舉報人身分，違者須負刑事責任。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 如果診所醫生判斷兒童需要送去急症室做進一步檢查(例如照 X-ray 確認骨折)，我是應該「先舉報」，還是「先送去急症室讓醫院舉報」？&lt;/strong&gt;
-A: 醫療救治優先，但個人法定舉報責任不因此消除。
-- 臨床處理：若兒童有即時醫療需要，應立即安排轉介至急症室。
-- 法律責任：若診所醫生在門診時已形成「合理懷疑」(Reasonable grounds to suspect)兒童遭受嚴重傷害，其法定舉報責任即已產生。診所醫生應在轉介信中明確註明懷疑虐兒狀況，並與急症室醫護辦好交接；為確保符合「盡快舉報」之法定要求，診所醫生應親自向社署/警方通報，或與醫院醫護確認由醫院即時作聯合舉報，不可假設對方會自動處理而忽略個人法律責任。
+A: 醫療優先，但個人舉報責任不可轉嫁。診所醫生形成合理懷疑即產生舉報責任，應於轉介信註明，並親自通報社署/警方，或與急症室確認作聯合舉報。山
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 舉報之後，診所護士是否需要頻繁去開會、去法庭作證？&lt;/strong&gt;
-A: 通常不需要。 舉報完成後，刑事調查與福利評估主要由警方「保護兒童案調查組」(CAIU)及社署 FCPSU 接手。
-- 醫護配合責任：護士及醫生主要是配合提供客觀臨床紀錄(如門診預檢 Triage 觀察、身體檢查紀錄、生長曲線、疫苗紀錄)並提供專業口供。
-- 法庭作證：僅在案件進入刑事審訊或保護令法律程序，且診所醫護是關鍵第一目擊證人時，才可能需出庭作證。
+A: 通常不需要。主由警方 CAIU 及社署 FCPSU 跟進，醫護僅需提供客觀臨床紀錄與口供；極少數情況（作為關鍵目擊證人）才需出庭。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 如果未滿 18 歲(如 15 歲)的青少年因懷孕或性病求診，且雙方為自願情侶，是否必須強制舉報？&lt;/strong&gt;
-A: 須嚴格依據法例對「嚴重傷害」及性侵犯之界定作臨床評估。
-- 法律背景：香港法例第200章《刑事罪行條例》規定與16歲以下人士非法性交屬刑事罪行。
-- 強制舉報門檻：若發現青少年涉及強制、脅迫、代際剝削、嚴重身體傷害或嚴重心理創傷，必須強制舉報。
-- 自願同齡關係：若評估屬同齡青少年自願行為且無任何剝削/嚴重傷害風險，醫護人員應參照官方發佈之最新《強制舉報指南》中針對「青少年性行為與性侵犯」之專用評估流程。若判定未達「嚴重傷害」門檻，醫護人員應著重提供避孕、性健康及心理輔導轉介；但若對風險存疑，應立即致電 FCPSU 進行不具名專業諮詢。
+A: 視乎是否達「嚴重傷害/剝削」門檻。若涉強迫、代際剝削或嚴重創傷必須舉報；若屬同齡自願且無嚴重傷害風險，按評估指引著重健康輔導，存疑可不具名諮詢 FCPSU。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 在門診常看到兒童經常錯過疫苗接種、嚴重蛀牙、過敏性哮喘長期不服藥，這算不算需要強制舉報的「疏忽照顧」？&lt;/strong&gt;
-A: 只有達到「嚴重傷害」風險時才屬於強制舉報範疇。
-- 一般照顧不周：因家長健康知識不足、貧困或缺乏照顧能力導致者，應給予健康教育或轉介社區家庭支援服務(如 Maternal and Child Health Centre / IHC)。
-- 嚴重疏忽照顧(強制舉報門檻)：家長長期且故意拒絕適當醫療或照顧，導致兒童生命受到即時威脅、身體健康受到顯著且不可逆轉的嚴重損害(例如：故意不給予哮喘救命藥物致重症發作、嚴重的營養不良致發育停滯)。
+A: 一般照顧不周（貧困/缺乏知識）給予衛教轉介即可；僅在故意且長期拒絕照顧，導致生命危險或不可逆轉之嚴重健康損害時，才達強制舉報門檻。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 來診所的不是父母，而是外傭、祖父母或保姆，他們對傷勢一問三不知或支吾其詞，診所該如何處理？&lt;/strong&gt;
-A: 照顧者無法合理解釋傷勢是重要的臨床警號(Red Flag)。
-- 臨床處置：嘗試聯絡法律監護人(父母)了解情況。
-- 即時保護：若無法聯絡父母，且照顧者表現極度可疑、試圖強行帶走有嚴重傷勢(如非解釋性骨折、燙傷、頭部創傷)的兒童：
-*現場有即時危險：診所應立即撥打 999 報警求助。
-*現場情況穩定：由指明專業人員(醫生/護士)即時向 FCPSU 舉報。
+A: 此為臨床警號（Red Flag）。嘗試聯絡父母，若無法聯絡且照顧者可疑企圖帶走重傷兒童：現場即時危險打 999；情況穩定由醫護直報 FCPSU。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 家長頻繁帶兒童到不同私人診所求診，主訴各種嚴重症狀，但臨床檢查完全正常，這算不算虐兒？&lt;/strong&gt;
 A: 這可能屬於「偽造或誘發兒童疾病」(Fabricated or Induced Illness, FII / 心理虐待)。
