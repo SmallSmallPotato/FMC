@@ -2457,7 +2457,7 @@ $(document).on(':passagestart', function (ev) {
 
 
 /* 1. 設定版本號 */
-&lt;&lt;set $galleryVersion = &quot;v2.0&quot;&gt;&gt;
+&lt;&lt;set $galleryVersion = &quot;v3.0&quot;&gt;&gt;
 
 /* 2. 檢查版本：如果版本不符，清空舊快取與變數 */
 &lt;&lt;if recall(&#39;gallery_ver&#39;) !== $galleryVersion&gt;&gt;
@@ -5392,9 +5392,11 @@ Thinking: $totalTime s
         &lt;div class=&quot;gallery-sub&quot;&gt;點擊已解鎖圖片可放大查看臨床解析與法規檢討&lt;/div&gt;
     &lt;/div&gt;
 
+    &lt;!-- 🏆 榮譽結業證書區塊（達成 7 個 Good Ending 時透過 JS 動態注入） --&gt;
+    &lt;div id=&quot;cert-container&quot; style=&quot;margin-bottom: 25px; text-align: center;&quot;&gt;&lt;/div&gt;
+
     &lt;!-- 18 格畫廊容器 --&gt;
     &lt;div id=&quot;grid-container&quot; class=&quot;pikmin-grid&quot;&gt;&lt;/div&gt;
-
 &lt;/div&gt;
 
 &lt;!-- 放大燈箱彈窗 --&gt;
@@ -5410,22 +5412,60 @@ Thinking: $totalTime s
 &lt;&lt;run
     setTimeout(function () {
         var container = document.getElementById(&#39;grid-container&#39;);
+        var certContainer = document.getElementById(&#39;cert-container&#39;);
         if (!container) return;
 
-        // 確保抓得到 $gallery，如果沒有就給預設陣列
+        // 1. 取得圖鑑資料與基礎 URL
         var galleryData = State.variables.gallery || [];
         var baseUrl = &quot;https://smallsmallpotato.github.io/FMC/&quot;;
 
-        // 先清空容器
+        // 🖼️ 2. 設定證書圖片路徑 (請依實際檔名/路徑確認)
+        var certImgUrl = &quot;images/certificate.jpeg&quot;; 
+
+        // 清空容器
         container.innerHTML = &#39;&#39;;
+        if (certContainer) certContainer.innerHTML = &#39;&#39;;
 
         if (galleryData.length === 0) {
-             container.innerHTML = &#39;&lt;div style=&quot;grid-column: 1/-1; color: #94a3b8; text-align: center; padding: 20px;&quot;&gt;載入圖鑑資料中...請重試&lt;/div&gt;&#39;;
+            container.innerHTML = &#39;&lt;div style=&quot;grid-column: 1/-1; color: #94a3b8; text-align: center; padding: 20px;&quot;&gt;載入圖鑑資料中...請重試&lt;/div&gt;&#39;;
             return;
         }
 
+        // 📊 3. 統計 Good Ending 數量
+        var goodCount = 0;
         galleryData.forEach(function (item) {
-            // --- 1. Good Ending 格子 ---
+            if (item.good === true) {
+                goodCount++;
+            }
+        });
+
+// 🏆 4. 若滿 7 個 Good Ending，渲染頂部迷你榮譽證書卡片
+        if (goodCount &gt;= 7 &amp;&amp; certContainer) {
+            var fullCertUrl = certImgUrl.startsWith(&#39;http&#39;) ? certImgUrl : (baseUrl + certImgUrl);
+            
+            certContainer.innerHTML = 
+                &#39;&lt;div id=&quot;cert-box&quot; style=&quot;background: rgba(15, 23, 42, 0.9); border: 2px solid #ffd700; border-radius: 12px; padding: 10px; display: inline-block; max-width: 260px; width: 85%; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); cursor: pointer; transition: transform 0.2s;&quot;&gt;&#39; +
+                    &#39;&lt;h4 style=&quot;color: #ffd700; margin: 0 0 6px 0; font-size: 0.9em; text-align: center;&quot;&gt;🎓 榮譽結業證明（已解鎖）&lt;/h4&gt;&#39; +
+                    &#39;&lt;div style=&quot;width: 100%; max-height: 150px; overflow: hidden; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: #000;&quot;&gt;&#39; +
+                        &#39;&lt;img src=&quot;&#39; + fullCertUrl + &#39;&quot; alt=&quot;Certificate of Clinical Excellence&quot; style=&quot;width: 100%; height: auto; display: block; object-fit: contain;&quot;&gt;&#39; +
+                    &#39;&lt;/div&gt;&#39; +
+                    &#39;&lt;div style=&quot;color: #94a3b8; font-size: 0.75em; margin-top: 6px; text-align: center;&quot;&gt;🔍 點擊放大查看結業證書&lt;/div&gt;&#39; +
+                &#39;&lt;/div&gt;&#39;;
+
+            // 綁定點擊事件：利用現有的放大彈窗 (image-modal) 顯示證書
+            document.getElementById(&#39;cert-box&#39;).onclick = function () {
+                window.openGalleryModal(
+                    fullCertUrl, 
+                    &quot;Certificate of Clinical Excellence&quot;, 
+                    &quot;Congratulations!&quot;, 
+                    &quot;🏆 榮譽畢業證書&quot;
+                );
+            };
+        }
+
+        // 🧩 5. 渲染原本的圖鑑格子 (Good &amp; Bad Endings)
+        galleryData.forEach(function (item) {
+            // Good Ending 格子
             var goodBox = document.createElement(&#39;div&#39;);
             goodBox.className = &#39;grid-box&#39;;
 
@@ -5442,7 +5482,7 @@ Thinking: $totalTime s
             }
             container.appendChild(goodBox);
 
-            // --- 2. Bad Endings 格子 ---
+            // Bad Endings 格子
             if (item.bads) {
                 Object.keys(item.bads).forEach(function (key) {
                     var badItem = item.bads[key];
@@ -5466,6 +5506,7 @@ Thinking: $totalTime s
         });
     }, 100);
 
+    // 💡 燈箱放大函數
     window.openGalleryModal = function (imgSrc, title, desc, tag) {
         var modal = document.getElementById(&#39;image-modal&#39;);
         document.getElementById(&#39;modal-img&#39;).src = imgSrc;
