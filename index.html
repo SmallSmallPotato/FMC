@@ -8469,7 +8469,16 @@ Thinking: $totalTime s
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;NHGood&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="127" name="ND2A" tags="Nd" position="2025,900" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;div id=&quot;is-certificate-page&quot; data-target=&quot;NHGood&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="127" name="ND2A" tags="Nd" position="2025,900" size="100,100">&lt;&lt;if $unlocked.redFlags is false&gt;&gt;\
+            &lt;&lt;set $unlocked.redFlags to true&gt;&gt;\
+            &lt;div id=&quot;unlock-notice&quot; class=&quot;anim-item-get&quot;&gt;Unlock hand book item!!&lt;br&gt;[Red Flags Guideline]&lt;/div&gt;
+            /* 音效與自動清理邏輯 */
+            &lt;&lt;audio &quot;get&quot; play&gt;&gt;
+            &lt;&lt;timed 3.5s&gt;&gt;
+                &lt;&lt;run $(&quot;#unlock-notice&quot;).remove()&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;div id=&quot;dialogue-box-container&quot;&gt;
     &lt;span id=&quot;story-text&quot;&gt;
         你知道小寶的體重和臨床徵狀顯示他正處於飢餓與嚴重的生理損害中，這屬於極度嚴重的飲食疏忽(Neglect of Diet)，已構成健康受損的實際風險。
