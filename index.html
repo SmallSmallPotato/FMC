@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="index" startnode="114" creator="Twine" creator-version="2.12.0" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+	<tw-storydata name="index" startnode="114" creator="Twine" creator-version="2.12.1" format="SugarCube" format-version="2.37.3" ifid="21A05A8C-6D76-4BAE-BACE-C4FAABFE843C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 
 body {
@@ -3241,6 +3241,7 @@ $(document).on(':passagestart', function (ev) {
     &lt;&lt;link &quot;🔄RESTART&quot;&gt;&gt;
         &lt;&lt;run UI.restart()&gt;&gt;
     &lt;&lt;/link&gt;&gt;
+    
 &lt;/div&gt;
 
 
@@ -3951,7 +3952,7 @@ Thinking: $totalTime s
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;雖然你最終在第二天舉報了。但你太遲行動，錯失了在診所將兒童與施虐者即時隔離的黃金機會。&lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $page = 2&gt;&gt;
             &lt;&lt;elseif $page == 2&gt;&gt;
-             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在當晚那個漫長的黑夜裡，阿樂已經承受了本不該屬於他的顱骨骨折。雖然經 ICU 搶救後保住了性命，但腦部缺氧造成了不可逆轉的永久性神經受損，小宇下半生將需要坐輪椅。&lt;&lt;/replace&gt;&gt;
+             &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;在當晚那個漫長的黑夜裡，阿樂已經承受了本不該屬於他的顱骨骨折。雖然經 ICU 搶救後保住了性命，但腦部缺氧造成了不可逆轉的永久性神經受損，阿樂下半生將需要坐輪椅。&lt;&lt;/replace&gt;&gt;
             &lt;&lt;set $page = 3&gt;&gt;
             &lt;&lt;elseif $page == 3&gt;&gt;
                 &lt;&lt;replace &quot;#story-text&quot;&gt;&gt;「等待更多證據」是否有時就是風險？而Safeguarding本身就是在不確定中行動。&lt;&lt;/replace&gt;&gt;
@@ -7647,7 +7648,7 @@ Thinking: $totalTime s
             }
         &lt;&lt;/script&gt;&gt;
     &lt;&lt;/link&gt;&gt;
-    &lt;p class=&quot;music-panel-tip&quot;&gt;※ Welcome to the FMC Nursing Scenario-Based Training Simulator! ※&lt;/p&gt;
+    &lt;p class=&quot;music-panel-tip&quot;&gt;※ Welcome to the FMC Nursing Scenario-Based Training Simulator! &lt;br&gt;本模擬情節涉及虐待兒童相關描述(包括受傷、心理創傷等)，如你曾經歷相關事件，可自行決定是否參與或隨時暫停。※&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;!-- 復古暗灰風格資訊按鈕區 --&gt;
@@ -7696,8 +7697,9 @@ Thinking: $totalTime s
     &lt;span class=&quot;terminal-status&quot;&gt;● SYSTEM READY&lt;/span&gt;
 
 
-&lt;p class=&quot;intro-paragraph&quot;&gt;在了解《強制舉報虐待兒童條例》背景資料後再參與此培訓模擬器，能夠更深入了解七個情景主題。&lt;br&gt;本系統會全程為閣下實時保存進度，而進度僅儲存於閣下之本地瀏覽器(Local Storage)。後台不會收集任何個人資料/選答紀錄，請安心練習。&lt;/p&gt;
+&lt;p class=&quot;intro-paragraph&quot;&gt;在了解《強制舉報虐待兒童條例》背景資料後再參與此培訓模擬器，能夠更深入了解七個情景主題。&lt;br&gt;本系統會全程為閣下實時保存進度，而進度僅儲存於閣下之本地瀏覽器(Local Storage)。後台不會收集任何個人資料/選答紀錄，請安心練習。&lt;br&gt;&lt;br&gt;[本模擬器含背景音效及語音，建議先調校裝置音量🔊]&lt;/p&gt;
 &lt;br&gt;
+
 &lt;div class=&quot;btn-container&quot;&gt;
     &lt;&lt;button &quot;🕹️ START NEW SESSION &lt;br&gt;(全新開始)&quot;&gt;&gt;
         &lt;&lt;run window.clearFmcMemory()&gt;&gt; &lt;&lt;goto &quot;Player_Register&quot;&gt;&gt;
@@ -9424,7 +9426,7 @@ Thinking: $totalTime s
 &lt;&lt;audio &quot;wizard&quot; play loop&gt;&gt;\
 &lt;&lt;nobr&gt;&gt;\
     &lt;span class=&quot;terminal-status&quot;&gt;● REGISTRATION&lt;/span&gt;
-&lt;p class=&quot;intro-paragraph&quot;&gt; ⚠️ 聲明：本模擬器專為 HA FMC 護士培訓設計，情境模擬僅供教學，實際臨床執業請嚴格遵循醫管局最新指引、法例(第 650 章)及諮詢上級/醫務社工。&lt;br&gt;系統不會收集任何真實病人資料。&lt;/p&gt;
+&lt;p class=&quot;intro-paragraph&quot;&gt; ⚠️ 聲明：本模擬器專為 HA FMC 護士培訓設計，情境模擬僅供教學，實際臨床執業請嚴格遵循醫管局最新指引、法例(第 650 章)及諮詢上級/醫務社工/社署。&lt;br&gt;系統不會收集任何真實病人資料。&lt;/p&gt;
 &lt;div class=&quot;login-box&quot;&gt;
     &lt;label&gt;✏️ ENTER PLAYER NAME :&lt;/label&gt;
     &lt;&lt;textbox &quot;$staffID&quot; &quot;&quot; autofocus&gt;&gt;
@@ -9541,7 +9543,7 @@ Thinking: $totalTime s
 [01:50.50]FMC Frontline&lt;br&gt;Protecting every child
 [01:53.70]The law does not expect certainty
 [01:56.50]It expects professional action when serious concern exists
-</tw-passagedata><tw-passagedata pid="147" name="Again" tags="no-handbk no-timer Register" position="225,150" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
+</tw-passagedata><tw-passagedata pid="147" name="Again" tags="no-handbk no-timer Register" position="175,0" size="100,100">&lt;div class=&quot;certificate-container&quot; style=&quot;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -9790,7 +9792,7 @@ A: 不會。 根據《條例》(第650章)規定，指明專業人員為履行�
 - 身分保密與禁止阻撓：法例嚴禁任何人(包括雇主或家長)阻撓舉報，或非法披露舉報人身分，違者須負刑事責任。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 如果診所醫生判斷兒童需要送去急症室做進一步檢查(例如照 X-ray 確認骨折)，我是應該「先舉報」，還是「先送去急症室讓醫院舉報」？&lt;/strong&gt;
-A: 醫療優先，但個人舉報責任不可轉嫁。診所醫生形成合理懷疑即產生舉報責任，應於轉介信註明，並親自通報社署/警方，或與急症室確認作聯合舉報。山
+A: 醫療優先，但個人舉報責任不可轉嫁。診所醫生形成合理懷疑即產生舉報責任，應於轉介信註明，並親自通報社署/警方，或與急症室確認作聯合舉報。
 
 &lt;strong style=&quot;color: #e3b5b5;&quot;&gt;Q: 舉報之後，診所護士是否需要頻繁去開會、去法庭作證？&lt;/strong&gt;
 A: 通常不需要。主由警方 CAIU 及社署 FCPSU 跟進，醫護僅需提供客觀臨床紀錄與口供；極少數情況（作為關鍵目擊證人）才需出庭。
